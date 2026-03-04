@@ -48,6 +48,8 @@ const int DIST_MIN = 20; // cm (distancia de frenado)
 
 bool personaVistaAnteriormente = false;
 
+//================================
+int ultimaPosicionX = 160;   // centro por defecto
 
 void setup() {
     //Serial.begin(115200);
@@ -89,7 +91,7 @@ void loop() {
         Serial.println(F("No block or arrow appears on the screen!"));
         parar();
         
-        recuperarPersona();
+        recuperarPersonaInteligente();
         buscarpersona();
         Serial.println("estoy buscando");
         
@@ -105,9 +107,11 @@ void loop() {
             if (result.ID == 1){
                 avanzar();
                 personaVistaAnteriormente = true; 
+                ultimaPosicionX = result.xCenter;
                 Serial.println("estoy viendo a alguien");
                 delay(500);
             }else{
+                recuperarPersonaInteligente(); //NO ESTOY SEGURO 
                 buscarpersona();
                 Serial.println("ya te dije q estoy buscando");
                 delay(3000);
@@ -176,43 +180,7 @@ void giro_atras(){
 
 void buscarpersona(){
    
-   /* //giro adelante derecha
-    digitalWrite(DIR_A, HIGH);
-    digitalWrite(DIR_B, HIGH);
-    analogWrite(PWM_A, SPEED);
-    analogWrite(PWM_B, SPEED);
-    delay(2000);
-    parar();
-    delay(2000);
-
-    //Giro atras izquierda
-
-    digitalWrite(DIR_A, HIGH);
-    digitalWrite(DIR_B, HIGH);
-    analogWrite(PWM_A, SPEED);
-    analogWrite(PWM_B, SPEED);
-    delay(2000);
-    parar();
-    delay(2000);
-
-    //giro adelante iaquierda
-    digitalWrite(DIR_A, HIGH);
-    digitalWrite(DIR_B, HIGH);
-    analogWrite(PWM_A, SPEED);
-    analogWrite(PWM_B, SPEED);
-    delay(2000);
-    parar();
-    delay(2000);
-
-    //Giro atras derecha
-    digitalWrite(DIR_A, HIGH);
-    digitalWrite(DIR_B, HIGH);
-    analogWrite(PWM_A, SPEED);
-    analogWrite(PWM_B, SPEED);
-    delay(2000);
-    parar();
-    delay(2000);
-    */
+ 
      int velocidadLenta = SPEED;   // 🔧 Ajusta si quieres más lento
   int SPEED = 30;
   // Lado A adelante
@@ -247,17 +215,55 @@ void recuperarPersona() {
 
     delay(1500);
 
-    // 🔄 2. Giro completo 360° lento
-    //int velocidadLenta = SPEED - 50;
+    
+    parar();
 
-    /*digitalWrite(DIR_A, HIGH);
+
+    personaVistaAnteriormente = false;
+}
+
+void recuperarPersonaInteligente() {
+
+    if (!personaVistaAnteriormente) {
+        return;
+    }
+
+    Serial.println("Recuperacion inteligente activada");
+
+    // 🔙 Retrocede un poco
+    digitalWrite(DIR_A, LOW);
     digitalWrite(DIR_B, HIGH);
+    analogWrite(PWM_A, SPEED);
+    analogWrite(PWM_B, SPEED);
+    delay(500);
+    parar();
+    delay(300);
+
+    int velocidadLenta = SPEED - 30;
+
+    // 🔁 Decidir dirección según última X
+    if (ultimaPosicionX < 160) {
+
+        Serial.println("Girando hacia la IZQUIERDA");
+
+        // Giro izquierda
+        digitalWrite(DIR_A, LOW);
+        digitalWrite(DIR_B, LOW);
+
+    } else {
+
+        Serial.println("Girando hacia la DERECHA");
+
+        // Giro derecha
+        digitalWrite(DIR_A, HIGH);
+        digitalWrite(DIR_B, HIGH);
+    }
+
     analogWrite(PWM_A, velocidadLenta);
     analogWrite(PWM_B, velocidadLenta);
 
-    delay(2000);   // 🔧 Ajustar hasta que sea 360° real*/
+    delay(1200);   // 🔧 Ajustar para ~180° inteligente
     parar();
 
-    // 🧠 3. Reiniciar memoria
     personaVistaAnteriormente = false;
 }
