@@ -93,7 +93,9 @@ void loop() {
         //recuperarPersonaInteligente();
         parar();                // Detiene robot
         recuperarPersona();     // Ejecuta rutina de recuperación
-        mapeoArea();
+        if (mapeoArea()) {
+            return; // Termina el loop para ir hacia la persona de inmediato
+        }
         buscarpersona();        // Ejecuta búsqueda activa
         Serial.println("estoy buscando");
     } 
@@ -309,7 +311,26 @@ void recuperarPersonaInteligente() {
 
 
 
-void mapeoArea(){
+// Función auxiliar para detectar ID:1 durante pausas simulando un delay
+bool pausaDeteccion(int tiempoMs) {
+    unsigned long start = millis();
+    while (millis() - start < tiempoMs) {
+        if (huskylens.request()) {
+            while (huskylens.available()) {
+                HUSKYLENSResult result = huskylens.read();
+                if (result.ID == 1) {
+                    avanzar();
+                    personaVistaAnteriormente = true;
+                    return true;
+                }
+            }
+        }
+        delay(10); // Evitar saturar el puerto serial
+    }
+    return false;
+}
+
+bool mapeoArea(){
     int velocidadLenta = SPEED - 30;
 
 
@@ -318,44 +339,28 @@ void mapeoArea(){
     digitalWrite(DIR_B, HIGH);
     analogWrite(PWM_A, velocidadLenta);
     analogWrite(PWM_B, velocidadLenta);
-    delay(800);
+    if (pausaDeteccion(800)) return true;
     parar();
     
-    delay(300);
+    if (pausaDeteccion(300)) return true;
 
     // ↩ 3️⃣ Giro a la IZQUIERDA
     digitalWrite(DIR_A, LOW);
     digitalWrite(DIR_B, LOW);
     analogWrite(PWM_A, velocidadLenta);
     analogWrite(PWM_B, velocidadLenta);
-    delay(800);
+    if (pausaDeteccion(800)) return true;
     parar();
 
     digitalWrite(DIR_A, LOW);
     digitalWrite(DIR_B, LOW);
     analogWrite(PWM_A, velocidadLenta);
     analogWrite(PWM_B, velocidadLenta);
-    delay(800);
+    if (pausaDeteccion(800)) return true;
     parar();
     
 
     Serial.println("Mapeo finalizado");
+    return false;
 
-
-}
-
-void vueltaDerecha(){
-
-}
-
-void vueltaIzquierda(){
-
-}
-
-void Adelante(){
-
-}
-
-void Atras(){
-    
 }
