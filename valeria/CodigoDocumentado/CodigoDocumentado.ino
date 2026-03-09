@@ -36,6 +36,7 @@ const int DIST_MIN = 20;  // Distancia mínima de seguridad en cm
 bool personaVistaAnteriormente = false; 
 int x = 0 ;
 int rc = 0;
+int numVueltas= 0;
 // Guarda si alguna vez se detectó persona con ID=1
 
 /************************************************************/
@@ -92,22 +93,22 @@ void loop() {
     else if(!huskylens.available()){
         Serial.println(F("No block or arrow appears"));
         HUSKYLENSResult result = huskylens.read();  
-        if (distancia < 18) {
+        /*if (distancia < 18) {
             avanzar();
             delay(500);
-        }
+        }*/
 
         recuperarPersonaInteligente(rc);
-          if (distancia < 18) {
+          /*if (distancia < 18) {
             avanzar();
             delay(500);
-        }
+        }*/
 
         mapeoArea(rc);
-          if (distancia < 18) {
+          /*if (distancia < 18) {
             avanzar();
             delay(500);
-        }
+        }*/
         //recuperarPersona();     // Ejecuta rutina de recuperación
         /*if (mapeoArea()) {
             return; // Termina el loop para ir hacia la persona de inmediato
@@ -285,6 +286,7 @@ void recuperarPersona() {
 
  int recuperarPersonaInteligente(int rc) {
 
+    
     if (!personaVistaAnteriormente) {
         return;
     }
@@ -368,15 +370,25 @@ bool pausaDeteccion(int tiempoMs) {
 
 bool mapeoArea(int rc){
     int velocidadLenta = SPEED - 30;
+    Serial.println("Mapeo de area activado");
+    Serial.print("este es el valor por donde se pierde la pelota: ");
+    Serial.println(rc);
+
+    Serial.print("vueltas: ");
+    Serial.println(numVueltas);
 
 
     // ↪ 2️⃣ Giro a la DERECHA
-    if (rc < 100){
+    if (rc < 150){
+        Serial.println("giro izquierda");
         digitalWrite(DIR_A, LOW);
         digitalWrite(DIR_B, LOW);
+        numVueltas = numVueltas + 1;
     }else{
+        Serial.println("giro derecha");
         digitalWrite(DIR_A, HIGH);
         digitalWrite(DIR_B, HIGH);
+        numVueltas = numVueltas + 1;
     } 
     
     analogWrite(PWM_A, velocidadLenta);
@@ -387,24 +399,40 @@ bool mapeoArea(int rc){
     if (pausaDeteccion(300)) return true;
 
     // ↩ 3️⃣ Giro a la IZQUIERDA
-    if (rc < 100){
+    if (rc > 150){
+        Serial.println("giro derecha");
         digitalWrite(DIR_A, HIGH);
         digitalWrite(DIR_B, HIGH);
+        numVueltas = numVueltas + 1;
     }else{
+        Serial.println("giro izquierda");
         digitalWrite(DIR_A, LOW);
         digitalWrite(DIR_B, LOW);
+        numVueltas = numVueltas + 1;
     } 
     analogWrite(PWM_A, velocidadLenta);
     analogWrite(PWM_B, velocidadLenta);
     if (pausaDeteccion(800)) return true;
     parar();
 
-    if (rc < 100){
+
+    if (numVueltas >= 5){
+        retroceder();
+        numVueltas = 0;
+        return;
+
+    }
+
+    if (rc > 150){
+        Serial.println("giro derecha");
         digitalWrite(DIR_A, HIGH);
         digitalWrite(DIR_B, HIGH);
+        numVueltas = numVueltas + 1;
     }else{
+        Serial.println("giro izquierda");
         digitalWrite(DIR_A, LOW);
         digitalWrite(DIR_B, LOW);
+        numVueltas = numVueltas + 1;
     } 
     analogWrite(PWM_A, velocidadLenta);
     analogWrite(PWM_B, velocidadLenta);
@@ -415,4 +443,14 @@ bool mapeoArea(int rc){
     Serial.println("Mapeo finalizado");
     return false;
 
+}
+
+
+void retroceder(){
+    // 1️⃣ Retrocede un poco
+    digitalWrite(DIR_A, LOW);
+    digitalWrite(DIR_B, HIGH);
+    analogWrite(PWM_A, SPEED);
+    analogWrite(PWM_B, SPEED);
+    delay(600);
 }
