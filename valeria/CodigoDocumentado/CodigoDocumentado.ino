@@ -16,7 +16,7 @@ SoftwareSerial mySerial(10, 11); // RX=10, TX=11 (comunicación con HUSKYLENS)
 // Cable azul  -> Pin 11
 
 void printResult(HUSKYLENSResult result); // Prototipo de función
-int ultimaPosicionX = 160;   // centro por defecto
+//int ultimaPosicionX = 160;   // centro por defecto
 
 /*********** Pines de motores ***************/
 const byte DIR_A = 2;   // Dirección motor A
@@ -34,6 +34,9 @@ const int DIST_MIN = 20;  // Distancia mínima de seguridad en cm
 
 /*********** Variable de estado ***************/
 bool personaVistaAnteriormente = false; 
+int x = 0 ;
+int rc = 0;
+int numVueltas= 0;
 // Guarda si alguna vez se detectó persona con ID=1
 
 /************************************************************/
@@ -89,12 +92,28 @@ void loop() {
     // Si no detecta ningún objeto en pantalla
     else if(!huskylens.available()){
         Serial.println(F("No block or arrow appears"));
+        HUSKYLENSResult result = huskylens.read();  
+        /*if (distancia < 18) {
+            avanzar();
+            delay(500);
+        }*/
 
-        //recuperarPersonaInteligente();
-        parar();                // Detiene robot
-        recuperarPersona();     // Ejecuta rutina de recuperación
-        mapeoArea();
-        buscarpersona();        // Ejecuta búsqueda activa
+        recuperarPersonaInteligente(rc);
+          /*if (distancia < 18) {
+            avanzar();
+            delay(500);
+        }*/
+
+        mapeoArea(rc);
+          /*if (distancia < 18) {
+            avanzar();
+            delay(500);
+        }*/
+        //recuperarPersona();     // Ejecuta rutina de recuperación
+        /*if (mapeoArea()) {
+            return; // Termina el loop para ir hacia la persona de inmediato
+        }*/
+        //buscarpersona();        // Ejecuta búsqueda activa
         Serial.println("estoy buscando");
     } 
 
@@ -107,13 +126,17 @@ void loop() {
         {
             HUSKYLENSResult result = huskylens.read();  
             printResult(result);  // Imprime información del objeto
+            //Serial.println(result.xCenter);
+            rc = result.xCenter;
+
 
             // Si detecta ID 1 (persona entrenada)
             if (result.ID == 1){
                 avanzar();                      // Avanza hacia la persona
                 personaVistaAnteriormente = true; 
+                //ultimaPoscionX = result.xCenter;
                 Serial.println("estoy viendo a alguien");
-                delay(500);
+                delay(1400);
             }
             else{
                 buscarpersona();                // Si no es ID 1, busca
@@ -261,101 +284,173 @@ void recuperarPersona() {
     personaVistaAnteriormente = false;
 }
 
-void recuperarPersonaInteligente() {
+ int recuperarPersonaInteligente(int rc) {
 
+    
     if (!personaVistaAnteriormente) {
         return;
     }
 
     Serial.println("Recuperacion inteligente activada");
 
-    // 🔙 Retrocede un poco
-    digitalWrite(DIR_A, LOW);
-    digitalWrite(DIR_B, HIGH);
-    analogWrite(PWM_A, SPEED);
-    analogWrite(PWM_B, SPEED);
-    delay(500);
-    parar();
-    delay(300);
-
     int velocidadLenta = SPEED - 30;
 
-    // 🔁 Decidir dirección según última X
-    if (ultimaPosicionX < 160) {
+    // =============================
+    // ZONA IZQUIERDA
+    // =============================
+     Serial.println(rc+"xas");
+    if (rc < 100) {
 
-        Serial.println("Girando hacia la IZQUIERDA");
+        Serial.println("Ultima posicion: IZQUIERDA");
 
-        // Giro izquierda
         digitalWrite(DIR_A, LOW);
         digitalWrite(DIR_B, LOW);
 
-    } else {
+        analogWrite(PWM_A, velocidadLenta);
+        analogWrite(PWM_B, velocidadLenta);
 
-        Serial.println("Girando hacia la DERECHA");
-
-        // Giro derecha
-        digitalWrite(DIR_A, HIGH);
-        digitalWrite(DIR_B, HIGH);
+        delay(1000);
+        parar();
     }
 
-    analogWrite(PWM_A, velocidadLenta);
-    analogWrite(PWM_B, velocidadLenta);
+    // =============================
+    // ZONA CENTRO
+    // =============================
+    else if (rc >= 100 && rc <= 200) {
 
-    delay(1200);   // 🔧 Ajustar para ~180° inteligente
-    parar();
+        Serial.println("Ultima posicion: CENTRO");
+
+        avanzar();
+
+        delay(1000);   // avanza un poco
+        parar();
+    }
+
+    // =============================
+    // ZONA DERECHA
+    // =============================
+    else {
+
+        Serial.println("Ultima posicion: DERECHA");
+
+        digitalWrite(DIR_A, HIGH);
+        digitalWrite(DIR_B, HIGH);
+
+        analogWrite(PWM_A, velocidadLenta);
+        analogWrite(PWM_B, velocidadLenta);
+
+        delay(1000);
+        parar();
+    }
 
     personaVistaAnteriormente = false;
+   
 }
 
 
 
-void mapeoArea(){
+// Función auxiliar para detectar ID:1 durante pausas simulando un delay
+bool pausaDeteccion(int tiempoMs) {
+    unsigned long start = millis();
+    while (millis() - start < tiempoMs) {
+        if (huskylens.request()) {
+            while (huskylens.available()) {
+                HUSKYLENSResult result = huskylens.read();
+                if (result.ID == 1) {
+                    avanzar();
+                    personaVistaAnteriormente = true;
+                    return true;
+                }
+            }
+        }
+        delay(10); // Evitar saturar el puerto serial
+    }
+    return false;
+}
+
+bool mapeoArea(int rc){
     int velocidadLenta = SPEED - 30;
+    Serial.println("Mapeo de area activado");
+    Serial.print("este es el valor por donde se pierde la pelota: ");
+    Serial.println(rc);
+
+    Serial.print("vueltas: ");
+    Serial.println(numVueltas);
 
 
     // ↪ 2️⃣ Giro a la DERECHA
-    digitalWrite(DIR_A, HIGH);
-    digitalWrite(DIR_B, HIGH);
+    if (rc < 150){
+        Serial.println("giro izquierda");
+        digitalWrite(DIR_A, LOW);
+        digitalWrite(DIR_B, LOW);
+        numVueltas = numVueltas + 1;
+    }else{
+        Serial.println("giro derecha");
+        digitalWrite(DIR_A, HIGH);
+        digitalWrite(DIR_B, HIGH);
+        numVueltas = numVueltas + 1;
+    } 
+    
     analogWrite(PWM_A, velocidadLenta);
     analogWrite(PWM_B, velocidadLenta);
-    delay(800);
+    if (pausaDeteccion(800)) return true;
     parar();
     
-    delay(300);
+    if (pausaDeteccion(300)) return true;
 
     // ↩ 3️⃣ Giro a la IZQUIERDA
-    digitalWrite(DIR_A, LOW);
-    digitalWrite(DIR_B, LOW);
+    if (rc > 150){
+        Serial.println("giro derecha");
+        digitalWrite(DIR_A, HIGH);
+        digitalWrite(DIR_B, HIGH);
+        numVueltas = numVueltas + 1;
+    }else{
+        Serial.println("giro izquierda");
+        digitalWrite(DIR_A, LOW);
+        digitalWrite(DIR_B, LOW);
+        numVueltas = numVueltas + 1;
+    } 
     analogWrite(PWM_A, velocidadLenta);
     analogWrite(PWM_B, velocidadLenta);
-    delay(800);
+    if (pausaDeteccion(800)) return true;
     parar();
 
-    digitalWrite(DIR_A, LOW);
-    digitalWrite(DIR_B, LOW);
+
+    if (numVueltas >= 5){
+        retroceder();
+        numVueltas = 0;
+        return;
+
+    }
+
+    if (rc > 150){
+        Serial.println("giro derecha");
+        digitalWrite(DIR_A, HIGH);
+        digitalWrite(DIR_B, HIGH);
+        numVueltas = numVueltas + 1;
+    }else{
+        Serial.println("giro izquierda");
+        digitalWrite(DIR_A, LOW);
+        digitalWrite(DIR_B, LOW);
+        numVueltas = numVueltas + 1;
+    } 
     analogWrite(PWM_A, velocidadLenta);
     analogWrite(PWM_B, velocidadLenta);
-    delay(800);
+    if (pausaDeteccion(800)) return true;
     parar();
     
 
     Serial.println("Mapeo finalizado");
-
-
-}
-
-void vueltaDerecha(){
+    return false;
 
 }
 
-void vueltaIzquierda(){
 
-}
-
-void Adelante(){
-
-}
-
-void Atras(){
-    
+void retroceder(){
+    // 1️⃣ Retrocede un poco
+    digitalWrite(DIR_A, LOW);
+    digitalWrite(DIR_B, HIGH);
+    analogWrite(PWM_A, SPEED);
+    analogWrite(PWM_B, SPEED);
+    delay(600);
 }
