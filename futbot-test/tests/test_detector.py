@@ -1,0 +1,57 @@
+# futbot-test/tests/test_detector.py
+import numpy as np
+import cv2
+import pytest
+from detector import detect_ball, extract_roi
+
+def make_orange_frame(cx, cy, r=15):
+    """Create a synthetic frame with an orange circle."""
+    frame = np.zeros((240, 320, 3), dtype=np.uint8)
+    # Draw orange circle (HSV orange = BGR roughly (0, 100, 255))
+    cv2.circle(frame, (cx, cy), r, (0, 100, 255), -1)
+    return frame
+
+def test_detects_orange_ball():
+    frame = make_orange_frame(160, 120, r=20)
+    result = detect_ball(frame)
+    assert result is not None
+    x, y, radius = result
+    assert abs(x - 160) < 10
+    assert abs(y - 120) < 10
+    assert radius > 5
+
+def test_returns_none_when_no_ball():
+    frame = np.zeros((240, 320, 3), dtype=np.uint8)
+    result = detect_ball(frame)
+    assert result is None
+
+def test_extract_roi_returns_correct_size():
+    frame = np.zeros((240, 320, 3), dtype=np.uint8)
+    roi = extract_roi(frame, cx=160, cy=120, radius=20)
+    assert roi.shape == (96, 96, 3)
+
+def test_extract_roi_clamps_to_frame_boundaries():
+    frame = np.zeros((240, 320, 3), dtype=np.uint8)
+    # Ball near edge — should not raise
+    roi = extract_roi(frame, cx=5, cy=5, radius=20)
+    assert roi.shape == (96, 96, 3)
+
+# Kalman tests — add after implementing BallKalman
+from detector import BallKalman
+
+def test_kalman_predicts_stationary_ball():
+    kf = BallKalman()
+    kf.update(100, 100)
+    kf.update(100, 100)
+    px, py = kf.predict()
+    assert abs(px - 100) < 5
+    assert abs(py - 100) < 5
+
+def test_kalman_smooths_noisy_measurements():
+    kf = BallKalman()
+    for _ in range(10):
+        kf.update(100, 100)
+    # after 10 consistent updates, prediction should stay near truth
+    px, py = kf.predict()
+    assert abs(px - 100) < 15
+    assert abs(py - 100) < 15
