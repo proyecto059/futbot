@@ -90,8 +90,13 @@ class BallKalman:
     def update(self, x: float, y: float) -> tuple[float, float]:
         measurement = np.array([[x], [y]], dtype=np.float32)
         if not self._initialized:
-            self._kf.statePre = np.array([[x], [y], [0], [0]], dtype=np.float32)
+            # Initialize both statePost (used by predict) and statePre
+            initial = np.array([[x], [y], [0], [0]], dtype=np.float32)
+            self._kf.statePost = initial.copy()
+            self._kf.statePre = initial.copy()
+            self._kf.errorCovPost = np.eye(4, dtype=np.float32)
             self._initialized = True
+        self._kf.predict()  # advance state estimate before correction
         corrected = self._kf.correct(measurement)
         return float(corrected[0, 0]), float(corrected[1, 0])
 
