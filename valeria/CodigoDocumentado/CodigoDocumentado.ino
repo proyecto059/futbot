@@ -38,7 +38,7 @@ int x = 0 ;
 int rc = 0;
 int numVueltas= 0;
 int ADis [5];
-int contador = 1;
+int contador = 0;
 int sum=0;
 double prom=1000;
 // Guarda si alguna vez se detectó persona con ID=1
@@ -80,11 +80,11 @@ void loop() {
     Serial.println(" cm");
 
     //Promedio de la distancia
-    if (contador <= 5){
+    if (contador <= 4){
       ADis[contador] = distancia;
       contador=contador+1;
     }else{
-        contador = 1;
+        contador = 0;
         for (int i = 0; i<=4; i++){
             sum = sum + ADis[i];
         }
@@ -135,8 +135,32 @@ void loop() {
                 personaVistaAnteriormente = true; 
                 Serial.println("estoy viendo a alguien");
                 delay(1400);
+                medirDistancia();
+                // Medir distancia con ultrasónico
+    long distancia = medirDistancia();
+
+    Serial.print("Distancia: ");
+    Serial.print(distancia);
+    Serial.println(" cm");
+
+    //Promedio de la distancia FO
+    if (contador <= 4){
+      ADis[contador] = distancia;
+      contador=contador+1;
+    }else{
+        contador = 0;
+        for (int i = 0; i<=4; i++){
+            sum = sum + ADis[i];
+        }
+        prom = sum/5;
+        sum=0;
+    }
+    Serial.print("*********************************************");
+    Serial.print("Distancia: ");
+    Serial.print(prom);
+    Serial.println("*********************************************");
             }
-            else if (result.ID==2 && prom<=15){
+            else if (result.ID==2 && prom<=5){
                 retroceder();
             }
             else if (result.ID==1 && result.ID==2){
@@ -145,13 +169,9 @@ void loop() {
                 Serial.println("estoy viendo a alguien");
                 delay(1400);
             }
-            else{
+            else if(result.ID ==2){
                 mapeoArea(rc);
-                //buscarpersona();                // Si no es ID 1, busca
-                Serial.println("ya te dije q estoy buscando");
-                delay(3000);
-                parar();
-                delay(3000);
+                Serial.println("estoy buscando buey tengo ID2");
             }
         }    
     }
