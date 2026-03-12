@@ -37,11 +37,13 @@ bool personaVistaAnteriormente = false;
 int x = 0 ;
 int rc = 0;
 int numVueltas= 0;
+int ADis [5];
+int contador = 1;
+int sum=0;
+double prom=1000;
 // Guarda si alguna vez se detectó persona con ID=1
 
-/************************************************************/
 /*********************** SETUP ******************************/
-/************************************************************/
 void setup() {
 
     Serial.begin(9600);       // Monitor serial
@@ -67,9 +69,7 @@ void setup() {
     pinMode(ECHO_PIN, INPUT);
 }
 
-/************************************************************/
 /************************ LOOP ******************************/
-/************************************************************/
 void loop() {
 
     // Medir distancia con ultrasónico
@@ -78,6 +78,25 @@ void loop() {
     Serial.print("Distancia: ");
     Serial.print(distancia);
     Serial.println(" cm");
+
+    //Promedio de la distancia
+    if (contador <= 5){
+      ADis[contador] = distancia;
+      contador=contador+1;
+    }else{
+        contador = 1;
+        for (int i = 0; i<=4; i++){
+            sum = sum + ADis[i];
+        }
+        prom = sum/5;
+        sum=0;
+    }
+    Serial.print("*********************************************");
+    Serial.print("Distancia: ");
+    Serial.print(prom);
+    Serial.println("*********************************************");
+    
+
 
     // Solicitar datos al HUSKYLENS
     if (!huskylens.request()){ 
@@ -93,27 +112,8 @@ void loop() {
     else if(!huskylens.available()){
         Serial.println(F("No block or arrow appears"));
         HUSKYLENSResult result = huskylens.read();  
-        /*if (distancia < 18) {
-            avanzar();
-            delay(500);
-        }*/
-
         recuperarPersonaInteligente(rc);
-          /*if (distancia < 18) {
-            avanzar();
-            delay(500);
-        }*/
-
         mapeoArea(rc);
-          /*if (distancia < 18) {
-            avanzar();
-            delay(500);
-        }*/
-        //recuperarPersona();     // Ejecuta rutina de recuperación
-        /*if (mapeoArea()) {
-            return; // Termina el loop para ir hacia la persona de inmediato
-        }*/
-        //buscarpersona();        // Ejecuta búsqueda activa
         Serial.println("estoy buscando");
     } 
 
@@ -126,7 +126,6 @@ void loop() {
         {
             HUSKYLENSResult result = huskylens.read();  
             printResult(result);  // Imprime información del objeto
-            //Serial.println(result.xCenter);
             rc = result.xCenter;
 
 
@@ -134,12 +133,21 @@ void loop() {
             if (result.ID == 1){
                 avanzar();                      // Avanza hacia la persona
                 personaVistaAnteriormente = true; 
-                //ultimaPoscionX = result.xCenter;
+                Serial.println("estoy viendo a alguien");
+                delay(1400);
+            }
+            else if (result.ID==2 && prom<=15){
+                retroceder();
+            }
+            else if (result.ID==1 && result.ID==2){
+                avanzar();                      // Avanza hacia la persona
+                personaVistaAnteriormente = true; 
                 Serial.println("estoy viendo a alguien");
                 delay(1400);
             }
             else{
-                buscarpersona();                // Si no es ID 1, busca
+                mapeoArea(rc);
+                //buscarpersona();                // Si no es ID 1, busca
                 Serial.println("ya te dije q estoy buscando");
                 delay(3000);
                 parar();
@@ -149,9 +157,7 @@ void loop() {
     }
 }
 
-/************************************************************/
 /*************** FUNCIÓN IMPRIMIR RESULTADO ****************/
-/************************************************************/
 void printResult(HUSKYLENSResult result){
 
     // Si el resultado es un bloque detectado
@@ -183,9 +189,7 @@ void printResult(HUSKYLENSResult result){
     }
 }
 
-/************************************************************/
 /******************* SENSOR ULTRASÓNICO ********************/
-/************************************************************/
 long medirDistancia() {
 
     digitalWrite(TRIG_PIN, LOW);
@@ -206,9 +210,7 @@ long medirDistancia() {
     return distancia;
 }
 
-/************************************************************/
 /******************** MOVIMIENTO ROBOT **********************/
-/************************************************************/
 void avanzar() {
 
     digitalWrite(DIR_A, HIGH);  // Motor A adelante
@@ -235,9 +237,7 @@ void giro_atras(){
     delay(1000);
 }
 
-/************************************************************/
 /******************** BUSCAR PERSONA ***********************/
-/************************************************************/
 void buscarpersona(){
 
     int velocidadLenta = SPEED;  
@@ -254,9 +254,7 @@ void buscarpersona(){
     parar();
 }
 
-/************************************************************/
 /******************* RECUPERAR PERSONA **********************/
-/************************************************************/
 void recuperarPersona() {
 
     // Si nunca la vio antes, no ejecuta recuperación
@@ -346,8 +344,6 @@ void recuperarPersona() {
     personaVistaAnteriormente = false;
    
 }
-
-
 
 // Función auxiliar para detectar ID:1 durante pausas simulando un delay
 bool pausaDeteccion(int tiempoMs) {
@@ -444,7 +440,6 @@ bool mapeoArea(int rc){
     return false;
 
 }
-
 
 void retroceder(){
     // 1️⃣ Retrocede un poco
