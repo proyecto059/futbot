@@ -15,3 +15,7 @@ export = [
     "onnx>=1.15",
     "onnxsim>=0.4",
 ]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
