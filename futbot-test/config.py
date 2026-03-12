@@ -35,7 +35,7 @@ BALL_CLASS_ID = 32           # COCO class ID para sports ball; ajustar si modelo
 TRACKER_TYPE = "MOSSE"   # or "KCF"
 TRACKER_REINIT_INTERVAL = 15  # re-init tracker every N frames
 
-# GPIO motor pins (BCM numbering, same as Arduino code)
+# GPIO motor pins (BCM numbering) — H-bridge DIR+PWM scheme (L298N or similar)
 MOTOR_A_DIR = 2
 MOTOR_A_PWM = 5
 MOTOR_B_DIR = 4
