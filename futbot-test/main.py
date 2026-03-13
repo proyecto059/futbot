@@ -1,0 +1,114 @@
+"""
+FutBotMX — main pipeline entry point.
+
+Thread layout:
+  CameraThread      → shared frame (25 FPS)
+  Main loop         → HSV detect + Kalman + Tracker + Game Logic (~50 Hz)
+  AIInferenceThread → YOLO26n INT8 on full frame (~15-20 FPS async)
+  MotorController   → applied on each game logic decision
+"""
+import time
+import signal
+import sys
+
+from camera import CameraThread
+from detector import detect_ball, extract_roi, BallKalman
+from tracker import BallTracker
+from ai_inference import AIInferenceThread
+from game_logic import decide_action, Action
+from motor_control import MotorController
+from config import TRACKER_REINIT_INTERVAL
+
+
+def main():
+    cam = CameraThread()
+    kalman = BallKalman()
+    tracker = BallTracker()
+    ai = AIInferenceThread()
+    motors = MotorController()
+
+    motors.setup()
+    cam.start()
+    ai.start()
+
+    def _shutdown(sig, frame):
+        print("\n[main] Shutting down...")
+        motors.stop()
+        cam.stop()
+        ai.stop()
+        motors.cleanup()
+        sys.exit(0)
+
+    signal.signal(signal.SIGINT, _shutdown)
+
+    frame_count = 0
+    tracker_frame_counter = 0
+
+    print("[main] Pipeline started. Press Ctrl+C to stop.")
+    t_prev = time.monotonic()
+
+    while True:
+        frame = cam.get_frame()
+        if frame is None:
+            continue
+
+        t_now = time.monotonic()
+        dt = t_now - t_prev
+        t_prev = t_now
+
+        # 1. Fast HSV detection
+        detection = detect_ball(frame)
+
+        if detection is not None:
+            cx, cy, radius = detection
+            # 2. Kalman update
+            cx, cy = kalman.update(cx, cy)
+            cx, cy = int(cx), int(cy)
+            # 3. Re-init tracker periodically
+            if tracker_frame_counter % TRACKER_REINIT_INTERVAL == 0:
+                tracker.init(frame, cx, cy, radius)
+            tracker_frame_counter += 1
+            # 4. Submit full frame to YOLO26n AI thread (non-blocking)
+            ai.submit_frame(frame)
+        else:
+            # 5. Fall back to tracker
+            tracked = tracker.update(frame)
+            if tracked is not None:
+                cx, cy = tracked
+                radius = None
+            else:
+                cx, cy, radius = None, None, None
+            # Kalman prediction only (no measurement)
+            if cx is None:
+                pred_cx, pred_cy = kalman.predict()
+                cx, cy = int(pred_cx), int(pred_cy)
+
+        # 6. Fuse YOLO26n result if available (overrides HSV when AI has detection)
+        ai_dets = ai.get_detections()
+        if ai_dets:
+            best = max(ai_dets, key=lambda d: d["conf"])
+            cx, cy = best["cx"], best["cy"]
+            radius = max(best["w"], best["h"]) // 2
+
+        # 7. Game logic
+        action = decide_action(cx, cy, radius)
+
+        # 8. Motor output
+        if action == Action.FORWARD:
+            motors.forward()
+        elif action == Action.TURN_RIGHT:
+            motors.turn_right()
+        elif action == Action.TURN_LEFT:
+            motors.turn_left()
+        elif action == Action.STOP:
+            motors.stop()
+        elif action == Action.SEARCH:
+            motors.turn_right(speed=30)
+
+        frame_count += 1
+        if frame_count % 100 == 0:
+            print(f"[main] {frame_count} frames | action={action.name} | ball=({cx},{cy})")
+
+
+if __name__ == "__main__":
+    main()
