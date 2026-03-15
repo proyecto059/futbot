@@ -51,7 +51,11 @@ class MotorController:
         self._direction_pid = PIDController()
 
     def setup(self):
-        import RPi.GPIO as GPIO
+        try:
+            import RPi.GPIO as GPIO
+        except ImportError:
+            print("[motors] RPi.GPIO not available — running without motor control")
+            return
         self._gpio = GPIO
         GPIO.setmode(GPIO.BCM)
         for pin in (MOTOR_A_DIR, MOTOR_A_PWM, MOTOR_B_DIR, MOTOR_B_PWM):
