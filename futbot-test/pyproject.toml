@@ -16,6 +16,9 @@ export = [
     "onnxsim>=0.4",
 ]
 
+[tool.setuptools]
+py-modules = ["config", "camera", "detector", "tracker", "game_logic", "motor_control", "ai_inference", "main"]
+
 [build-system]
 requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
