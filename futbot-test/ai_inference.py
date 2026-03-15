@@ -109,56 +109,38 @@ class AIInferenceThread:
         Coordinates in pixels of original frame (FRAME_WIDTH x FRAME_HEIGHT).
         """
         tensor = self._preprocess(frame)
-        raw = self._session.run(None, {self._input_name: tensor})[0]  # (1, 84, N)
-        return self._parse_yolo26_output(raw[0])  # (84, N)
+        raw = self._session.run(None, {self._input_name: tensor})[0]  # (1, 300, 6)
+        return self._parse_output(raw[0])  # (300, 6)
 
-    def _parse_yolo26_output(self, output: np.ndarray) -> list:
+    def _parse_output(self, output: np.ndarray) -> list:
         """
-        output: (84, N) — YOLO26 no NMS output.
-        84 = [cx, cy, w, h, class0_conf, ..., class79_conf] — normalized coords.
-        Scales to FRAME_WIDTH x FRAME_HEIGHT.
+        Formato con NMS integrado (Ultralytics end-to-end):
+          output: (N, 6) — cada fila: [x1, y1, x2, y2, conf, class_id]
+          Coords en píxeles del input (AI_INPUT_SIZE). Se escalan al frame original.
+
+        NOTA: si tu modelo es de una sola clase (pelota), usa BALL_CLASS_ID=0 en config.py.
         """
-        preds = output.T  # (N, 84)
-        boxes_xywh = preds[:, :4]
-        class_scores = preds[:, 4:]
-        class_ids = np.argmax(class_scores, axis=1)
-        confs = class_scores[np.arange(len(class_ids)), class_ids]
-
-        mask = (class_ids == BALL_CLASS_ID) & (confs >= AI_CONF_THRESHOLD)
-        filtered_boxes = boxes_xywh[mask]
-        filtered_confs = confs[mask]
-
-        if len(filtered_boxes) == 0:
-            return []
-
         scale_x = FRAME_WIDTH / AI_INPUT_SIZE[1]
         scale_y = FRAME_HEIGHT / AI_INPUT_SIZE[0]
-        nms_boxes = []
-        nms_scores = []
-        for box, conf in zip(filtered_boxes, filtered_confs):
-            cx, cy, w, h = box
-            cx_px = cx * AI_INPUT_SIZE[1] * scale_x
-            cy_px = cy * AI_INPUT_SIZE[0] * scale_y
-            w_px  = w  * AI_INPUT_SIZE[1] * scale_x
-            h_px  = h  * AI_INPUT_SIZE[0] * scale_y
-            x1 = int(cx_px - w_px / 2)
-            y1 = int(cy_px - h_px / 2)
-            nms_boxes.append([x1, y1, int(w_px), int(h_px)])
-            nms_scores.append(float(conf))
-
-        indices = cv2.dnn.NMSBoxes(nms_boxes, nms_scores, AI_CONF_THRESHOLD, AI_NMS_THRESHOLD)
-        if len(indices) == 0:
-            return []
-
         results = []
-        for i in indices.flatten():
-            x1, y1, w, h = nms_boxes[i]
+        for det in output:
+            x1, y1, x2, y2, conf, class_id = det
+            if conf < AI_CONF_THRESHOLD:
+                continue
+            if int(class_id) != BALL_CLASS_ID:
+                continue
+            x1s = int(x1 * scale_x)
+            y1s = int(y1 * scale_y)
+            x2s = int(x2 * scale_x)
+            y2s = int(y2 * scale_y)
+            w = x2s - x1s
+            h = y2s - y1s
             results.append({
-                "cx": x1 + w // 2,
-                "cy": y1 + h // 2,
+                "cx": x1s + w // 2,
+                "cy": y1s + h // 2,
                 "w": w,
                 "h": h,
-                "conf": nms_scores[i],
-                "class_id": BALL_CLASS_ID,
+                "conf": float(conf),
+                "class_id": int(class_id),
             })
         return results

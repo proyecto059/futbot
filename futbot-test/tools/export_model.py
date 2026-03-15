@@ -47,7 +47,6 @@ def quantize_int8_dynamic(input_path: Path, output_path: Path) -> Path:
         model_input=str(input_path),
         model_output=str(output_path),
         weight_type=QuantType.QInt8,
-        optimize_model=True,
     )
     print(f"[int8] → {output_path} ({output_path.stat().st_size / 1024:.1f} KB)")
     return output_path
