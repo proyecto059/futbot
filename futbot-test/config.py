@@ -29,7 +29,7 @@ AI_THREADS = 4
 AI_INPUT_SIZE = (320, 320)   # imgsz usado en export_model.py --imgsz 320
 AI_CONF_THRESHOLD = 0.4      # confianza mínima para detección válida
 AI_NMS_THRESHOLD = 0.45      # NMS IoU threshold (YOLO26 no tiene NMS interno)
-BALL_CLASS_ID = 32           # COCO class ID para sports ball; ajustar si modelo custom
+BALL_CLASS_ID = 0            # Custom 2-class model: 0=ball, 1=robot
 
 # Tracker
 TRACKER_TYPE = "MOSSE"   # or "KCF"
