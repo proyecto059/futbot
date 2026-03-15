@@ -13,7 +13,6 @@ dev = ["pytest>=7.0", "pytest-mock>=3.0"]
 export = [
     "ultralytics>=8.3",
     "onnx>=1.15",
-    "onnxsim>=0.4",
 ]
 
 [tool.setuptools]
