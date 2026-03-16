@@ -6,6 +6,7 @@ from config import (
     MORPH_OPEN_SIZE, MORPH_DILATE_SIZE, ROI_SIZE, ROI_PADDING,
     FRAME_WIDTH, FRAME_HEIGHT,
     KALMAN_PROCESS_NOISE, KALMAN_MEASUREMENT_NOISE,
+    CLAHE_ENABLED, CLAHE_CLIP_LIMIT, CLAHE_TILE_GRID, CLAHE_BRIGHTNESS_THRESHOLD,
 )
 
 _kernel_open = cv2.getStructuringElement(
@@ -15,6 +16,21 @@ _kernel_dilate = cv2.getStructuringElement(
     cv2.MORPH_ELLIPSE, (MORPH_DILATE_SIZE, MORPH_DILATE_SIZE)
 )
 
+# CLAHE object — created once at module load, reused every frame
+# tileGridSize takes a (int, int) tuple — CLAHE_TILE_GRID is a scalar, expand here
+_clahe = cv2.createCLAHE(
+    clipLimit=CLAHE_CLIP_LIMIT,
+    tileGridSize=(CLAHE_TILE_GRID, CLAHE_TILE_GRID),
+)
+
+
+def _apply_clahe(frame: np.ndarray) -> np.ndarray:
+    """Normalize illumination via CLAHE on L channel of LAB color space."""
+    lab = cv2.cvtColor(frame, cv2.COLOR_BGR2LAB)
+    l, a, b = cv2.split(lab)
+    l = _clahe.apply(l)
+    return cv2.cvtColor(cv2.merge((l, a, b)), cv2.COLOR_LAB2BGR)
+
 
 def detect_ball(frame: np.ndarray) -> tuple[int, int, int] | None:
     """
@@ -22,6 +38,8 @@ def detect_ball(frame: np.ndarray) -> tuple[int, int, int] | None:
     Returns (cx, cy, radius) or None if not found.
     ~1-2ms on RPi3.
     """
+    if CLAHE_ENABLED and np.mean(frame) < CLAHE_BRIGHTNESS_THRESHOLD:
+        frame = _apply_clahe(frame)
     blurred = cv2.GaussianBlur(frame, (11, 11), 0)
     hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
     mask = cv2.inRange(hsv, HSV_LOWER, HSV_UPPER)
@@ -105,3 +123,7 @@ class BallKalman:
             return 0.0, 0.0
         predicted = self._kf.predict()
         return float(predicted[0, 0]), float(predicted[1, 0])
+
+    def reset(self):
+        """Discard current state — next update() re-initializes from scratch."""
+        self._initialized = False

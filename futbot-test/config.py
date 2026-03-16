@@ -1,7 +1,11 @@
 # futbot-test/config.py
 
+import os
+
 # Camera
-CAMERA_URL = "http://192.168.4.1:81/stream"
+CAMERA_URL: str = os.getenv("CAMERA_URL", "http://192.168.4.1:81/stream")
+USE_LOCAL_CAM: bool = os.getenv("USE_LOCAL_CAM", "false").lower() == "true"
+LOCAL_CAM_ID: int   = int(os.getenv("LOCAL_CAM_ID", "0"))
 FRAME_WIDTH = 320
 FRAME_HEIGHT = 240
 
@@ -11,6 +15,12 @@ HSV_UPPER = (20, 255, 255)
 MIN_CONTOUR_AREA = 500
 MIN_BALL_RADIUS = 10
 
+# Adaptive illumination (LAB+CLAHE) — applied inside detect_ball()
+CLAHE_ENABLED = True          # kill switch: set False to disable entirely
+CLAHE_CLIP_LIMIT = 2.5        # contrast limit (2.0=soft, 3.0=aggressive, 4.0=max)
+CLAHE_TILE_GRID = 8           # used as tileGridSize=(N,N) — do NOT pass scalar directly
+CLAHE_BRIGHTNESS_THRESHOLD = 130  # apply CLAHE when np.mean(frame) < this
+
 # Morphology kernels
 MORPH_OPEN_SIZE = 5
 MORPH_DILATE_SIZE = 7
@@ -18,6 +28,7 @@ MORPH_DILATE_SIZE = 7
 # Kalman
 KALMAN_PROCESS_NOISE = 1e-2
 KALMAN_MEASUREMENT_NOISE = 1e-1
+KALMAN_RESET_AFTER_N_FRAMES = 30  # reset if no detection for this many frames (~0.6s at 50Hz)
 
 # ROI for AI (usado por HSV detector para recorte visual, no por YOLO26)
 ROI_SIZE = 96          # 96x96 pixels
