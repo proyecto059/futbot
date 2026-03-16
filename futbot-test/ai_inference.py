@@ -78,7 +78,8 @@ class AIInferenceThread:
             )
             self._input_name = self._session.get_inputs()[0].name
             self._available = True
-            print(f"[AI] YOLO26n INT8 loaded — input: {self._input_name}")
+            active_providers = self._session.get_providers()
+            print(f"[AI] YOLO26n INT8 loaded — input: {self._input_name} | providers: {active_providers}")
         except Exception as e:
             print(f"[AI] Failed to load model: {e}")
 

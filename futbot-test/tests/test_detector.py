@@ -88,8 +88,8 @@ def test_detect_ball_applies_clahe_when_frame_is_dark():
 
 def test_detect_ball_skips_clahe_when_frame_is_bright():
     """detect_ball should NOT call _apply_clahe when mean(frame) >= threshold."""
-    # Bright frame — mean ~200, above CLAHE_BRIGHTNESS_THRESHOLD=130
-    bright_frame = np.full((240, 320, 3), 200, dtype=np.uint8)
+    # Bright frame — mean ~230, above CLAHE_BRIGHTNESS_THRESHOLD=220
+    bright_frame = np.full((240, 320, 3), 230, dtype=np.uint8)
     with patch.object(detector, '_apply_clahe', wraps=detector._apply_clahe) as mock_clahe:
         detector.detect_ball(bright_frame)
         mock_clahe.assert_not_called()
@@ -102,3 +102,45 @@ def test_detect_ball_respects_clahe_enabled_flag():
         with patch.object(detector, '_apply_clahe', wraps=detector._apply_clahe) as mock_clahe:
             detector.detect_ball(dark_frame)
             mock_clahe.assert_not_called()
+
+
+# ── Circularity filter + multi-distance detection tests ────────────────────
+
+def test_rejects_elongated_orange_blob():
+    """Blob naranja alargado (tipo teclado) debe ser rechazado por circularidad."""
+    frame = np.zeros((240, 320, 3), dtype=np.uint8)
+    # Rectangle 100×15 px — circularity ≈ 0.36, well below MIN_CIRCULARITY=0.65
+    cv2.rectangle(frame, (110, 113), (210, 128), (0, 100, 255), -1)
+    assert detect_ball(frame) is None
+
+
+def test_detects_small_distant_ball():
+    """Pelota pequeña (r=8, simula pelota lejana) debe ser detectada."""
+    frame = make_orange_frame(160, 120, r=8)
+    result = detect_ball(frame)
+    assert result is not None
+    cx, cy, radius = result
+    assert abs(cx - 160) < 15
+    assert abs(cy - 120) < 15
+
+
+def test_rejects_detection_near_frame_edge():
+    """Detección cerca del borde izquierdo/derecho debe ser rechazada (artefacto de dilatación)."""
+    # Ball drawn at x=5 — center lands near left edge, rejected by BORDER_REJECT_PX
+    frame = make_orange_frame(5, 120, r=15)
+    assert detect_ball(frame) is None
+
+
+def test_detects_ball_near_bottom_edge():
+    """Pelota cerca del borde inferior debe detectarse (no es artefacto de dilatación)."""
+    frame = make_orange_frame(160, 228, r=10)
+    assert detect_ball(frame) is not None
+
+
+def test_rejects_low_saturation_orange_blob():
+    """Blob naranja de baja saturación (S=70) debe ser rechazado — es fondo, no pelota."""
+    # HSV (10, 70, 180) — tono cálido pero muy desaturado, como cortina o tela
+    frame = cv2.cvtColor(
+        np.full((240, 320, 3), [10, 70, 180], dtype=np.uint8), cv2.COLOR_HSV2BGR
+    )
+    assert detect_ball(frame) is None

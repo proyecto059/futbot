@@ -10,16 +10,20 @@ FRAME_WIDTH = 320
 FRAME_HEIGHT = 240
 
 # HSV orange ball detection (reused from cam.py)
-HSV_LOWER = (5, 120, 120)
-HSV_UPPER = (20, 255, 255)
-MIN_CONTOUR_AREA = 500
-MIN_BALL_RADIUS = 10
+HSV_LOWER = (0, 120, 120)  # restaurado a original — S=80 causaba falsos positivos en fondos cálidos de baja saturación
+HSV_UPPER = (25, 255, 255) # era (20, 255, 255) — hue ligeramente más ancho
+MIN_CONTOUR_AREA = 200    # era 500 — detecta pelotas más pequeñas/lejanas
+MIN_BALL_RADIUS = 5       # era 10  — radio mínimo de la pelota en píxeles
+MIN_CIRCULARITY = 0.65    # rechaza blobs no circulares (teclado, ropa, etc.)
 
 # Adaptive illumination (LAB+CLAHE) — applied inside detect_ball()
 CLAHE_ENABLED = True          # kill switch: set False to disable entirely
 CLAHE_CLIP_LIMIT = 2.5        # contrast limit (2.0=soft, 3.0=aggressive, 4.0=max)
 CLAHE_TILE_GRID = 8           # used as tileGridSize=(N,N) — do NOT pass scalar directly
-CLAHE_BRIGHTNESS_THRESHOLD = 130  # apply CLAHE when np.mean(frame) < this
+CLAHE_BRIGHTNESS_THRESHOLD = 220  # era 130 — aplica CLAHE en casi todos los frames
+
+# Border rejection — reject detections within this many pixels from frame edge
+BORDER_REJECT_PX = 15
 
 # Morphology kernels
 MORPH_OPEN_SIZE = 5

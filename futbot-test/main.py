@@ -24,7 +24,7 @@ from tracker import BallTracker
 from ai_inference import AIInferenceThread
 from game_logic import decide_action, Action
 from motor_control import MotorController
-from config import TRACKER_REINIT_INTERVAL, AI_INPUT_SIZE, MODEL_PATH, KALMAN_RESET_AFTER_N_FRAMES
+from config import TRACKER_REINIT_INTERVAL, AI_INPUT_SIZE, MODEL_PATH, KALMAN_RESET_AFTER_N_FRAMES, HSV_LOWER, HSV_UPPER
 
 
 def _log_startup(ai: AIInferenceThread):
@@ -203,6 +203,9 @@ def main():
             cv2.putText(vis, f"{src_lbl} | {action.name} | ({cx},{cy})",
                         (4, 14), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (200, 200, 200), 1)
             cv2.imshow("FutBotMX", vis)
+            _hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+            _hsv_mask = cv2.inRange(_hsv_frame, HSV_LOWER, HSV_UPPER)
+            cv2.imshow("HSV mask", _hsv_mask)
             if cv2.waitKey(1) & 0xFF == ord("q"):
                 break
 

@@ -7,6 +7,8 @@ from config import (
     FRAME_WIDTH, FRAME_HEIGHT,
     KALMAN_PROCESS_NOISE, KALMAN_MEASUREMENT_NOISE,
     CLAHE_ENABLED, CLAHE_CLIP_LIMIT, CLAHE_TILE_GRID, CLAHE_BRIGHTNESS_THRESHOLD,
+    MIN_CIRCULARITY,
+    BORDER_REJECT_PX,
 )
 
 _kernel_open = cv2.getStructuringElement(
@@ -48,17 +50,33 @@ def detect_ball(frame: np.ndarray) -> tuple[int, int, int] | None:
 
     contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     best = None
-    best_area = MIN_CONTOUR_AREA
+    best_area = 0
 
     for cnt in contours:
         area = cv2.contourArea(cnt)
-        if area < best_area:
+        if area < MIN_CONTOUR_AREA:
             continue
+
+        # Circularity: reject elongated/irregular blobs (keyboards, clothing, etc.)
+        # A full ball → ~1.0 | semicircle → ~0.75 | keyboard row → ~0.50-0.70
+        perimeter = cv2.arcLength(cnt, True)
+        if perimeter == 0:
+            continue
+        circularity = 4 * np.pi * area / (perimeter * perimeter)
+        if circularity < MIN_CIRCULARITY:
+            continue
+
         (x, y), radius = cv2.minEnclosingCircle(cnt)
         if radius < MIN_BALL_RADIUS:
             continue
-        best = (int(x), int(y), int(radius))
-        best_area = area
+
+        # Reject detections near frame edges (dilation edge artifacts)
+        if x < BORDER_REJECT_PX or x > FRAME_WIDTH - BORDER_REJECT_PX:
+            continue
+
+        if area > best_area:
+            best = (int(x), int(y), int(radius))
+            best_area = area
 
     return best
 
