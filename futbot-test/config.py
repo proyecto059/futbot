@@ -28,7 +28,7 @@ MORPH_DILATE_SIZE = 7
 # Kalman
 KALMAN_PROCESS_NOISE = 1e-2
 KALMAN_MEASUREMENT_NOISE = 1e-1
-KALMAN_RESET_AFTER_N_FRAMES = 30  # reset if no detection for this many frames (~0.6s at 50Hz)
+KALMAN_RESET_AFTER_N_FRAMES = 150  # reset if no detection for this many frames (~5s at 30Hz)
 
 # ROI for AI (usado por HSV detector para recorte visual, no por YOLO26)
 ROI_SIZE = 96          # 96x96 pixels

@@ -10,7 +10,7 @@ def test_camera_thread_stores_frame():
     mock_cap.read.return_value = (True, fake_frame)
 
     with patch("camera.cv2.VideoCapture", return_value=mock_cap):
-        cam = CameraThread("http://fake-url/stream")
+        cam = CameraThread()
         cam.start()
         import time; time.sleep(0.05)
         frame = cam.get_frame()
