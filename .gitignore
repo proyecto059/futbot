@@ -12,5 +12,6 @@ wheels/
 
 App/rust/target
 
+futbot-test-rs/target
 # Worktrees
 .worktrees/

@@ -13,6 +13,7 @@ from config import (
     SEED_LOWER, SEED_UPPER, SEED_MIN_PIXELS, SEED_MAX_AREA,
     ACCUM_DECAY, ACCUM_THRESHOLD, ACCUM_MIN_AREA,
     DETECT_ROI_SIZE,
+    HSV_ADAPTIVE_V_RATIO, HSV_ADAPTIVE_V_PCTILE, HSV_ADAPTIVE_V_MIN, HSV_ADAPTIVE_S_SAMPLE,
 )
 
 _kernel_open = cv2.getStructuringElement(
@@ -21,6 +22,10 @@ _kernel_open = cv2.getStructuringElement(
 _kernel_dilate = cv2.getStructuringElement(
     cv2.MORPH_ELLIPSE, (MORPH_DILATE_SIZE, MORPH_DILATE_SIZE)
 )
+
+# Pre-converted ndarray bounds — cv2.inRange requires lb/ub to be the same type
+_HSV_UPPER = np.array(HSV_UPPER, dtype=np.uint8)
+_SEED_UPPER = np.array(SEED_UPPER, dtype=np.uint8)
 
 # CLAHE object — created once at module load, reused every frame
 # tileGridSize takes a (int, int) tuple — CLAHE_TILE_GRID is a scalar, expand here
@@ -80,7 +85,8 @@ def _hsv_pass(
             continue
 
         # Reject detections near frame edges (dilation edge artifacts)
-        if x < BORDER_REJECT_PX or x > FRAME_WIDTH - BORDER_REJECT_PX:
+        if (x < BORDER_REJECT_PX or x > FRAME_WIDTH - BORDER_REJECT_PX
+                or y < BORDER_REJECT_PX or y > FRAME_HEIGHT - BORDER_REJECT_PX):
             continue
 
         if area > best_area:
@@ -90,9 +96,9 @@ def _hsv_pass(
     return best
 
 
-def _partial_contour_pass(hsv: np.ndarray) -> tuple[int, int, int] | None:
+def _partial_contour_pass(hsv: np.ndarray, lower: np.ndarray) -> tuple[int, int, int] | None:
     """Detect partially visible ball (arc/semicircle) via ellipse fitting."""
-    mask = cv2.inRange(hsv, HSV_LOWER, HSV_UPPER)
+    mask = cv2.inRange(hsv, lower, _HSV_UPPER)
     mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, _kernel_open)
     mask = cv2.dilate(mask, _kernel_dilate)
 
@@ -125,15 +131,31 @@ def _partial_contour_pass(hsv: np.ndarray) -> tuple[int, int, int] | None:
         if radius < MIN_BALL_RADIUS:
             continue
         ex, ey = int(ex), int(ey)
-        if ex < BORDER_REJECT_PX or ex > FRAME_WIDTH - BORDER_REJECT_PX:
+        if (ex < BORDER_REJECT_PX or ex > FRAME_WIDTH - BORDER_REJECT_PX
+                or ey < BORDER_REJECT_PX or ey > FRAME_HEIGHT - BORDER_REJECT_PX):
             continue
         return (ex, ey, radius)
     return None
 
 
-def _seed_pass(hsv: np.ndarray) -> tuple[int, int, int] | None:
+def _compute_adaptive_v_floor(hsv: np.ndarray) -> int:
+    """
+    Computes V floor dynamically from orange-hue pixels in the current frame.
+    Adapts to any illumination: dim indoor → low floor; bright outdoor → high floor.
+    Falls back to HSV_LOWER[2] if not enough orange pixels found.
+    """
+    h, s, v = hsv[:, :, 0], hsv[:, :, 1], hsv[:, :, 2]
+    sample_mask = (h <= HSV_UPPER[0]) & (s >= HSV_ADAPTIVE_S_SAMPLE)
+    v_samples = v[sample_mask]
+    if len(v_samples) >= 5:
+        v_ref = float(np.percentile(v_samples, HSV_ADAPTIVE_V_PCTILE))
+        return max(HSV_ADAPTIVE_V_MIN, int(v_ref * HSV_ADAPTIVE_V_RATIO))
+    return int(HSV_LOWER[2])  # fallback: static config
+
+
+def _seed_pass(hsv: np.ndarray, seed_lower: np.ndarray) -> tuple[int, int, int] | None:
     """Detect tiny ball (8-15px) via high-purity color seed."""
-    seed_mask = cv2.inRange(hsv, SEED_LOWER, SEED_UPPER)
+    seed_mask = cv2.inRange(hsv, seed_lower, _SEED_UPPER)
     # Minimal erosion to clean 1px noise
     kernel_small = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
     seed_mask = cv2.erode(seed_mask, kernel_small, iterations=1)
@@ -146,7 +168,8 @@ def _seed_pass(hsv: np.ndarray) -> tuple[int, int, int] | None:
             continue
         (x, y), radius = cv2.minEnclosingCircle(cnt)
         x, y = int(x), int(y)
-        if x < BORDER_REJECT_PX or x > FRAME_WIDTH - BORDER_REJECT_PX:
+        if (x < BORDER_REJECT_PX or x > FRAME_WIDTH - BORDER_REJECT_PX
+                or y < BORDER_REJECT_PX or y > FRAME_HEIGHT - BORDER_REJECT_PX):
             continue
         if area > best_area:
             best = (x, y, max(int(radius), MIN_BALL_RADIUS))
@@ -157,13 +180,19 @@ def _seed_pass(hsv: np.ndarray) -> tuple[int, int, int] | None:
 def _detect_in_frame(frame: np.ndarray) -> tuple[int, int, int] | None:
     """Core detection logic — runs all passes on the given frame."""
     processed, hsv = _preprocess_frame(frame)
-    result = _hsv_pass(hsv, HSV_LOWER, HSV_UPPER, MIN_CIRCULARITY)
+
+    # Adaptive V floor: adjusts to current scene illumination
+    v_floor = _compute_adaptive_v_floor(hsv)
+    adaptive_lower = np.array([HSV_LOWER[0], HSV_LOWER[1], v_floor], dtype=np.uint8)
+    adaptive_seed_lower = np.array([SEED_LOWER[0], SEED_LOWER[1], v_floor], dtype=np.uint8)
+
+    result = _hsv_pass(hsv, adaptive_lower, _HSV_UPPER, MIN_CIRCULARITY)
     if result:
         return result
-    result = _partial_contour_pass(hsv)
+    result = _partial_contour_pass(hsv, adaptive_lower)
     if result:
         return result
-    return _seed_pass(hsv)
+    return _seed_pass(hsv, adaptive_seed_lower)
 
 
 def detect_ball(
@@ -221,7 +250,8 @@ class BallAccumulator:
                 continue
             (x, y), radius = cv2.minEnclosingCircle(cnt)
             x, y = int(x), int(y)
-            if x < BORDER_REJECT_PX or x > FRAME_WIDTH - BORDER_REJECT_PX:
+            if (x < BORDER_REJECT_PX or x > FRAME_WIDTH - BORDER_REJECT_PX
+                    or y < BORDER_REJECT_PX or y > FRAME_HEIGHT - BORDER_REJECT_PX):
                 continue
             val = float(np.max(self._acc[max(0, y - 3):y + 4, max(0, x - 3):x + 4]))
             if val > best_val:

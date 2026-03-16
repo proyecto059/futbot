@@ -125,6 +125,21 @@ def test_detects_small_distant_ball():
     assert abs(cy - 120) < 15
 
 
+def test_detects_dim_orange_ball():
+    """Pelota naranja muy tenue (HSV V=55, por debajo del antiguo V=80 estático)
+    debe detectarse gracias al piso V adaptativo."""
+    frame = np.zeros((240, 320, 3), dtype=np.uint8)
+    dim_color = cv2.cvtColor(
+        np.full((1, 1, 3), [12, 180, 55], dtype=np.uint8), cv2.COLOR_HSV2BGR
+    )[0, 0].tolist()
+    cv2.circle(frame, (160, 120), 15, dim_color, -1)
+    result = detect_ball(frame)
+    assert result is not None
+    cx, cy, _ = result
+    assert abs(cx - 160) < 15
+    assert abs(cy - 120) < 15
+
+
 def test_rejects_detection_near_frame_edge():
     """Detección cerca del borde izquierdo/derecho debe ser rechazada (artefacto de dilatación)."""
     # Ball drawn at x=5 — center lands near left edge, rejected by BORDER_REJECT_PX
@@ -134,7 +149,7 @@ def test_rejects_detection_near_frame_edge():
 
 def test_detects_ball_near_bottom_edge():
     """Pelota cerca del borde inferior debe detectarse (no es artefacto de dilatación)."""
-    frame = make_orange_frame(160, 228, r=10)
+    frame = make_orange_frame(160, 218, r=10)
     assert detect_ball(frame) is not None
 
 

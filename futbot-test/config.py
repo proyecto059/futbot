@@ -45,6 +45,14 @@ AI_CACHE_MAX_AGE = 10              # frames (~200ms a 50Hz)
 PARTIAL_CIRCULARITY_MIN = 0.35    # mínimo para considerar arco de pelota
 PARTIAL_ELLIPSE_RATIO = 0.75      # min(axis)/max(axis) — qué tan circular debe ser
 
+# Adaptive V floor — ajusta el piso HSV por frame según contenido naranja
+HSV_ADAPTIVE_V_RATIO = 0.5     # V floor = 50% del percentil 90 del V naranja
+HSV_ADAPTIVE_V_PCTILE = 90     # percentil de V usado como referencia
+HSV_ADAPTIVE_V_MIN = 20        # piso absoluto (nunca bajar de aquí)
+HSV_ADAPTIVE_S_SAMPLE = 80     # S mínima para incluir píxel en estadísticas de V
+                                # (antes: 30 — demasiado permisivo, ruido de cámara
+                                # pasaba y bajaba el piso artificialmente)
+
 # Seed detector (pelotas 8-15px, alta pureza de color)
 SEED_LOWER = (5, 150, 120)
 SEED_UPPER = (20, 255, 255)
@@ -60,6 +68,7 @@ ACCUM_MIN_AREA = 2           # píxeles mínimos en zona caliente
 # Nota: speed < 0.5 px/frame rechazaría pelota estática (STOP) — usar conteo de frames
 STATIC_REJECT_FRAMES = 30    # frames en misma posición → probable fondo estático
 STATIC_GRID_SIZE = 5         # tolerancia en px para "misma posición"
+HSV_CONFIRM_FRAMES = 3       # frames consecutivos requeridos antes de confirmar detección
 
 # ROI tracking para detect_ball (no confundir con ROI_SIZE para extract_roi)
 DETECT_ROI_SIZE = 120        # px — región de búsqueda alrededor de última posición
@@ -68,7 +77,7 @@ DETECT_ROI_SIZE = 120        # px — región de búsqueda alrededor de última 
 MODEL_PATH = "model.onnx"
 AI_THREADS = 4
 AI_INPUT_SIZE = (320, 320)   # imgsz usado en export_model.py --imgsz 320
-AI_CONF_THRESHOLD = 0.4      # confianza mínima para detección válida
+AI_CONF_THRESHOLD = 0.25     # confianza mínima para detección válida
 AI_NMS_THRESHOLD = 0.45      # NMS IoU threshold (YOLO26 no tiene NMS interno)
 BALL_CLASS_ID = 0            # Custom 2-class model: 0=ball, 1=robot
 

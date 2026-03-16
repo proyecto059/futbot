@@ -31,6 +31,7 @@ from config import (
     SEED_LOWER, SEED_UPPER,
     ACCUM_DECAY, ACCUM_THRESHOLD,
     STATIC_REJECT_FRAMES, STATIC_GRID_SIZE,
+    HSV_CONFIRM_FRAMES,
 )
 
 
@@ -82,6 +83,7 @@ def main():
     _no_ball_frames = 0
     last_radius: int | None = 15       # default 15 — evita radius=None → SEARCH
     _prev_hsv_detected = False
+    _hsv_streak: int = 0          # frames consecutivos con detección HSV
     _ai_cache: dict | None = None
     _ai_cache_age: int = 0
     accumulator = BallAccumulator()
@@ -133,18 +135,27 @@ def main():
             _no_ball_frames = 0
             cx, cy, radius = detection
             last_radius = radius
-            if not _prev_hsv_detected:
-                print(f"[hsv] ball found @ ({cx},{cy}) r={radius}")
-            _prev_hsv_detected = True
-            # 2. Kalman update
-            cx, cy = kalman.update(cx, cy)
-            cx, cy = int(cx), int(cy)
-            # 3. Re-init tracker periodically
+            _hsv_streak += 1
+
+            if _hsv_streak >= HSV_CONFIRM_FRAMES:
+                # Detección confirmada (≥2 frames consecutivos)
+                if not _prev_hsv_detected:
+                    print(f"[hsv] ball found @ ({cx},{cy}) r={radius}")
+                _prev_hsv_detected = True
+                # 2. Kalman update
+                cx, cy = kalman.update(cx, cy)
+                cx, cy = int(cx), int(cy)
+            else:
+                # Tentativa — no actualizar Kalman todavía
+                cx, cy = int(cx), int(cy)
+
+            # 3. Re-init tracker periodically (en cualquier detección)
             if tracker_frame_counter % TRACKER_REINIT_INTERVAL == 0:
                 tracker.init(frame, cx, cy, radius)
             tracker_frame_counter += 1
             # 4. Tracker re-init handled; AI submit moved below HSV block
         else:
+            _hsv_streak = 0
             if _prev_hsv_detected:
                 print("[hsv] ball lost")
             _prev_hsv_detected = False
