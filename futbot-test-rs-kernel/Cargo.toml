@@ -1,0 +1,32 @@
+[package]
+name = "futbot-test-rs"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "futbot"
+path = "src/main.rs"
+
+[features]
+default = []
+# Enable OpenCV legacy MOSSE/KCF tracker (requires opencv-contrib)
+opencv-tracking = ["opencv/tracking"]
+# Enable AI inference via OnnxRuntime (requires libonnxruntime on target)
+ai = ["dep:ort", "dep:ndarray"]
+
+[dependencies]
+opencv = { version = "0.92", default-features = false, features = ["videoio", "imgproc", "video", "highgui", "dnn"] }
+ort = { version = "2.0.0-rc.12", features = ["load-dynamic"], optional = true }
+ndarray = { version = "0.16", optional = true }
+rppal = "0.18"
+crossbeam-channel = "0.5"
+anyhow = "1"
+log = "0.4"
+env_logger = "0.11"
+clap = { version = "4", features = ["derive"] }
+ctrlc = "3"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
