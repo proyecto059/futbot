@@ -10,17 +10,17 @@ FRAME_WIDTH = 320
 FRAME_HEIGHT = 240
 
 # HSV orange ball detection (reused from cam.py)
-HSV_LOWER = (0, 120, 120)  # restaurado a original — S=80 causaba falsos positivos en fondos cálidos de baja saturación
+HSV_LOWER = (0, 60, 80)    # S=60 (de 120), V=80 (de 120) — captura pelotas dim/lejanas
 HSV_UPPER = (25, 255, 255) # era (20, 255, 255) — hue ligeramente más ancho
-MIN_CONTOUR_AREA = 200    # era 500 — detecta pelotas más pequeñas/lejanas
-MIN_BALL_RADIUS = 5       # era 10  — radio mínimo de la pelota en píxeles
-MIN_CIRCULARITY = 0.65    # rechaza blobs no circulares (teclado, ropa, etc.)
+MIN_CONTOUR_AREA = 30      # de 200 — detecta pelotas muy pequeñas
+MIN_BALL_RADIUS = 5        # era 10  — radio mínimo de la pelota en píxeles
+MIN_CIRCULARITY = 0.70     # más estricto (de 0.65) — compensa S bajo
 
 # Adaptive illumination (LAB+CLAHE) — applied inside detect_ball()
 CLAHE_ENABLED = True          # kill switch: set False to disable entirely
 CLAHE_CLIP_LIMIT = 2.5        # contrast limit (2.0=soft, 3.0=aggressive, 4.0=max)
 CLAHE_TILE_GRID = 8           # used as tileGridSize=(N,N) — do NOT pass scalar directly
-CLAHE_BRIGHTNESS_THRESHOLD = 220  # era 130 — aplica CLAHE en casi todos los frames
+CLAHE_BRIGHTNESS_THRESHOLD = 300   # de 220 — en la práctica siempre activo
 
 # Border rejection — reject detections within this many pixels from frame edge
 BORDER_REJECT_PX = 15
@@ -37,6 +37,32 @@ KALMAN_RESET_AFTER_N_FRAMES = 150  # reset if no detection for this many frames 
 # ROI for AI (usado por HSV detector para recorte visual, no por YOLO26)
 ROI_SIZE = 96          # 96x96 pixels
 ROI_PADDING = 20       # extra padding around ball bbox
+
+# AI sticky cache
+AI_CACHE_MAX_AGE = 10              # frames (~200ms a 50Hz)
+
+# Partial contour detector
+PARTIAL_CIRCULARITY_MIN = 0.35    # mínimo para considerar arco de pelota
+PARTIAL_ELLIPSE_RATIO = 0.75      # min(axis)/max(axis) — qué tan circular debe ser
+
+# Seed detector (pelotas 8-15px, alta pureza de color)
+SEED_LOWER = (5, 150, 120)
+SEED_UPPER = (20, 255, 255)
+SEED_MIN_PIXELS = 3               # mínimo píxeles conectados para ser seed válido
+SEED_MAX_AREA = 700               # máximo píxeles — excluye blobs grandes (tela, teclado)
+
+# Temporal ball accumulator
+ACCUM_DECAY = 0.85           # factor de decaimiento por frame
+ACCUM_THRESHOLD = 3.0        # evidencia acumulada mínima para detección
+ACCUM_MIN_AREA = 2           # píxeles mínimos en zona caliente
+
+# Motion consistency filter
+# Nota: speed < 0.5 px/frame rechazaría pelota estática (STOP) — usar conteo de frames
+STATIC_REJECT_FRAMES = 30    # frames en misma posición → probable fondo estático
+STATIC_GRID_SIZE = 5         # tolerancia en px para "misma posición"
+
+# ROI tracking para detect_ball (no confundir con ROI_SIZE para extract_roi)
+DETECT_ROI_SIZE = 120        # px — región de búsqueda alrededor de última posición
 
 # ONNX model — YOLO26n INT8 exportado con export_model.py
 MODEL_PATH = "model.onnx"

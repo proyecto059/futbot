@@ -88,11 +88,12 @@ def test_detect_ball_applies_clahe_when_frame_is_dark():
 
 def test_detect_ball_skips_clahe_when_frame_is_bright():
     """detect_ball should NOT call _apply_clahe when mean(frame) >= threshold."""
-    # Bright frame — mean ~230, above CLAHE_BRIGHTNESS_THRESHOLD=220
+    # Patch threshold to 100 so frame mean=230 is clearly above it
     bright_frame = np.full((240, 320, 3), 230, dtype=np.uint8)
-    with patch.object(detector, '_apply_clahe', wraps=detector._apply_clahe) as mock_clahe:
-        detector.detect_ball(bright_frame)
-        mock_clahe.assert_not_called()
+    with patch.object(detector, 'CLAHE_BRIGHTNESS_THRESHOLD', 100):
+        with patch.object(detector, '_apply_clahe', wraps=detector._apply_clahe) as mock_clahe:
+            detector.detect_ball(bright_frame)
+            mock_clahe.assert_not_called()
 
 
 def test_detect_ball_respects_clahe_enabled_flag():
@@ -137,10 +138,48 @@ def test_detects_ball_near_bottom_edge():
     assert detect_ball(frame) is not None
 
 
-def test_rejects_low_saturation_orange_blob():
-    """Blob naranja de baja saturación (S=70) debe ser rechazado — es fondo, no pelota."""
-    # HSV (10, 70, 180) — tono cálido pero muy desaturado, como cortina o tela
+def test_partial_contour_detects_semicircle():
+    """Semicírculo naranja (pelota parcialmente visible) debe detectarse."""
+    frame = np.zeros((240, 320, 3), dtype=np.uint8)
+    # Semicírculo: ángulo 0-180°
+    cv2.ellipse(frame, (160, 120), (25, 25), 0, 0, 180, (0, 100, 255), -1)
+    assert detect_ball(frame) is not None
+
+
+def test_seed_detects_tiny_ball():
+    """Pelota muy pequeña (r=4) de color muy naranja debe detectarse."""
+    frame = np.zeros((240, 320, 3), dtype=np.uint8)
+    seed_color = cv2.cvtColor(
+        np.full((1, 1, 3), [12, 200, 220], dtype=np.uint8), cv2.COLOR_HSV2BGR
+    )[0, 0].tolist()
+    cv2.circle(frame, (160, 120), 4, seed_color, -1)
+    assert detect_ball(frame) is not None
+
+
+def test_accumulator_detects_tiny_ball_after_n_frames():
+    """BallAccumulator debe detectar blob de 4px después de acumular evidencia."""
+    from detector import BallAccumulator
+    acc = BallAccumulator()
+    seed_color = cv2.cvtColor(
+        np.full((1, 1, 3), [12, 200, 220], dtype=np.uint8), cv2.COLOR_HSV2BGR
+    )[0, 0].tolist()
+    seed_frame = np.zeros((240, 320, 3), dtype=np.uint8)
+    cv2.circle(seed_frame, (160, 120), 4, seed_color, -1)
+    from config import SEED_LOWER, SEED_UPPER
+    hsv = cv2.cvtColor(seed_frame, cv2.COLOR_BGR2HSV)
+    seed_mask = cv2.inRange(hsv, SEED_LOWER, SEED_UPPER)
+    result = None
+    for _ in range(20):  # acumular evidencia
+        result = acc.update(seed_mask)
+    assert result is not None
+    cx, cy, _ = result
+    assert abs(cx - 160) < 15
+    assert abs(cy - 120) < 15
+
+
+def test_rejects_very_low_saturation_orange_blob():
+    """Blob naranja de saturación muy baja (S=50) debe ser rechazado — fondo, no pelota."""
     frame = cv2.cvtColor(
-        np.full((240, 320, 3), [10, 70, 180], dtype=np.uint8), cv2.COLOR_HSV2BGR
+        np.full((240, 320, 3), [10, 50, 180], dtype=np.uint8), cv2.COLOR_HSV2BGR
     )
     assert detect_ball(frame) is None

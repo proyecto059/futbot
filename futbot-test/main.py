@@ -19,12 +19,19 @@ import cv2
 import numpy as np
 
 from camera import CameraThread
-from detector import detect_ball, extract_roi, BallKalman
+from detector import detect_ball, extract_roi, BallKalman, BallAccumulator
 from tracker import BallTracker
 from ai_inference import AIInferenceThread
 from game_logic import decide_action, Action
 from motor_control import MotorController
-from config import TRACKER_REINIT_INTERVAL, AI_INPUT_SIZE, MODEL_PATH, KALMAN_RESET_AFTER_N_FRAMES, HSV_LOWER, HSV_UPPER
+from config import (
+    TRACKER_REINIT_INTERVAL, AI_INPUT_SIZE, MODEL_PATH, KALMAN_RESET_AFTER_N_FRAMES,
+    HSV_LOWER, HSV_UPPER,
+    AI_CACHE_MAX_AGE,
+    SEED_LOWER, SEED_UPPER,
+    ACCUM_DECAY, ACCUM_THRESHOLD,
+    STATIC_REJECT_FRAMES, STATIC_GRID_SIZE,
+)
 
 
 def _log_startup(ai: AIInferenceThread):
@@ -73,8 +80,13 @@ def main():
     frame_count = 0
     tracker_frame_counter = 0
     _no_ball_frames = 0
-    last_radius: int | None = None
+    last_radius: int | None = 15       # default 15 — evita radius=None → SEARCH
     _prev_hsv_detected = False
+    _ai_cache: dict | None = None
+    _ai_cache_age: int = 0
+    accumulator = BallAccumulator()
+    _static_hits: dict = {}
+    _last_known_pos: tuple | None = None
     t_start = time.monotonic()
     t_prev = t_start
 
@@ -105,8 +117,17 @@ def main():
 
         # 1. Fast HSV detection (timed)
         t_hsv = time.monotonic()
-        detection = detect_ball(frame)
+        detection = detect_ball(frame, roi_center=_last_known_pos)
         _hsv_times.append(time.monotonic() - t_hsv)
+
+        # Accumulator pass — if HSV/partial/seed all failed
+        if detection is None:
+            _blurred = cv2.GaussianBlur(frame, (11, 11), 0)
+            _hsv_frame = cv2.cvtColor(_blurred, cv2.COLOR_BGR2HSV)
+            _seed_mask = cv2.inRange(_hsv_frame, SEED_LOWER, SEED_UPPER)
+            detection = accumulator.update(_seed_mask)
+            if detection:
+                print(f"[accum] ball @ ({detection[0]},{detection[1]}) r={detection[2]}")
 
         if detection is not None:
             _no_ball_frames = 0
@@ -144,10 +165,26 @@ def main():
                     cx, cy = None, None  # truly unknown — don't pass garbage to game logic
 
         # 6. Fuse YOLO26n result if available (overrides HSV when AI has detection)
-        ai.submit_frame(frame)   # always, independent of HSV
-        ai_dets = ai.get_detections()
+        ai.submit_frame(frame)
+        _raw_ai_dets = ai.get_detections()
+        if _raw_ai_dets:
+            best = max(_raw_ai_dets, key=lambda d: d["conf"])
+            _ai_cache = {
+                "cx": best["cx"], "cy": best["cy"],
+                "w": best["w"], "h": best["h"],
+                "conf": best["conf"], "class_id": best["class_id"],
+            }
+            _ai_cache_age = 0
+        elif _ai_cache is not None and _ai_cache_age < AI_CACHE_MAX_AGE:
+            _ai_cache_age += 1
+        else:
+            _ai_cache = None
+            _ai_cache_age += 1
+
+        ai_dets = [_ai_cache] if _ai_cache is not None else []
+
         if ai_dets:
-            best = max(ai_dets, key=lambda d: d["conf"])
+            best = _ai_cache  # usar directamente el cache
             print(f"[ai]  ball @ ({best['cx']},{best['cy']}) w={best['w']} h={best['h']} conf={best['conf']:.2f}")
             cx, cy = best["cx"], best["cy"]
             radius = max(best["w"], best["h"]) // 2
@@ -156,9 +193,29 @@ def main():
             cx, cy = int(cx), int(cy)
             _no_ball_frames = 0
 
-        # Reset Kalman only if no detection from ANY source (HSV or AI) for too long
+        # Update last known position for ROI tracking
+        if detection is not None:
+            hx, hy, _ = detection
+            _last_known_pos = (hx, hy)
+        elif ai_dets and cx is not None:
+            _last_known_pos = (cx, cy)
+        if _no_ball_frames > 30:
+            _last_known_pos = None
+
+        # Motion consistency: rechazar candidatos estáticos por ≥ STATIC_REJECT_FRAMES
+        if cx is not None:
+            _key = (cx // STATIC_GRID_SIZE, cy // STATIC_GRID_SIZE)
+            _static_hits[_key] = _static_hits.get(_key, 0) + 1
+            _static_hits = {k: v for k, v in _static_hits.items()
+                            if k == _key or v < STATIC_REJECT_FRAMES}
+            if _static_hits[_key] > STATIC_REJECT_FRAMES:
+                cx, cy = None, None
+
+        # Reset Kalman + accumulator if no detection from ANY source for too long
         if _no_ball_frames >= KALMAN_RESET_AFTER_N_FRAMES:
             kalman.reset()
+            accumulator.reset()
+            _static_hits.clear()
 
         # 7. Game logic
         action = decide_action(cx, cy, radius)
