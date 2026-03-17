@@ -29,7 +29,9 @@ impl VisionContext {
         let processed: Mat;
         let preprocess_src: &Mat = if CLAHE_ENABLED {
             let mean = core::mean_def(frame)?;
-            let brightness = mean[0] + mean[1] + mean[2];
+            // Divide by 3 to get per-channel average — matches Python's np.mean(frame)
+            // which also returns the mean across all channels (not their sum).
+            let brightness = (mean[0] + mean[1] + mean[2]) / 3.0;
             if brightness < CLAHE_BRIGHTNESS_THRESHOLD {
                 processed = apply_clahe(frame)?;
                 &processed
@@ -73,7 +75,7 @@ impl VisionContext {
 
         if CLAHE_ENABLED {
             let mean = core::mean_def(&roi_ref)?;
-            let brightness = mean[0] + mean[1] + mean[2];
+            let brightness = (mean[0] + mean[1] + mean[2]) / 3.0;
             if brightness < CLAHE_BRIGHTNESS_THRESHOLD {
                 let processed = apply_clahe(&roi_ref)?;
                 imgproc::gaussian_blur_def(

@@ -40,24 +40,29 @@ fn mat_f32(rows: i32, cols: i32, data: &[f32]) -> Result<Mat> {
     Ok(m)
 }
 
-// ── Pre-built morphology kernels ──────────────────────────────────────────────
+// ── Pre-built morphology kernels (thread-local, created once per thread) ──────
 
-fn kernel_open() -> Mat {
-    imgproc::get_structuring_element(
+thread_local! {
+    static KERNEL_OPEN: Mat = imgproc::get_structuring_element(
         imgproc::MORPH_ELLIPSE,
         Size::new(MORPH_OPEN_SIZE, MORPH_OPEN_SIZE),
         Point::new(-1, -1),
     )
-    .unwrap()
-}
+    .expect("kernel_open");
 
-fn kernel_dilate() -> Mat {
-    imgproc::get_structuring_element(
+    static KERNEL_DILATE: Mat = imgproc::get_structuring_element(
         imgproc::MORPH_ELLIPSE,
         Size::new(MORPH_DILATE_SIZE, MORPH_DILATE_SIZE),
         Point::new(-1, -1),
     )
-    .unwrap()
+    .expect("kernel_dilate");
+
+    static KERNEL_SEED: Mat = imgproc::get_structuring_element(
+        imgproc::MORPH_ELLIPSE,
+        Size::new(3, 3),
+        Point::new(-1, -1),
+    )
+    .expect("kernel_seed");
 }
 
 #[inline]
@@ -88,15 +93,12 @@ fn hsv_pass(
         mask
     };
 
-    let kopen = kernel_open();
-    let kdilate = kernel_dilate();
-
     let t_morph = Instant::now();
     let mut opened = Mat::default();
-    imgproc::morphology_ex_def(&mask, &mut opened, imgproc::MORPH_OPEN, &kopen)?;
+    KERNEL_OPEN.with(|ko| imgproc::morphology_ex_def(&mask, &mut opened, imgproc::MORPH_OPEN, ko))?;
 
     let mut dilated = Mat::default();
-    imgproc::dilate_def(&opened, &mut dilated, &kdilate)?;
+    KERNEL_DILATE.with(|kd| imgproc::dilate_def(&opened, &mut dilated, kd))?;
     stats.morphology_ms += t_morph.elapsed().as_secs_f64() * 1000.0;
 
     let t_contours = Instant::now();
@@ -166,15 +168,12 @@ fn partial_contour_pass(
     core::in_range(hsv, &lower_s, &upper_s, &mut mask)?;
     stats.threshold_main_ms += t_threshold.elapsed().as_secs_f64() * 1000.0;
 
-    let kopen = kernel_open();
-    let kdilate = kernel_dilate();
-
     let t_morph = Instant::now();
     let mut opened = Mat::default();
-    imgproc::morphology_ex_def(&mask, &mut opened, imgproc::MORPH_OPEN, &kopen)?;
+    KERNEL_OPEN.with(|ko| imgproc::morphology_ex_def(&mask, &mut opened, imgproc::MORPH_OPEN, ko))?;
 
     let mut dilated = Mat::default();
-    imgproc::dilate_def(&opened, &mut dilated, &kdilate)?;
+    KERNEL_DILATE.with(|kd| imgproc::dilate_def(&opened, &mut dilated, kd))?;
     stats.morphology_ms += t_morph.elapsed().as_secs_f64() * 1000.0;
 
     let t_contours = Instant::now();
@@ -273,14 +272,9 @@ fn seed_pass(
         seed_mask
     };
 
-    let k3 = imgproc::get_structuring_element(
-        imgproc::MORPH_ELLIPSE,
-        Size::new(3, 3),
-        Point::new(-1, -1),
-    )?;
     let t_morph = Instant::now();
     let mut eroded = Mat::default();
-    imgproc::erode_def(&seed_mask, &mut eroded, &k3)?;
+    KERNEL_SEED.with(|k3| imgproc::erode_def(&seed_mask, &mut eroded, k3))?;
     stats.morphology_ms += t_morph.elapsed().as_secs_f64() * 1000.0;
 
     let t_contours = Instant::now();
