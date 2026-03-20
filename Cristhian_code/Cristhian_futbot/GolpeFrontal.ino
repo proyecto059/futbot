@@ -36,7 +36,8 @@ const int DIST_MIN = 20;  // Distancia mínima de seguridad en cm
 bool personaVistaAnteriormente = false; 
 int x = 0 ;
 int rc = 0;
-int numVueltas= 0;
+int rs = 0;
+int numVueltas = 0;
 int ADis [3];
 int contador = 0;
 int sum=0;
@@ -130,29 +131,41 @@ void loop() {
             HUSKYLENSResult result = huskylens.read();  
             printResult(result);  // Imprime información del objeto
             rc = result.xCenter;
+            rs= result.yCenter;
 
             if (result.ID == 1) hasID1 = true;
             if (result.ID == 2) hasID2 = true;
         }
 
         // Si detecta ID 1 y ID 2 juntos con distancia <= 15
-        if (hasID1 && hasID2 && prom <= 15) {
+        if (hasID1 && hasID2) {
             Serial.println("Detectados ID 1 y ID 2 con distancia <= 15. Retrocediendo y mapeando...");
             retroceder();
             mapeoArea(rc);
         }
+
         // Si detecta ID 1 o (ID 1 y ID 2 juntos pero prom > 15)
         else if (hasID1) {
-            avanzar();                      // Avanza hacia la persona
+            avanzar();                // Avanza hacia la persona // Usa el ataque cuando pierde la pelota por el centro
             personaVistaAnteriormente = true; 
             Serial.println("estoy viendo a alguien (ID 1)");
             delay(1400);
             
             // Promedio de la distancia FO
             Serial.print("*********************************************");
-            Serial.print("Distancia: ");
+            Serial.print("Distanciaggg: ");
             Serial.print(prom);
             Serial.println("*********************************************");
+           if (distancia <= 5 && rs <= 120){  //que salga por la parte inferior de la pantaña
+            golpeFrontal();
+            //golpederecha();
+            Serial.print("estoy pegandooooooo");
+        }
+       /* if (distancia <= 5 &&  rs <= 120){  //que salga por la parte inferior de la pantaña
+            golpeFrontal();
+            //golpederecha();
+            Serial.print("estoy pegandooooooo");*/
+        
         }
         else if (hasID2) {
             if (prom <= 15) {
@@ -230,12 +243,16 @@ void avanzar() {
 }
 
 void golpeFrontal(){
+
+
     int velAlta = 255;  // Velocidad máxima permitida por PWM (0-255)
     
     digitalWrite(DIR_A, HIGH);  // Motor A adelante
     digitalWrite(DIR_B, LOW);   // Motor B adelante
     analogWrite(PWM_A, velAlta);
     analogWrite(PWM_B, velAlta);
+    delay(200);
+    Serial.print("golpeando...");
 }
 
 void parar() {
@@ -301,7 +318,7 @@ void recuperarPersona() {
     personaVistaAnteriormente = false;
 }
 
- int recuperarPersonaInteligente(int rc) {
+int recuperarPersonaInteligente(int rc) {
 
     
     if (!personaVistaAnteriormente) {
@@ -333,13 +350,11 @@ void recuperarPersona() {
     // =============================
     // ZONA CENTRO
     // =============================
-    else if (rc >= 100 && rc <= 200) {
+    else if (rc >= 100 && rc <= 200 ) {
 
         Serial.println("Ultima posicion: CENTRO");
-
-        golpeFrontal(); // Usa el ataque cuando pierde la pelota por el centro
-
-        delay(1000);   // Ataca por 1 segundo
+        
+        delay(500);   // Ataca por 1 segundo
         parar();
     }
 
@@ -467,4 +482,16 @@ void retroceder(){
     analogWrite(PWM_A, SPEED);
     analogWrite(PWM_B, SPEED);
     delay(600);
+}
+
+void golpederecha(){
+
+        Serial.println("giro derecha");
+        digitalWrite(DIR_A, HIGH);
+        digitalWrite(DIR_B, HIGH);
+        analogWrite(PWM_A, 200);
+        analogWrite(PWM_B, 200);
+        delay(200);
+        parar();
+
 }
