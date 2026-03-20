@@ -1,0 +1,45 @@
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Wed Mar 18 15:04:10 2026 from fe80::2a84:aec5:40af:28e1%wlan0
+rasp1@raspberrypi:~$ cd futbot/
+rasp1@raspberrypi:~/futbot$ FUTBOT_UI=false \
+> RUST_LOG=debug \
+> SERVO_TILT_ENABLED=true \
+> SERVO_PWM_BCM=18 \
+> SERVO_INVERT=false \
+> ./run_rpi3_ai_profile.sh
+Warning: libonnxruntime.so is not resolved by the dynamic linker.
+Install it system-wide and run sudo ldconfig, or export ORT_DYLIB_PATH before running.
+[2026-03-18T22:05:07Z DEBUG futbot::tracker] [tracker] opencv-tracking feature not enabled — tracker disabled, using Kalman only
+[2026-03-18T22:05:07Z INFO  futbot::motor_control] [motors] GPIO initialized (BCM: A_DIR=2 A_PWM=5 B_DIR=4 B_PWM=6)
+[2026-03-18T22:05:07Z WARN  futbot::raspberry::servo_tilt] [servo] failed to initialize PWM: I/O error: No such file or directory (os error 2)
+[2026-03-18T22:05:07Z INFO  futbot::camera] [camera] source: http://192.168.4.1:81/stream
+====================================================
+[main] FutBotMX Vision Pipeline (Rust)
+  Platform  : linux aarch64
+  AI model  : model.onnx  (file found — loading…)
+  AI input  : 320x320
+  AI stride : 1
+  AI ROI    : enabled
+  AI policy : dual (search stride=10, track stride=18, conf_search=0.18, conf_track=0.32)
+  AI track  : hsv_streak>=6 fullframe_every=12 cache_max_age=8
+  HSV kernel: Neon
+  Validation: disabled
+  Detector  : HSV
+  BGR fused : disabled
+====================================================
+[2026-03-18T22:05:07Z INFO  futbot] [main] Detector backend active: HSV
+[2026-03-18T22:05:07Z INFO  futbot] [main] Pipeline started. Press Ctrl+C to stop.
+    
+[2026-03-18T22:05:07Z INFO  futbot::camera] [camera] HTTP stream connected, reading frames...
+[2026-03-18T22:05:09Z INFO  futbot] [HSV] ball found @ (193,150) r=20
+[2026-03-18T22:05:16Z INFO  futbot] [HSV] ball lost
+[2026-03-18T22:05:16Z INFO  futbot] [HSV] ball found @ (197,142) r=10
+[2026-03-18T22:05:17Z INFO  futbot] [HSV] ball lost
+[2026-03-18T22:05:18Z WARN  futbot] [camera] no frame for 1s — check source
+[2026-03-18T22:05:19Z INFO  futbot] [HSV] ball found @ (197,90) r=15
+[2026-03-18T22:05:21Z INFO  futbot] [HSV] ball lost
+[2026-03-18T22:05:22Z INFO  futbot] [HSV] ball found @ (172,131) r=7
+[2026-03-18T22:05:23Z INFO  futbot] [HSV] ball lost
+^C[2026-03-18T22:05:23Z INFO  futbot] 
+    [main] Shutdown — 87 frames in 16.3s (5.3 FPS avg)

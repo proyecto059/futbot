@@ -1,0 +1,39 @@
+# Cross-compilation Docker image for futbot-test-rs
+# Target: aarch64-unknown-linux-gnu (Raspberry Pi OS/Debian 64-bit)
+
+FROM ghcr.io/cross-rs/aarch64-unknown-linux-gnu:main
+
+# Install host and target development dependencies
+RUN dpkg --add-architecture arm64 && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        clang-10 \
+        libclang-10-dev \
+        libssl-dev \
+        pkg-config \
+        curl \
+        ca-certificates \
+        libopencv-core-dev:arm64 \
+        libopencv-imgproc-dev:arm64 \
+        libopencv-imgcodecs-dev:arm64 \
+        libopencv-videoio-dev:arm64 \
+        libopencv-video-dev:arm64 \
+        libopencv-highgui-dev:arm64 \
+        libopencv-dnn-dev:arm64 && \
+    ln -sf /usr/bin/clang-10 /usr/bin/clang && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install OnnxRuntime prebuilt AArch64 binary
+ARG ORT_VERSION=1.20.1
+ARG ORT_ARCH=aarch64
+RUN curl -fsSL \
+    "https://github.com/microsoft/onnxruntime/releases/download/v${ORT_VERSION}/onnxruntime-linux-${ORT_ARCH}-${ORT_VERSION}.tgz" \
+    | tar xz -C /usr/local/ --strip-components=1
+
+ENV PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/share/pkgconfig
+ENV PKG_CONFIG_ALLOW_CROSS=1
+ENV OPENCV_LINK_LIBS=opencv_dnn,opencv_highgui,opencv_videoio,opencv_video,opencv_imgcodecs,opencv_imgproc,opencv_core
+ENV OPENCV_LINK_PATHS=/usr/lib/aarch64-linux-gnu
+ENV OPENCV_INCLUDE_PATHS=/usr/include/opencv4
+ENV OPENCV_DISABLE_PROBES=pkg_config,cmake,vcpkg_cmake,vcpkg
+ENV ORT_DYLIB_PATH=/usr/local/lib/libonnxruntime.so

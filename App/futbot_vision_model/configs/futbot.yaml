@@ -1,0 +1,15 @@
+# FutBotMX Dataset Configuration
+# Sistema Hibrido: YOLO (ball, robot) + HSV (goal_yellow, goal_blue)
+
+path: ../dataset
+train: images/train
+val: images/val
+
+nc: 2
+names:
+  0: ball
+  1: robot
+
+# Deteccion HSV (no requieren entrenamiento YOLO):
+# - goal_yellow: HSV [20-40, 100-255, 100-255]
+# - goal_blue: HSV [100-130, 150-255, 50-255]
