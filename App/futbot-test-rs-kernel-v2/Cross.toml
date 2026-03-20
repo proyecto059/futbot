@@ -1,0 +1,17 @@
+[build.env]
+passthrough = [
+    "CAMERA_URL",
+    "USE_LOCAL_CAM",
+    "LOCAL_CAM_ID",
+    "ORT_DYLIB_PATH",
+    "OPENCV_LINK_LIBS",
+    "OPENCV_LINK_PATHS",
+    "OPENCV_INCLUDE_PATHS",
+    "OPENCV_DISABLE_PROBES",
+]
+
+[target.armv7-unknown-linux-gnueabihf]
+image = "futbot-cross-arm:latest"
+
+[target.aarch64-unknown-linux-gnu]
+image = "futbot-cross-aarch64:latest"

@@ -10,9 +10,7 @@ wheels/
 .venv
 .env
 
-App/rust/target
-
-futbot-test-rs/target
 # Worktrees
 .worktrees/
-futbot-test-rs-kernel/target
+.backup/
+App/futbot-test-rs-kernel-v2/target

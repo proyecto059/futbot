@@ -1,0 +1,47 @@
+# Cross-compilation Docker image for futbot-test-rs
+# Target: armv7-unknown-linux-gnueabihf (Raspberry Pi 3 Model B)
+#
+# Build this image once:
+#   docker build -f Dockerfile.cross -t futbot-cross-arm:latest .
+#
+# Then cross-compile with:
+#   cross build --release --target armv7-unknown-linux-gnueabihf
+
+FROM ghcr.io/cross-rs/armv7-unknown-linux-gnueabihf:main
+
+# Add armhf architecture for cross-compilation libraries
+RUN dpkg --add-architecture armhf && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        clang-10 \
+        libclang-10-dev \
+        libssl-dev \
+        pkg-config \
+        curl \
+        ca-certificates \
+        libopencv-core-dev:armhf \
+        libopencv-imgproc-dev:armhf \
+        libopencv-imgcodecs-dev:armhf \
+        libopencv-videoio-dev:armhf \
+        libopencv-video-dev:armhf \
+        libopencv-highgui-dev:armhf \
+        libopencv-dnn-dev:armhf && \
+    ln -sf /usr/bin/clang-10 /usr/bin/clang && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install OnnxRuntime prebuilt ARM binary
+# Used by the `ort` crate (load-dynamic feature)
+ARG ORT_VERSION=1.20.1
+ARG ORT_ARCH=aarch64
+RUN curl -fsSL \
+    "https://github.com/microsoft/onnxruntime/releases/download/v${ORT_VERSION}/onnxruntime-linux-${ORT_ARCH}-${ORT_VERSION}.tgz" \
+    | tar xz -C /usr/local/ --strip-components=1
+
+# pkg-config wrapper for cross-compilation
+ENV PKG_CONFIG_PATH=/usr/lib/arm-linux-gnueabihf/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/share/pkgconfig
+ENV PKG_CONFIG_ALLOW_CROSS=1
+ENV OPENCV_LINK_LIBS=opencv_dnn,opencv_highgui,opencv_videoio,opencv_video,opencv_imgcodecs,opencv_imgproc,opencv_core
+ENV OPENCV_LINK_PATHS=/usr/lib/arm-linux-gnueabihf
+ENV OPENCV_INCLUDE_PATHS=/usr/include/opencv4
+ENV OPENCV_DISABLE_PROBES=pkg_config,cmake,vcpkg_cmake,vcpkg
+ENV ORT_DYLIB_PATH=/usr/local/lib/libonnxruntime.so
