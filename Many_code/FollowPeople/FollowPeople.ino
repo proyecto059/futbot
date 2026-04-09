@@ -42,11 +42,20 @@ int  contador   = 0;
 int  sum        = 0;
 double prom     = 1000;
 
+
+// -------- SENSOR DE SONIDO --------
+const int SOUND_PIN = A3;
+int umbralSonido = 100;
+int contadorSonido = 0;
+bool sistemaActivo = false;
+
 /*********************** SETUP ******************************/
 void setup() {
 
     Serial.begin(9600);
-    mySerial.begin(9600);
+
+  pinMode(SOUND_PIN, INPUT);
+
 
     while (!huskylens.begin(mySerial)) {
         Serial.println(F("Begin failed!"));
@@ -73,6 +82,30 @@ void setup() {
 
 /************************ LOOP ******************************/
 void loop() {
+
+      // ───────── ACTIVACIÓN POR SILBIDO ─────────
+  if (!sistemaActivo) {
+
+    int valor = analogRead(SOUND_PIN);
+    Serial.print("Sonido: ");
+    Serial.println(valor);
+
+    if (valor > umbralSonido) {
+      contadorSonido++;
+    } else {
+      contadorSonido = 0;
+    }
+
+    // Confirmar silbido real
+    if (contadorSonido > 5) {
+      sistemaActivo = true;
+      Serial.println(">>> SISTEMA ACTIVADO <<<");
+      delay(500);
+    }
+
+    return; // 🚨 BLOQUEA TODO LO DEMÁS
+  }
+
 
     // ── 1. Verificar línea blanca ANTES de cualquier movimiento ──
     if (lineaBlancaDetectada()) {
