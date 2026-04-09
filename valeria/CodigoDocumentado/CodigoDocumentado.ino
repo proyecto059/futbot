@@ -229,15 +229,6 @@ void avanzar() {
     analogWrite(PWM_B, SPEED);
 }
 
-void golpeFrontal(){
-    int velAlta = 255;  // Velocidad máxima permitida por PWM (0-255)
-    
-    digitalWrite(DIR_A, HIGH);  // Motor A adelante
-    digitalWrite(DIR_B, LOW);   // Motor B adelante
-    analogWrite(PWM_A, velAlta);
-    analogWrite(PWM_B, velAlta);
-}
-
 void parar() {
 
     analogWrite(PWM_A, 0);
@@ -337,9 +328,9 @@ void recuperarPersona() {
 
         Serial.println("Ultima posicion: CENTRO");
 
-        golpeFrontal(); // Usa el ataque cuando pierde la pelota por el centro
+        avanzar();
 
-        delay(1000);   // Ataca por 1 segundo
+        delay(1000);   // avanza un poco
         parar();
     }
 

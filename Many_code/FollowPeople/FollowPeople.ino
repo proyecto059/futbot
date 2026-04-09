@@ -24,9 +24,9 @@ const byte TRIG_PIN = 12;
 const byte ECHO_PIN = 13;
 
 /*********** Pines sensores IR (línea blanca) ***************/
-const byte IR_IZQ   = 7;  // Sensor IR izquierdo
-const byte IR_CENT  = 8;  // Sensor IR central
-const byte IR_DER   = 9;  // Sensor IR derecho
+const byte IR_IZQ   = 7;
+const byte IR_CENT  = 8;
+const byte IR_DER   = 9;
 
 /*********** Constantes del sistema ***************/
 const int SPEED    = 80;
@@ -42,20 +42,20 @@ int  contador   = 0;
 int  sum        = 0;
 double prom     = 1000;
 
-
 // -------- SENSOR DE SONIDO --------
 const int SOUND_PIN = A3;
-int umbralSonido = 100;
+int umbralSonido = 20;
 int contadorSonido = 0;
 bool sistemaActivo = false;
+unsigned long tiempoVentana = 0;  // ← Nueva variable
 
 /*********************** SETUP ******************************/
 void setup() {
 
     Serial.begin(9600);
+    mySerial.begin(9600);
 
-  pinMode(SOUND_PIN, INPUT);
-
+    pinMode(SOUND_PIN, INPUT);
 
     while (!huskylens.begin(mySerial)) {
         Serial.println(F("Begin failed!"));
@@ -83,34 +83,39 @@ void setup() {
 /************************ LOOP ******************************/
 void loop() {
 
-      // ───────── ACTIVACIÓN POR SILBIDO ─────────
-  if (!sistemaActivo) {
+    // ───────── ACTIVACIÓN POR SILBIDO ─────────
+    if (!sistemaActivo) {
 
-    int valor = analogRead(SOUND_PIN);
-    Serial.print("Sonido: ");
-    Serial.println(valor);
+        int valor = analogRead(SOUND_PIN);
+        Serial.print("Sonido: ");
+        Serial.println(valor);
 
-    if (valor > umbralSonido) {
-      contadorSonido++;
-    } else {
-      contadorSonido = 0;
+        if (valor > umbralSonido) {
+            contadorSonido++;
+            Serial.print("Picos detectados: ");
+            Serial.println(contadorSonido);
+        }
+
+        // Ventana de 1 segundo: si no llega a 3 picos, reinicia
+        if (millis() - tiempoVentana > 500) {
+            contadorSonido = 0;
+            tiempoVentana = millis();
+        }
+
+        if (contadorSonido >= 1) {
+            sistemaActivo = true;
+            contadorSonido = 0;
+            Serial.println(">>> SISTEMA ACTIVADO <<<");
+            delay(800);
+        }
+
+        return;
     }
-
-    // Confirmar silbido real
-    if (contadorSonido > 5) {
-      sistemaActivo = true;
-      Serial.println(">>> SISTEMA ACTIVADO <<<");
-      delay(500);
-    }
-
-    return; // 🚨 BLOQUEA TODO LO DEMÁS
-  }
-
 
     // ── 1. Verificar línea blanca ANTES de cualquier movimiento ──
     if (lineaBlancaDetectada()) {
         manejarLineaBlanca();
-        return; // Reinicia el loop tras el giro 180°
+        return;
     }
 
     // ── 2. Medir distancia ──
@@ -189,10 +194,8 @@ void loop() {
 }
 
 /*************** DETECCIÓN LÍNEA BLANCA ********************/
-
-// Retorna true si AL MENOS UN sensor detecta línea blanca (LOW = línea blanca)
 bool lineaBlancaDetectada() {
-    const int CONFIRMACIONES_REQUERIDAS = 5;  // Ajusta: más = menos falsos positivos
+    const int CONFIRMACIONES_REQUERIDAS = 5;
     const int INTERVALO_MS = 10;
 
     int contIzq  = 0;
@@ -220,30 +223,23 @@ bool lineaBlancaDetectada() {
     return false;
 }
 
-// Rutina completa al detectar línea blanca:
-// 1) Para  2) Gira 180°  3) Retoma rutinas normales
 void manejarLineaBlanca() {
     Serial.println("=== LINEA BLANCA: parando y girando 180 grados ===");
 
-    // 1. Parar
     parar();
     delay(500);
 
-    // 2. Giro 180°: motor A y B en sentidos opuestos
-    //    Ajusta el delay hasta que el robot gire aproximadamente 180°
     digitalWrite(DIR_A, HIGH);
     digitalWrite(DIR_B, HIGH);
     analogWrite(PWM_A, SPEED);
     analogWrite(PWM_B, SPEED);
-    delay(1100); // ← Calibra este valor según tu robot (ms para 180°)
+    delay(1100);
 
-    // 3. Parar tras el giro
     parar();
     delay(300);
 
     Serial.println("=== Giro 180 completado. Reanudando rutinas... ===");
 
-    // Reiniciar variables de búsqueda para no entrar en recuperación falsa
     personaVistaAnteriormente = false;
     numVueltas = 0;
 }
@@ -386,7 +382,6 @@ bool pausaDeteccion(int tiempoMs) {
     unsigned long start = millis();
     while (millis() - start < tiempoMs) {
 
-        // Verificar línea blanca durante la pausa también
         if (lineaBlancaDetectada()) {
             parar();
             manejarLineaBlanca();
@@ -417,7 +412,6 @@ bool mapeoArea(int rc) {
     Serial.print("Vueltas: ");
     Serial.println(numVueltas);
 
-    // Giro inicial según lado donde se perdió
     if (rc < 150) {
         Serial.println("Giro izquierda");
         digitalWrite(DIR_A, LOW);
@@ -434,7 +428,6 @@ bool mapeoArea(int rc) {
     parar();
     if (pausaDeteccion(300)) return true;
 
-    // Giro contrario
     if (rc > 150) {
         Serial.println("Giro derecha");
         digitalWrite(DIR_A, HIGH);
@@ -456,7 +449,6 @@ bool mapeoArea(int rc) {
         return false;
     }
 
-    // Tercer giro
     if (rc > 150) {
         Serial.println("Giro derecha");
         digitalWrite(DIR_A, HIGH);
