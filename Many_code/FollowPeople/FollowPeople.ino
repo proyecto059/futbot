@@ -43,11 +43,17 @@ int  sum        = 0;
 double prom     = 1000;
 
 // -------- SENSOR DE SONIDO --------
-const int SOUND_PIN = A3;
-int umbralSonido = 20;
-int contadorSonido = 0;
-bool sistemaActivo = false;
-unsigned long tiempoVentana = 0;  // ← Nueva variable
+const int SOUND_PIN    = A3;
+int umbralSonido       = 30;   // Subido para ignorar ruido eléctrico
+int contadorSonido     = 0;
+bool sistemaActivo     = false;
+unsigned long tiempoVentana = 0;
+
+// Promedio móvil para filtrar ruido de la fuente de alimentación
+const int NUM_MUESTRAS = 8;
+int muestrasSonido[NUM_MUESTRAS];
+int indiceMuestra      = 0;
+long sumaMuestras      = 0;
 
 /*********************** SETUP ******************************/
 void setup() {
@@ -56,6 +62,11 @@ void setup() {
     mySerial.begin(9600);
 
     pinMode(SOUND_PIN, INPUT);
+
+    // Inicializar arreglo de muestras en 0
+    for (int i = 0; i < NUM_MUESTRAS; i++) {
+        muestrasSonido[i] = 0;
+    }
 
     while (!huskylens.begin(mySerial)) {
         Serial.println(F("Begin failed!"));
@@ -86,23 +97,32 @@ void loop() {
     // ───────── ACTIVACIÓN POR SILBIDO ─────────
     if (!sistemaActivo) {
 
-        int valor = analogRead(SOUND_PIN);
-        Serial.print("Sonido: ");
-        Serial.println(valor);
+        // --- Promedio móvil: filtra ruido eléctrico de la fuente ---
+        sumaMuestras -= muestrasSonido[indiceMuestra];
+        muestrasSonido[indiceMuestra] = analogRead(SOUND_PIN);
+        sumaMuestras += muestrasSonido[indiceMuestra];
+        indiceMuestra = (indiceMuestra + 1) % NUM_MUESTRAS;
+        int valorFiltrado = sumaMuestras / NUM_MUESTRAS;
 
-        if (valor > umbralSonido) {
+        Serial.print("Sonido filtrado: ");
+        Serial.println(valorFiltrado);
+
+        // --- Ventana de tiempo CORREGIDA ---
+        // Primero verifica si la ventana expiró y reinicia el contador
+        if (millis() - tiempoVentana > 800) {
+            contadorSonido = 0;
+            tiempoVentana = millis();
+        }
+
+        // Luego detecta si hay un pico real
+        if (valorFiltrado > umbralSonido) {
             contadorSonido++;
             Serial.print("Picos detectados: ");
             Serial.println(contadorSonido);
         }
 
-        // Ventana de 1 segundo: si no llega a 3 picos, reinicia
-        if (millis() - tiempoVentana > 500) {
-            contadorSonido = 0;
-            tiempoVentana = millis();
-        }
-
-        if (contadorSonido >= 1) {
+        // Requiere 3 picos dentro de la misma ventana de 800 ms
+        if (contadorSonido >= 3) {
             sistemaActivo = true;
             contadorSonido = 0;
             Serial.println(">>> SISTEMA ACTIVADO <<<");
