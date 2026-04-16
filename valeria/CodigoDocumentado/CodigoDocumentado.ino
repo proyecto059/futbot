@@ -37,7 +37,7 @@ bool personaVistaAnteriormente = false;
 int x = 0 ;
 int rc = 0;
 int numVueltas= 0;
-int ADis [3];
+int ADis [5];
 int contador = 0;
 int sum=0;
 double prom=1000;
@@ -80,15 +80,15 @@ void loop() {
     Serial.println(" cm");
 
     //Promedio de la distancia
-    if (contador <= 2){
+    if (contador <= 4){
       ADis[contador] = distancia;
       contador=contador+1;
     }else{
         contador = 0;
-        for (int i = 0; i<=2; i++){
+        for (int i = 0; i<=4; i++){
             sum = sum + ADis[i];
         }
-        prom = sum/3;
+        prom = sum/5;
         sum=0;
     }
     Serial.print("*********************************************");
@@ -122,48 +122,58 @@ void loop() {
     {
         Serial.println(F("###########"));
 
-        bool hasID1 = false;
-        bool hasID2 = false;
-
         while (huskylens.available())
         {
             HUSKYLENSResult result = huskylens.read();  
             printResult(result);  // Imprime información del objeto
             rc = result.xCenter;
 
-            if (result.ID == 1) hasID1 = true;
-            if (result.ID == 2) hasID2 = true;
-        }
 
-        // Si detecta ID 1 y ID 2 juntos con distancia <= 15
-        if (hasID1 && hasID2 && prom <= 15) {
-            Serial.println("Detectados ID 1 y ID 2 con distancia <= 15. Retrocediendo y mapeando...");
-            retroceder();
-            mapeoArea(rc);
+            // Si detecta ID 1 (persona entrenada)
+            if (result.ID == 1){
+                avanzar();                      // Avanza hacia la persona
+                personaVistaAnteriormente = true; 
+                Serial.println("estoy viendo a alguien");
+                delay(1400);
+                medirDistancia();
+                // Medir distancia con ultrasónico
+    long distancia = medirDistancia();
+
+    Serial.print("Distancia: ");
+    Serial.print(distancia);
+    Serial.println(" cm");
+
+    //Promedio de la distancia FO
+    if (contador <= 4){
+      ADis[contador] = distancia;
+      contador=contador+1;
+    }else{
+        contador = 0;
+        for (int i = 0; i<=4; i++){
+            sum = sum + ADis[i];
         }
-        // Si detecta ID 1 o (ID 1 y ID 2 juntos pero prom > 15)
-        else if (hasID1) {
-            avanzar();                      // Avanza hacia la persona
-            personaVistaAnteriormente = true; 
-            Serial.println("estoy viendo a alguien (ID 1)");
-            delay(1400);
-            
-            // Promedio de la distancia FO
-            Serial.print("*********************************************");
-            Serial.print("Distancia: ");
-            Serial.print(prom);
-            Serial.println("*********************************************");
-        }
-        else if (hasID2) {
-            if (prom <= 15) {
-                Serial.println("Detectado ID 2 y distancia <= 5. Retrocediendo y mapeando...");
-                retroceder();
-                mapeoArea(rc);
-            } else {
-                Serial.println("estoy buscando buey tengo ID2");
-                mapeoArea(rc);
+        prom = sum/5;
+        sum=0;
+    }
+    Serial.print("*********************************************");
+    Serial.print("Distancia: ");
+    Serial.print(prom);
+    Serial.println("*********************************************");
             }
-        }   
+            else if (result.ID==2 && prom<=5){
+                retroceder();
+            }
+            else if (result.ID==1 && result.ID==2){
+                avanzar();                      // Avanza hacia la persona
+                personaVistaAnteriormente = true; 
+                Serial.println("estoy viendo a alguien");
+                delay(1400);
+            }
+            else if(result.ID ==2){
+                mapeoArea(rc);
+                Serial.println("estoy buscando buey tengo ID2");
+            }
+        }    
     }
 }
 
