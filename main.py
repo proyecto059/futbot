@@ -7,9 +7,9 @@ from vision.vision_service import VisionService
 
 # ─── Configuración ────────────────────────────────────────────────────────────
 # Cambia ROBOT_ID a "robot2" en el segundo robot
-ROBOT_ID  = "robot1"       # "robot1" (servidor) | "robot2" (cliente)
-PEER_IP   = "192.168.10.12"  # IP del robot opuesto en competencia
-#PEER_IP  = "192.168.22.47"  # IP para pruebas con RPi3
+ROBOT_ID  = "robot2"       # "robot1" (servidor) | "robot2" (cliente)
+#PEER_IP   = "192.168.22.17"  # IP del robot opuesto en competencia
+PEER_IP  = "192.168.22.47"  # IP para pruebas con RPi3
 PORT      = 8765
 IS_SERVER = ROBOT_ID == "robot1"
 # ──────────────────────────────────────────────────────────────────────────────
