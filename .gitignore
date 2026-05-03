@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# uv
+uv.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# Imágenes de diagnóstico (generadas en runtime)
+images/*.jpg
+images/*.png
+images/*.h264
+*.jpg
+*.png
+frame_*.jpg
+
+# Modelos YOLO (grandes, no van en git)
+*.onnx
+*.pt
+*.weights
+
+# Variables de entorno locales
+.env
+
+# Logs
+*.log
+logs/
+
+# Pytest
+.pytest_cache/
+.coverage
+htmlcov/
