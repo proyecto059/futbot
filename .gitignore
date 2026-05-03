@@ -17,7 +17,7 @@ env/
 # ── uv ───────────────────────────────────────────────────────
 # uv.lock SÍ se sube — fija las versiones exactas para reproducibilidad en RPi
 # Si quieres excluirlo descomenta la línea:
-# uv.lock
+uv.lock
 
 # ── Modelos de ML (archivos grandes) ─────────────────────────
 # No se versionan — se copian manualmente a la RPi
