@@ -1,0 +1,17 @@
+" Constantes del pipeline3 — ver pelota → avanzar perder → buscar.
+
+IDLE = IDLE
+ADVANCE = ADVANCE
+SEARCH = SEARCH
+BACKUP = BACKUP
+
+ADVANCE_SPEED = 120
+ADVANCE_DUR_MS = 140
+
+BACKUP_SPEED = -80
+BACKUP_DUR_MS = 200
+
+SEARCH_SPEED = 80
+SEARCH_TURN_DUR_MS = 150
+
+STOP_DUR_MS = 100
