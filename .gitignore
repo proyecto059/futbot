@@ -1,51 +1,94 @@
-# Python
+# ============================================================
+# FutbotMX v2 — .gitignore
+# ============================================================
+
+# ── Python — cachés y bytecode ───────────────────────────────
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
 .Python
-*.egg-info/
-dist/
-build/
 
-# Virtual environments
+# ── Entornos virtuales ────────────────────────────────────────
 .venv/
 venv/
 env/
 
-# uv
-uv.lock
+# ── uv ───────────────────────────────────────────────────────
+# uv.lock SÍ se sube — fija las versiones exactas para reproducibilidad en RPi
+# Si quieres excluirlo descomenta la línea:
+# uv.lock
 
-# IDE
+# ── Modelos de ML (archivos grandes) ─────────────────────────
+# No se versionan — se copian manualmente a la RPi
+*.onnx
+*.pt
+*.weights
+*.tflite
+model.onnx.placeholder
+
+# ── Carpeta de modelos generada como placeholder ──────────────
+models/
+
+# ── IDE ───────────────────────────────────────────────────────
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
 
-# macOS
+# ── Claude Code — permisos locales de sesión ─────────────────
+# Contiene permisos bash que cada desarrollador configura en su máquina
+.claude/
+
+# ── macOS ─────────────────────────────────────────────────────
 .DS_Store
+.AppleDouble
+.LSOverride
 
-# Imágenes de diagnóstico (generadas en runtime)
-images/*.jpg
-images/*.png
-images/*.h264
-*.jpg
-*.png
-frame_*.jpg
+# ── Windows ───────────────────────────────────────────────────
+Thumbs.db
+Desktop.ini
 
-# Modelos YOLO (grandes, no van en git)
-*.onnx
-*.pt
-*.weights
-
-# Variables de entorno locales
+# ── Variables de entorno locales ─────────────────────────────
+# config.env SÍ se sube (es la plantilla sin secretos)
+# .env NO se sube (tiene IPs y configuración local real)
 .env
 
-# Logs
+# ── Imágenes capturadas en runtime ───────────────────────────
+# Las genera el robot al correr diag_*.py, no son código
+test-robot/images/*
+!test-robot/images/.gitkeep
+images/
+*.h264
+pan=*.jpg
+
+# ── Logs ─────────────────────────────────────────────────────
 *.log
 logs/
 
-# Pytest
+# ── LaTeX — archivos auxiliares de compilación ───────────────
+# serial-map.tex SÍ se sube, pero sus artefactos de compilación no
+*.aux
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# ── Pytest y cobertura ────────────────────────────────────────
 .pytest_cache/
 .coverage
 htmlcov/
+.tox/
+
+# ── Distribución de paquetes ──────────────────────────────────
+*.egg-info/
+dist/
+build/
+
+# ── Backups manuales ─────────────────────────────────────────
+# test-robot/.backup/ contiene versiones anteriores ya reemplazadas
+test-robot/.backup/
+*.bak
+*.orig
