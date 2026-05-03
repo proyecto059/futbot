@@ -1,0 +1,5 @@
+Este archivo es un placeholder.
+Para usar el proyecto con YOLO, copia tu archivo `model.onnx` 
+a la raíz del proyecto con ese nombre exacto.
+
+Sin el modelo, HybridVisionService cae en modo HSV puro (solo detección por color).

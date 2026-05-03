@@ -1,0 +1,582 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-noshorthands]{babel}
+\usepackage[margin=1.5cm,top=1.5cm,bottom=1.5cm]{geometry}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,backgrounds,calc}
+
+\definecolor{primary}{HTML}{1B2A4A}
+\definecolor{secondary}{HTML}{2E86AB}
+\definecolor{accent}{HTML}{E8651A}
+\definecolor{lightbg}{HTML}{F5F7FA}
+\definecolor{codebg}{HTML}{F0F2F5}
+\definecolor{darktext}{HTML}{2C3E50}
+\definecolor{midgray}{HTML}{7F8C8D}
+\definecolor{codegreen}{HTML}{27AE60}
+\definecolor{codeblue}{HTML}{2980B9}
+\definecolor{codegray}{HTML}{95A5A6}
+\definecolor{uartcolor}{HTML}{E74C3C}
+\definecolor{i2ccolor}{HTML}{27AE60}
+\definecolor{usbcolor}{HTML}{2980B9}
+
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{infobox}[1][]{
+  colback=lightbg,
+  colframe=secondary!60,
+  fonttitle=\bfseries\small,
+  boxrule=0.6pt,
+  arc=3pt,
+  left=6pt,right=6pt,top=4pt,bottom=4pt,
+  #1
+}
+
+\lstdefinestyle{pystyle}{
+  language=Python,
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{codeblue}\bfseries,
+  commentstyle=\color{codegreen}\itshape,
+  stringstyle=\color{accent},
+  numbers=left,
+  numberstyle=\tiny\color{codegray},
+  numbersep=5pt,
+  breaklines=true,
+  frame=l,
+  framerule=2pt,
+  rulecolor=\color{codeblue!50},
+  showstringspaces=false,
+  tabsize=4,
+  xleftmargin=2em,
+  aboveskip=0.5em,
+  belowskip=0.5em,
+}
+
+\lstdefinelanguage{Rust}{
+  morekeywords={let,mut,fn,use,extern,crate,mod,pub,impl,Self,match,Ok,Err,
+    unwrap,expect,return,if,else,for,in,while,loop,break,continue,as,ref,
+    struct,enum,type,const,static,trait,where,async,await,move,true,false},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+}
+
+\lstdefinestyle{ruststyle}{
+  language=Rust,
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{codeblue}\bfseries,
+  commentstyle=\color{codegreen}\itshape,
+  stringstyle=\color{accent},
+  numbers=left,
+  numberstyle=\tiny\color{codegray},
+  numbersep=5pt,
+  breaklines=true,
+  frame=l,
+  framerule=2pt,
+  rulecolor=\color{uartcolor!50},
+  showstringspaces=false,
+  tabsize=4,
+  xleftmargin=2em,
+  aboveskip=0.5em,
+  belowskip=0.5em,
+  morekeywords={let,mut,fn,use,extern,crate,mod,pub,impl,Self,match,Ok,Err,unwrap,expect},
+}
+
+\lstdefinestyle{tomlstyle}{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=l,
+  framerule=2pt,
+  rulecolor=\color{midgray},
+  showstringspaces=false,
+  xleftmargin=2em,
+  aboveskip=0.5em,
+  belowskip=0.5em,
+}
+
+\titleformat{\section}{\Large\bfseries\color{primary}}{}{0em}{}[{\titlerule[1pt]\color{secondary}}]
+\titleformat{\subsection}{\large\bfseries\color{secondary}}{}{0em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{darktext}}{}{0em}{}
+
+\setlength{\parskip}{0.3em}
+\setlength{\parindent}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=accent,
+}
+
+\begin{document}
+
+% ============================================================
+% HEADER
+% ============================================================
+
+\begin{center}
+\begin{tikzpicture}
+  \fill[primary] (0,0) rectangle (\textwidth,2.2);
+  \node[anchor=west, text=white, font=\LARGE\bfseries] at (0.5,1.3) {Mapa de Buses de Comunicaci\'{o}n};
+  \node[anchor=west, text=secondary!40!white, font=\large] at (0.5,0.6) {TurboPi Hiwonder --- Robot de F\'{u}tbol Aut\'{o}nomo};
+  \node[anchor=east, text=white!60, font=\small] at (\textwidth-0.5,0.3) {Fuente: \texttt{hardware.py} $\cdot$ Abril 2026};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+
+% ============================================================
+% DIAGRAMA DE TOPOLOGIA
+% ============================================================
+
+\begin{center}
+\resizebox{0.96\textwidth}{!}{%
+\begin{tikzpicture}[
+  x=1cm,
+  y=1cm,
+  rpi/.style={rectangle, draw=primary, fill=primary!12, very thick, rounded corners=5pt, minimum width=3.0cm, minimum height=4.6cm, font=\normalsize\bfseries, align=center},
+  busnode/.style={rectangle, draw=#1, fill=#1!10, thick, rounded corners=4pt, minimum width=2.9cm, minimum height=1.3cm, font=\small, align=center},
+  groupnode/.style={rectangle, draw=#1!75, fill=#1!6, rounded corners=3pt, minimum width=4.2cm, minimum height=1.6cm, font=\scriptsize, align=left, text width=3.9cm, inner sep=6pt},
+  buslabel/.style={font=\scriptsize\bfseries, text=#1, fill=white, inner sep=1pt},
+  arr/.style={-{Stealth[length=6pt,width=4pt]}, very thick, color=#1},
+]
+
+\node[rpi] (rpi) at (0,0) {\textcolor{primary}{Raspberry Pi}\\[2pt]{\small TurboPi}};
+
+\node[busnode=uartcolor] (uart) at (5.2,2.1)
+  {\textcolor{uartcolor}{\textbf{UART}}\\[1pt]\scriptsize\texttt{/dev/ttyAMA0}\\[-2pt]\scriptsize 1,000,000 baud};
+\node[busnode=i2ccolor] (i2c) at (5.2,0)
+  {\textcolor{i2ccolor}{\textbf{I\textsuperscript{2}C}}\\[1pt]\scriptsize Bus 1 $\cdot$ \texttt{/dev/i2c-1}};
+\node[busnode=usbcolor] (usb) at (5.2,-2.1)
+  {\textcolor{usbcolor}{\textbf{USB}}\\[1pt]\scriptsize\texttt{/dev/video*}};
+
+\coordinate (rpi_uart_port) at ($(rpi.east)+(0,1.5)$);
+\coordinate (rpi_i2c_port) at ($(rpi.east)+(0,0)$);
+\coordinate (rpi_usb_port) at ($(rpi.east)+(0,-1.5)$);
+
+\draw[arr=uartcolor] (rpi_uart_port) -- node[buslabel=uartcolor, above]{tx/rx} (uart.west);
+\draw[arr=i2ccolor] (rpi_i2c_port) -- node[buslabel=i2ccolor, above]{SDA/SCL} (i2c.west);
+\draw[arr=usbcolor] (rpi_usb_port) -- node[buslabel=usbcolor, above]{USB 2.0} (usb.west);
+
+\node[groupnode=uartcolor] (uartgroup) at (9.7,2.1)
+  {\textbf{Actuadores UART}\\
+   Servo Pan (ID=2, 0--180\textdegree)\\
+   Servo Tilt (ID=1, 0--180\textdegree)\\
+   Motores M0..M3 (float32)};
+
+\node[groupnode=i2ccolor] (i2cgroup) at (9.7,0)
+  {\textbf{Sensores I\textsuperscript{2}C}\\
+   Ultras\'{o}nico (0x77, 0--5000\,mm, LED)\\
+   Line Follower (0x78, 4x IR)};
+
+\node[groupnode=usbcolor] (usbgroup) at (9.7,-2.1)
+  {\textbf{Visi\'{o}n USB}\\
+   C\'{a}mara (\texttt{/dev/video*})\\
+   Detecci\'{o}n HSV + YOLO 26 nano ONNX};
+
+\draw[arr=uartcolor] (uart.east) -- (uartgroup.west);
+\draw[arr=i2ccolor] (i2c.east) -- (i2cgroup.west);
+\draw[arr=usbcolor] (usb.east) -- (usbgroup.west);
+
+\end{tikzpicture}%
+}
+\end{center}
+
+\vspace{0.3em}
+
+% ============================================================
+% TABLA RESUMEN
+% ============================================================
+
+\begin{infobox}[title={Resumen de Buses}]
+\centering\small
+\begin{tabularx}{\textwidth}{l l l l X}
+\toprule
+\textbf{Bus} & \textbf{Dispositivo} & \textbf{Direcci\'{o}n} & \textbf{Baud/Reg} & \textbf{Funci\'{o}n} \\
+\midrule
+\textcolor{uartcolor}{\textbf{UART}} & SerialBus & \texttt{/dev/ttyAMA0} & 1,000,000 & 2 servos pan/tilt + 4 motores DC omnidireccionales \\
+\textcolor{i2ccolor}{\textbf{I\textsuperscript{2}C}} & Ultras\'{o}nico & \texttt{0x77} & Reg \texttt{0x02} LED & Sensor distancia 0--5000\,mm + LED RGB \\
+\textcolor{i2ccolor}{\textbf{I\textsuperscript{2}C}} & Line Follower & \texttt{0x78} & Reg \texttt{0x01} & 4 sensores IR digitales (bitmask) \\
+\textcolor{usbcolor}{\textbf{USB}} & C\'{a}mara & \texttt{/dev/video*} & --- & Detecci\'{o}n HSV adaptativa + YOLO 26 nano ONNX \\
+\bottomrule
+\end{tabularx}
+\end{infobox}
+
+\newpage
+
+% ============================================================
+% DETALLE UART
+% ============================================================
+
+\section{\textcolor{uartcolor}{UART} --- \texttt{/dev/ttyAMA0}}
+
+\subsection{Protocolo binario}
+
+Todas las tramas usan header fijo \texttt{0xAA 0x55}, seguido de tipo, longitud, datos y CRC8 (tabla de 256 bytes).
+
+\begin{center}\small
+\begin{tabular}{llp{8cm}}
+\toprule
+\textbf{Campo} & \textbf{Bytes} & \textbf{Descripci\'{o}n} \\
+\midrule
+Header & \texttt{0xAA 0x55} & Sync bytes fijos \\
+Tipo & 1 & \texttt{0x04}=servo, \texttt{0x03}=motor \\
+Longitud & 1 & Cantidad de bytes de datos \\
+Datos & N & Ver estructura abajo \\
+CRC8 & 1 & Sobre campos tipo+longitud+datos \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{infobox}[title={Estructura de trama Servo (tipo \texttt{0x04})}]
+\small
+\texttt{dur\_ms(2B LE)} $+$ \texttt{count(1B)} $+$ \texttt{[id(1B) $+$ pos\_pulse(2B LE)]} $\times$ count. \\[3pt]
+Servo Pan (ID=2): centro=86\textdegree, rango 0--180\textdegree, \textbf{invertido}. Pulso: $p = 500 + (\theta/180)\times 2000\;\mu s$. \\
+Servo Tilt (ID=1): centro=129\textdegree, rango 0--180\textdegree, \textbf{invertido}. Mismo c\'{a}lculo de pulso.
+\end{infobox}
+
+\begin{infobox}[title={Estructura de trama Motor (tipo \texttt{0x03})}]
+\small
+\texttt{0x05(1B)} $+$ \texttt{count(1B=4)} $+$ \texttt{[motor\_id(1B) $+$ speed\_float32(4B LE)]} $\times$ 4. \\[3pt]
+Motor 0 = delantero-izq, Motor 1 = delantero-der, Motor 2 = trasero-izq, Motor 3 = trasero-der. \\
+Velocidad: \texttt{float32} con signo (negativo=atr\'{a}s). Mapeo diferencial: $(-v_L,\;v_R,\;-v_L,\;v_R)$ con cap=250.
+\end{infobox}
+
+% ============================================================
+% DETALLE I2C
+% ============================================================
+
+\section{\textcolor{i2ccolor}{I\textsuperscript{2}C} --- Bus 1}
+
+Ambos sensores comparten el bus con un \texttt{threading.Lock} para acceso seguro.
+
+\subsection{Sensor Ultras\'{o}nico (\texttt{0x77})}
+
+\begin{itemize}[nosep,leftmargin=1.5em]
+  \item \textbf{Distancia:} write \texttt{[0x00]}, luego read 2 bytes como \texttt{uint16\_little\_endian}. Rango 0--5000\,mm. Error $\rightarrow$ 9999.
+  \item \textbf{LED RGB:} registro \texttt{0x02}. Datos: \texttt{[mode, R, G, B, R, G, B]}. \texttt{mode=0x00} s\'{o}lido, \texttt{0x01} parpadeo.
+\end{itemize}
+
+\subsection{Line Follower (\texttt{0x78})}
+
+\begin{itemize}[nosep,leftmargin=1.5em]
+  \item \textbf{Lectura:} registro \texttt{0x01}, 1 byte. Bitmask: bit0=IR1, bit1=IR2, bit2=IR3, bit3=IR4.
+  \item \textbf{Calibraci\'{o}n:} 20 muestras para establecer baseline (pasto dominante = \texttt{True}).
+  \item \textbf{Detecci\'{o}n:} $\geq$2 sensores cambian respecto al baseline $\Rightarrow$ l\'{i}nea blanca detectada.
+\end{itemize}
+
+% ============================================================
+% DETALLE CAMARA
+% ============================================================
+
+\section{\textcolor{usbcolor}{C\'{a}mara USB}}
+
+\begin{itemize}[nosep,leftmargin=1.5em]
+  \item Resoluci\'{o}n 320$\times$240, buffer=1, auto-exposici\'{o}n deshabilitada, exposici\'{o}n manual 150--450 (default 200).
+  \item \textbf{HSV adaptativo:} H naranja = 0--10 y 168--179, S$\geq$230, V$\geq$20. Gamma din\'{a}mico 1.0--2.0. Modo estricto/relajado/re-adquisici\'{o}n.
+  \item \textbf{Filtros:} area$>$700px, radio$>$15px, circularidad$>$0.20. Centro de hue adaptativo con EMA $\alpha$=0.15.
+  \item \textbf{YOLO 26 nano ONNX:} modelo ONNX 320$\times$320, confianza$\geq$0.35, clase 0 = pelota.
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% EJEMPLOS PYTHON
+% ============================================================
+
+\section{Ejemplos Python}
+
+\subsection{UART: enviar comando servo + motor}
+
+\begin{lstlisting}[style=pystyle]
+import struct, serial
+
+CRC8 = [0,94,188,226,97,63,221,131,194,156,126,32,163,
+  253,31,65,157,195,33,127,252,162,64,30,95,1,227,189,
+  62,96,130,220,35,125,159,193,66,28,254,160,225,191,
+  93,3,128,222,60,98,190,224,2,92,223,129,99,61,124,
+  34,192,158,29,67,161,255,70,24,250,164,39,121,155,
+  197,132,218,56,102,229,187,89,7,219,133,103,57,186,
+  228,6,88,25,71,165,251,120,38,196,154,101,59,217,
+  135,4,90,184,230,167,249,27,69,198,152,122,36,248,
+  166,68,26,153,199,37,123,58,100,134,216,91,5,231,
+  185,140,210,48,110,237,179,81,15,78,16,242,172,47,
+  113,147,205,17,79,173,243,112,46,204,146,211,141,
+  111,49,178,236,14,80,175,241,19,77,206,144,114,44,
+  109,51,209,143,12,82,176,238,50,108,142,208,83,13,
+  239,177,240,174,76,18,145,207,45,115,202,148,118,
+  40,171,245,23,73,8,86,180,234,105,55,213,139,87,9,
+  235,181,54,104,138,212,149,203,41,119,244,170,72,
+  22,233,183,85,11,136,214,52,106,43,117,151,201,74,
+  20,246,168,116,42,200,150,21,75,169,247,182,232,10,
+  84,215,137,107,53]
+
+def crc8(data):
+    c = 0
+    for b in data:
+        c = CRC8[c ^ b]
+    return c
+
+def pulse(angle):
+    return int(500 + (max(0, min(180, angle)) / 180.0) * 2000)
+
+def burst(ser, pan, tilt, dur_ms, m1, m2, m3, m4):
+    pp, tp = pulse(pan), pulse(tilt)
+    d = int(dur_ms)
+    sd = bytearray([0x01, d & 0xFF, (d >> 8) & 0xFF, 2,
+      2, pp & 0xFF, (pp >> 8) & 0xFF,
+      1, tp & 0xFF, (tp >> 8) & 0xFF])
+    fs = bytearray(b"\xaa\x55") + bytes([0x04, len(sd)]) + sd
+    fs.append(crc8(fs[2:]))
+    md = bytearray([0x05, 4])
+    for mid, val in ((0, m1), (1, m2), (2, m3), (3, m4)):
+        md += struct.pack("<Bf", mid, float(val))
+    fm = bytearray(b"\xaa\x55") + bytes([0x03, len(md)]) + md
+    fm.append(crc8(fm[2:]))
+    ser.write(fs + fm)
+
+ser = serial.Serial("/dev/ttyAMA0", 1_000_000)
+burst(ser, pan=86, tilt=129, dur_ms=500, m1=200, m2=200, m3=0, m4=0)
+ser.close()
+\end{lstlisting}
+
+\subsection{I\textsuperscript{2}C: leer ultras\'{o}nico + line follower}
+
+\begin{lstlisting}[style=pystyle]
+from smbus2 import SMBus, i2c_msg
+
+bus = SMBus(1)
+
+# --- Ultrasonico (0x77): leer distancia mm ---
+w = i2c_msg.write(0x77, [0])
+bus.i2c_rdwr(w)
+r = i2c_msg.read(0x77, 2)
+bus.i2c_rdwr(r)
+dist_mm = int.from_bytes(bytes(list(r)), "little")
+print(f"Distancia: {dist_mm} mm")
+
+# --- Ultrasonico: LED verde solido ---
+bus.write_i2c_block_data(0x77, 0x02, [0x00, 0x00, 0x10, 0x00,
+                                       0x00, 0x10, 0x00])
+
+# --- Line Follower (0x78): 4 sensores IR ---
+v = bus.read_byte_data(0x78, 0x01)
+sensors = [bool(v & b) for b in (0x01, 0x02, 0x04, 0x08)]
+print(f"Sensores IR: {sensors}")
+bus.close()
+\end{lstlisting}
+
+\subsection{C\'{a}mara: detecci\'{o}n HSV naranja}
+
+\begin{lstlisting}[style=pystyle]
+import cv2, numpy as np
+
+cap = cv2.VideoCapture(0)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
+cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 1)
+cap.set(cv2.CAP_PROP_EXPOSURE, 200)
+
+for _ in range(100):
+    ok, frame = cap.read()
+    if not ok:
+        continue
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    m1 = cv2.inRange(hsv, (0, 230, 20), (10, 255, 255))
+    m2 = cv2.inRange(hsv, (168, 230, 20), (179, 255, 255))
+    mask = cv2.bitwise_or(m1, m2)
+    k = np.ones((3, 3), np.uint8)
+    mask = cv2.dilate(cv2.morphologyEx(mask, cv2.MORPH_OPEN, k), k)
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL,
+                                    cv2.CHAIN_APPROX_SIMPLE)
+    for c in contours:
+        (x, y), r = cv2.minEnclosingCircle(c)
+        if cv2.contourArea(c) > 700 and r > 15:
+            print(f"Pelota ({int(x)}, {int(y)}) radio={r:.0f}")
+            break
+cap.release()
+\end{lstlisting}
+
+\newpage
+
+% ============================================================
+% EJEMPLOS RUST
+% ============================================================
+
+\section{Ejemplos Rust}
+
+\textbf{Dependencias} (\texttt{Cargo.toml}):
+\begin{lstlisting}[style=tomlstyle]
+[dependencies]
+serialport = "4"
+i2cdev = "0.6"
+opencv = { version = "0.93", features = ["clang-runtime"] }
+\end{lstlisting}
+
+\subsection{UART: enviar comando servo + motor}
+
+\begin{lstlisting}[style=ruststyle]
+use serialport::SerialPort;
+use std::io::Write;
+
+const CRC8: [u8; 256] = [0,94,188,226,97,63,221,131,
+  194,156,126,32,163,253,31,65,157,195,33,127,252,
+  162,64,30,95,1,227,189,62,96,130,220,35,125,159,
+  193,66,28,254,160,225,191,93,3,128,222,60,98,190,
+  224,2,92,223,129,99,61,124,34,192,158,29,67,161,
+  255,70,24,250,164,39,121,155,197,132,218,56,102,
+  229,187,89,7,219,133,103,57,186,228,6,88,25,71,
+  165,251,120,38,196,154,101,59,217,135,4,90,184,
+  230,167,249,27,69,198,152,122,36,248,166,68,26,
+  153,199,37,123,58,100,134,216,91,5,231,185,140,
+  210,48,110,237,179,81,15,78,16,242,172,47,113,
+  147,205,17,79,173,243,112,46,204,146,211,141,
+  111,49,178,236,14,80,175,241,19,77,206,144,114,
+  44,109,51,209,143,12,82,176,238,50,108,142,208,
+  83,13,239,177,240,174,76,18,145,207,45,115,202,
+  148,118,40,171,245,23,73,8,86,180,234,105,55,
+  213,139,87,9,235,181,54,104,138,212,149,203,41,
+  119,244,170,72,22,233,183,85,11,136,214,52,106,
+  43,117,151,201,74,20,246,168,116,42,200,150,21,
+  75,169,247,182,232,10,84,215,137,107,53];
+
+fn crc8(data: &[u8]) -> u8 {
+    let mut c: u8 = 0;
+    for &b in data { c = CRC8[(c ^ b) as usize]; }
+    c
+}
+
+fn pulse(angle: u16) -> u16 {
+    (500.0 + (angle.min(180) as f32 / 180.0) * 2000.0) as u16
+}
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let mut port = serialport::new("/dev/ttyAMA0", 1_000_000)
+        .timeout(std::time::Duration::from_millis(100))
+        .open()?;
+    let (pan, tilt, dur) = (86u16, 129u16, 500u16);
+    let (pp, tp) = (pulse(pan), pulse(tilt));
+    let sd: Vec<u8> = vec![
+        0x01, dur as u8, (dur >> 8) as u8, 2,
+        2, pp as u8, (pp >> 8) as u8,
+        1, tp as u8, (tp >> 8) as u8];
+    let mut fs: Vec<u8> = vec![0xAA, 0x55, 0x04, sd.len() as u8];
+    fs.extend(&sd);
+    fs.push(crc8(&fs[2..]));
+    let mut md: Vec<u8> = vec![0x05, 4];
+    for (id, val) in [(0u8, 200f32), (1, 200.0), (2, 0.0), (3, 0.0)] {
+        md.push(id);
+        md.extend(&val.to_le_bytes());
+    }
+    let mut fm: Vec<u8> = vec![0xAA, 0x55, 0x03, md.len() as u8];
+    fm.extend(&md);
+    fm.push(crc8(&fm[2..]));
+    port.write_all(&[&fs[..], &fm[..]].concat())?;
+    println!("Trama enviada: {} bytes", fs.len() + fm.len());
+    Ok(())
+}
+\end{lstlisting}
+
+\subsection{I\textsuperscript{2}C: leer ultras\'{o}nico + line follower}
+
+\begin{lstlisting}[style=ruststyle]
+use i2cdev::core::*;
+use i2cdev::linux::LinuxI2CDevice;
+
+fn read_ultra(dev: &mut LinuxI2CDevice) -> Result<u16, ()> {
+    dev.write(&[0x00]).map_err(|_| ())?;
+    let mut buf = [0u8; 2];
+    dev.read(&mut buf).map_err(|_| ())?;
+    Ok(u16::from_le_bytes(buf).min(5000))
+}
+
+fn set_led(dev: &mut LinuxI2CDevice, r: u8, g: u8, b: u8)
+    -> Result<(), ()> {
+    dev.write(&[0x02, 0x00, r, g, b, r, g, b]).map_err(|_| ())
+}
+
+fn read_line(dev: &mut LinuxI2CDevice) -> Result<[bool; 4], ()> {
+    dev.write(&[0x01]).map_err(|_| ())?;
+    let mut buf = [0u8; 1];
+    dev.read(&mut buf).map_err(|_| ())?;
+    let v = buf[0];
+    Ok([v & 1 != 0, v & 2 != 0, v & 4 != 0, v & 8 != 0])
+}
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let mut ultra = LinuxI2CDevice::new("/dev/i2c-1", 0x77)?;
+    let mut line = LinuxI2CDevice::new("/dev/i2c-1", 0x78)?;
+    let dist = read_ultra(&mut ultra)?;
+    println!("Distancia: {} mm", dist);
+    set_led(&mut ultra, 0x00, 0x10, 0x00)?;
+    let sensors = read_line(&mut line)?;
+    println!("Sensores IR: {:?}", sensors);
+    Ok(())
+}
+\end{lstlisting}
+
+\subsection{C\'{a}mara: detecci\'{o}n HSV naranja}
+
+\begin{lstlisting}[style=ruststyle]
+use opencv::prelude::*;
+use opencv::{imgproc, videoio, core};
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let mut cap = videoio::VideoCapture::new(0, videoio::CAP_ANY)?;
+    cap.set(videoio::CAP_PROP_FRAME_WIDTH, 320.0)?;
+    cap.set(videoio::CAP_PROP_FRAME_HEIGHT, 240.0)?;
+    let mut frame = Mat::default();
+    for _ in 0..100 {
+        cap.read(&mut frame)?;
+        if frame.empty() { continue; }
+        let mut hsv = Mat::default();
+        imgproc::cvt_color(&frame, &mut hsv,
+            imgproc::COLOR_BGR2HSV, 0)?;
+        let mut m1 = Mat::default();
+        let mut m2 = Mat::default();
+        core::in_range(&hsv,
+            &core::Scalar::new(0.0, 230.0, 20.0, 0.0),
+            &core::Scalar::new(10.0, 255.0, 255.0, 0.0),
+            &mut m1)?;
+        core::in_range(&hsv,
+            &core::Scalar::new(168.0, 230.0, 20.0, 0.0),
+            &core::Scalar::new(179.0, 255.0, 255.0, 0.0),
+            &mut m2)?;
+        let mut mask = Mat::default();
+        core::bitwise_or(&m1, &m2, &mut mask,
+            &core::no_array())?;
+        let mut contours =
+            opencv::types::VectorOfVectorOfPoint::new();
+        imgproc::find_contours(&mut mask, &mut contours,
+            imgproc::RETR_EXTERNAL,
+            imgproc::CHAIN_APPROX_SIMPLE,
+            core::Point::new(0, 0))?;
+        for c in contours.iter() {
+            let area = imgproc::contour_area(&c, false)?;
+            let ((x, y), r) = imgproc::min_enclosing_circle(&c)?;
+            if area > 700.0 && r > 15.0 {
+                println!("Pelota ({:.0}, {:.0}) radio={:.0}", x, y, r);
+                break;
+            }
+        }
+    }
+    Ok(())
+}
+\end{lstlisting}
+
+\end{document}
