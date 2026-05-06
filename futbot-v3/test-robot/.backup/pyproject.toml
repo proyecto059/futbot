@@ -1,0 +1,11 @@
+[project]
+name = "test-robot"
+version = "0.1.0"
+requires-python = ">=3.11,<3.12"
+
+dependencies = [
+    "opencv-python-headless==4.8.1.78",
+    "numpy<2.0",
+    "pyserial>=3.5",
+    "smbus2>=0.4",
+]

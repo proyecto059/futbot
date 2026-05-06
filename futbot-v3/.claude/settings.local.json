@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m py_compile main.py)",
+      "Bash(python -m py_compile scripts/cal_motors.py)",
+      "Bash(python -m pytest tests/test_main_hybrid_logic.py -v)",
+      "Bash(python -m py_compile cam.py)",
+      "Bash(python -m py_compile main.py cam.py scripts/cal_motors.py)",
+      "Bash(python -m pytest tests/test_main_hybrid_logic.py -q)",
+      "Bash(python *)",
+      "Bash(uv run *)",
+      "Bash(uv sync *)"
+    ]
+  }
+}
