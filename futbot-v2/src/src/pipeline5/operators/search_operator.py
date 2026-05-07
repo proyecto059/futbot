@@ -21,10 +21,15 @@ class SearchOperator:
         self._search_start_ts = time.time()
         self._search_direction = 1  # 1 = derecha, -1 = izquierda
 
-    def reset(self):
-        """Reinicia el estado de búsqueda al entrar al estado SEARCH."""
+    def reset(self, direction=1):
+        """Reinicia el estado de búsqueda al entrar al estado SEARCH.
+        
+        Args:
+            direction (int): 1 para girar a la derecha, -1 para izquierda.
+        """
         self._search_phase = "turn"
         self._search_start_ts = time.time()
+        self._search_direction = direction
 
     def compute(self):
         """Ejecuta la rutina de búsqueda paso a paso.

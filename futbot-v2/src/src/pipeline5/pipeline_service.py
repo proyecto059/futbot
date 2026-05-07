@@ -34,6 +34,7 @@ class Pipeline5Service:
         self._running = False
         self._last_ball_log = 0.0
         self._last_no_ball_log = 0.0
+        self._last_ball_cx = 0.0  # Para saber dónde se vio por última vez
 
         self._search_op = SearchOperator()
         self._advance_op = AdvanceOperator()
@@ -46,13 +47,15 @@ class Pipeline5Service:
         ball = snap.get("ball")
         ball_visible = ball is not None
 
-        # Log de detección de pelota
-        if ball_visible and now - self._last_ball_log >= 0.5:
-            log.info(
-                "event=ball_detected cx=%s cy=%s r=%s source=%s state=%s",
-                ball["cx"], ball["cy"], ball["r"], ball["source"], self._state,
-            )
-            self._last_ball_log = now
+        # Log de detección de pelota y actualización de última posición
+        if ball_visible:
+            self._last_ball_cx = ball["cx"]
+            if now - self._last_ball_log >= 0.5:
+                log.info(
+                    "event=ball_detected cx=%s cy=%s r=%s source=%s state=%s",
+                    ball["cx"], ball["cy"], ball["r"], ball["source"], self._state,
+                )
+                self._last_ball_log = now
         elif not ball_visible and now - self._last_no_ball_log >= 1.0:
             log.info("event=ball_NOT_detected state=%s", self._state)
             self._last_no_ball_log = now
@@ -65,8 +68,14 @@ class Pipeline5Service:
         elif self._state == ADVANCE:
             if not ball_visible:
                 self._state = SEARCH
-                self._search_op.reset()
-                log.info("event=state_change from=ADVANCE to=SEARCH")
+                # Determinar hacia qué lado se perdió la pelota
+                # Si estaba en la mitad izquierda (cx < centro), buscamos a la izquierda (-1)
+                # Si estaba en la mitad derecha (cx >= centro), buscamos a la derecha (1)
+                centro_x = self._vision.frame_width / 2.0
+                direccion = -1 if self._last_ball_cx < centro_x else 1
+                
+                self._search_op.reset(direction=direccion)
+                log.info(f"event=state_change from=ADVANCE to=SEARCH direction={'left' if direccion == -1 else 'right'}")
 
         # Ejecución del estado actual
         v_left, v_right, dur_ms = 0.0, 0.0, 100
