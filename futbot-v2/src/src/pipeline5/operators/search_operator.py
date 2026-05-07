@@ -49,7 +49,7 @@ class SearchOperator:
             speed = SEARCH_SPEED
             v_left = speed * self._search_direction
             v_right = -speed * self._search_direction
-            dur_ms = SEARCH_TURN_DUR_MS
+            dur_ms = STOP_DUR_MS # Enviamos pulso corto al motor para que pueda ser interrumpido
             if time_in_phase > (SEARCH_TURN_DUR_MS / 1000.0):
                 self._search_phase = "pause"
                 self._search_start_ts = now

@@ -17,7 +17,7 @@ el pipeline de v3:
 import logging
 import time
 
-from src.pipeline5.utils.pipeline_constants import SEARCH, ADVANCE, STOP_DUR_MS
+from src.pipeline5.utils.pipeline_constants import SEARCH, ADVANCE, SHOOT, SHOOT_SPEED, STOP_DUR_MS
 from src.pipeline5.dto.pipeline_output_dto import PipelineOutputDto
 from src.pipeline5.operators.search_operator import SearchOperator
 from src.pipeline5.operators.advance_operator import AdvanceOperator
@@ -35,6 +35,9 @@ class Pipeline5Service:
         self._last_ball_log = 0.0
         self._last_no_ball_log = 0.0
         self._last_ball_cx = 0.0  # Para saber dónde se vio por última vez
+        self._last_ball_cy = 0.0  # Para saber qué tan cerca estaba antes de perderla
+        self._last_seen_ts = 0.0  # Para evitar parpadeos falsos
+        self._shoot_start_ts = 0.0
 
         self._search_op = SearchOperator()
         self._advance_op = AdvanceOperator()
@@ -50,6 +53,8 @@ class Pipeline5Service:
         # Log de detección de pelota y actualización de última posición
         if ball_visible:
             self._last_ball_cx = ball["cx"]
+            self._last_ball_cy = ball["cy"]
+            self._last_seen_ts = now
             if now - self._last_ball_log >= 0.5:
                 log.info(
                     "event=ball_detected cx=%s cy=%s r=%s source=%s state=%s",
@@ -66,16 +71,33 @@ class Pipeline5Service:
                 self._state = ADVANCE
                 log.info("event=state_change from=SEARCH to=ADVANCE")
         elif self._state == ADVANCE:
-            if not ball_visible:
-                self._state = SEARCH
-                # Determinar hacia qué lado se perdió la pelota
-                # Si estaba en la mitad izquierda (cx < centro), buscamos a la izquierda (-1)
-                # Si estaba en la mitad derecha (cx >= centro), buscamos a la derecha (1)
-                centro_x = self._vision.frame_width / 2.0
-                direccion = -1 if self._last_ball_cx < centro_x else 1
+            if not ball_visible and (now - self._last_seen_ts > 0.2):
+                # Esperamos 0.2s antes de darla por perdida para evitar "parpadeos"
+                # Determinar altura de la cámara, por default 240 (o 480 según configuración)
+                cam_height = 240
+                if hasattr(self._vision, "_cfg"):
+                    cam_height = self._vision._cfg.camera_height
                 
-                self._search_op.reset(direction=direccion)
-                log.info(f"event=state_change from=ADVANCE to=SEARCH direction={'left' if direccion == -1 else 'right'}")
+                umbral_tiro = cam_height * 0.70  # 70% hacia abajo es la "parte baja"
+
+                if self._last_ball_cy >= umbral_tiro:
+                    # Se perdió por abajo -> TIRO
+                    self._state = SHOOT
+                    self._shoot_start_ts = now
+                    log.info("event=state_change from=ADVANCE to=SHOOT reason=ball_lost_bottom")
+                else:
+                    # Se perdió por los lados -> BUSQUEDA
+                    self._state = SEARCH
+                    centro_x = self._vision.frame_width / 2.0
+                    direccion = -1 if self._last_ball_cx < centro_x else 1
+                    self._search_op.reset(direction=direccion)
+                    log.info(f"event=state_change from=ADVANCE to=SEARCH direction={'left' if direccion == -1 else 'right'}")
+        elif self._state == SHOOT:
+            if now - self._shoot_start_ts >= 0.5:
+                # Termina el periodo de 0.5s de tiro
+                self._state = SEARCH
+                self._search_op.reset(direction=1) # Reinicia búsqueda hacia la derecha por defecto
+                log.info("event=state_change from=SHOOT to=SEARCH reason=shoot_finished")
 
         # Ejecución del estado actual
         v_left, v_right, dur_ms = 0.0, 0.0, 100
@@ -85,6 +107,9 @@ class Pipeline5Service:
 
         elif self._state == SEARCH:
             v_left, v_right, dur_ms = self._search_op.compute()
+
+        elif self._state == SHOOT:
+            v_left, v_right, dur_ms = float(SHOOT_SPEED), float(SHOOT_SPEED), 100
 
         # Invertir v_left porque la rueda izquierda tiene polaridad invertida
         if v_left != 0 or v_right != 0:
