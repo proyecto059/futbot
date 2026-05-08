@@ -21,6 +21,7 @@ from src.pipeline5.utils.pipeline_constants import SEARCH, ADVANCE, SHOOT, SHOOT
 from src.pipeline5.dto.pipeline_output_dto import PipelineOutputDto
 from src.pipeline5.operators.search_operator import SearchOperator
 from src.pipeline5.operators.advance_operator import AdvanceOperator
+from src.pipeline5.operators.avoid_wall_operator import AvoidWallOperator
 
 log = logging.getLogger("turbopi.pipeline5")
 
@@ -41,6 +42,7 @@ class Pipeline5Service:
 
         self._search_op = SearchOperator()
         self._advance_op = AdvanceOperator()
+        self._avoid_wall_op = AvoidWallOperator()
 
     def tick(self) -> PipelineOutputDto:
         now = time.time()
@@ -110,6 +112,13 @@ class Pipeline5Service:
 
         elif self._state == SHOOT:
             v_left, v_right, dur_ms = float(SHOOT_SPEED), float(SHOOT_SPEED), 100
+
+        # Capa de seguridad: Evaluación de pared negra antes de mandar a motores
+        frame = self._vision.last_frame()
+        evasion = self._avoid_wall_op.check_and_avoid(frame)
+        if evasion is not None:
+            v_left, v_right, dur_ms = evasion
+            log.info("event=avoid_wall_activated action=reversing")
 
         # Invertir v_left porque la rueda izquierda tiene polaridad invertida
         if v_left != 0 or v_right != 0:
