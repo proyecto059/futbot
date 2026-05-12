@@ -1,0 +1,1 @@
+#!/bin/bash\nsource ../../../.venv/bin/activate\npython3 capture_image.py

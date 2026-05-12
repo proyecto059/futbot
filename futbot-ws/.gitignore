@@ -1,0 +1,94 @@
+# ============================================================
+# FutbotMX v2 — .gitignore
+# ============================================================
+
+# ── Python — cachés y bytecode ───────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# ── Entornos virtuales ────────────────────────────────────────
+.venv/
+venv/
+env/
+
+# ── uv ───────────────────────────────────────────────────────
+# uv.lock SÍ se sube — fija las versiones exactas para reproducibilidad en RPi
+# Si quieres excluirlo descomenta la línea:
+# uv.lock
+
+# ── Modelos de ML (archivos grandes) ─────────────────────────
+# No se versionan — se copian manualmente a la RPi
+*.onnx
+*.pt
+*.weights
+*.tflite
+model.onnx.placeholder
+
+# ── Carpeta de modelos generada como placeholder ──────────────
+models/
+
+# ── IDE ───────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Claude Code — permisos locales de sesión ─────────────────
+# Contiene permisos bash que cada desarrollador configura en su máquina
+.claude/
+
+# ── macOS ─────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ── Windows ───────────────────────────────────────────────────
+Thumbs.db
+Desktop.ini
+
+# ── Variables de entorno locales ─────────────────────────────
+# config.env SÍ se sube (es la plantilla sin secretos)
+# .env NO se sube (tiene IPs y configuración local real)
+.env
+
+# ── Imágenes capturadas en runtime ───────────────────────────
+# Las genera el robot al correr diag_*.py, no son código
+test-robot/images/*
+!test-robot/images/.gitkeep
+images/
+*.h264
+pan=*.jpg
+
+# ── Logs ─────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── LaTeX — archivos auxiliares de compilación ───────────────
+# serial-map.tex SÍ se sube, pero sus artefactos de compilación no
+*.aux
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# ── Pytest y cobertura ────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# ── Distribución de paquetes ──────────────────────────────────
+*.egg-info/
+dist/
+build/
+
+# ── Backups manuales ─────────────────────────────────────────
+# test-robot/.backup/ contiene versiones anteriores ya reemplazadas
+test-robot/.backup/
+*.bak
+*.orig

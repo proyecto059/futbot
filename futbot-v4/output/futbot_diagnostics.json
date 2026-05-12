@@ -1,0 +1,61 @@
+{
+  "image": "/tmp/futbot_current.jpg",
+  "annotated": "/tmp/futbot_annotated.jpg",
+  "frame_shape": [
+    240,
+    320,
+    3
+  ],
+  "ball": {
+    "cx": 170,
+    "cy": 50,
+    "r": 42.33424377441406,
+    "conf": 1.0,
+    "source": "hsv"
+  },
+  "goals": {
+    "yellow": false,
+    "yellow_cx": null,
+    "blue": true,
+    "blue_cx": 158.19312602291325
+  },
+  "line": {
+    "detected": false,
+    "cx": null,
+    "pixels": 0
+  },
+  "hsv_debug": {
+    "mode": "strict",
+    "v_median": 172,
+    "v_median_raw": 113,
+    "sat_min": 100,
+    "val_min": 60,
+    "hue_center": 8.549999999999999,
+    "hue_half_width": 7,
+    "gamma": 1.0,
+    "exposure": 200
+  },
+  "strict_mask_pixels": 2583,
+  "candidates": [
+    {
+      "cx": 170,
+      "cy": 50,
+      "r": 42.33424377441406,
+      "area": 2403.5,
+      "circularity": 0.4738503292208168,
+      "patch_median_h": 6,
+      "accepted_by_hsv": true,
+      "score": 20.06009534982042
+    },
+    {
+      "cx": 110,
+      "cy": 49,
+      "r": 5.000100135803223,
+      "area": 59.5,
+      "circularity": 0.8847180035435352,
+      "patch_median_h": 21,
+      "accepted_by_hsv": false,
+      "score": 4.423678609665586
+    }
+  ]
+}

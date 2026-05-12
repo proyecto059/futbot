@@ -1,0 +1,18 @@
+# /etc/netplan/60-futbot-ap.yaml
+# ============================================================
+# FutbotMX — Netplan robot1 (servidor AP)
+#
+# Solo declara wlan0 con IP fija. hostapd toma el control del
+# modo WiFi. eth0 lo sigue gestionando el netplan del sistema
+# (00-installer-config.yaml) — no se toca para preservar SSH.
+# ============================================================
+
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    wlan0:
+      dhcp4: false
+      addresses:
+        - 192.168.10.1/24
+      # Sin gateway ni DNS aquí: esta interfaz es solo AP local

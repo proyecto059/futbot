@@ -1,0 +1,15 @@
+# /etc/sudoers.d/futbot
+# ============================================================
+# FutbotMX — Permisos sudo mínimos para el usuario pi
+#
+# Solo permite los comandos exactos que ApManager necesita en
+# runtime. NO concede sudo general.
+# ============================================================
+
+pi ALL=(ALL) NOPASSWD: \
+    /usr/bin/systemctl start hostapd, \
+    /usr/bin/systemctl stop hostapd, \
+    /usr/bin/systemctl restart hostapd, \
+    /usr/bin/systemctl start dnsmasq, \
+    /usr/bin/systemctl stop dnsmasq, \
+    /usr/bin/systemctl restart dnsmasq

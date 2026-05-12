@@ -1,0 +1,19 @@
+# /etc/netplan/60-futbot-client.yaml
+# ============================================================
+# FutbotMX — Netplan robot2 (cliente WiFi)
+#
+# wlan0 se conecta al AP oculto de robot1. El SSID se especifica
+# explícitamente porque ignore_broadcast_ssid=1 en hostapd.
+# eth0 lo sigue gestionando el netplan del sistema — no se toca.
+# ============================================================
+
+network:
+  version: 2
+  renderer: networkd
+  wifis:
+    wlan0:
+      dhcp4: true
+      access-points:
+        "RPI_INET":
+          password: "futbot2025"
+          hidden: true          # SSID oculto — escaneo activo
