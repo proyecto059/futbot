@@ -17,7 +17,7 @@ el pipeline de v3:
 import logging
 import time
 
-from src.pipeline5.utils.pipeline_constants import SEARCH, ADVANCE, SHOOT, SHOOT_SPEED, STOP_DUR_MS
+from src.pipeline5.utils.pipeline_constants import SEARCH, ADVANCE, STOP_DUR_MS
 from src.pipeline5.dto.pipeline_output_dto import PipelineOutputDto
 from src.pipeline5.operators.search_operator import SearchOperator
 from src.pipeline5.operators.advance_operator import AdvanceOperator
@@ -38,7 +38,6 @@ class Pipeline5Service:
         self._last_ball_cx = 0.0  # Para saber dónde se vio por última vez
         self._last_ball_cy = 0.0  # Para saber qué tan cerca estaba antes de perderla
         self._last_seen_ts = 0.0  # Para evitar parpadeos falsos
-        self._shoot_start_ts = 0.0
 
         self._search_op = SearchOperator()
         self._advance_op = AdvanceOperator()
@@ -51,6 +50,52 @@ class Pipeline5Service:
         snap = self._vision.tick()
         ball = snap.get("ball")
         ball_visible = ball is not None
+
+        # --- FILTROS INSTANTÁNEOS (Sin retrasos) ---
+        if ball_visible:
+            frame = self._vision.last_frame()
+            if frame is not None:
+                import cv2
+                import numpy as np
+                cx, cy = int(ball["cx"]), int(ball["cy"])
+                
+                # 1. Filtro de Color y Saturación (Rechaza amarillo y brillos blancos)
+                patch_r = 3
+                y0, y1 = max(0, cy - patch_r), min(frame.shape[0], cy + patch_r + 1)
+                x0, x1 = max(0, cx - patch_r), min(frame.shape[1], cx + patch_r + 1)
+                
+                if x1 > x0 and y1 > y0:
+                    patch_bgr = frame[y0:y1, x0:x1]
+                    patch_hsv = cv2.cvtColor(patch_bgr, cv2.COLOR_BGR2HSV)
+                    median_h = int(np.median(patch_hsv[:, :, 0]))
+                    median_s = int(np.median(patch_hsv[:, :, 1]))
+                    
+                    # La pelota es naranja (Hue entre 0 y 12). 
+                    # Rechazamos CUALQUIER OTRO COLOR (amarillo, verde, azul, morado, rosa)
+                    if 13 <= median_h <= 170:
+                        log.info(f"event=ball_rejected reason=wrong_color hue={median_h} source={ball.get('source')}")
+                        ball = None
+                        ball_visible = False
+                    elif median_s < 140:  # Exigir que sea un "naranja chillón" (saturación alta). Rechaza madera, piel, cartón.
+                        log.info(f"event=ball_rejected reason=not_neon_enough sat={median_s} source={ball.get('source')}")
+                        ball = None
+                        ball_visible = False
+                        
+            # 2. Filtro de Forma (Rechaza pilares altos, solo si YOLO ya los vio)
+            if ball_visible and hasattr(self._vision, "_yolo"):
+                yolo_raw = self._vision._yolo.get_latest_output()
+                ball_bbox = yolo_raw.get("ball_bbox")
+                if ball_bbox is not None:
+                    x1, y1, x2, y2, conf, cls_id = ball_bbox
+                    w = max(1.0, float(x2 - x1))
+                    h = max(1.0, float(y2 - y1))
+                    
+                    # Si es un pilar, lo rechazamos al instante.
+                    if (h / w) > 1.4:
+                        log.info(f"event=ball_rejected reason=tall_pillar_shape source={ball.get('source')}")
+                        ball = None
+                        ball_visible = False
+        # -------------------------------------------
 
         # Log de detección de pelota y actualización de última posición
         if ball_visible:
@@ -75,43 +120,21 @@ class Pipeline5Service:
         elif self._state == ADVANCE:
             if not ball_visible and (now - self._last_seen_ts > 0.2):
                 # Esperamos 0.2s antes de darla por perdida para evitar "parpadeos"
-                # Determinar altura de la cámara, por default 240 (o 480 según configuración)
-                cam_height = 240
-                if hasattr(self._vision, "_cfg"):
-                    cam_height = self._vision._cfg.camera_height
-                
-                umbral_tiro = cam_height * 0.70  # 70% hacia abajo es la "parte baja"
-
-                if self._last_ball_cy >= umbral_tiro:
-                    # Se perdió por abajo -> TIRO
-                    self._state = SHOOT
-                    self._shoot_start_ts = now
-                    log.info("event=state_change from=ADVANCE to=SHOOT reason=ball_lost_bottom")
-                else:
-                    # Se perdió por los lados -> BUSQUEDA
-                    self._state = SEARCH
-                    centro_x = self._vision.frame_width / 2.0
-                    direccion = -1 if self._last_ball_cx < centro_x else 1
-                    self._search_op.reset(direction=direccion)
-                    log.info(f"event=state_change from=ADVANCE to=SEARCH direction={'left' if direccion == -1 else 'right'}")
-        elif self._state == SHOOT:
-            if now - self._shoot_start_ts >= 0.5:
-                # Termina el periodo de 0.5s de tiro
+                # Se perdió la pelota -> pasamos a BUSQUEDA (SEARCH)
                 self._state = SEARCH
-                self._search_op.reset(direction=1) # Reinicia búsqueda hacia la derecha por defecto
-                log.info("event=state_change from=SHOOT to=SEARCH reason=shoot_finished")
+                centro_x = self._vision.frame_width / 2.0
+                direccion = -1 if self._last_ball_cx < centro_x else 1
+                self._search_op.reset(direction=direccion)
+                log.info(f"event=state_change from=ADVANCE to=SEARCH direction={'left' if direccion == -1 else 'right'}")
 
         # Ejecución del estado actual
         v_left, v_right, dur_ms = 0.0, 0.0, 100
 
         if self._state == ADVANCE:
-            v_left, v_right, dur_ms = self._advance_op.compute()
+            v_left, v_right, dur_ms = self._advance_op.compute(self._vision.frame_width, ball)
 
         elif self._state == SEARCH:
             v_left, v_right, dur_ms = self._search_op.compute()
-
-        elif self._state == SHOOT:
-            v_left, v_right, dur_ms = float(SHOOT_SPEED), float(SHOOT_SPEED), 100
 
         # Capa de seguridad: Evaluación de pared negra antes de mandar a motores
         frame = self._vision.last_frame()

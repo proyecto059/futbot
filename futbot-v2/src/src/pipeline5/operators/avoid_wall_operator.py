@@ -36,7 +36,7 @@ class AvoidWallOperator:
             # Fase 2: Giro sobre su propio eje (180 grados a mitad de velocidad)
             elif elapsed < (self.reverse_duration + self.turn_duration):
                 # v_left positivo y v_right negativo = giro cerrado hacia la derecha (velocidad reducida)
-                return 75.0, -75.0, STOP_DUR_MS
+                return 50.0, -50.0, STOP_DUR_MS
                 
             # Terminó la maniobra
             else:
@@ -48,13 +48,24 @@ class AvoidWallOperator:
         # Convertimos a escala de grises para analizar brillo
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         
-        # Filtramos los píxeles muy oscuros (negros)
-        black_mask = cv2.inRange(gray, 0, self.black_threshold)
+        # --- AJUSTE PARA CÁMARA INVERTIDA ---
+        # Como la cámara está de cabeza, lo que está justo en las llantas del robot
+        # aparece en la parte de ARRIBA de la imagen (de y=0 al 25%).
+        # El techo o lo que está lejos aparece en la parte de abajo.
+        h, w = gray.shape
+        roi = gray[0:int(h * 0.25), int(w * 0.2):int(w * 0.8)]
         
-        # Calculamos qué porcentaje de la imagen es negra
-        total_pixels = frame.shape[0] * frame.shape[1]
+        # Filtramos los píxeles muy oscuros (negros).
+        self.black_threshold = 20
+        black_mask = cv2.inRange(roi, 0, self.black_threshold)
+        
+        # Calculamos qué porcentaje de ESA FRANJA (la más cercana al robot físicamente) es negra
+        total_pixels = roi.shape[0] * roi.shape[1]
         black_pixels = np.sum(black_mask > 0)
         ratio = black_pixels / total_pixels
+        
+        # Subimos la exigencia al 50%. Solo si más de la mitad es negra, evade.
+        self.coverage_ratio = 0.50
         
         if ratio > self.coverage_ratio:
             # Hay mucha pared negra, iniciamos la maniobra de escape
