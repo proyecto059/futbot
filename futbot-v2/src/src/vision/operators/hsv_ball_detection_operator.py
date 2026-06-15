@@ -107,12 +107,43 @@ class HsvBallDetectionOperator:
 
         mode = "strict"
 
-        # 1) Intento estricto (ventana de hue angosta)
-        primary_mask = self._candidate_mask(hsv, relaxed=False)
-        best = self._scan_contours(hsv, primary_mask)
-        best = self._reject_if_border(best, frame_w)
+        best = None
 
-        # 2) Intento reacquire (ventana más ancha + sat/val más permisivos)
+        # 1) Prioriza la pelota real desaturada sobre
+        # reflejos amarillos bajos que tambien caen en el rango naranja amplio.
+        tan_mask = self._tan_candidate_mask(hsv)
+        tan_best = self._scan_contours(
+            hsv,
+            tan_mask,
+            min_circularity_override=0.20,
+            min_candidate_y_override=int(float(frame_h) * 0.25),
+            max_candidate_y_override=int(float(frame_h) * 0.70),
+            max_radius_override=24.0,
+            allow_tan_hue=True,
+        )
+        tan_best = self._reject_if_border(tan_best, frame_w)
+        if tan_best is not None:
+            best = tan_best
+            mode = "tan"
+
+        # 2) Intento estricto (ventana de hue angosta)
+        primary_mask = self._candidate_mask(hsv, relaxed=False)
+        strict_best = self._scan_contours(hsv, primary_mask)
+        strict_best = self._reject_if_border(strict_best, frame_w)
+        if tan_best is None:
+            best = strict_best
+        elif strict_best is not None and (
+            strict_best[2] >= tan_best[2] * 2.0
+            or (
+                strict_best[1] < self._min_candidate_y(frame_h)
+                and strict_best[2] <= 24.0
+                and (strict_best[3] <= 25 or strict_best[3] >= 168)
+            )
+        ):
+            best = strict_best
+            mode = "strict"
+
+        # 3) Intento reacquire (ventana más ancha + sat/val más permisivos)
         if best is None and should_try_reacquire:
             reacquire_mask = self._candidate_mask(
                 hsv,
@@ -126,7 +157,7 @@ class HsvBallDetectionOperator:
             if best is not None:
                 mode = "reacquire"
 
-        # 3) Intento relaxed (después de un miss reciente)
+        # 4) Intento relaxed (después de un miss reciente)
         if best is None and use_relaxed:
             relaxed_mask = self._candidate_mask(hsv, relaxed=True)
             best = self._scan_contours(hsv, relaxed_mask)
@@ -134,7 +165,7 @@ class HsvBallDetectionOperator:
             if best is not None:
                 mode = "relaxed"
 
-        # 4) Intento low_light (sat muy baja + circularidad reforzada)
+        # 5) Intento low_light (sat muy baja + circularidad reforzada)
         if best is None and self.miss_streak >= ADAPTIVE_LOW_LIGHT_MIN_MISS_FRAMES:
             low_light_mask = self._candidate_mask(
                 hsv,
@@ -173,6 +204,10 @@ class HsvBallDetectionOperator:
         return dict(self._debug_snapshot)
 
     # ── Helpers internos ─────────────────────────────────────────────────
+
+    @staticmethod
+    def _min_candidate_y(frame_h: int) -> int:
+        return max(int(HOT_PIXEL_Y_MAX), int(float(frame_h) * 0.25))
 
     @staticmethod
     def _circularity(contour) -> float:
@@ -365,6 +400,16 @@ class HsvBallDetectionOperator:
         return mask
 
     @staticmethod
+    def _tan_candidate_mask(hsv: np.ndarray) -> np.ndarray:
+        mask = cv2.inRange(
+            hsv,
+            np.array((66, 70, 90), dtype=np.uint8),
+            np.array((72, 190, 220), dtype=np.uint8),
+        )
+        k = np.ones((3, 3), np.uint8)
+        return cv2.dilate(cv2.morphologyEx(mask, cv2.MORPH_OPEN, k), k)
+
+    @staticmethod
     def _extract_hue_patch(
         hsv: np.ndarray, cx: int, cy: int, radius: float
     ) -> Optional[np.ndarray]:
@@ -383,6 +428,10 @@ class HsvBallDetectionOperator:
         hsv: np.ndarray,
         mask: np.ndarray,
         min_circularity_override: Optional[float] = None,
+        min_candidate_y_override: Optional[int] = None,
+        max_candidate_y_override: Optional[int] = None,
+        max_radius_override: Optional[float] = None,
+        allow_tan_hue: bool = False,
     ) -> Optional[Tuple[int, int, float, int]]:
         """Aplica morfología, extrae contornos y elige el mejor candidato."""
         k = np.ones((3, 3), np.uint8)
@@ -411,10 +460,41 @@ class HsvBallDetectionOperator:
             if area < min_area:
                 continue
             (x, y), radius = cv2.minEnclosingCircle(contour)
-            if radius < min_radius or radius > ADAPTIVE_MAX_RADIUS:
+            max_radius = ADAPTIVE_MAX_RADIUS if max_radius_override is None else max_radius_override
+            if radius < min_radius or radius > max_radius:
                 continue
+            min_candidate_y = (
+                self._min_candidate_y(hsv.shape[0])
+                if min_candidate_y_override is None
+                else int(min_candidate_y_override)
+            )
+            patch_radius = int(max(3, min(12, radius * 0.4)))
+            patch_hsv = hsv[
+                max(0, int(y) - patch_radius): min(
+                    hsv.shape[0], int(y) + patch_radius + 1
+                ),
+                max(0, int(x) - patch_radius): min(
+                    hsv.shape[1], int(x) + patch_radius + 1
+                ),
+            ]
+            if patch_hsv.size == 0:
+                continue
+            patch_median = np.median(patch_hsv.reshape(-1, 3), axis=0)
+            patch_median_h = int(patch_median[0])
+            patch_median_s = int(patch_median[1])
+            strong_top_orange = (
+                radius <= 24.0
+                and y >= float(hsv.shape[0]) * 0.14
+                and patch_median_s >= 180
+                and (patch_median_h <= 25 or patch_median_h >= 168)
+            )
             if (
-                int(y - radius) < HOT_PIXEL_Y_MAX
+                (int(y - radius) < min_candidate_y and not strong_top_orange)
+                or (
+                    max_candidate_y_override is not None
+                    and int(y + radius) > int(max_candidate_y_override)
+                )
+                or int(y + radius) >= hsv.shape[0] - 2
                 or int(x) < BORDER_MARGIN
                 or int(x) > hsv.shape[1] - BORDER_MARGIN
             ):
@@ -422,7 +502,11 @@ class HsvBallDetectionOperator:
             circularity = self._circularity(contour)
             if circularity < effective_min_circ:
                 continue
+            if radius >= 8.0 and patch_median_s < 140 and 45 <= patch_median_h <= 65:
+                continue
             score = float(radius) * float(circularity)
+            if strong_top_orange:
+                score *= 3.0
             candidates.append((score, int(x), int(y), float(radius)))
 
         candidates.sort(key=lambda c: c[0], reverse=True)
@@ -433,14 +517,20 @@ class HsvBallDetectionOperator:
             if patch_h is None or patch_h.size == 0:
                 continue
             patch_median_h = int(np.median(patch_h))
-            if (
-                patch_median_h < ADAPTIVE_ORANGE_HUE_MIN
-                or patch_median_h > ADAPTIVE_ORANGE_HUE_MAX
-            ):
+            if not self._is_valid_ball_hue(patch_median_h, allow_tan=allow_tan_hue):
                 continue
             return x, y, radius, patch_median_h
 
         return None
+
+    @staticmethod
+    def _is_valid_ball_hue(hue: int, allow_tan: bool = False) -> bool:
+        hue = int(hue)
+        if ADAPTIVE_ORANGE_HUE_MIN <= hue <= ADAPTIVE_ORANGE_HUE_MAX:
+            return True
+        if HSV_LO2[0] <= hue <= HSV_HI2[0]:
+            return True
+        return bool(allow_tan) and 66 <= hue <= 72
 
     @staticmethod
     def _reject_if_border(
@@ -451,7 +541,9 @@ class HsvBallDetectionOperator:
         if best is None:
             return None
         cx, cy, _r, _h = best
-        if cy < HOT_PIXEL_Y_MAX or cx < BORDER_MARGIN or cx > frame_w - BORDER_MARGIN:
+        if cx < BORDER_MARGIN or cx > frame_w - BORDER_MARGIN:
+            return None
+        if _r < 10.0 and (cx < BORDER_MARGIN + 12 or cx > frame_w - BORDER_MARGIN - 12):
             return None
         return best
 

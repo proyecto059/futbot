@@ -1,0 +1,588 @@
+{
+  "output": "output/resolution_search_1",
+  "summaries": [
+    {
+      "mode": "pipeline",
+      "width": 320,
+      "height": 240,
+      "fps": 17.79,
+      "frames": 50,
+      "ball_count": 5,
+      "blue_goal_count": 50,
+      "yellow_goal_count": 0,
+      "line_count": 0,
+      "sources": {
+        "goal_green": 5
+      },
+      "ball_samples": [
+        {
+          "i": 5,
+          "cx": 106,
+          "cy": 105,
+          "r": 9.0,
+          "source": "goal_green"
+        },
+        {
+          "i": 9,
+          "cx": 106,
+          "cy": 105,
+          "r": 9.0,
+          "source": "goal_green"
+        },
+        {
+          "i": 16,
+          "cx": 106,
+          "cy": 105,
+          "r": 9.0,
+          "source": "goal_green"
+        },
+        {
+          "i": 29,
+          "cx": 106,
+          "cy": 105,
+          "r": 10.0,
+          "source": "goal_green"
+        },
+        {
+          "i": 30,
+          "cx": 106,
+          "cy": 105,
+          "r": 9.0,
+          "source": "goal_green"
+        }
+      ],
+      "error": null
+    },
+    {
+      "mode": "raw_opencv",
+      "width": 320,
+      "height": 240,
+      "fps": 0.0,
+      "frames": 0,
+      "ball_count": 0,
+      "blue_goal_count": 0,
+      "yellow_goal_count": 0,
+      "line_count": 0,
+      "sources": {},
+      "ball_samples": [],
+      "error": "raw OpenCV capture unavailable",
+      "backend": "unavailable"
+    },
+    {
+      "mode": "pipeline",
+      "width": 424,
+      "height": 240,
+      "fps": 18.01,
+      "frames": 50,
+      "ball_count": 24,
+      "blue_goal_count": 0,
+      "yellow_goal_count": 0,
+      "line_count": 0,
+      "sources": {
+        "hsv": 24
+      },
+      "ball_samples": [
+        {
+          "i": 3,
+          "cx": 112,
+          "cy": 98,
+          "r": 16.77060890197754,
+          "source": "hsv"
+        },
+        {
+          "i": 5,
+          "cx": 112,
+          "cy": 98,
+          "r": 16.101341247558594,
+          "source": "hsv"
+        },
+        {
+          "i": 7,
+          "cx": 113,
+          "cy": 98,
+          "r": 16.55304527282715,
+          "source": "hsv"
+        },
+        {
+          "i": 9,
+          "cx": 113,
+          "cy": 98,
+          "r": 16.55304527282715,
+          "source": "hsv"
+        },
+        {
+          "i": 11,
+          "cx": 113,
+          "cy": 98,
+          "r": 17.007450103759766,
+          "source": "hsv"
+        },
+        {
+          "i": 13,
+          "cx": 113,
+          "cy": 98,
+          "r": 17.007450103759766,
+          "source": "hsv"
+        },
+        {
+          "i": 15,
+          "cx": 110,
+          "cy": 97,
+          "r": 14.151071548461914,
+          "source": "hsv"
+        },
+        {
+          "i": 17,
+          "cx": 166,
+          "cy": 101,
+          "r": 18.06941032409668,
+          "source": "hsv"
+        },
+        {
+          "i": 19,
+          "cx": 233,
+          "cy": 97,
+          "r": 6.324655532836914,
+          "source": "hsv"
+        },
+        {
+          "i": 21,
+          "cx": 232,
+          "cy": 97,
+          "r": 5.852449893951416,
+          "source": "hsv"
+        },
+        {
+          "i": 23,
+          "cx": 232,
+          "cy": 97,
+          "r": 5.852449893951416,
+          "source": "hsv"
+        },
+        {
+          "i": 25,
+          "cx": 232,
+          "cy": 97,
+          "r": 5.852449893951416,
+          "source": "hsv"
+        },
+        {
+          "i": 27,
+          "cx": 232,
+          "cy": 97,
+          "r": 5.852449893951416,
+          "source": "hsv"
+        },
+        {
+          "i": 29,
+          "cx": 215,
+          "cy": 98,
+          "r": 6.324655532836914,
+          "source": "hsv"
+        },
+        {
+          "i": 31,
+          "cx": 232,
+          "cy": 97,
+          "r": 6.041623115539551,
+          "source": "hsv"
+        },
+        {
+          "i": 33,
+          "cx": 232,
+          "cy": 97,
+          "r": 5.852449893951416,
+          "source": "hsv"
+        },
+        {
+          "i": 35,
+          "cx": 232,
+          "cy": 97,
+          "r": 5.852449893951416,
+          "source": "hsv"
+        },
+        {
+          "i": 37,
+          "cx": 233,
+          "cy": 97,
+          "r": 6.324655532836914,
+          "source": "hsv"
+        },
+        {
+          "i": 39,
+          "cx": 232,
+          "cy": 97,
+          "r": 5.852449893951416,
+          "source": "hsv"
+        },
+        {
+          "i": 41,
+          "cx": 233,
+          "cy": 97,
+          "r": 6.324655532836914,
+          "source": "hsv"
+        }
+      ],
+      "error": null
+    },
+    {
+      "mode": "raw_opencv",
+      "width": 424,
+      "height": 240,
+      "fps": 0.0,
+      "frames": 0,
+      "ball_count": 0,
+      "blue_goal_count": 0,
+      "yellow_goal_count": 0,
+      "line_count": 0,
+      "sources": {},
+      "ball_samples": [],
+      "error": "raw OpenCV capture unavailable",
+      "backend": "unavailable"
+    },
+    {
+      "mode": "pipeline",
+      "width": 512,
+      "height": 384,
+      "fps": 15.0,
+      "frames": 50,
+      "ball_count": 50,
+      "blue_goal_count": 50,
+      "yellow_goal_count": 50,
+      "line_count": 0,
+      "sources": {
+        "hsv": 50
+      },
+      "ball_samples": [
+        {
+          "i": 0,
+          "cx": 293,
+          "cy": 111,
+          "r": 11.037999153137207,
+          "source": "hsv"
+        },
+        {
+          "i": 1,
+          "cx": 293,
+          "cy": 111,
+          "r": 11.037999153137207,
+          "source": "hsv"
+        },
+        {
+          "i": 2,
+          "cx": 293,
+          "cy": 112,
+          "r": 11.15046215057373,
+          "source": "hsv"
+        },
+        {
+          "i": 3,
+          "cx": 293,
+          "cy": 111,
+          "r": 11.474371910095215,
+          "source": "hsv"
+        },
+        {
+          "i": 4,
+          "cx": 293,
+          "cy": 111,
+          "r": 11.694071769714355,
+          "source": "hsv"
+        },
+        {
+          "i": 5,
+          "cx": 293,
+          "cy": 111,
+          "r": 11.474371910095215,
+          "source": "hsv"
+        },
+        {
+          "i": 6,
+          "cx": 293,
+          "cy": 111,
+          "r": 11.474371910095215,
+          "source": "hsv"
+        },
+        {
+          "i": 7,
+          "cx": 293,
+          "cy": 110,
+          "r": 11.307238578796387,
+          "source": "hsv"
+        },
+        {
+          "i": 8,
+          "cx": 293,
+          "cy": 111,
+          "r": 11.037999153137207,
+          "source": "hsv"
+        },
+        {
+          "i": 9,
+          "cx": 294,
+          "cy": 111,
+          "r": 11.530864715576172,
+          "source": "hsv"
+        },
+        {
+          "i": 10,
+          "cx": 293,
+          "cy": 112,
+          "r": 11.39367961883545,
+          "source": "hsv"
+        },
+        {
+          "i": 11,
+          "cx": 293,
+          "cy": 112,
+          "r": 11.321748733520508,
+          "source": "hsv"
+        },
+        {
+          "i": 12,
+          "cx": 293,
+          "cy": 112,
+          "r": 11.343878746032715,
+          "source": "hsv"
+        },
+        {
+          "i": 13,
+          "cx": 293,
+          "cy": 112,
+          "r": 11.343878746032715,
+          "source": "hsv"
+        },
+        {
+          "i": 14,
+          "cx": 292,
+          "cy": 113,
+          "r": 11.236202239990234,
+          "source": "hsv"
+        },
+        {
+          "i": 15,
+          "cx": 293,
+          "cy": 112,
+          "r": 11.149651527404785,
+          "source": "hsv"
+        },
+        {
+          "i": 16,
+          "cx": 293,
+          "cy": 112,
+          "r": 11.157316207885742,
+          "source": "hsv"
+        },
+        {
+          "i": 17,
+          "cx": 293,
+          "cy": 112,
+          "r": 11.15046215057373,
+          "source": "hsv"
+        },
+        {
+          "i": 18,
+          "cx": 293,
+          "cy": 112,
+          "r": 11.39367961883545,
+          "source": "hsv"
+        },
+        {
+          "i": 19,
+          "cx": 293,
+          "cy": 112,
+          "r": 11.39367961883545,
+          "source": "hsv"
+        }
+      ],
+      "error": null
+    },
+    {
+      "mode": "raw_opencv",
+      "width": 512,
+      "height": 384,
+      "fps": 0.0,
+      "frames": 0,
+      "ball_count": 0,
+      "blue_goal_count": 0,
+      "yellow_goal_count": 0,
+      "line_count": 0,
+      "sources": {},
+      "ball_samples": [],
+      "error": "raw OpenCV capture unavailable",
+      "backend": "unavailable"
+    },
+    {
+      "mode": "pipeline",
+      "width": 640,
+      "height": 480,
+      "fps": 11.84,
+      "frames": 50,
+      "ball_count": 50,
+      "blue_goal_count": 50,
+      "yellow_goal_count": 50,
+      "line_count": 0,
+      "sources": {
+        "hsv": 50
+      },
+      "ball_samples": [
+        {
+          "i": 0,
+          "cx": 367,
+          "cy": 139,
+          "r": 14.49186897277832,
+          "source": "hsv"
+        },
+        {
+          "i": 1,
+          "cx": 367,
+          "cy": 139,
+          "r": 14.49186897277832,
+          "source": "hsv"
+        },
+        {
+          "i": 2,
+          "cx": 366,
+          "cy": 141,
+          "r": 14.433862686157227,
+          "source": "hsv"
+        },
+        {
+          "i": 3,
+          "cx": 366,
+          "cy": 141,
+          "r": 14.546016693115234,
+          "source": "hsv"
+        },
+        {
+          "i": 4,
+          "cx": 366,
+          "cy": 141,
+          "r": 14.605412483215332,
+          "source": "hsv"
+        },
+        {
+          "i": 5,
+          "cx": 365,
+          "cy": 141,
+          "r": 14.379772186279297,
+          "source": "hsv"
+        },
+        {
+          "i": 6,
+          "cx": 322,
+          "cy": 141,
+          "r": 13.509356498718262,
+          "source": "hsv"
+        },
+        {
+          "i": 7,
+          "cx": 366,
+          "cy": 140,
+          "r": 14.387579917907715,
+          "source": "hsv"
+        },
+        {
+          "i": 8,
+          "cx": 366,
+          "cy": 140,
+          "r": 14.474099159240723,
+          "source": "hsv"
+        },
+        {
+          "i": 9,
+          "cx": 367,
+          "cy": 140,
+          "r": 13.974170684814453,
+          "source": "hsv"
+        },
+        {
+          "i": 10,
+          "cx": 367,
+          "cy": 140,
+          "r": 13.91712474822998,
+          "source": "hsv"
+        },
+        {
+          "i": 11,
+          "cx": 367,
+          "cy": 140,
+          "r": 13.195365905761719,
+          "source": "hsv"
+        },
+        {
+          "i": 12,
+          "cx": 366,
+          "cy": 140,
+          "r": 13.538206100463867,
+          "source": "hsv"
+        },
+        {
+          "i": 13,
+          "cx": 366,
+          "cy": 140,
+          "r": 13.538206100463867,
+          "source": "hsv"
+        },
+        {
+          "i": 14,
+          "cx": 366,
+          "cy": 140,
+          "r": 13.627840995788574,
+          "source": "hsv"
+        },
+        {
+          "i": 15,
+          "cx": 367,
+          "cy": 140,
+          "r": 13.748613357543945,
+          "source": "hsv"
+        },
+        {
+          "i": 16,
+          "cx": 367,
+          "cy": 140,
+          "r": 13.91712474822998,
+          "source": "hsv"
+        },
+        {
+          "i": 17,
+          "cx": 366,
+          "cy": 140,
+          "r": 13.91034984588623,
+          "source": "hsv"
+        },
+        {
+          "i": 18,
+          "cx": 367,
+          "cy": 140,
+          "r": 13.748613357543945,
+          "source": "hsv"
+        },
+        {
+          "i": 19,
+          "cx": 367,
+          "cy": 140,
+          "r": 13.748613357543945,
+          "source": "hsv"
+        }
+      ],
+      "error": null
+    },
+    {
+      "mode": "raw_opencv",
+      "width": 640,
+      "height": 480,
+      "fps": 0.0,
+      "frames": 0,
+      "ball_count": 0,
+      "blue_goal_count": 0,
+      "yellow_goal_count": 0,
+      "line_count": 0,
+      "sources": {},
+      "ball_samples": [],
+      "error": "raw OpenCV capture unavailable",
+      "backend": "unavailable"
+    }
+  ]
+}

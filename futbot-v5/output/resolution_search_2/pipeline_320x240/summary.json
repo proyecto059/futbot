@@ -1,0 +1,14 @@
+{
+  "mode": "pipeline",
+  "width": 320,
+  "height": 240,
+  "fps": 19.39,
+  "frames": 50,
+  "ball_count": 0,
+  "blue_goal_count": 0,
+  "yellow_goal_count": 0,
+  "line_count": 50,
+  "sources": {},
+  "ball_samples": [],
+  "error": null
+}

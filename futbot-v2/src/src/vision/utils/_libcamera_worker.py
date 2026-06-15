@@ -22,6 +22,7 @@ Usage (internal):
     /usr/bin/python3 _libcamera_worker.py <width> <height> [warmup_frames]
 """
 
+import argparse
 import mmap
 import os
 import select
@@ -29,11 +30,33 @@ import struct
 import sys
 import time
 
-import libcamera as lc
-
 MAGIC = b"\xf8\xb4\xc2\x0d"
 HEADER_FMT = "<4sIIII"
 HEADER_SIZE = struct.calcsize(HEADER_FMT)
+
+NOISE_REDUCTION_MODES = {
+    "off": ("Off", 0),
+    "fast": ("Fast", 1),
+    "high_quality": ("HighQuality", 2),
+    "minimal": ("Minimal", 3),
+    "zsl": ("Zsl", 4),
+}
+
+
+def build_arg_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("width", type=int, nargs="?", default=320)
+    parser.add_argument("height", type=int, nargs="?", default=240)
+    parser.add_argument("warmup_frames", type=int, nargs="?", default=10)
+    parser.add_argument("--sharpness", type=float, default=None)
+    parser.add_argument(
+        "--denoise",
+        choices=tuple(NOISE_REDUCTION_MODES),
+        default=None,
+    )
+    parser.add_argument("--exposure-us", type=int, default=None)
+    parser.add_argument("--gain", type=float, default=None)
+    return parser
 
 
 def _send_xrgb(w: int, h: int, stride: int, data: bytes) -> None:
@@ -57,34 +80,63 @@ def _read_command(timeout_s: float = 0.0):
     return line.decode("ascii", errors="ignore").strip()
 
 
-def _process_command(cmd: str, cam) -> None:
+def _resolve_noise_reduction_mode(lc, mode: str):
+    enum_name, fallback = NOISE_REDUCTION_MODES[mode]
+    enum = getattr(lc.controls.draft, "NoiseReductionModeEnum", None)
+    if enum is not None and hasattr(enum, enum_name):
+        return getattr(enum, enum_name)
+    return fallback
+
+
+def _build_startup_controls(lc, args) -> dict:
+    controls = {}
+    if args.sharpness is not None:
+        controls[lc.controls.Sharpness] = float(args.sharpness)
+    if args.denoise is not None:
+        controls[lc.controls.draft.NoiseReductionMode] = _resolve_noise_reduction_mode(
+            lc,
+            args.denoise,
+        )
+    if args.exposure_us is not None:
+        controls[lc.controls.AeEnable] = False
+        controls[lc.controls.ExposureTime] = int(args.exposure_us)
+    if args.gain is not None:
+        controls[lc.controls.AnalogueGain] = float(args.gain)
+    return controls
+
+
+def _apply_controls_to_request(req, controls: dict) -> None:
+    for control_id, value in controls.items():
+        req.set_control(control_id, value)
+
+
+def _reuse_and_queue(cam, req, controls: dict) -> None:
+    req.reuse()
+    _apply_controls_to_request(req, controls)
+    cam.queue_request(req)
+
+
+def _process_command(cmd: str, controls: dict, lc) -> None:
     if cmd is None or cmd == "":
         return
     if cmd == "QUIT":
         raise SystemExit(0)
     if cmd.startswith("EXPOSURE "):
         value_us = int(cmd.split()[1])
-        try:
-            ctrls = lc.ControlList()
-            ctrls.set(lc.controls.AeEnable, False)
-            ctrls.set(lc.controls.ExposureTime, value_us)
-            cam.controls.set(controls=ctrls)
-        except Exception:
-            pass
+        controls[lc.controls.AeEnable] = False
+        controls[lc.controls.ExposureTime] = value_us
     elif cmd.startswith("AE "):
         enable = cmd.split()[1] == "1"
-        try:
-            ctrls = lc.ControlList()
-            ctrls.set(lc.controls.AeEnable, enable)
-            cam.controls.set(controls=ctrls)
-        except Exception:
-            pass
+        controls[lc.controls.AeEnable] = enable
 
 
 def main() -> None:
-    width = int(sys.argv[1]) if len(sys.argv) > 1 else 320
-    height = int(sys.argv[2]) if len(sys.argv) > 2 else 240
-    warmup = int(sys.argv[3]) if len(sys.argv) > 3 else 10
+    args = build_arg_parser().parse_args()
+    width = args.width
+    height = args.height
+    warmup = args.warmup_frames
+
+    import libcamera as lc
 
     cm = lc.CameraManager.singleton()
     if not cm.cameras:
@@ -100,6 +152,7 @@ def main() -> None:
     sc.pixel_format = lc.formats.XRGB8888
     cfg.validate()
     cam.configure(cfg)
+    runtime_controls = _build_startup_controls(lc, args)
 
     w, h = sc.size.width, sc.size.height
     stride = sc.stride
@@ -115,6 +168,7 @@ def main() -> None:
     for b in bufs:
         req = cam.create_request()
         req.add_buffer(stream, b)
+        _apply_controls_to_request(req, runtime_controls)
         cam.queue_request(req)
 
     for _ in range(warmup):
@@ -123,8 +177,7 @@ def main() -> None:
             ready = cm.get_ready_requests()
             if ready:
                 for r in ready:
-                    r.reuse()
-                    cam.queue_request(r)
+                    _reuse_and_queue(cam, r, runtime_controls)
                 break
             time.sleep(0.005)
 
@@ -142,13 +195,11 @@ def main() -> None:
         if req is None:
             break
         if req.status != lc.Request.Status.Complete:
-            req.reuse()
-            cam.queue_request(req)
+            _reuse_and_queue(cam, req, runtime_controls)
             continue
         fb = req.buffers.get(stream)
         if fb is None:
-            req.reuse()
-            cam.queue_request(req)
+            _reuse_and_queue(cam, req, runtime_controls)
             continue
         try:
             fd = fb.planes[0].fd
@@ -159,8 +210,7 @@ def main() -> None:
             mm.close()
         except Exception:
             brightness = 0
-        req.reuse()
-        cam.queue_request(req)
+        _reuse_and_queue(cam, req, runtime_controls)
         ae_settle += 1
         if brightness > 15:
             break
@@ -169,8 +219,7 @@ def main() -> None:
         ready = cm.get_ready_requests()
         if ready:
             for r in ready:
-                r.reuse()
-                cam.queue_request(r)
+                _reuse_and_queue(cam, r, runtime_controls)
 
     sys.stderr.write(f"READY {w} {h} {stride}\n")
     sys.stderr.flush()
@@ -179,7 +228,7 @@ def main() -> None:
         while True:
             cmd = _read_command(timeout_s=0.0)
             if cmd is not None:
-                _process_command(cmd, cam)
+                _process_command(cmd, runtime_controls, lc)
 
             ready = cm.get_ready_requests()
             if not ready:
@@ -188,14 +237,12 @@ def main() -> None:
 
             for req in ready:
                 if req.status != lc.Request.Status.Complete:
-                    req.reuse()
-                    cam.queue_request(req)
+                    _reuse_and_queue(cam, req, runtime_controls)
                     continue
 
                 fb = req.buffers.get(stream)
                 if fb is None:
-                    req.reuse()
-                    cam.queue_request(req)
+                    _reuse_and_queue(cam, req, runtime_controls)
                     continue
 
                 try:
@@ -206,12 +253,10 @@ def main() -> None:
                     _send_xrgb(w, h, stride, payload)
                     mm.close()
                 except Exception:
-                    req.reuse()
-                    cam.queue_request(req)
+                    _reuse_and_queue(cam, req, runtime_controls)
                     continue
 
-                req.reuse()
-                cam.queue_request(req)
+                _reuse_and_queue(cam, req, runtime_controls)
                 break
 
     except (SystemExit, KeyboardInterrupt, BrokenPipeError):

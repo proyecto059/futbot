@@ -39,6 +39,12 @@ class Pipeline5Service:
         self._last_ball_cy = 0.0  # Para saber qué tan cerca estaba antes de perderla
         self._last_seen_ts = 0.0  # Para evitar parpadeos falsos
 
+        import os
+        self._attack_blue = os.environ.get("ATTACK_BLUE", "1").strip().lower() not in {"0", "false", "no"}
+        self._ball_visible_min_radius = float(os.environ.get("BALL_VISIBLE_MIN_RADIUS", "8.0"))
+        self._goal_edge_ball_min_radius = float(os.environ.get("GOAL_EDGE_BALL_MIN_RADIUS", "5.0"))
+        self._ball_streak = 0
+
         self._search_op = SearchOperator()
         self._advance_op = AdvanceOperator()
         self._avoid_wall_op = AvoidWallOperator()
@@ -49,53 +55,27 @@ class Pipeline5Service:
         # Obtener snapshot de visión (mismo que v3)
         snap = self._vision.tick()
         ball = snap.get("ball")
-        ball_visible = ball is not None
 
-        # --- FILTROS INSTANTÁNEOS (Sin retrasos) ---
-        if ball_visible:
-            frame = self._vision.last_frame()
-            if frame is not None:
-                import cv2
-                import numpy as np
-                cx, cy = int(ball["cx"]), int(ball["cy"])
-                
-                # 1. Filtro de Color y Saturación (Rechaza amarillo y brillos blancos)
-                patch_r = 3
-                y0, y1 = max(0, cy - patch_r), min(frame.shape[0], cy + patch_r + 1)
-                x0, x1 = max(0, cx - patch_r), min(frame.shape[1], cx + patch_r + 1)
-                
-                if x1 > x0 and y1 > y0:
-                    patch_bgr = frame[y0:y1, x0:x1]
-                    patch_hsv = cv2.cvtColor(patch_bgr, cv2.COLOR_BGR2HSV)
-                    median_h = int(np.median(patch_hsv[:, :, 0]))
-                    median_s = int(np.median(patch_hsv[:, :, 1]))
-                    
-                    # La pelota es naranja (Hue entre 0 y 12). 
-                    # Rechazamos CUALQUIER OTRO COLOR (amarillo, verde, azul, morado, rosa)
-                    if 13 <= median_h <= 170:
-                        log.info(f"event=ball_rejected reason=wrong_color hue={median_h} source={ball.get('source')}")
-                        ball = None
-                        ball_visible = False
-                    elif median_s < 140:  # Exigir que sea un "naranja chillón" (saturación alta). Rechaza madera, piel, cartón.
-                        log.info(f"event=ball_rejected reason=not_neon_enough sat={median_s} source={ball.get('source')}")
-                        ball = None
-                        ball_visible = False
-                        
-            # 2. Filtro de Forma (Rechaza pilares altos, solo si YOLO ya los vio)
-            if ball_visible and hasattr(self._vision, "_yolo"):
-                yolo_raw = self._vision._yolo.get_latest_output()
-                ball_bbox = yolo_raw.get("ball_bbox")
-                if ball_bbox is not None:
-                    x1, y1, x2, y2, conf, cls_id = ball_bbox
-                    w = max(1.0, float(x2 - x1))
-                    h = max(1.0, float(y2 - y1))
-                    
-                    # Si es un pilar, lo rechazamos al instante.
-                    if (h / w) > 1.4:
-                        log.info(f"event=ball_rejected reason=tall_pillar_shape source={ball.get('source')}")
-                        ball = None
-                        ball_visible = False
-        # -------------------------------------------
+        # --- FILTROS DE VISIÓN (estilo test_chase_dynamic.py de v4) ---
+        target_key = "blue" if self._attack_blue else "yellow"
+        target_goal_cx_now = snap.get("goals", {}).get(f"{target_key}_cx")
+
+        if self._is_trackable_ball(
+            ball,
+            min_radius=self._ball_visible_min_radius,
+        ) or self._should_accept_goal_edge_ball(
+            ball,
+            goal_cx=target_goal_cx_now,
+            min_radius=self._goal_edge_ball_min_radius,
+        ):
+            self._ball_streak += 1
+        else:
+            self._ball_streak = 0
+
+        ball_visible = self._ball_streak >= 1
+
+        if not ball_visible:
+            ball = None
 
         # Log de detección de pelota y actualización de última posición
         if ball_visible:
@@ -172,3 +152,28 @@ class Pipeline5Service:
         self._running = False
         self._motors.stop(200)
         log.info("event=pipeline5_closed")
+
+    def _is_trackable_ball(
+        self,
+        ball: dict | None,
+        min_radius: float = 8.0,
+        allowed_sources: tuple[str, ...] = ("hsv",),
+    ) -> bool:
+        if ball is None:
+            return False
+        return ball.get("source") in allowed_sources and float(ball.get("r", 0.0)) >= min_radius
+
+    def _should_accept_goal_edge_ball(
+        self,
+        ball: dict | None,
+        goal_cx: float | None,
+        min_radius: float = 5.0,
+        max_ball_goal_dx: float = 80.0,
+    ) -> bool:
+        if ball is None or goal_cx is None:
+            return False
+        if ball.get("source") != "hsv":
+            return False
+        if float(ball.get("r", 0.0)) < min_radius:
+            return False
+        return abs(float(ball.get("cx", 0.0)) - float(goal_cx)) <= max_ball_goal_dx

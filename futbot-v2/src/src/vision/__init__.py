@@ -8,6 +8,12 @@ Punto de entrada único:
     vision.close()
 """
 
-from vision.hybrid_vision_service import HybridVisionService
-
 __all__ = ["HybridVisionService"]
+
+
+def __getattr__(name: str):
+    if name == "HybridVisionService":
+        from vision.hybrid_vision_service import HybridVisionService
+
+        return HybridVisionService
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

@@ -1,0 +1,7424 @@
+{
+  "attack_blue": true,
+  "duration_s": 8.0,
+  "frames": 210,
+  "detections": 33,
+  "large_detections": 0,
+  "blue_seen_frames": 44,
+  "sources": [
+    "hsv"
+  ],
+  "first_detections": [
+    {
+      "cx": 61,
+      "cy": 100,
+      "r": 11.752758979797363,
+      "conf": 1.0,
+      "source": "hsv"
+    },
+    {
+      "cx": 61,
+      "cy": 100,
+      "r": 11.752758979797363,
+      "conf": 1.0,
+      "source": "hsv"
+    },
+    {
+      "cx": 61,
+      "cy": 100,
+      "r": 11.752758979797363,
+      "conf": 1.0,
+      "source": "hsv"
+    },
+    {
+      "cx": 61,
+      "cy": 100,
+      "r": 11.752758979797363,
+      "conf": 1.0,
+      "source": "hsv"
+    },
+    {
+      "cx": 61,
+      "cy": 100,
+      "r": 11.752758979797363,
+      "conf": 1.0,
+      "source": "hsv"
+    },
+    {
+      "cx": 61,
+      "cy": 100,
+      "r": 11.593820571899414,
+      "conf": 1.0,
+      "source": "hsv"
+    },
+    {
+      "cx": 61,
+      "cy": 100,
+      "r": 11.838939666748047,
+      "conf": 1.0,
+      "source": "hsv"
+    },
+    {
+      "cx": 61,
+      "cy": 100,
+      "r": 11.687024116516113,
+      "conf": 1.0,
+      "source": "hsv"
+    },
+    {
+      "cx": 61,
+      "cy": 100,
+      "r": 11.687024116516113,
+      "conf": 1.0,
+      "source": "hsv"
+    },
+    {
+      "cx": 61,
+      "cy": 100,
+      "r": 11.687024116516113,
+      "conf": 1.0,
+      "source": "hsv"
+    }
+  ],
+  "large_samples": [],
+  "records": [
+    {
+      "tick": 0,
+      "elapsed": 0.00011198100037290715,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.752758979797363,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.25925925925927
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 36.175,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.25925925925927,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 1,
+      "elapsed": 0.03832942400003958,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.752758979797363,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.25925925925927
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 39.29875,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.25925925925927,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 2,
+      "elapsed": 0.08266537300005439,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.752758979797363,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.21978021978023
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 41.953937499999995,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.21978021978023,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 3,
+      "elapsed": 0.11941620800007513,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.752758979797363,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.04294478527606
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 44.210846874999994,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.04294478527606,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 4,
+      "elapsed": 0.16344706499967288,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.752758979797363,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.3359497645212
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 113,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 46.12921984374999,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.3359497645212,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 5,
+      "elapsed": 0.20753582999986975,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.593820571899414,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.3359497645212
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 47.75983686718749,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.3359497645212,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 6,
+      "elapsed": 0.256082642000365,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.838939666748047,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.05863708399366
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 48.99586133710936,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.05863708399366,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 7,
+      "elapsed": 0.29146448000028613,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.687024116516113,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.39035769828928
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 50.196482136542954,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.39035769828928,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 8,
+      "elapsed": 0.32854648099964834,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.687024116516113,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.17879746835442
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 51.217009816061505,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.17879746835442,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 9,
+      "elapsed": 0.36599511100030213,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.687024116516113,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.0857142857143
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 52.08445834365227,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.0857142857143,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 10,
+      "elapsed": 0.39828325100006623,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.687024116516113,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.044094488189
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 52.82178959210443,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.044094488189,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 11,
+      "elapsed": 0.4302817799998593,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.687024116516113,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 157.95107033639144
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 53.44852115328876,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 157.95107033639144,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 12,
+      "elapsed": 0.4572818200003894,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.687024116516113,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 157.95107033639144
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 53.98124298029544,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 157.95107033639144,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 13,
+      "elapsed": 0.4922774910000953,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.687024116516113,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.04718417047184
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 54.43405653325112,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.04718417047184,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 14,
+      "elapsed": 0.5250407599996834,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.687024116516113,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.1246105919003
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 54.81894805326345,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.1246105919003,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 15,
+      "elapsed": 0.5643454970004314,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.577882766723633,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 157.87365177195684
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 54.99610584527393,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 157.87365177195684,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 16,
+      "elapsed": 0.5966267300000254,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.577882766723633,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 157.81591263650546
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 55.14668996848284,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 157.81591263650546,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 17,
+      "elapsed": 0.6332670649999272,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.593820571899414,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.18309859154928
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 55.27468647321041,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.18309859154928,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 18,
+      "elapsed": 0.6635320240002329,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.593820571899414,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.18309859154928
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 55.38348350222884,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.18309859154928,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 19,
+      "elapsed": 0.6916179319996445,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.615548133850098,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.1098901098901
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 55.47596097689451,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.1098901098901,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 20,
+      "elapsed": 0.7227027219996671,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.687024116516113,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.18622848200312
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 55.704566830360335,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.18622848200312,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 21,
+      "elapsed": 0.7558343609998701,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.687024116516113,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.1551724137931
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 55.748881805806285,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.1551724137931,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 22,
+      "elapsed": 0.7927152689999275,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.687024116516113,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 157.8783151326053
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 55.78654953493534,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 157.8783151326053,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 23,
+      "elapsed": 0.826855090999743,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.687024116516113,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 157.84375
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 55.818567104695035,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 157.84375,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 24,
+      "elapsed": 0.880204152999795,
+      "ball": {
+        "cx": 60,
+        "cy": 99,
+        "r": 11.848400115966797,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.05379746835442
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 55.84578203899078,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.05379746835442,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 25,
+      "elapsed": 0.9250031940000554,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.838939666748047,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.07765451664025
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 55.868914733142155,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.07765451664025,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 26,
+      "elapsed": 0.9596895510003378,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.687024116516113,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.00635930047696
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 55.73857752317083,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.00635930047696,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 27,
+      "elapsed": 0.9949123890000919,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.841093063354492,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.2747603833866
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 55.62779089469521,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.2747603833866,
+      "mode": "WARMUP",
+      "reason": "warmup",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 28,
+      "elapsed": 1.033583424000426,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.838939666748047,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.30721003134795
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 55.53362226049093,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.30721003134795,
+      "mode": "CHASE",
+      "reason": "ball",
+      "v_left": 23.9984375,
+      "v_right": -113.09843750000002,
+      "v": 68.5484375,
+      "w": -44.55000000000001
+    },
+    {
+      "tick": 29,
+      "elapsed": 1.0768912459998319,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.838939666748047,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.04430379746836
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 55.45357892141729,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.04430379746836,
+      "mode": "CHASE",
+      "reason": "ball",
+      "v_left": 23.9984375,
+      "v_right": -113.09843750000002,
+      "v": 68.5484375,
+      "w": -44.55000000000001
+    },
+    {
+      "tick": 30,
+      "elapsed": 1.1133643599996503,
+      "ball": {
+        "cx": 61,
+        "cy": 100,
+        "r": 11.838939666748047,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 158.0488188976378
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 112,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 55.3855420832047,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 158.0488188976378,
+      "mode": "CHASE",
+      "reason": "ball",
+      "v_left": 23.9984375,
+      "v_right": -113.09843750000002,
+      "v": 68.5484375,
+      "w": -44.55000000000001
+    },
+    {
+      "tick": 31,
+      "elapsed": 1.1467038130003857,
+      "ball": {
+        "cx": 55,
+        "cy": 102,
+        "r": 12.188197135925293,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 152.77707006369425
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 113,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 55.92771077072399,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 152.77707006369425,
+      "mode": "CHASE",
+      "reason": "ball",
+      "v_left": 20.679598149450847,
+      "v_right": -113.94441615798311,
+      "v": 67.31200715371698,
+      "w": -46.63240900426614
+    },
+    {
+      "tick": 32,
+      "elapsed": 1.1880727699999625,
+      "ball": {
+        "cx": 38,
+        "cy": 111,
+        "r": 13.20529842376709,
+        "conf": 1.0,
+        "source": "hsv"
+      },
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 138.10032362459546
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 171,
+        "v_median_raw": 114,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 138.10032362459546,
+      "mode": "CHASE",
+      "reason": "ball",
+      "v_left": 10.517465334304433,
+      "v_right": -116.53476373831455,
+      "v": 63.52611453630949,
+      "w": -53.00864920200506
+    },
+    {
+      "tick": 33,
+      "elapsed": 1.2264625460002208,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 125.05220228384992
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 172,
+        "v_median_raw": 116,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 125.05220228384992,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 34,
+      "elapsed": 1.2591024639996249,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 111.29910714285714
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 172,
+        "v_median_raw": 119,
+        "sat_min": 80,
+        "val_min": 60,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 111.29910714285714,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 35,
+      "elapsed": 1.2912733450002634,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 98.96934306569344
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 27
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 172,
+        "v_median_raw": 121,
+        "sat_min": 80,
+        "val_min": 60,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 98.96934306569344,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 36,
+      "elapsed": 1.3268125169997802,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 83.65996908809892
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 75
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 173,
+        "v_median_raw": 122,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 83.65996908809892,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 37,
+      "elapsed": 1.371476743999665,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 51.87482614742698
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 172,
+        "v_median_raw": 120,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 51.87482614742698,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 38,
+      "elapsed": 1.407338340000024,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 35.90634005763689
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 171,
+        "v_median_raw": 116,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 35.90634005763689,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 39,
+      "elapsed": 1.4463559309997436,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 29.621970920840063
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 169,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 29.621970920840063,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 40,
+      "elapsed": 1.4811780480004018,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 21.73980582524272
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 167,
+        "v_median_raw": 113,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 21.73980582524272,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 41,
+      "elapsed": 1.5195691760000045,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 13.723350253807107
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 167,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 200
+      },
+      "last_goal_cx": 13.723350253807107,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 42,
+      "elapsed": 1.5526147780001338,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 8.814035087719299
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 168,
+        "v_median_raw": 116,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 240
+      },
+      "last_goal_cx": 8.814035087719299,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 43,
+      "elapsed": 1.5889882629999192,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": true,
+        "blue_cx": 4.795918367346939
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 171,
+        "v_median_raw": 120,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 240
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 44,
+      "elapsed": 1.627702206000322,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 174,
+        "v_median_raw": 124,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 240
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 45,
+      "elapsed": 1.6908736369996404,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 177,
+        "v_median_raw": 128,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 240
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 46,
+      "elapsed": 1.738927135999802,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 178,
+        "v_median_raw": 130,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 240
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 47,
+      "elapsed": 1.7899104070002068,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 181,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 240
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 48,
+      "elapsed": 1.8374214989999018,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 182,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 240
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 49,
+      "elapsed": 1.8940146289996846,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 137,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 240
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 50,
+      "elapsed": 1.9232609050004612,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 137,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 240
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 51,
+      "elapsed": 1.960689387000457,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 136,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 240
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 52,
+      "elapsed": 2.005596873000286,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 136,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 280
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 53,
+      "elapsed": 2.0432452439999906,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 136,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 280
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 54,
+      "elapsed": 2.0752470520001225,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 136,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 280
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 55,
+      "elapsed": 2.107260564000171,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 136,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 280
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 56,
+      "elapsed": 2.1434080310000354,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 135,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 280
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 57,
+      "elapsed": 2.1944128389995967,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 135,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 280
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 58,
+      "elapsed": 2.2353936850004175,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 135,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 280
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 59,
+      "elapsed": 2.2732795379997697,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 135,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 280
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 60,
+      "elapsed": 2.305917382000189,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 135,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 280
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 61,
+      "elapsed": 2.3403977409998333,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 135,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 280
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 62,
+      "elapsed": 2.3746241930002725,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 135,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 63,
+      "elapsed": 2.4117572870000004,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 135,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 57.28855415511539,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 64,
+      "elapsed": 2.442621152999891,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 135,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 65,
+      "elapsed": 2.488137027999983,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 135,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 66,
+      "elapsed": 2.537731467999947,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 135,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 67,
+      "elapsed": 2.574281453000367,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 135,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 68,
+      "elapsed": 2.611821786999826,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 69,
+      "elapsed": 2.6691256390004128,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 70,
+      "elapsed": 2.7170666379997783,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 71,
+      "elapsed": 2.754411547000018,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 72,
+      "elapsed": 2.7953713939996305,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 73,
+      "elapsed": 2.8323009519999687,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 74,
+      "elapsed": 2.864041019999604,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 75,
+      "elapsed": 2.8910248559996035,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 76,
+      "elapsed": 2.9240482360000897,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 77,
+      "elapsed": 2.95531852699969,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 78,
+      "elapsed": 2.990445329999602,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 79,
+      "elapsed": 3.0292943280001055,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 80,
+      "elapsed": 3.065060722000453,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 81,
+      "elapsed": 3.1022916310002984,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 82,
+      "elapsed": 3.1344857539997975,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 83,
+      "elapsed": 3.1666929510001864,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 84,
+      "elapsed": 3.1980258909998156,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 85,
+      "elapsed": 3.23626298399995,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 86,
+      "elapsed": 3.270274604000406,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 87,
+      "elapsed": 3.300696692999736,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 88,
+      "elapsed": 3.355269290999786,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 89,
+      "elapsed": 3.4003240929996537,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 90,
+      "elapsed": 3.4433361029996377,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 91,
+      "elapsed": 3.4723205099999177,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 92,
+      "elapsed": 3.5302789170000324,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 93,
+      "elapsed": 3.571270430000368,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": 4.795918367346939,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 94,
+      "elapsed": 3.606359362999683,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 95,
+      "elapsed": 3.64022329799991,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 96,
+      "elapsed": 3.682221123999625,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 97,
+      "elapsed": 3.7129510650001976,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 98,
+      "elapsed": 3.7495862900004795,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 99,
+      "elapsed": 3.7830620410004485,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 100,
+      "elapsed": 3.816934585999661,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 101,
+      "elapsed": 3.861274130000311,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 102,
+      "elapsed": 3.89341190200048,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 103,
+      "elapsed": 3.929711924000003,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 104,
+      "elapsed": 3.9613425119996464,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 105,
+      "elapsed": 3.996570592000353,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 106,
+      "elapsed": 4.025430998999582,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 107,
+      "elapsed": 4.0582903800004715,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 108,
+      "elapsed": 4.090181096999913,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 109,
+      "elapsed": 4.129389059000459,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 110,
+      "elapsed": 4.183392363000166,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 111,
+      "elapsed": 4.231723232999684,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 112,
+      "elapsed": 4.265800889999809,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 113,
+      "elapsed": 4.312372819000302,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 114,
+      "elapsed": 4.361266115000035,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 115,
+      "elapsed": 4.395266698000341,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 116,
+      "elapsed": 4.427788672999668,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 117,
+      "elapsed": 4.465530636999574,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 118,
+      "elapsed": 4.499266535999595,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 119,
+      "elapsed": 4.53052955000021,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 120,
+      "elapsed": 4.564277225999831,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 121,
+      "elapsed": 4.600245824000012,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 122,
+      "elapsed": 4.62861830699967,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 123,
+      "elapsed": 4.667950602000019,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 124,
+      "elapsed": 4.701034704999984,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 125,
+      "elapsed": 4.741244183999697,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 126,
+      "elapsed": 4.77225443899988,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 127,
+      "elapsed": 4.801251717000014,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 128,
+      "elapsed": 4.832383250000021,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 129,
+      "elapsed": 4.866273573999933,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 130,
+      "elapsed": 4.9059064240000225,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 131,
+      "elapsed": 4.970774133000305,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 132,
+      "elapsed": 5.001925259000018,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 133,
+      "elapsed": 5.064873842000452,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 134,
+      "elapsed": 5.1025862329997835,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 135,
+      "elapsed": 5.1548047449996375,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 136,
+      "elapsed": 5.186784073000126,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 137,
+      "elapsed": 5.226666479000414,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 138,
+      "elapsed": 5.263465519999954,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 139,
+      "elapsed": 5.297785824999664,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 140,
+      "elapsed": 5.32728019499973,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 141,
+      "elapsed": 5.364769920000072,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 142,
+      "elapsed": 5.396267027000249,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 143,
+      "elapsed": 5.428293725000003,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 144,
+      "elapsed": 5.4670037070000035,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 145,
+      "elapsed": 5.503534434000358,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 146,
+      "elapsed": 5.5372472589997415,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 147,
+      "elapsed": 5.569248494000021,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 148,
+      "elapsed": 5.601450062999902,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 149,
+      "elapsed": 5.634276112000407,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 150,
+      "elapsed": 5.66266881699994,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 151,
+      "elapsed": 5.695927327999925,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 152,
+      "elapsed": 5.732727517000058,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 153,
+      "elapsed": 5.7934078090002,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 154,
+      "elapsed": 5.840352645999701,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 155,
+      "elapsed": 5.87740900100016,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 156,
+      "elapsed": 5.910318606000146,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 157,
+      "elapsed": 5.967887867000172,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 158,
+      "elapsed": 6.001357209999696,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 159,
+      "elapsed": 6.034934942999826,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 160,
+      "elapsed": 6.0722542610001256,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 161,
+      "elapsed": 6.109052005999729,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 162,
+      "elapsed": 6.1382454140002665,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 163,
+      "elapsed": 6.177247415000238,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 164,
+      "elapsed": 6.20858318899991,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 134,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 165,
+      "elapsed": 6.245821710999735,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 166,
+      "elapsed": 6.280256517000453,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 167,
+      "elapsed": 6.318721296000149,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 168,
+      "elapsed": 6.354249488000278,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 169,
+      "elapsed": 6.393264489000103,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 170,
+      "elapsed": 6.425377038999613,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 171,
+      "elapsed": 6.4610162310000305,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 172,
+      "elapsed": 6.499261863000356,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 173,
+      "elapsed": 6.539432434999981,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 174,
+      "elapsed": 6.58526790399992,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 175,
+      "elapsed": 6.632070630999806,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 176,
+      "elapsed": 6.675026902000354,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 177,
+      "elapsed": 6.726405157000045,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 178,
+      "elapsed": 6.776264154999808,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 179,
+      "elapsed": 6.8112650149996625,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 180,
+      "elapsed": 6.844209859999864,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 181,
+      "elapsed": 6.894925005000005,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 182,
+      "elapsed": 6.927043407999918,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 183,
+      "elapsed": 6.957951737999792,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 184,
+      "elapsed": 6.989855067000462,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 185,
+      "elapsed": 7.0272661079998215,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 186,
+      "elapsed": 7.0682829560000755,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 187,
+      "elapsed": 7.1002892850001444,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 188,
+      "elapsed": 7.134320610000032,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 189,
+      "elapsed": 7.171251984999799,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 190,
+      "elapsed": 7.199420377000024,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 191,
+      "elapsed": 7.229368414000419,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 192,
+      "elapsed": 7.259420561000297,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 193,
+      "elapsed": 7.29299507199994,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 194,
+      "elapsed": 7.329074930999923,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 195,
+      "elapsed": 7.383495791999849,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 196,
+      "elapsed": 7.451333406000231,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 197,
+      "elapsed": 7.492356124999787,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 198,
+      "elapsed": 7.550277016999644,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 199,
+      "elapsed": 7.588315963999776,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 200,
+      "elapsed": 7.626779281000381,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 201,
+      "elapsed": 7.671948418999818,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 202,
+      "elapsed": 7.711258233999615,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 203,
+      "elapsed": 7.74125776999972,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 204,
+      "elapsed": 7.779355069000303,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 205,
+      "elapsed": 7.817279849999977,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 206,
+      "elapsed": 7.857404274999681,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 207,
+      "elapsed": 7.900468361000094,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 208,
+      "elapsed": 7.936256813,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "tick": 209,
+      "elapsed": 7.971468468999774,
+      "ball": null,
+      "goals": {
+        "yellow": false,
+        "yellow_cx": null,
+        "blue": false,
+        "blue_cx": null
+      },
+      "line": {
+        "detected": false,
+        "cx": null,
+        "pixels": 0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 184,
+        "v_median_raw": 133,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      },
+      "last_goal_cx": null,
+      "mode": "NO_BALL",
+      "reason": "none",
+      "v_left": 0.0,
+      "v_right": 0.0,
+      "v": 0.0,
+      "w": 0.0
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "snapshot": {
+    "ts": 1778708618.5222867,
+    "ball": {
+      "cx": 76,
+      "cy": 94,
+      "r": 6.828876972198486,
+      "conf": 1.0,
+      "source": "hsv"
+    },
+    "robots": [],
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "yellow_cy": null,
+      "yellow_bbox": null,
+      "yellow_pixels": 0,
+      "blue": true,
+      "blue_cx": 287.0979381443299,
+      "blue_cy": 94.20103092783505,
+      "blue_bbox": [
+        256,
+        91,
+        64,
+        8
+      ],
+      "blue_pixels": 388
+    },
+    "line": {
+      "detected": false,
+      "cx": null,
+      "pixels": 0,
+      "cy": null
+    },
+    "debug": {
+      "frames_in": 66,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 1,
+        "best_ball_conf": 0.4902844727039337,
+        "robot_count": 0,
+        "inference_ms": 775.7682800292969
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 217,
+        "v_median_raw": 83,
+        "sat_min": 80,
+        "val_min": 60,
+        "hue_center": 27.05808882736518,
+        "hue_half_width": 10,
+        "gamma": 1.5,
+        "exposure": 200
+      }
+    }
+  },
+  "fallback_masks": {
+    "yellow_bbox": [
+      71,
+      11,
+      101,
+      92
+    ],
+    "blue_bbox": [
+      0,
+      87,
+      320,
+      12
+    ]
+  },
+  "target_key": "blue"
+}

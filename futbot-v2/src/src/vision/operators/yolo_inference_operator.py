@@ -1,8 +1,8 @@
-"""HILO 2 — Inferencia YOLO en un worker thread (ONNX Runtime).
+"""HILO 2 — Inferencia YOLO en un worker thread (NCNN/ONNX).
 
 Patrón productor-consumidor:
     - `submit(frame)`  → el caller deja el frame pendiente (reemplaza si había uno).
-    - `_worker_loop`   → consume el pendiente, corre ONNX, guarda el resultado.
+    - `_worker_loop`   → consume el pendiente, corre YOLO, guarda el resultado.
     - `get_latest_output()` → devuelve el ÚLTIMO resultado (last-known-good).
 
 La inferencia toma ~30-60 ms por frame en la Raspberry Pi 5; correrla en el hilo
@@ -21,27 +21,25 @@ import time
 from threading import Lock, Thread
 from typing import Optional
 
-import cv2
 import numpy as np
-import onnxruntime as ort
 
 from vision.utils.vision_constants import (
-    YOLO_BALL_CLASS_ID,
+    YOLO_BALL_CLASS_IDS,
     YOLO_CONF_THRESHOLD,
     YOLO_IMGSZ,
-    YOLO_ROBOT_CLASS_ID,
+    YOLO_ROBOT_CLASS_IDS,
     YOLO_THREAD_SLEEP_SEC,
 )
+from vision.utils.yolo_backend_factory import YoloBackend
 
 log = logging.getLogger("turbopi.vision.yolo")
 
 
 class YoloInferenceOperator:
-    """Corre YOLO ONNX en un hilo dedicado y expone el último resultado."""
+    """Corre YOLO en un hilo dedicado y expone el último resultado."""
 
-    def __init__(self, session: ort.InferenceSession) -> None:
-        self._session = session
-        self._input_name = session.get_inputs()[0].name
+    def __init__(self, backend: YoloBackend) -> None:
+        self._backend = backend
 
         self._lock = Lock()
         self._pending_frame: Optional[np.ndarray] = None
@@ -54,7 +52,8 @@ class YoloInferenceOperator:
             "ts": 0.0,
         }
         self._debug_snapshot: dict = {
-            "detector": "yolo_threaded",
+            "detector": f"yolo_{backend.name}_threaded",
+            "backend": backend.name,
             "raw_detections": 0,
             "best_ball_conf": 0.0,
             "robot_count": 0,
@@ -124,18 +123,12 @@ class YoloInferenceOperator:
                     self._debug_snapshot["last_error"] = str(exc)
 
     def _run_once(self, frame: np.ndarray, t0: float) -> None:
-        """Un ciclo de inferencia: blob → session.run → guarda raw output."""
+        """Un ciclo de inferencia: backend.run → guarda raw output."""
         h, w = frame.shape[:2]
-
-        # Preprocesado a (1, 3, IMGSZ, IMGSZ) con swapRB y normalización a [0,1]
-        blob = cv2.dnn.blobFromImage(
-            frame, 1.0 / 255.0, (YOLO_IMGSZ, YOLO_IMGSZ), swapRB=True
-        ).astype(np.float32)
-        outputs = self._session.run(None, {self._input_name: blob})
-        predictions = outputs[0][0]
-
-        scale_x = w / YOLO_IMGSZ
-        scale_y = h / YOLO_IMGSZ
+        predictions = self._backend.run(frame)
+        image_size = float(getattr(self._backend, "image_size", YOLO_IMGSZ))
+        scale_x = w / image_size
+        scale_y = h / image_size
 
         ball_bbox = None
         best_ball_conf = 0.0
@@ -156,11 +149,11 @@ class YoloInferenceOperator:
             raw_count += 1
             bbox_entry = (x1, y1, x2, y2, conf, cls_id)
 
-            if cls_id == YOLO_BALL_CLASS_ID:
+            if cls_id in YOLO_BALL_CLASS_IDS:
                 if conf > best_ball_conf:
                     best_ball_conf = conf
                     ball_bbox = bbox_entry
-            elif cls_id == YOLO_ROBOT_CLASS_ID:
+            elif cls_id in YOLO_ROBOT_CLASS_IDS:
                 robot_bboxes.append(bbox_entry)
 
         robot_bboxes.sort(key=lambda r: r[4], reverse=True)

@@ -6,7 +6,7 @@ HSV sync → fusión → JSON".
 
 Dos hilos en segundo plano:
     HILO OPENCV → `FrameCaptureOperator`   (captura continua de frames)
-    HILO YOLO   → `YoloInferenceOperator`  (inferencia ONNX)
+    HILO YOLO   → `YoloInferenceOperator`  (inferencia NCNN/ONNX)
 
 El caller (FSM en `main.py`) invoca `tick()` en su loop y recibe un dict
 JSON-serializable con ball / robots / goals / line / ts / debug.
@@ -38,7 +38,7 @@ from vision.operators.json_export_operator import JsonExportOperator
 from vision.operators.white_line_detection_operator import WhiteLineDetectionOperator
 from vision.operators.yolo_inference_operator import YoloInferenceOperator
 from vision.operators.yolo_parser_operator import YoloParserOperator
-from vision.utils.onnx_session_factory import OnnxSessionFactory
+from vision.utils.yolo_backend_factory import YoloBackendFactory
 
 
 class HybridVisionService:
@@ -55,8 +55,8 @@ class HybridVisionService:
         )
 
         # ── HILO 2: inferencia YOLO (worker thread) ─────────────────────
-        session = OnnxSessionFactory.create(cfg.yolo_model_path)
-        self._yolo = YoloInferenceOperator(session)
+        backend = YoloBackendFactory.create()
+        self._yolo = YoloInferenceOperator(backend)
 
         # ── Operadores puros (corren en el hilo del caller de `tick`) ───
         self._hsv_ball = HsvBallDetectionOperator()

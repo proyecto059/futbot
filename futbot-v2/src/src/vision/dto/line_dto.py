@@ -13,17 +13,20 @@ class LineDto:
     - `detected`: True si los pixeles blancos exceden el umbral.
     - `cx`: centroide horizontal de la línea (None si no detectada).
     - `pixels`: conteo crudo de pixeles blancos (útil para debug / tuning).
+    - `cy`: centroide vertical absoluto; ayuda a distinguir línea lejana/cercana.
     """
 
     detected: bool
     cx: Optional[float]
     pixels: int
+    cy: Optional[float] = None
 
     def to_dict(self) -> dict:
         return {
             "detected": bool(self.detected),
             "cx": float(self.cx) if self.cx is not None else None,
             "pixels": int(self.pixels),
+            "cy": float(self.cy) if self.cy is not None else None,
         }
 
     @classmethod

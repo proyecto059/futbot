@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+HOST="raspi@raspi.local"
+REMOTE_DIR="~/test-robot"
+
+FILES=(
+    hardware.py
+    main.py
+    test_gol.py
+    test_line.py
+    test_motors.py
+    test_servo_motors.py
+    test_omni.py
+    test_servos.py
+    test_sonic.py
+    diag_vision.py
+    diag_yolo_hsv.py
+    diag_center_kick.py
+    diag_line.py
+    diag_line2.py
+    play_futbot.py
+    pyproject.toml
+    .python-version
+)
+
+echo "Deploying to ${HOST}:${REMOTE_DIR} ..."
+scp "${FILES[@]}" "${HOST}:${REMOTE_DIR}/"
+echo "Done."

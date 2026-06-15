@@ -9,8 +9,6 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Optional
 
-import onnxruntime as ort
-
 from vision.exceptions.yolo_model_not_found_exception import (
     YoloModelNotFoundException,
 )
@@ -25,7 +23,7 @@ class OnnxSessionFactory:
     """Construye `ort.InferenceSession` listo para consumir por YoloInferenceOperator."""
 
     @staticmethod
-    def create(model_path: Optional[Path] = None) -> ort.InferenceSession:
+    def create(model_path: Optional[Path] = None) -> object:
         """Crea una sesión ONNX Runtime validando que el archivo existe.
 
         Si `model_path` es None, se resuelve vía `resolve_yolo_model_path()`.
@@ -38,6 +36,8 @@ class OnnxSessionFactory:
                 f"YOLO model no encontrado. Se buscó en: {path}. "
                 "Copia `model.onnx` a la raíz del proyecto o a `test-robot/`."
             )
+
+        import onnxruntime as ort
 
         opts = ort.SessionOptions()
         opts.graph_optimization_level = ort.GraphOptimizationLevel.ORT_ENABLE_ALL

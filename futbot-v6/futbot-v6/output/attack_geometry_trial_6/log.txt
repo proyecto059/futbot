@@ -1,0 +1,102 @@
+[0;93m2026-05-13 21:44:42.730964295 [W:onnxruntime:Default, device_discovery.cc:325 DiscoverDevicesForPlatform] GPU device discovery failed: device_discovery.cc:92 ReadFileContents Failed to open file: "/sys/class/drm/card1/device/vendor"[m
+Iniciando sensores...
+Listo. Frame=320 centro=160.0
+goals yellow=False blue=True line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=216 hue_center=31.7 exp=200
+goals yellow=False blue=True line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=216 hue_center=26.7 exp=200
+loop_fps=41.9 state=WARMUP ball=no line=no goal=no
+goals yellow=False blue=True line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=216 hue_center=26.0 exp=200
+loop_fps=42.7 state=WARMUP ball=no line=no goal=no
+goals yellow=False blue=True line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=216 hue_center=27.0 exp=200
+goals yellow=False blue=True line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=216 hue_center=26.9 exp=200
+loop_fps=44.2 state=WARMUP ball=no line=no goal=no
+goals yellow=False blue=True line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=216 hue_center=26.7 exp=200
+loop_fps=42.2 state=WARMUP ball=no line=no goal=no
+goals yellow=False blue=True line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=216 hue_center=27.0 exp=200
+src=hsv r=10 cx=103.4 r_s=9.7 theta=-0.35 v=101 w=-42 vL=59 vR=-143 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff85962ba0> goal=287
+src=hsv r=7 cx=136.9 r_s=8.6 theta=-0.14 v=112 w=-24 vL=88 vR=-136 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff85962ba0> goal=21
+--- TRACK hold miss=1 v=76 w=+10 ---
+goals yellow=False blue=True line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=204 hue_center=28.1 exp=200
+loop_fps=41.0 state=TRACK ball=no line=no goal=yes
+src=hsv r=11 cx=195.3 r_s=10.7 theta=+0.22 v=108 w=+37 vL=145 vR=-71 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff85962ba0> goal=29
+src=hsv r=12 cx=211.9 r_s=11.9 theta=+0.32 v=102 w=+42 vL=144 vR=-60 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff85962ba0> goal=28
+src=hsv r=14 cx=224.7 r_s=14.2 theta=+0.40 v=98 w=+42 vL=140 vR=-56 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff85962ba0> goal=21
+goals yellow=False blue=True line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=209 hue_center=17.4 exp=200
+src=hsv r=20 cx=241.0 r_s=19.6 theta=+0.51 v=91 w=+42 vL=133 vR=-49 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff85962ba0> goal=12
+loop_fps=38.8 state=TRACK ball=yes line=no goal=yes
+src=hsv r=31 cx=271.0 r_s=31.1 theta=+0.69 v=70 w=+42 vL=112 vR=-28 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff85962ba0> goal=31
+src=hsv r=42 cx=289.1 r_s=41.7 theta=+0.81 v=35 w=+15 vL=50 vR=-20 mode=ALIGN_ARC hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff85962ba0> goal=32
+goals yellow=False blue=True line_det=False line_pix=1249 line_cy=None
+HSV mode=strict v_median=202 hue_center=9.1 exp=200
+--- TRACK hold miss=7 v=12 w=+6 ---
+--- perdida PREDICT t=0.10s ---
+loop_fps=37.7 state=PREDICT ball=no line=no goal=yes
+--- LOCAL_REACQUIRE dir=right last_cx=293 last_r=34.2 ---
+goals yellow=False blue=True line_det=False line_pix=0 line_cy=None
+HSV mode=relaxed v_median=184 hue_center=9.3 exp=280
+loop_fps=36.4 state=FIELD_SEARCH ball=no line=no goal=yes
+goals yellow=False blue=True line_det=False line_pix=18 line_cy=None
+HSV mode=relaxed v_median=197 hue_center=32.5 exp=300
+src=hsv r=48 cx=142.3 r_s=48.3 theta=-0.11 v=35 w=-15 vL=20 vR=-50 mode=ALIGN_ARC hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff85962ba0> goal=31
+goals yellow=True blue=True line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=164 hue_center=19.0 exp=300
+loop_fps=38.3 state=TRACK ball=yes line=no goal=yes
+--- TRACK hold miss=4 v=33 w=+13 ---
+--- LINE streak=1 cx=148 cy=214 pixels=7153 ---
+--- LINE DETECTED retreating 400ms ---
+--- LINE escape stop/no-forward ---
+loop_fps=14.3 state=TRACK ball=yes line=no goal=yes
+--- TRACK hold miss=2 v=40 w=+21 ---
+goals yellow=True blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=relaxed v_median=231 hue_center=20.4 exp=300
+--- perdida PREDICT t=0.22s ---
+goals yellow=False blue=True line_det=False line_pix=0 line_cy=None
+HSV mode=relaxed v_median=181 hue_center=32.5 exp=300
+loop_fps=33.3 state=LOCAL_REACQUIRE ball=no line=no goal=yes
+--- TRACK hold miss=2 v=69 w=+3 ---
+--- perdida PREDICT t=0.43s ---
+goals yellow=False blue=True line_det=False line_pix=917 line_cy=None
+HSV mode=relaxed v_median=159 hue_center=35.7 exp=300
+loop_fps=35.7 state=LOCAL_REACQUIRE ball=no line=no goal=yes
+--- LINE DETECTED retreating 400ms ---
+loop_fps=11.7 state=FIELD_SEARCH ball=no line=no goal=yes
+--- pelota recuperada src=hsv r=11 → TRACK ---
+src=hsv r=11 cx=162.3 r_s=13.3 theta=+0.01 v=119 w=+0 vL=119 vR=-119 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff85962ba0> goal=none
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=relaxed v_median=239 hue_center=31.9 exp=300
+--- TRACK hold miss=6 v=24 w=+8 ---
+--- perdida PREDICT t=0.05s ---
+--- perdida PREDICT t=0.47s ---
+goals yellow=True blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=relaxed v_median=226 hue_center=29.1 exp=300
+loop_fps=36.4 state=LOCAL_REACQUIRE ball=no line=no goal=yes
+src=hsv r=30 cx=158.4 r_s=32.1 theta=-0.01 v=100 w=+0 vL=100 vR=-100 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff85962ba0> goal=288
+src=hsv r=38 cx=246.3 r_s=37.6 theta=+0.54 v=71 w=+42 vL=113 vR=-29 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff85962ba0> goal=31
+goals yellow=False blue=True line_det=False line_pix=7302 line_cy=207.6522870446453
+HSV mode=strict v_median=105 hue_center=10.4 exp=300
+--- LINE DETECTED retreating 400ms ---
+--- GOAL scored color=blue -> CELEBRATE_360 ---
+--- CELEBRATE_360 color=blue t=112ms/4000ms ---
+--- CELEBRATE_360 color=blue t=454ms/4000ms ---
+--- CELEBRATE_360 color=blue t=893ms/4000ms ---
+--- CELEBRATE_360 color=blue t=1263ms/4000ms ---
+--- CELEBRATE_360 color=blue t=1702ms/4000ms ---
+--- CELEBRATE_360 color=blue t=2081ms/4000ms ---
+--- CELEBRATE_360 color=blue t=2517ms/4000ms ---
+--- CELEBRATE_360 color=blue t=2871ms/4000ms ---
+--- CELEBRATE_360 color=blue t=3360ms/4000ms ---
+--- CELEBRATE_360 color=blue t=3732ms/4000ms ---
+--- CELEBRATE_360 done -> STOPPED ---
+Traceback (most recent call last):
+  File "/home/raspi/futbot-v2/scripts/test_chase_dynamic.py", line 686, in <module>
+    time.sleep(0.2)
+    ~~~~~~~~~~^^^^^
+KeyboardInterrupt

@@ -1,0 +1,1802 @@
+[
+  {
+    "i": 0,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 187.64309465750387,
+      "pixels": 4511
+    },
+    "debug": {
+      "frames_in": 36,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 158,
+        "v_median_raw": 114,
+        "sat_min": 110,
+        "val_min": 60,
+        "hue_center": 32.5,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      }
+    }
+  },
+  {
+    "i": 1,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 187.64309465750387,
+      "pixels": 4511
+    },
+    "debug": {
+      "frames_in": 37,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 158,
+        "v_median_raw": 114,
+        "sat_min": 110,
+        "val_min": 60,
+        "hue_center": 32.5,
+        "hue_half_width": 7,
+        "gamma": 1.0,
+        "exposure": 200
+      }
+    }
+  },
+  {
+    "i": 2,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 187.73925501432666,
+      "pixels": 4537
+    },
+    "debug": {
+      "frames_in": 38,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 157,
+        "v_median_raw": 114,
+        "sat_min": 100,
+        "val_min": 50,
+        "hue_center": 32.5,
+        "hue_half_width": 16,
+        "gamma": 1.0,
+        "exposure": 200
+      }
+    }
+  },
+  {
+    "i": 3,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 188.72504913736623,
+      "pixels": 4579
+    },
+    "debug": {
+      "frames_in": 40,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 157,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 200
+      }
+    }
+  },
+  {
+    "i": 4,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 187.70536883457007,
+      "pixels": 4582
+    },
+    "debug": {
+      "frames_in": 41,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 157,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 200
+      }
+    }
+  },
+  {
+    "i": 5,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 187.1658269441402,
+      "pixels": 4565
+    },
+    "debug": {
+      "frames_in": 42,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 158,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 200
+      }
+    }
+  },
+  {
+    "i": 6,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 186.12957684718265,
+      "pixels": 4561
+    },
+    "debug": {
+      "frames_in": 43,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 158,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 200
+      }
+    }
+  },
+  {
+    "i": 7,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 187.24950884086445,
+      "pixels": 4581
+    },
+    "debug": {
+      "frames_in": 44,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 158,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 200
+      }
+    }
+  },
+  {
+    "i": 8,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 187.1952380952381,
+      "pixels": 4620
+    },
+    "debug": {
+      "frames_in": 45,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 158,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 200
+      }
+    }
+  },
+  {
+    "i": 9,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 185.79691572545613,
+      "pixels": 4604
+    },
+    "debug": {
+      "frames_in": 46,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 158,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 240
+      }
+    }
+  },
+  {
+    "i": 10,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 186.06913740788903,
+      "pixels": 4614
+    },
+    "debug": {
+      "frames_in": 48,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 158,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 240
+      }
+    }
+  },
+  {
+    "i": 11,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 185.3281693214052,
+      "pixels": 4583
+    },
+    "debug": {
+      "frames_in": 49,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 158,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 240
+      }
+    }
+  },
+  {
+    "i": 12,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 185.41277056277056,
+      "pixels": 4620
+    },
+    "debug": {
+      "frames_in": 49,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 159,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 240
+      }
+    }
+  },
+  {
+    "i": 13,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 184.4710408206882,
+      "pixels": 4679
+    },
+    "debug": {
+      "frames_in": 50,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 159,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 240
+      }
+    }
+  },
+  {
+    "i": 14,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 184.4710408206882,
+      "pixels": 4679
+    },
+    "debug": {
+      "frames_in": 51,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 159,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 240
+      }
+    }
+  },
+  {
+    "i": 15,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 182.82837238758708,
+      "pixels": 4737
+    },
+    "debug": {
+      "frames_in": 52,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 159,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 240
+      }
+    }
+  },
+  {
+    "i": 16,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 183.57798555036123,
+      "pixels": 4706
+    },
+    "debug": {
+      "frames_in": 53,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 160,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 240
+      }
+    }
+  },
+  {
+    "i": 17,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 182.01022146507665,
+      "pixels": 4696
+    },
+    "debug": {
+      "frames_in": 53,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 160,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 240
+      }
+    }
+  },
+  {
+    "i": 18,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 182.01022146507665,
+      "pixels": 4696
+    },
+    "debug": {
+      "frames_in": 54,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 160,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 240
+      }
+    }
+  },
+  {
+    "i": 19,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 182.75517532741867,
+      "pixels": 4734
+    },
+    "debug": {
+      "frames_in": 55,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 160,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 280
+      }
+    }
+  },
+  {
+    "i": 20,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 182.88942610889217,
+      "pixels": 4757
+    },
+    "debug": {
+      "frames_in": 56,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 160,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 280
+      }
+    }
+  },
+  {
+    "i": 21,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 182.7519477784797,
+      "pixels": 4749
+    },
+    "debug": {
+      "frames_in": 57,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 160,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 280
+      }
+    }
+  },
+  {
+    "i": 22,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 183.9598074105087,
+      "pixels": 4777
+    },
+    "debug": {
+      "frames_in": 57,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 160,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 280
+      }
+    }
+  },
+  {
+    "i": 23,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 184.59478623566216,
+      "pixels": 4795
+    },
+    "debug": {
+      "frames_in": 58,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 160,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 280
+      }
+    }
+  },
+  {
+    "i": 24,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 184.18656093489147,
+      "pixels": 4792
+    },
+    "debug": {
+      "frames_in": 59,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 160,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 280
+      }
+    }
+  },
+  {
+    "i": 25,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 184.18656093489147,
+      "pixels": 4792
+    },
+    "debug": {
+      "frames_in": 60,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 160,
+        "v_median_raw": 114,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 280
+      }
+    }
+  },
+  {
+    "i": 26,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 188.30644268045043,
+      "pixels": 5417
+    },
+    "debug": {
+      "frames_in": 60,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 161,
+        "v_median_raw": 115,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 280
+      }
+    }
+  },
+  {
+    "i": 27,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 188.4806971514243,
+      "pixels": 5336
+    },
+    "debug": {
+      "frames_in": 61,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 161,
+        "v_median_raw": 115,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 280
+      }
+    }
+  },
+  {
+    "i": 28,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 188.4806971514243,
+      "pixels": 5336
+    },
+    "debug": {
+      "frames_in": 62,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 161,
+        "v_median_raw": 115,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 280
+      }
+    }
+  },
+  {
+    "i": 29,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 188.30675877520537,
+      "pixels": 5356
+    },
+    "debug": {
+      "frames_in": 63,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 895.6131935119629
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 161,
+        "v_median_raw": 115,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      }
+    }
+  },
+  {
+    "i": 30,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 187.2021517553794,
+      "pixels": 5298
+    },
+    "debug": {
+      "frames_in": 63,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 895.6131935119629
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 162,
+        "v_median_raw": 115,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      }
+    }
+  },
+  {
+    "i": 31,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 188.27131194228213,
+      "pixels": 5267
+    },
+    "debug": {
+      "frames_in": 65,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 895.6131935119629
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 162,
+        "v_median_raw": 115,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      }
+    }
+  },
+  {
+    "i": 32,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 188.27131194228213,
+      "pixels": 5267
+    },
+    "debug": {
+      "frames_in": 66,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 895.6131935119629
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 162,
+        "v_median_raw": 115,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      }
+    }
+  },
+  {
+    "i": 33,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 190.46546338077056,
+      "pixels": 5762
+    },
+    "debug": {
+      "frames_in": 68,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 895.6131935119629
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 163,
+        "v_median_raw": 115,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      }
+    }
+  },
+  {
+    "i": 34,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 190.34506675914687,
+      "pixels": 5767
+    },
+    "debug": {
+      "frames_in": 68,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 895.6131935119629
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 163,
+        "v_median_raw": 115,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      }
+    }
+  },
+  {
+    "i": 35,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 189.61537120948066,
+      "pixels": 5738
+    },
+    "debug": {
+      "frames_in": 69,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 895.6131935119629
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 163,
+        "v_median_raw": 115,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      }
+    }
+  },
+  {
+    "i": 36,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 189.61537120948066,
+      "pixels": 5738
+    },
+    "debug": {
+      "frames_in": 71,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 895.6131935119629
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 163,
+        "v_median_raw": 115,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      }
+    }
+  },
+  {
+    "i": 37,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 193.84359100607253,
+      "pixels": 6093
+    },
+    "debug": {
+      "frames_in": 72,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 895.6131935119629
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 164,
+        "v_median_raw": 116,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      }
+    }
+  },
+  {
+    "i": 38,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 194.5302980674746,
+      "pixels": 6106
+    },
+    "debug": {
+      "frames_in": 72,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 895.6131935119629
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 164,
+        "v_median_raw": 117,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      }
+    }
+  },
+  {
+    "i": 39,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 194.91434197571382,
+      "pixels": 6094
+    },
+    "debug": {
+      "frames_in": 74,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 895.6131935119629
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 164,
+        "v_median_raw": 117,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      }
+    }
+  },
+  {
+    "i": 40,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 194.32182388898067,
+      "pixels": 6053
+    },
+    "debug": {
+      "frames_in": 74,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 895.6131935119629
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 164,
+        "v_median_raw": 117,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      }
+    }
+  },
+  {
+    "i": 41,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 194.29730623037514,
+      "pixels": 6051
+    },
+    "debug": {
+      "frames_in": 76,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 895.6131935119629
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 164,
+        "v_median_raw": 116,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      }
+    }
+  },
+  {
+    "i": 42,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 194.7198750616472,
+      "pixels": 6083
+    },
+    "debug": {
+      "frames_in": 76,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 895.6131935119629
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 164,
+        "v_median_raw": 116,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      }
+    }
+  },
+  {
+    "i": 43,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 198.46951124903026,
+      "pixels": 6445
+    },
+    "debug": {
+      "frames_in": 77,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 895.6131935119629
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 165,
+        "v_median_raw": 117,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      }
+    }
+  },
+  {
+    "i": 44,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 200.1582654978084,
+      "pixels": 6388
+    },
+    "debug": {
+      "frames_in": 78,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 895.6131935119629
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 165,
+        "v_median_raw": 117,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      }
+    }
+  },
+  {
+    "i": 45,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 201.58981989036806,
+      "pixels": 6385
+    },
+    "debug": {
+      "frames_in": 79,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 895.6131935119629
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 165,
+        "v_median_raw": 118,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      }
+    }
+  },
+  {
+    "i": 46,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 201.58981989036806,
+      "pixels": 6385
+    },
+    "debug": {
+      "frames_in": 80,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 895.6131935119629
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 165,
+        "v_median_raw": 118,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      }
+    }
+  },
+  {
+    "i": 47,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 200.89712580493168,
+      "pixels": 6367
+    },
+    "debug": {
+      "frames_in": 81,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 895.6131935119629
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 165,
+        "v_median_raw": 118,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      }
+    }
+  },
+  {
+    "i": 48,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 199.3250315258512,
+      "pixels": 6344
+    },
+    "debug": {
+      "frames_in": 82,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 895.6131935119629
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 165,
+        "v_median_raw": 117,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      }
+    }
+  },
+  {
+    "i": 49,
+    "ball": null,
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "blue": false,
+      "blue_cx": null
+    },
+    "line": {
+      "detected": true,
+      "cx": 202.06062798437273,
+      "pixels": 6911
+    },
+    "debug": {
+      "frames_in": 83,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 895.6131935119629
+      },
+      "hsv": {
+        "mode": "relaxed",
+        "v_median": 166,
+        "v_median_raw": 118,
+        "sat_min": 80,
+        "val_min": 20,
+        "hue_center": 32.5,
+        "hue_half_width": 10,
+        "gamma": 1.0,
+        "exposure": 300
+      }
+    }
+  }
+]

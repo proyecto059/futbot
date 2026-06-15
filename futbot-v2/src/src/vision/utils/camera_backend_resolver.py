@@ -29,6 +29,34 @@ from vision.utils.vision_constants import (
 log = logging.getLogger("turbopi.vision.camera")
 
 
+_NOISE_REDUCTION_MODE_VALUES = {
+    "off": 0,
+    "fast": 1,
+    "high_quality": 2,
+    "minimal": 3,
+    "zsl": 4,
+}
+
+
+def _build_picamera2_controls(
+    sharpness: float | None = None,
+    noise_reduction_mode: str | None = None,
+    exposure_us: int | None = None,
+    analogue_gain: float | None = None,
+) -> dict:
+    controls = {}
+    if sharpness is not None:
+        controls["Sharpness"] = float(sharpness)
+    if noise_reduction_mode is not None:
+        controls["NoiseReductionMode"] = _NOISE_REDUCTION_MODE_VALUES[noise_reduction_mode]
+    if exposure_us is not None:
+        controls["AeEnable"] = False
+        controls["ExposureTime"] = int(exposure_us)
+    if analogue_gain is not None:
+        controls["AnalogueGain"] = float(analogue_gain)
+    return controls
+
+
 class _Picamera2Camera:
     """Adapta `picamera2.Picamera2` a la interfaz tipo `cv2.VideoCapture`.
 
@@ -36,7 +64,15 @@ class _Picamera2Camera:
     pipeline trate este objeto igual que un VideoCapture de OpenCV.
     """
 
-    def __init__(self, width: int = CAMERA_WIDTH, height: int = CAMERA_HEIGHT) -> None:
+    def __init__(
+        self,
+        width: int = CAMERA_WIDTH,
+        height: int = CAMERA_HEIGHT,
+        sharpness: float | None = None,
+        noise_reduction_mode: str | None = None,
+        exposure_us: int | None = None,
+        analogue_gain: float | None = None,
+    ) -> None:
         from picamera2 import Picamera2  # import lazy: sólo si estamos en RPi
 
         self._picam = Picamera2()
@@ -45,6 +81,14 @@ class _Picamera2Camera:
             buffer_count=2,
         )
         self._picam.configure(config)
+        controls = _build_picamera2_controls(
+            sharpness=sharpness,
+            noise_reduction_mode=noise_reduction_mode,
+            exposure_us=exposure_us,
+            analogue_gain=analogue_gain,
+        )
+        if controls:
+            self._picam.set_controls(controls)
         self._picam.start()
         self._width = width
         self._height = height
@@ -105,10 +149,18 @@ class _LibcameraCap:
     _MAGIC = b"\xf8\xb4\xc2\x0d"
     _SYSTEM_PYTHON = "/usr/bin/python3"
 
-    def __init__(self, width: int, height: int) -> None:
+    def __init__(
+        self,
+        width: int,
+        height: int,
+        sharpness: float | None = None,
+        noise_reduction_mode: str | None = None,
+        exposure_us: int | None = None,
+        analogue_gain: float | None = None,
+    ) -> None:
         self._width = width
         self._height = height
-        self._exposure = CAMERA_EXPOSURE_DEFAULT
+        self._exposure = int(exposure_us / self._EXPOSURE_TO_US) if exposure_us else CAMERA_EXPOSURE_DEFAULT
         self._running = True
         self._proc = None
 
@@ -118,8 +170,18 @@ class _LibcameraCap:
         if not os.path.isfile(self._SYSTEM_PYTHON):
             raise RuntimeError(f"system Python not found: {self._SYSTEM_PYTHON}")
 
+        args = [self._SYSTEM_PYTHON, worker, str(width), str(height)]
+        if sharpness is not None:
+            args.extend(["--sharpness", str(sharpness)])
+        if noise_reduction_mode is not None:
+            args.extend(["--denoise", str(noise_reduction_mode)])
+        if exposure_us is not None:
+            args.extend(["--exposure-us", str(int(exposure_us))])
+        if analogue_gain is not None:
+            args.extend(["--gain", str(analogue_gain)])
+
         self._proc = subprocess.Popen(
-            [self._SYSTEM_PYTHON, worker, str(width), str(height)],
+            args,
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
@@ -151,7 +213,8 @@ class _LibcameraCap:
             self._width = int(parts[1])
             self._height = int(parts[2])
 
-        self._send_command(f"EXPOSURE {CAMERA_EXPOSURE_DEFAULT * self._EXPOSURE_TO_US}")
+        if exposure_us is None:
+            self._send_command(f"EXPOSURE {CAMERA_EXPOSURE_DEFAULT * self._EXPOSURE_TO_US}")
 
     def _send_command(self, cmd: str) -> None:
         if self._proc is None or self._proc.stdin is None:
@@ -246,9 +309,23 @@ class CameraBackendResolver:
     """
 
     @staticmethod
-    def _try_picamera2(width: int, height: int):
+    def _try_picamera2(
+        width: int,
+        height: int,
+        sharpness: float | None = None,
+        noise_reduction_mode: str | None = None,
+        exposure_us: int | None = None,
+        analogue_gain: float | None = None,
+    ):
         try:
-            cap = _Picamera2Camera(width=width, height=height)
+            cap = _Picamera2Camera(
+                width=width,
+                height=height,
+                sharpness=sharpness,
+                noise_reduction_mode=noise_reduction_mode,
+                exposure_us=exposure_us,
+                analogue_gain=analogue_gain,
+            )
         except ImportError as exc:
             log.info(
                 "picamera2 no instalado (%s); probando GStreamer libcamerasrc", exc
@@ -427,9 +504,23 @@ class CameraBackendResolver:
         return CAMERA_EXPOSURE_DEFAULT
 
     @staticmethod
-    def _try_libcamera_subprocess(width: int, height: int):
+    def _try_libcamera_subprocess(
+        width: int,
+        height: int,
+        sharpness: float | None = None,
+        noise_reduction_mode: str | None = None,
+        exposure_us: int | None = None,
+        analogue_gain: float | None = None,
+    ):
         try:
-            cap = _LibcameraCap(width, height)
+            cap = _LibcameraCap(
+                width=width,
+                height=height,
+                sharpness=sharpness,
+                noise_reduction_mode=noise_reduction_mode,
+                exposure_us=exposure_us,
+                analogue_gain=analogue_gain,
+            )
         except Exception as exc:
             log.info("libcamera subprocess no disponible: %s", exc)
             return None
@@ -445,6 +536,10 @@ class CameraBackendResolver:
         cls,
         width: int = CAMERA_WIDTH,
         height: int = CAMERA_HEIGHT,
+        sharpness: float | None = None,
+        noise_reduction_mode: str | None = None,
+        exposure_us: int | None = None,
+        analogue_gain: float | None = None,
     ) -> Tuple[Optional[object], int, int]:
         """Devuelve `(cap, frame_width_real, exposure)` o `(None, 0, 0)` si falla.
 
@@ -454,12 +549,26 @@ class CameraBackendResolver:
         """
         log.info("Auto-detectando cámara CSI IMX219 (%dx%d)", width, height)
 
-        cap = cls._try_picamera2(width, height)
+        cap = cls._try_picamera2(
+            width=width,
+            height=height,
+            sharpness=sharpness,
+            noise_reduction_mode=noise_reduction_mode,
+            exposure_us=exposure_us,
+            analogue_gain=analogue_gain,
+        )
         if cap is not None:
             log.info("IMX219 CSI detectada vía picamera2 (%dx%d)", width, height)
             return cap, width, CAMERA_EXPOSURE_DEFAULT
 
-        cap = cls._try_libcamera_subprocess(width, height)
+        cap = cls._try_libcamera_subprocess(
+            width=width,
+            height=height,
+            sharpness=sharpness,
+            noise_reduction_mode=noise_reduction_mode,
+            exposure_us=exposure_us,
+            analogue_gain=analogue_gain,
+        )
         if cap is not None:
             ok, f = cap.read()
             h, w = f.shape[:2] if ok and f is not None else (height, width)

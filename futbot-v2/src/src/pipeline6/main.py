@@ -2,7 +2,7 @@ import sys
 import os
 import logging
 
-# Añadir el directorio 'src' principal al PYTHONPATH para importar correctamente 'vision' y 'motors'
+# Anadir el directorio 'src' principal al PYTHONPATH para importar correctamente 'vision' y 'motors'
 current_dir = os.path.dirname(os.path.abspath(__file__))
 src_dir = os.path.abspath(os.path.join(current_dir, "..", ".."))
 if src_dir not in sys.path:
@@ -15,6 +15,7 @@ logging.basicConfig(
 )
 log = logging.getLogger("turbopi")
 
+
 def main():
     vision = None
     motors = None
@@ -23,8 +24,7 @@ def main():
     try:
         from vision import HybridVisionService
         from motors import MotorService
-        
-        # Importar el nuevo Pipeline6
+
         from src.pipeline6.pipeline_service import Pipeline6Service
 
         log.info("event=controller_started mode=pipeline6")
@@ -47,6 +47,7 @@ def main():
             motors.close()
         if vision is not None:
             vision.close()
+
 
 if __name__ == "__main__":
     main()

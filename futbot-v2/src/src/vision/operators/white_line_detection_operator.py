@@ -1,9 +1,8 @@
 """Detección de línea blanca (borde del campo) en el frame.
 
 Usado por la lógica AVOID_MAP del FSM: cuando el robot ve mucho blanco abajo,
-está por salirse del campo y debe girar. En la Raspberry actual la cámara ve la
-línea antes de que llegue al cuarto inferior, así que se analiza el frame entero
-para priorizar seguridad sobre detección tardía.
+está por salirse del campo y debe girar. Solo la zona inferior cercana debe
+disparar evasión; una línea lejana visible no es peligro inmediato.
 """
 
 from __future__ import annotations
@@ -25,7 +24,7 @@ class WhiteLineDetectionOperator:
 
     def detect(self, frame: np.ndarray) -> LineDto:
         h, _w = frame.shape[:2]
-        y0 = h // 3
+        y0 = (h * 2) // 3
         roi = frame[y0:, :, :]
         hsv = cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)
         mask = cv2.inRange(hsv, HSV_WHITE_LO, HSV_WHITE_HI)
@@ -43,4 +42,9 @@ class WhiteLineDetectionOperator:
             return LineDto(detected=False, cx=None, pixels=pixels)
 
         cx = float(moments["m10"] / moments["m00"])
-        return LineDto(detected=True, cx=cx, pixels=pixels)
+        cy = float(y0 + moments["m01"] / moments["m00"])
+        urgent_line = pixels >= LINE_DETECT_MIN_PIXELS * 2 or ratio >= LINE_DETECT_MIN_RATIO * 6
+        danger_y = h * (0.83 if urgent_line else 0.88)
+        if cy < danger_y:
+            return LineDto(detected=False, cx=cx, pixels=pixels, cy=cy)
+        return LineDto(detected=True, cx=cx, pixels=pixels, cy=cy)

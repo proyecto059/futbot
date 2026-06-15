@@ -1,0 +1,20 @@
+description: Ultralytics YOLO26n model trained on /tmp/tmpn1uj87y1.yaml
+author: Ultralytics
+date: '2026-05-24T08:00:07.488372'
+version: 8.4.53
+license: AGPL-3.0 License (https://ultralytics.com/license)
+docs: https://docs.ultralytics.com
+stride: 32
+task: detect
+batch: 1
+imgsz:
+- 640
+- 640
+names:
+  0: ball
+  1: robot
+args:
+  batch: 1
+  half: false
+channels: 3
+end2end: false

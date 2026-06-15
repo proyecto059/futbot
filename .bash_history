@@ -465,4 +465,133 @@ cd src/
 cd pipeline5
 uv run capture_image.py 
 uv run main.py 
-                                                                                                                                                                                                                                                                                                                                                                                                   
+                                                                                                                                                                                                                                                                                                                                                                                                   cd futbot-v2
+cd src/
+cd pipeline5
+uv run main.py 
+cd ..
+cd..
+cd ..
+cd futbot-v2
+cd ..
+cd futbot-v4
+cd src/
+ls
+cd pipeline2
+ls
+cd ..
+ls
+uv run main_pipeline2.py 
+cd ..
+ls
+cd scripts/
+ls
+uv run test_chase_dynamic.py 
+cd ..
+cd futbot-v2
+cd src/src/
+ls
+cd pipeline5
+uv run main.py 
+ls
+uv run main.py 
+cd ..
+ls
+cd pipeline5
+
+uv run main.py 
+cd futbot-v2
+cd src/src
+cd pipeline6
+uv run process_video.py --save
+uv run process_video.py 
+lw
+ls
+cd output_frames/
+ls
+cd futbot-v2
+cd src/src/pipeline5
+uv run main.py 
+cd futbot-v2
+cd src/src
+cd pipeline6
+uv run main.py 
+cd ..
+cd futbot-v5
+ls
+cd src
+ls
+cd src
+cd .. 
+cd ..
+cd futbot-v2/src/src/pipeline6
+ls
+uv run main.py 
+ls
+cd vision_calibration/
+ls
+cd rwa
+ls
+exit
+cd futbot-v2/src/src/pipeline5
+ls
+uv run main.py 
+cd futbot-v2/src/src/pipeline6
+uv run main.py 
+ls
+cd futbot-v5
+ls
+cd docs/
+ls
+cd plans/
+ls
+cd ..
+ls
+cd output/
+ls
+cd ..
+ls
+cd scripts/
+ls
+cd ..
+cd --
+exit
+cd futbot-v2/src/src/pipeline6
+uv run main.py 
+ls
+cd futbot-v6/
+ls
+uv sync --no-dev --extra rpi
+uv run --no-dev --extra rpi scripts/analyze_image.py --rpi
+cam -l
+ls
+exit
+sudo /home/raspi1/fix-alpha1-camera-config.sh
+sudo reboot
+nano capture.py
+python3 capture.py 
+ls
+./install-libcamera-rpi5.sh 
+cam -l
+sudo
+sudo su
+cd futbot-v2
+ls
+cd scripts/
+ls
+cd ..
+cd src/
+cd pipeline7
+uv run main.py 
+cd  futbot-v2
+cd futbot-v2
+cd src/
+cd src/}
+cd src
+ls
+futbot-v2
+                                                  scp :~/futbot-v2 raspi@192.168.22.17:~
+scp ~/futbot-v2 raspi@192.168.22.17:~/futbot-v9
+scp -r ~/futbot-v2 raspi@192.168.22.17:/home/raspi/futbot-v9
+rsync -avz ~/futbot-v2/ raspi@192.168.22.17:/home/raspi/futbot-v9/
+ssh raspi@192.168.22.17

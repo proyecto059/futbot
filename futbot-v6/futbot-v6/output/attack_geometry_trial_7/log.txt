@@ -1,0 +1,231 @@
+[0;93m2026-05-13 21:52:39.722413323 [W:onnxruntime:Default, device_discovery.cc:325 DiscoverDevicesForPlatform] GPU device discovery failed: device_discovery.cc:92 ReadFileContents Failed to open file: "/sys/class/drm/card1/device/vendor"[m
+Iniciando sensores...
+Listo. Frame=320 centro=160.0
+goals yellow=False blue=True line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=224 hue_center=32.5 exp=200
+src=hsv r=10 cx=63.5 r_s=9.7 theta=-0.60 v=87 w=-43 vL=44 vR=-131 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=287
+src=hsv r=4 cx=107.1 r_s=5.5 theta=-0.33 v=102 w=-42 vL=60 vR=-144 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=8
+src=hsv r=5 cx=115.6 r_s=7.0 theta=-0.28 v=105 w=-42 vL=63 vR=-147 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=26
+goals yellow=False blue=True line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=206 hue_center=35.0 exp=200
+src=hsv r=9 cx=135.4 r_s=8.8 theta=-0.15 v=112 w=-26 vL=86 vR=-138 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=16
+loop_fps=40.8 state=TRACK ball=yes line=no goal=yes
+src=hsv r=13 cx=150.9 r_s=13.1 theta=-0.06 v=117 w=-10 vL=107 vR=-126 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=19
+src=hsv r=17 cx=156.5 r_s=17.4 theta=-0.02 v=119 w=-4 vL=115 vR=-122 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=18
+goals yellow=False blue=True line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=210 hue_center=15.2 exp=200
+src=hsv r=26 cx=144.1 r_s=26.2 theta=-0.10 v=104 w=-17 vL=87 vR=-121 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=18
+src=hsv r=48 cx=215.8 r_s=48.0 theta=+0.35 v=35 w=+42 vL=77 vR=7 mode=ALIGN_ARC hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=9
+loop_fps=39.7 state=TRACK ball=yes line=no goal=yes
+--- TRACK hold miss=4 v=46 w=+0 ---
+goals yellow=False blue=True line_det=False line_pix=66 line_cy=None
+HSV mode=relaxed v_median=203 hue_center=15.0 exp=200
+--- perdida PREDICT t=0.26s ---
+--- LOCAL_REACQUIRE dir=scan last_cx=159 last_r=24.6 ---
+goals yellow=False blue=True line_det=False line_pix=0 line_cy=None
+HSV mode=relaxed v_median=201 hue_center=32.5 exp=280
+loop_fps=38.2 state=LOCAL_REACQUIRE ball=no line=no goal=yes
+goals yellow=True blue=True line_det=False line_pix=0 line_cy=None
+HSV mode=relaxed v_median=185 hue_center=32.5 exp=300
+loop_fps=36.2 state=FIELD_SEARCH ball=no line=no goal=yes
+src=hsv r=22 cx=127.7 r_s=22.5 theta=-0.20 v=104 w=-34 vL=70 vR=-138 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=288
+goals yellow=True blue=True line_det=False line_pix=1495 line_cy=None
+HSV mode=strict v_median=168 hue_center=18.3 exp=300
+src=hsv r=27 cx=134.9 r_s=26.8 theta=-0.16 v=100 w=-26 vL=74 vR=-127 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=31
+loop_fps=40.8 state=TRACK ball=yes line=no goal=yes
+src=hsv r=43 cx=149.8 r_s=43.0 theta=-0.06 v=35 w=-17 vL=18 vR=-52 mode=ALIGN_ARC hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=31
+--- TRACK hold miss=4 v=44 w=+10 ---
+goals yellow=False blue=True line_det=False line_pix=6425 line_cy=195.74334630350194
+HSV mode=relaxed v_median=111 hue_center=15.1 exp=300
+--- LINE streak=1 cx=155 cy=214 pixels=6595 ---
+--- LINE DETECTED retreating 400ms ---
+loop_fps=13.7 state=LOCAL_REACQUIRE ball=no line=no goal=yes
+goals yellow=False blue=True line_det=False line_pix=3194 line_cy=203.4364433312461
+HSV mode=relaxed v_median=129 hue_center=14.0 exp=300
+loop_fps=37.2 state=FIELD_SEARCH ball=no line=no goal=yes
+goals yellow=False blue=True line_det=False line_pix=70 line_cy=None
+HSV mode=relaxed v_median=185 hue_center=32.5 exp=300
+src=hsv r=20 cx=268.7 r_s=20.4 theta=+0.68 v=81 w=+46 vL=127 vR=-35 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=21
+src=hsv r=16 cx=195.2 r_s=16.2 theta=+0.22 v=108 w=+37 vL=145 vR=-71 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=32
+loop_fps=39.8 state=TRACK ball=yes line=no goal=yes
+src=hsv r=18 cx=197.5 r_s=18.2 theta=+0.23 v=107 w=+39 vL=147 vR=-68 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=30
+goals yellow=False blue=True line_det=False line_pix=3196 line_cy=200.08103879849813
+HSV mode=strict v_median=181 hue_center=10.0 exp=300
+src=hsv r=22 cx=209.3 r_s=22.1 theta=+0.31 v=99 w=+42 vL=141 vR=-57 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=31
+src=hsv r=30 cx=222.0 r_s=30.1 theta=+0.39 v=86 w=+42 vL=128 vR=-44 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=31
+--- LINE DETECTED retreating 400ms ---
+--- LOCAL_REACQUIRE dir=right last_cx=224 last_r=31.9 ---
+loop_fps=18.9 state=LOCAL_REACQUIRE ball=no line=no goal=yes
+goals yellow=False blue=False line_det=False line_pix=348 line_cy=None
+HSV mode=relaxed v_median=130 hue_center=14.0 exp=300
+goals yellow=True blue=False line_det=False line_pix=568 line_cy=None
+HSV mode=relaxed v_median=135 hue_center=32.5 exp=300
+loop_fps=34.8 state=FIELD_SEARCH ball=no line=no goal=yes
+src=hsv r=31 cx=190.6 r_s=31.2 theta=+0.19 v=93 w=+32 vL=125 vR=-61 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=30
+src=hsv r=35 cx=113.4 r_s=35.1 theta=-0.29 v=84 w=-42 vL=42 vR=-126 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=32
+src=hsv r=56 cx=153.8 r_s=56.4 theta=-0.04 v=35 w=-22 vL=13 vR=-57 mode=ALIGN_ARC hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=32
+goals yellow=True blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=106 hue_center=11.6 exp=300
+src=hsv r=41 cx=278.6 r_s=43.7 theta=+0.74 v=35 w=+42 vL=77 vR=7 mode=ALIGN_ARC hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=32
+loop_fps=43.1 state=TRACK ball=no line=no goal=yes
+src=hsv r=27 cx=249.6 r_s=27.2 theta=+0.56 v=80 w=+42 vL=122 vR=-38 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=32
+src=hsv r=26 cx=44.1 r_s=26.1 theta=-0.72 v=73 w=-53 vL=21 vR=-126 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=32
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=95 hue_center=16.8 exp=300
+src=hsv r=7 cx=29.0 r_s=8.8 theta=-0.82 v=76 w=-56 vL=20 vR=-132 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=32
+loop_fps=41.9 state=TRACK ball=yes line=no goal=yes
+--- TRACK hold miss=2 v=44 w=+23 ---
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=relaxed v_median=125 hue_center=16.5 exp=300
+src=hsv r=7 cx=294.8 r_s=6.8 theta=+0.84 v=74 w=+54 vL=129 vR=-20 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=32
+src=hsv r=7 cx=294.0 r_s=6.5 theta=+0.84 v=75 w=+55 vL=130 vR=-20 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=32
+src=hsv r=4 cx=294.8 r_s=5.0 theta=+0.84 v=74 w=+54 vL=129 vR=-20 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=none
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=relaxed v_median=122 hue_center=18.0 exp=300
+loop_fps=42.7 state=TRACK ball=no line=no goal=no
+src=hsv r=5 cx=294.0 r_s=5.4 theta=+0.84 v=75 w=+55 vL=130 vR=-20 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=none
+src=hsv r=5 cx=295.0 r_s=5.2 theta=+0.84 v=74 w=+54 vL=129 vR=-20 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=none
+src=hsv r=5 cx=294.0 r_s=5.2 theta=+0.84 v=75 w=+55 vL=130 vR=-20 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=none
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=relaxed v_median=122 hue_center=19.7 exp=300
+src=hsv r=5 cx=294.9 r_s=4.7 theta=+0.84 v=74 w=+54 vL=129 vR=-20 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=none
+--- TRACK hold miss=4 v=31 w=+17 ---
+loop_fps=44.0 state=TRACK ball=no line=no goal=no
+--- TRACK hold miss=1 v=50 w=+27 ---
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=121 hue_center=19.9 exp=300
+--- TRACK hold miss=3 v=37 w=+20 ---
+--- TRACK hold miss=1 v=50 w=+27 ---
+--- TRACK hold miss=1 v=50 w=+27 ---
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=121 hue_center=21.6 exp=300
+loop_fps=43.5 state=TRACK ball=no line=no goal=no
+--- TRACK hold miss=1 v=50 w=+27 ---
+--- TRACK hold miss=1 v=50 w=+27 ---
+--- TRACK hold miss=1 v=50 w=+27 ---
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=121 hue_center=21.9 exp=300
+--- TRACK hold miss=1 v=50 w=+27 ---
+--- TRACK hold miss=3 v=38 w=+21 ---
+loop_fps=42.6 state=TRACK ball=yes line=no goal=no
+--- TRACK hold miss=1 v=51 w=+28 ---
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=121 hue_center=20.3 exp=300
+--- TRACK hold miss=7 v=14 w=+8 ---
+--- TRACK hold miss=3 v=39 w=+21 ---
+--- TRACK hold miss=3 v=38 w=+20 ---
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=relaxed v_median=121 hue_center=19.5 exp=300
+loop_fps=41.2 state=TRACK ball=no line=no goal=no
+--- TRACK hold miss=1 v=52 w=+28 ---
+--- TRACK hold miss=3 v=39 w=+21 ---
+--- TRACK hold miss=1 v=52 w=+28 ---
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=121 hue_center=19.0 exp=300
+loop_fps=42.1 state=TRACK ball=no line=no goal=no
+--- TRACK hold miss=5 v=26 w=+14 ---
+--- TRACK hold miss=1 v=51 w=+28 ---
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=121 hue_center=19.7 exp=300
+--- TRACK hold miss=1 v=51 w=+28 ---
+loop_fps=42.7 state=TRACK ball=no line=no goal=no
+--- TRACK hold miss=3 v=38 w=+21 ---
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=relaxed v_median=121 hue_center=20.2 exp=300
+--- TRACK hold miss=1 v=51 w=+28 ---
+--- TRACK hold miss=7 v=14 w=+8 ---
+--- TRACK hold miss=1 v=51 w=+27 ---
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=121 hue_center=20.3 exp=300
+--- TRACK hold miss=3 v=38 w=+21 ---
+loop_fps=43.6 state=TRACK ball=no line=no goal=no
+--- TRACK hold miss=5 v=25 w=+14 ---
+--- TRACK hold miss=1 v=50 w=+27 ---
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=121 hue_center=20.3 exp=300
+--- TRACK hold miss=1 v=50 w=+27 ---
+--- TRACK hold miss=1 v=50 w=+27 ---
+loop_fps=41.8 state=TRACK ball=no line=no goal=no
+--- TRACK hold miss=1 v=50 w=+27 ---
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=121 hue_center=23.1 exp=300
+--- TRACK hold miss=1 v=50 w=+27 ---
+--- TRACK hold miss=1 v=50 w=+27 ---
+--- TRACK hold miss=1 v=50 w=+27 ---
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=121 hue_center=23.3 exp=300
+loop_fps=42.5 state=TRACK ball=yes line=no goal=no
+--- TRACK hold miss=1 v=50 w=+27 ---
+--- TRACK hold miss=1 v=50 w=+27 ---
+--- TRACK hold miss=1 v=50 w=+27 ---
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=121 hue_center=23.0 exp=300
+--- TRACK hold miss=3 v=38 w=+21 ---
+--- TRACK hold miss=6 v=19 w=+10 ---
+loop_fps=41.8 state=TRACK ball=no line=no goal=no
+src=hsv r=7 cx=294.0 r_s=6.8 theta=+0.84 v=75 w=+55 vL=130 vR=-20 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=none
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=relaxed v_median=121 hue_center=22.7 exp=300
+--- TRACK hold miss=4 v=31 w=+17 ---
+--- perdida PREDICT t=0.31s ---
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=relaxed v_median=121 hue_center=21.3 exp=300
+loop_fps=43.8 state=TRACK ball=no line=no goal=no
+--- TRACK hold miss=2 v=45 w=+24 ---
+src=hsv r=11 cx=288.0 r_s=11.5 theta=+0.80 v=77 w=+57 vL=134 vR=-20 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=none
+--- TRACK hold miss=6 v=19 w=+10 ---
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=121 hue_center=20.1 exp=300
+--- perdida PREDICT t=0.28s ---
+loop_fps=41.1 state=PREDICT ball=no line=no goal=no
+--- TRACK hold miss=1 v=51 w=+28 ---
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=121 hue_center=21.2 exp=300
+--- TRACK hold miss=3 v=38 w=+21 ---
+--- TRACK hold miss=5 v=26 w=+14 ---
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=relaxed v_median=121 hue_center=20.4 exp=300
+loop_fps=42.3 state=TRACK ball=no line=no goal=no
+--- TRACK hold miss=1 v=51 w=+28 ---
+--- TRACK hold miss=3 v=37 w=+20 ---
+--- TRACK hold miss=5 v=25 w=+13 ---
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=121 hue_center=21.5 exp=300
+--- TRACK hold miss=1 v=50 w=+27 ---
+loop_fps=40.9 state=TRACK ball=yes line=no goal=no
+--- TRACK hold miss=3 v=37 w=+20 ---
+--- TRACK hold miss=1 v=50 w=+27 ---
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=121 hue_center=22.2 exp=300
+--- TRACK hold miss=3 v=37 w=+20 ---
+--- TRACK hold miss=1 v=50 w=+27 ---
+loop_fps=44.6 state=TRACK ball=no line=no goal=no
+--- TRACK hold miss=1 v=50 w=+27 ---
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=121 hue_center=23.0 exp=300
+--- TRACK hold miss=1 v=50 w=+27 ---
+--- TRACK hold miss=7 v=14 w=+7 ---
+--- TRACK hold miss=1 v=50 w=+27 ---
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=strict v_median=121 hue_center=21.4 exp=300
+--- TRACK hold miss=1 v=50 w=+27 ---
+loop_fps=43.9 state=TRACK ball=yes line=no goal=no
+--- TRACK hold miss=3 v=37 w=+20 ---
+src=hsv r=5 cx=294.0 r_s=5.8 theta=+0.84 v=75 w=+55 vL=130 vR=-20 mode=CHASE hys=<chase.visual_servo_controller.TurnHysteresis object at 0xffff71372ba0> goal=none
+goals yellow=False blue=False line_det=False line_pix=0 line_cy=None
+HSV mode=relaxed v_median=121 hue_center=23.5 exp=300
+--- TRACK hold miss=2 v=44 w=+24 ---
+Traceback (most recent call last):
+  File "/home/raspi/futbot-v2/scripts/test_chase_dynamic.py", line 687, in <module>
+    vision.close()
+    ~~~~~~~~~~~~^^
+  File "/home/raspi/futbot-v2/src/vision/hybrid_vision_service.py", line 155, in close
+    self._yolo.close()
+    ~~~~~~~~~~~~~~~~^^
+  File "/home/raspi/futbot-v2/src/vision/operators/yolo_inference_operator.py", line 104, in close
+    self._thread.join(timeout=2.0)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/raspi/.local/share/uv/python/cpython-3.14.3-linux-aarch64-gnu/lib/python3.14/threading.py", line 1133, in join
+    self._os_thread_handle.join(timeout)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyboardInterrupt

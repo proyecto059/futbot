@@ -1,0 +1,45 @@
+/* SPDX-License-Identifier: LGPL-2.1-or-later */
+/*
+ * Copyright (C) 2024, Ideas On Board Oy
+ *
+ * Mali-C55 Lens shading correction algorithm
+ */
+
+#include <map>
+#include <tuple>
+
+#include "algorithm.h"
+
+namespace libcamera {
+
+namespace ipa::mali_c55::algorithms {
+
+class Lsc : public Algorithm
+{
+public:
+	Lsc() = default;
+	~Lsc() = default;
+
+	int init(IPAContext &context, const ValueNode &tuningData) override;
+	void prepare(IPAContext &context, const uint32_t frame,
+		     IPAFrameContext &frameContext,
+		     MaliC55Params *params) override;
+private:
+	static constexpr unsigned int kRedOffset = 0;
+	static constexpr unsigned int kGreenOffset = 1024;
+	static constexpr unsigned int kBlueOffset = 2048;
+
+	void fillConfigParamsBlock(MaliC55Params *params) const;
+	void fillSelectionParamsBlock(MaliC55Params *params,
+				      uint8_t bank, uint8_t alpha) const;
+	std::tuple<uint8_t, uint8_t> findBankAndAlpha(uint32_t ct) const;
+
+	std::vector<uint32_t> mesh_ = std::vector<uint32_t>(3072);
+	std::vector<uint32_t> colourTemperatures_;
+	uint32_t meshScale_;
+	uint32_t meshSize_;
+};
+
+} /* namespace ipa::mali_c55::algorithms */
+
+} /* namespace libcamera */

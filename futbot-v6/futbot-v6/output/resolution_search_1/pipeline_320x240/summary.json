@@ -1,0 +1,52 @@
+{
+  "mode": "pipeline",
+  "width": 320,
+  "height": 240,
+  "fps": 17.79,
+  "frames": 50,
+  "ball_count": 5,
+  "blue_goal_count": 50,
+  "yellow_goal_count": 0,
+  "line_count": 0,
+  "sources": {
+    "goal_green": 5
+  },
+  "ball_samples": [
+    {
+      "i": 5,
+      "cx": 106,
+      "cy": 105,
+      "r": 9.0,
+      "source": "goal_green"
+    },
+    {
+      "i": 9,
+      "cx": 106,
+      "cy": 105,
+      "r": 9.0,
+      "source": "goal_green"
+    },
+    {
+      "i": 16,
+      "cx": 106,
+      "cy": 105,
+      "r": 9.0,
+      "source": "goal_green"
+    },
+    {
+      "i": 29,
+      "cx": 106,
+      "cy": 105,
+      "r": 10.0,
+      "source": "goal_green"
+    },
+    {
+      "i": 30,
+      "cx": 106,
+      "cy": 105,
+      "r": 9.0,
+      "source": "goal_green"
+    }
+  ],
+  "error": null
+}

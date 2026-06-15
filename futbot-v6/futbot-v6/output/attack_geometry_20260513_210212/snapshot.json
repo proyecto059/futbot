@@ -1,0 +1,66 @@
+{
+  "snapshot": {
+    "ts": 1778706134.434503,
+    "ball": null,
+    "robots": [],
+    "goals": {
+      "yellow": false,
+      "yellow_cx": null,
+      "yellow_cy": null,
+      "yellow_bbox": null,
+      "yellow_pixels": 0,
+      "blue": true,
+      "blue_cx": 301.9107142857143,
+      "blue_cy": 86.05803571428571,
+      "blue_bbox": [
+        282,
+        83,
+        38,
+        8
+      ],
+      "blue_pixels": 224
+    },
+    "line": {
+      "detected": false,
+      "cx": null,
+      "pixels": 0,
+      "cy": null
+    },
+    "debug": {
+      "frames_in": 25,
+      "yolo": {
+        "detector": "yolo_threaded",
+        "raw_detections": 0,
+        "best_ball_conf": 0.0,
+        "robot_count": 0,
+        "inference_ms": 0.0
+      },
+      "hsv": {
+        "mode": "strict",
+        "v_median": 226,
+        "v_median_raw": 104,
+        "sat_min": 100,
+        "val_min": 60,
+        "hue_center": 32.5,
+        "hue_half_width": 12,
+        "gamma": 1.25,
+        "exposure": 200
+      }
+    }
+  },
+  "fallback_masks": {
+    "yellow_bbox": [
+      57,
+      6,
+      122,
+      87
+    ],
+    "blue_bbox": [
+      0,
+      77,
+      320,
+      14
+    ]
+  },
+  "target_key": "blue"
+}

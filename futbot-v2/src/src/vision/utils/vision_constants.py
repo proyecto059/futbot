@@ -63,14 +63,14 @@ BALL_MIN_RADIUS = 4
 BALL_CLOSE_RADIUS = 60
 
 # Filtros de falsos positivos: ignora la franja superior ruidosa y bordes
-HOT_PIXEL_Y_MAX = 80
+HOT_PIXEL_Y_MAX = 60
 BORDER_MARGIN = 25
 
 # ── HSV goles ────────────────────────────────────────────────────────────────
 
-HSV_GOAL_YELLOW_LO = np.array([18, 60, 130], dtype=np.uint8)
+HSV_GOAL_YELLOW_LO = np.array([18, 130, 130], dtype=np.uint8)
 HSV_GOAL_YELLOW_HI = np.array([50, 255, 255], dtype=np.uint8)
-HSV_GOAL_BLUE_LO = np.array([95, 180, 80], dtype=np.uint8)
+HSV_GOAL_BLUE_LO = np.array([95, 180, 60], dtype=np.uint8)
 HSV_GOAL_BLUE_HI = np.array([140, 255, 255], dtype=np.uint8)
 HSV_GOAL_BLUE_DARK_LO = np.array([75, 100, 70], dtype=np.uint8)
 HSV_GOAL_BLUE_DARK_HI = np.array([95, 255, 145], dtype=np.uint8)
@@ -87,29 +87,34 @@ HSV_WHITE_HI = np.array([180, 60, 255], dtype=np.uint8)
 LINE_DETECT_MIN_PIXELS = 3000
 LINE_DETECT_MIN_RATIO = 0.035
 
-# ── YOLO (ONNX) ──────────────────────────────────────────────────────────────
+# ── YOLO (NCNN/ONNX) ─────────────────────────────────────────────────────────
 
 YOLO_IMGSZ = 320
 YOLO_BALL_CLASS_ID = 0
-YOLO_ROBOT_CLASS_ID = 1
+YOLO_ROBOT_CLASS_ID = 4
+YOLO_BALL_CLASS_IDS = frozenset({0, 1, 2, 3})
+YOLO_ROBOT_CLASS_IDS = frozenset({4, 5, 6, 7, 8, 9, 10, 11})
 YOLO_CONF_THRESHOLD = 0.40
 YOLO_THREAD_SLEEP_SEC = 0.001
 YOLO_INTRA_OP_THREADS = 4
 YOLO_INTER_OP_THREADS = 1
+
+YOLO_NCNN_MODEL_DIR = "models/yoloe26n_v2/ncnn/yoloe26n_v2_ncnn_model"
+YOLO_ONNX_MODEL_PATH = "models/yoloe26n_v2/onnx/yoloe26n_v2.onnx"
 
 # ── Fusión de detección de bola ──────────────────────────────────────────────
 
 BALL_FUSION_CACHE_TTL_SEC = 0.5
 
 
-def resolve_yolo_model_path() -> Path:
-    """Busca `model.onnx` en la raíz del proyecto; si no, en `test-robot/`.
+def resolve_project_root() -> Path:
+    return Path(__file__).resolve().parents[3]
 
-    Devuelve un `Path` aunque el archivo no exista: la validación se hace en
-    `OnnxSessionFactory.create` para permitir mensajes de error específicos.
-    """
-    project_root = Path(__file__).resolve().parents[2]
-    root_path = project_root / "model.onnx"
-    if root_path.exists():
-        return root_path
-    return project_root / "test-robot" / "model.onnx"
+
+def resolve_yolo_ncnn_model_dir() -> Path:
+    return resolve_project_root() / YOLO_NCNN_MODEL_DIR
+
+
+def resolve_yolo_model_path() -> Path:
+    """Devuelve el ONNX export actual de YOLO."""
+    return resolve_project_root() / YOLO_ONNX_MODEL_PATH

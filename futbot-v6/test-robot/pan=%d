@@ -1,0 +1,4 @@
+  File "<string>", line 4
+    print(PAN_CENTER=%d TILT_CENTER=%d % (PAN_CENTER, TILT_CENTER))
+                     ^
+SyntaxError: invalid syntax

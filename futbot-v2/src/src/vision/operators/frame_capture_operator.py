@@ -41,9 +41,20 @@ class FrameCaptureOperator:
         self,
         width: int = CAMERA_WIDTH,
         height: int = CAMERA_HEIGHT,
+        sharpness: float | None = None,
+        noise_reduction_mode: str | None = None,
+        exposure_us: int | None = None,
+        analogue_gain: float | None = None,
     ) -> None:
         # Resuelve backend de cámara inmediatamente (fallar rápido si no hay)
-        cap, frame_width, exposure = CameraBackendResolver.resolve(width, height)
+        cap, frame_width, exposure = CameraBackendResolver.resolve(
+            width=width,
+            height=height,
+            sharpness=sharpness,
+            noise_reduction_mode=noise_reduction_mode,
+            exposure_us=exposure_us,
+            analogue_gain=analogue_gain,
+        )
         if cap is None:
             raise CameraNotFoundException(
                 "No se detectó ningún backend de cámara (picamera2/GStreamer/V4L2)."
