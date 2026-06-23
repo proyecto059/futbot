@@ -1,15 +1,23 @@
 """Captura de frames — resuelve backend de cámara automáticamente.
 
-Backends probados en orden:
-  1. picamera2 (nativo en RPi5, CSI IMX219)
-  2. libcamera via subprocess (system Python con bindings C)
-  3. GStreamer libcamerasrc
-  4. V4L2 (/dev/video*)
+Backends probados en orden de preferencia:
+  1. picamera2 (nativo en RPi5, CSI IMX219, vía librería Python)
+  2. libcamera vía subprocess (system Python con bindings C, comunicación por pipes)
+  3. GStreamer libcamerasrc (pipeline GStreamer → OpenCV)
+  4. V4L2 (/dev/video*, cámaras USB o CSI emuladas)
 
-El módulo expone una clase Camera con interfaz simple:
-  cam = Camera(config)
-  frame = cam.grab()  # np.ndarray BGR o None
-  cam.release()
+El módulo expone una clase `Camera` con interfaz simple:
+    cam = Camera(config)
+    frame = cam.grab()  # np.ndarray BGR o None si falla
+    cam.release()
+
+Los backends 1 y 2 se envuelven en adaptadores (`_Picamera2Adapter`,
+`_LibcameraSubprocessAdapter`) que exponen la misma interfaz que
+`cv2.VideoCapture` (read, release, isOpened).
+
+Flujo de inicialización:
+  1. `_resolve_backend()` → prueba cada backend en orden
+  2. `_warmup()` → descarta los primeros frames para estabilizar exposición
 """
 
 from __future__ import annotations
@@ -32,9 +40,28 @@ log = logging.getLogger("futbot.camera")
 
 
 class Camera:
-    """Fachada unificada de captura de cámara."""
+    """Fachada unificada de captura de cámara.
+
+    Oculta la complejidad de los 4 backends. El consumidor solo llama a
+    `grab()` para obtener el frame más reciente en formato BGR.
+
+    Atributos:
+        width: Ancho real del frame capturado (puede diferir del configurado).
+        height: Alto real del frame capturado.
+    """
 
     def __init__(self, config: Config) -> None:
+        """Inicializa la cámara resolviendo el mejor backend disponible.
+
+        Recorre los 4 backends en orden. Si ninguno funciona, lanza
+        RuntimeError con instrucciones de diagnóstico.
+
+        Args:
+            config: Instancia de Config con parámetros de cámara.
+
+        Raises:
+            RuntimeError: Si ningún backend de cámara está disponible.
+        """
         self._cfg = config
         self._cap, self._width, self._height = self._resolve_backend()
         if self._cap is None:
@@ -47,14 +74,21 @@ class Camera:
 
     @property
     def width(self) -> int:
+        """Ancho real del frame en píxeles (tras resolver el backend)."""
         return self._width
 
     @property
     def height(self) -> int:
+        """Alto real del frame en píxeles (tras resolver el backend)."""
         return self._height
 
     def grab(self) -> Optional[np.ndarray]:
-        """Captura el último frame. Retorna None si falla."""
+        """Captura el frame más reciente de la cámara.
+
+        Returns:
+            Frame en formato BGR como array numpy (H, W, 3), o None si
+            la captura falla (cámara desconectada, error del backend).
+        """
         ok, frame = self._cap.read()
         if not ok or frame is None:
             return None
@@ -63,13 +97,23 @@ class Camera:
         return frame
 
     def release(self) -> None:
+        """Libera la cámara y todos los recursos asociados.
+
+        Es seguro llamarla múltiples veces. Las excepciones se suprimen
+        para garantizar un apagado limpio sin crashes.
+        """
         try:
             self._cap.release()
         except Exception:
             pass
 
     def _warmup(self) -> None:
-        """Descarta los primeros frames hasta obtener uno válido."""
+        """Descarta los primeros frames hasta obtener uno válido.
+
+        Las cámaras CSI necesitan algunas capturas para estabilizar
+        exposición y balance de blancos. Sin warmup, los primeros frames
+        pueden ser negros o verdes.
+        """
         for _ in range(10):
             ok, _ = self._cap.read()
             if ok:
@@ -79,25 +123,27 @@ class Camera:
     # ── Resolución de backend ─────────────────────────────────────────────
 
     def _resolve_backend(self) -> Tuple[object | None, int, int]:
+        """Prueba los 4 backends en orden y devuelve el primero que funciona.
+
+        Returns:
+            Tupla (capture_obj, ancho_real, alto_real). Si ningún backend
+            funciona, devuelve (None, 0, 0).
+        """
         w, h = self._cfg.camera_width, self._cfg.camera_height
 
-        # 1. picamera2
         cap = self._try_picamera2(w, h)
         if cap:
             return cap, w, h
 
-        # 2. libcamera subprocess
         cap = self._try_libcamera_subprocess(w, h)
         if cap:
             return cap, w, h
 
-        # 3. GStreamer
         cap = self._try_gstreamer(w, h)
         if cap:
             rw, rh = self._get_frame_dims(cap, w, h)
             return cap, rw, rh
 
-        # 4. V4L2
         cap, idx = self._try_v4l2_any(w, h)
         if cap:
             rw, rh = self._get_frame_dims(cap, w, h)
@@ -106,6 +152,15 @@ class Camera:
         return None, 0, 0
 
     def _try_picamera2(self, w: int, h: int):
+        """Intenta abrir la cámara CSI vía picamera2 (backend nativo RPi5).
+
+        Args:
+            w: Ancho deseado en píxeles.
+            h: Alto deseado en píxeles.
+
+        Returns:
+            _Picamera2Adapter si funciona, None si falla.
+        """
         try:
             from picamera2 import Picamera2
         except ImportError:
@@ -130,7 +185,20 @@ class Camera:
         return None
 
     def _try_libcamera_subprocess(self, w: int, h: int):
-        """libcamera vía subprocess con el intérprete del sistema."""
+        """Intenta abrir la cámara vía libcamera en subprocess.
+
+        Ejecuta `scripts/_libcamera_worker.py` con el Python del sistema
+        (`/usr/bin/python3`) que tiene los bindings C de libcamera.
+        La comunicación es por pipes: frames BGR por stdout,
+        comandos por stdin. Espera la señal READY del worker.
+
+        Args:
+            w: Ancho deseado.
+            h: Alto deseado.
+
+        Returns:
+            _LibcameraSubprocessAdapter si funciona, None si falla.
+        """
         worker = Path(__file__).parent / "scripts" / "_libcamera_worker.py"
         system_python = "/usr/bin/python3"
         if not worker.is_file() or not os.path.isfile(system_python):
@@ -162,6 +230,18 @@ class Camera:
         return None
 
     def _try_gstreamer(self, w: int, h: int):
+        """Intenta abrir la cámara CSI vía pipeline GStreamer + OpenCV.
+
+        Usa `libcamerasrc` como fuente y `appsink` como salida.
+        Descarta 8 frames de warmup antes de validar.
+
+        Args:
+            w: Ancho deseado.
+            h: Alto deseado.
+
+        Returns:
+            Objeto cv2.VideoCapture si funciona, None si falla.
+        """
         pipeline = (
             f"libcamerasrc ! video/x-raw,width={w},height={h},format=BGRx "
             "! videoconvert ! video/x-raw,format=BGR "
@@ -180,6 +260,18 @@ class Camera:
         return None
 
     def _try_v4l2_any(self, w: int, h: int):
+        """Busca una cámara V4L2 funcional entre todos los /dev/video*.
+
+        Útil para webcams USB durante desarrollo local. Prueba cada
+        dispositivo en orden, configurando resolución y buffersize.
+
+        Args:
+            w: Ancho deseado.
+            h: Alto deseado.
+
+        Returns:
+            Tupla (cv2.VideoCapture, índice) o (None, None) si falla.
+        """
         import glob
         indices = []
         for path in sorted(glob.glob("/dev/video*")):
@@ -203,6 +295,19 @@ class Camera:
         return None, None
 
     def _get_frame_dims(self, cap, default_w: int, default_h: int) -> Tuple[int, int]:
+        """Obtiene las dimensiones reales del frame desde el backend.
+
+        Algunos backends (GStreamer, V4L2) pueden entregar frames con
+        dimensiones diferentes a las solicitadas.
+
+        Args:
+            cap: Objeto de captura (cv2.VideoCapture o adaptador).
+            default_w: Ancho por defecto si no se puede leer.
+            default_h: Alto por defecto si no se puede leer.
+
+        Returns:
+            Tupla (ancho_real, alto_real).
+        """
         ok, frame = cap.read()
         if ok and frame is not None:
             return frame.shape[1], frame.shape[0]
@@ -212,13 +317,32 @@ class Camera:
 # ── Adaptadores de backend ────────────────────────────────────────────────────
 
 class _Picamera2Adapter:
-    """Adapta Picamera2 a interfaz tipo cv2.VideoCapture."""
+    """Adapta el objeto Picamera2 a la interfaz de cv2.VideoCapture.
+
+    picamera2 usa `capture_array("main")` que devuelve RGB888.
+    El adaptador lo convierte a BGR para que el resto del pipeline
+    trabaje de forma consistente.
+
+    Atributos:
+        _picam: Instancia de Picamera2.
+        _running: Flag de control de ciclo de vida.
+    """
 
     def __init__(self, picam):
+        """Inicializa el adaptador con una instancia de Picamera2 ya iniciada.
+
+        Args:
+            picam: Instancia configurada e iniciada de Picamera2.
+        """
         self._picam = picam
         self._running = True
 
     def read(self):
+        """Captura un frame del sensor.
+
+        Returns:
+            Tupla (True, frame_BGR) si funciona, (False, None) si falla.
+        """
         if not self._running:
             return False, None
         try:
@@ -230,9 +354,15 @@ class _Picamera2Adapter:
         return True, cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
 
     def isOpened(self):
+        """Verifica si el adaptador sigue activo.
+
+        Returns:
+            True si la cámara está funcionando.
+        """
         return self._running
 
     def release(self):
+        """Detiene y cierra la instancia de Picamera2."""
         if not self._running:
             return
         self._running = False
@@ -244,19 +374,47 @@ class _Picamera2Adapter:
 
 
 class _LibcameraSubprocessAdapter:
-    """Adapta worker libcamera (subprocess + pipes) a interfaz cv2.VideoCapture."""
+    """Adapta el worker libcamera (subprocess) a la interfaz de cv2.VideoCapture.
+
+    El worker envía frames BGR por stdout con un header binario de 20 bytes.
+    El adaptador lee el header, extrae dimensiones y tamaño, y reconstruye
+    el array numpy.
+
+    Protocolo del header:
+        MAGIC (4B) | width (4B uint32) | height (4B uint32) |
+        stride (4B uint32) | size (4B uint32)
+    MAGIC = b'\\xf8\\xb4\\xc2\\x0d'
+
+    Atributos de clase:
+        _HEADER_FMT: Formato struct para el header (little-endian).
+        _HEADER_SIZE: 20 bytes.
+        _MAGIC: Bytes mágicos para validar el header.
+    """
 
     _HEADER_FMT = "<4sIIII"
     _HEADER_SIZE = struct.calcsize(_HEADER_FMT)
     _MAGIC = b"\xf8\xb4\xc2\x0d"
 
     def __init__(self, proc, w: int, h: int):
+        """Inicializa el adaptador con el proceso worker ya arrancado.
+
+        Args:
+            proc: Objeto Popen del worker libcamera.
+            w: Ancho inicial esperado.
+            h: Alto inicial esperado.
+        """
         self._proc = proc
         self._width = w
         self._height = h
         self._running = True
 
     def read(self):
+        """Lee un frame completo del pipe stdout del worker.
+
+        Returns:
+            Tupla (True, frame_BGR) o (False, None) si el worker murió
+            o el pipe se cerró.
+        """
         if not self._running:
             return False, None
         header = self._read_exact(self._HEADER_SIZE)
@@ -277,6 +435,14 @@ class _LibcameraSubprocessAdapter:
         return True, frame
 
     def _read_exact(self, n: int):
+        """Lee exactamente n bytes del pipe stdout del worker.
+
+        Args:
+            n: Número exacto de bytes a leer.
+
+        Returns:
+            Bytes leídos, o None si el pipe se cerró antes de completar.
+        """
         data = b""
         while len(data) < n:
             chunk = self._proc.stdout.read(n - len(data))
@@ -286,6 +452,10 @@ class _LibcameraSubprocessAdapter:
         return data
 
     def release(self):
+        """Envía comando QUIT al worker y espera a que termine.
+
+        Si el worker no responde en 3 segundos, lo mata con SIGKILL.
+        """
         self._running = False
         if self._proc:
             try:

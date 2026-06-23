@@ -7,9 +7,13 @@ Estados:
 
 Transiciones:
   SEARCH -> CHASE    (pelota detectada)
-  CHASE  -> RECOVERY (pelota perdida > timeout)
+  CHASE  -> RECOVERY (pelota perdida > chase_miss_secs)
   RECOVERY -> CHASE  (pelota re-detectada)
-  RECOVERY -> SEARCH (timeout sin encontrar)
+  RECOVERY -> SEARCH (timeout: recovery_max_steps * 2)
+
+La clase Pipeline consume Detections de vision.py y produce MotorCommand
+para motors.py. No tiene dependencia de hardware — funciona identico en
+modo real y stub.
 """
 
 from __future__ import annotations
@@ -24,15 +28,43 @@ from vision import Ball, Detections
 
 log = logging.getLogger("futbot.pipeline")
 
+# ── Constantes de estado ──────────────────────────────────────────────────────
+
 SEARCH = "SEARCH"
+"""Estado de busqueda: el robot gira sobre si mismo escaneando el entorno."""
+
 CHASE = "CHASE"
+"""Estado de persecucion: servo visual hacia la pelota con avance."""
+
 RECOVERY = "RECOVERY"
+"""Estado de recuperacion: maniobras para reencontrar la pelota perdida."""
 
 
 class Pipeline:
-    """Controlador FSM que convierte detecciones en comandos de motores."""
+    """Controlador FSM que convierte detecciones en comandos de motores.
+
+    Mantiene el estado interno de la maquina y los timers para transiciones.
+    El metodo tick() se llama una vez por frame desde el bucle principal.
+
+    Atributos:
+        _state: Estado actual ("SEARCH", "CHASE" o "RECOVERY").
+        _last_cx: Ultima posicion x conocida de la pelota en pixeles.
+        _miss_start: Timestamp cuando se perdio la pelota por primera vez.
+        _last_ball_time: Timestamp de la ultima deteccion exitosa.
+        _last_search_time: Timestamp del ultimo paso de busqueda.
+        _last_chase_time: Timestamp del ultimo paso de escaneo ciego.
+        _recovery_step: Contador de pasos en la secuencia de recuperacion.
+        _recovery_dir: Direccion de giro en recuperacion ("left"/"right").
+        _frame_width: Ancho del frame en pixeles para calculos de centro.
+    """
 
     def __init__(self, config: Config) -> None:
+        """Inicializa el pipeline en estado SEARCH.
+
+        Args:
+            config: Instancia de Config con parametros de velocidad, tiempos
+                y umbrales para cada estado del FSM.
+        """
         self._cfg = config
         self._state: str = SEARCH
         self._last_cx: Optional[float] = None
@@ -46,13 +78,33 @@ class Pipeline:
 
     @property
     def state(self) -> str:
+        """Estado actual del FSM: "SEARCH", "CHASE" o "RECOVERY"."""
         return self._state
 
     def set_frame_width(self, w: int) -> None:
+        """Actualiza el ancho del frame para calculos de centro x.
+
+        Se llama desde main.py despues de inicializar la camara, ya que
+        algunos backends pueden entregar frames con dimensiones diferentes
+        a las configuradas.
+
+        Args:
+            w: Ancho real del frame en pixeles.
+        """
         self._frame_width = w
 
     def tick(self, dets: Detections) -> MotorCommand:
-        """Evalua el estado actual, decide transicion y retorna comando."""
+        """Ejecuta un paso de la maquina de estados.
+
+        Evalua el estado actual, verifica condiciones de transicion,
+        aplica la logica del estado activo y retorna el comando de motores.
+
+        Args:
+            dets: Detecciones del frame actual (ball, goal, white_line).
+
+        Returns:
+            MotorCommand con velocidades, duracion y angulos de servo.
+        """
         now = time.time()
         ball: Optional[Ball] = dets.ball
         ball_visible = ball is not None
@@ -112,6 +164,18 @@ class Pipeline:
         return cmd
 
     def _tick_search(self, now: float) -> MotorCommand:
+        """Logica del estado SEARCH: barrido rotacional con pausas.
+
+        Gira en una direccion, espera search_scan_secs, y vuelve a girar.
+        La direccion se determina por la ultima posicion conocida de la
+        pelota. Si no hay referencia, gira a la izquierda por defecto.
+
+        Args:
+            now: Timestamp actual.
+
+        Returns:
+            MotorCommand con giro o pausa.
+        """
         if now - self._last_search_time >= self._cfg.search_scan_secs:
             direction = "left" if (
                 self._last_cx is None or self._last_cx < self._frame_width / 2
@@ -128,6 +192,27 @@ class Pipeline:
     def _tick_chase(
         self, now: float, ball: Optional[Ball], ball_visible: bool, frame_center: float
     ) -> MotorCommand:
+        """Logica del estado CHASE: servo visual proporcional.
+
+        Con pelota visible:
+          - Si el radio >= kick_radius_px: patada directa (avance recto rapido)
+          - Si el error horizontal <= deadband: avance recto
+          - Si no: giro proporcional — la rueda externa acelera, la interna
+            desacelera (nunca negativa, siempre avanza)
+
+        Sin pelota:
+          - Ventana de inercia (chase_miss_secs): avance recto lento
+          - Escaneo ciego: giros direccionales periodicos
+
+        Args:
+            now: Timestamp actual.
+            ball: Deteccion de pelota (None si no visible).
+            ball_visible: Si la pelota esta en el frame actual.
+            frame_center: Centro x del frame en pixeles.
+
+        Returns:
+            MotorCommand con velocidades de persecucion.
+        """
         if ball_visible and ball is not None:
             self._last_ball_time = now
             cx = ball.x * self._frame_width
@@ -174,6 +259,20 @@ class Pipeline:
     def _tick_recovery(
         self, now: float, ball_visible: bool, line
     ) -> MotorCommand:
+        """Logica del estado RECOVERY: secuencia de maniobras de busqueda.
+
+        Secuencia: retroceso → giro → avance → giro → ...
+        Si detecta linea blanca, retrocede inmediatamente para no salir
+        del campo. Tras recovery_max_steps * 2 pasos, vuelve a SEARCH.
+
+        Args:
+            now: Timestamp actual.
+            ball_visible: Si la pelota es visible (provoca transicion a CHASE).
+            line: Deteccion de linea blanca (WhiteLine o None).
+
+        Returns:
+            MotorCommand con maniobra de recuperacion.
+        """
         if line is not None and line.detected:
             return MotorCommand(-self._cfg.recovery_reverse_speed,
                                 -self._cfg.recovery_reverse_speed,
