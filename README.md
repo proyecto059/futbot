@@ -219,6 +219,6 @@ FUTBOT_MODE=stub uv run pytest tests/test_pipeline.py -v
 
 ## Documentación Adicional
 
-- **[GUIDE_USERS.md](GUIDE_USERS.md)** — Guía práctica para operar el robot físicamente
-- **[GUIDE_TECHNICAL.md](GUIDE_TECHNICAL.md)** — Documentación técnica para desarrolladores
+- **[../docs/GUIDE_USERS.md](GUIDE_USERS.md)** — Guía práctica para operar el robot físicamente
+- **[../docs/GUIDE_TECHNICAL.md](GUIDE_TECHNICAL.md)** — Documentación técnica para desarrolladores
 - **[../Changelog.md](../Changelog.md)** — Historial completo de versiones (v2 → v9)
