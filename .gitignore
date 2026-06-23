@@ -1,0 +1,77 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtualenv
+.venv/
+venv/
+env/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Entorno y secretos
+.env
+*.env
+config.env
+*.local
+
+# Shell personal
+.bash_history
+.bash_logout
+.profile
+.zshrc
+.sudo_as_admin_successful
+
+# SSH (claves privadas)
+.ssh/
+
+# Config personal
+.config/
+
+# SDD ledger (local, no se sube)
+.superpowers/sdd/
+
+# Tests y cobertura
+.pytest_cache/
+htmlcov/
+.coverage
+.coverage.*
+
+# Logs
+*.log
+
+# Output de diagnósticos (imágenes de test, JSON de sesiones)
+output/
+*.jpg
+!**/test_frames/*.jpg
+
+# Artefactos de entrenamiento
+runs/
+
+# Modelos grandes (se gestionan con Git LFS o aparte)
+*.pt
+*.tar.gz
+*.tar.xz
+
+# Builds de libcamera (dependencias grandes, no trackeadas)
+libcamera/
+libcamera-build/
+
+# OpenCode
+.opencode/
+
+# uv lock (regenerado por uv sync)
+uv.lock
