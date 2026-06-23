@@ -1,0 +1,33 @@
+[project]
+name = "futbot"
+version = "9.0.0"
+description = "Robot autónomo de fútbol sobre Raspberry Pi 5"
+requires-python = ">=3.11,<3.15"
+
+dependencies = [
+    "opencv-python>=4.13",
+    "numpy>=2,<3",
+    "pyserial>=3.5",
+]
+
+[project.optional-dependencies]
+onnx = [
+    "onnxruntime>=1.24",
+]
+ncnn = [
+    "ncnn",
+]
+model-tools = [
+    "onnxruntime>=1.24",
+    "ultralytics>=8.4",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0",
+]
+
+[tool.uv]
+required-environments = [
+    "sys_platform == 'linux' and platform_machine == 'aarch64'",
+]
