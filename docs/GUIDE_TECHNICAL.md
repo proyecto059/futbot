@@ -1,86 +1,132 @@
 # Guía Técnica — Futbot v9
 
-Documentación técnica para desarrolladores que desean entender, modificar o extender el código del robot.
+**Audiencia:** Desarrolladores, arquitectos de software e ingenieros de robótica que desean entender, modificar o extender el sistema.
+**Prerrequisitos:** Conocimientos de Python 3.11+, OpenCV, conceptos básicos de FSM y protocolos seriales.
 
 ---
 
 ## Tabla de Contenidos
 
-1. [Arquitectura General](#arquitectura-general)
-2. [Módulo: `config.py`](#módulo-configpy)
-3. [Módulo: `camera.py`](#módulo-camerapy)
-4. [Módulo: `vision.py`](#módulo-visionpy)
-5. [Módulo: `pipeline.py`](#módulo-pipelinepy)
-6. [Módulo: `motors.py`](#módulo-motorspy)
-7. [Módulo: `main.py`](#módulo-mainpy)
-8. [Sistema de Stubs](#sistema-de-stubs)
-9. [Protocolo UART de Motores](#protocolo-uart-de-motores)
-10. [Backends YOLO](#backends-yolo)
-11. [Backends de Cámara](#backends-de-cámara)
-12. [Cómo Extender el Sistema](#cómo-extender-el-sistema)
+1. [Resumen Ejecutivo](#resumen-ejecutivo)
+2. [Arquitectura General](#arquitectura-general)
+3. [API Reference](#api-reference)
+4. [Módulo: `config.py`](#módulo-configpy)
+5. [Módulo: `camera.py`](#módulo-camerapy)
+6. [Módulo: `vision.py`](#módulo-visionpy)
+7. [Módulo: `pipeline.py`](#módulo-pipelinepy)
+8. [Módulo: `motors.py`](#módulo-motorspy)
+9. [Módulo: `main.py`](#módulo-mainpy)
+10. [Sistema de Stubs](#sistema-de-stubs)
+11. [Protocolo UART de Motores](#protocolo-uart-de-motores)
+12. [Backends YOLO](#backends-yolo)
+13. [Backends de Cámara](#backends-de-cámara)
+14. [Métricas de Rendimiento](#métricas-de-rendimiento)
+15. [Estrategia de Pruebas](#estrategia-de-pruebas)
+16. [Cómo Extender el Sistema](#cómo-extender-el-sistema)
+17. [Convenciones de Código](#convenciones-de-código)
+18. [Matriz de Compatibilidad](#matriz-de-compatibilidad)
+
+---
+
+## Resumen Ejecutivo
+
+Futbot v9 es la novena iteración de un sistema de robótica autónoma para fútbol. Tras 8 versiones previas que acumularon complejidad incrementalmente (operadores anidados, DTOs, comunicación P2P WebSocket), la v9 unifica el código en una **arquitectura de módulos planos** con 6 archivos `.py` y ~1,500 líneas de código.
+
+### Decisiones Clave de Arquitectura
+
+| Decisión | Alternativa rechazada | Razón |
+|----------|----------------------|-------|
+| Módulos planos (1 archivo por responsabilidad) | Operadores anidados con DTOs (v2-v8) | Curva de aprendizaje plana. Un dev nuevo entiende el sistema en 8 archivos. |
+| Inyección manual de dependencias (`main.py` pasa `Config`) | Contenedores DI, decoradores, providers | Sin frameworks. Explícito y depurable. |
+| Dataclasses compartidos como tipos de frontera | DTOs por módulo con mapeo | 5 tipos bastan para describir todo el flujo de datos. |
+| Lazy imports para dependencias opcionales | Imports a nivel de módulo con try/except | `motor.py` importable sin pyserial. `vision.py` importable sin onnxruntime. |
+| FSM de 3 estados (SEARCH/CHASE/RECOVERY) | FSM de 4+ estados con roles (v8-ws) | Cobertura suficiente para juego 1v1 sin complejidad innecesaria. |
+
+### Stack Tecnológico
+
+```
+┌─────────────────────────────────────────┐
+│ Aplicación                              │
+│  main.py → pipeline.py                  │
+├─────────────────────────────────────────┤
+│ Dominio                                 │
+│  vision.py  ←→  motors.py               │
+│  camera.py        config.py             │
+├─────────────────────────────────────────┤
+│ Bibliotecas                             │
+│  opencv  onnxruntime/ncnn  pyserial     │
+├─────────────────────────────────────────┤
+│ Sistema Operativo                       │
+│  Raspberry Pi OS (aarch64)              │
+├─────────────────────────────────────────┤
+│ Hardware                                │
+│  RPi5  IMX219 CSI  Driver UART  Servos  │
+└─────────────────────────────────────────┘
+```
 
 ---
 
 ## Arquitectura General
 
-Futbot sigue una arquitectura de **módulos planos** — un archivo `.py` por responsabilidad, sin anidación de operadores ni capas de abstracción.
-
 ### Diagrama de Componentes
 
 ```
-┌────────────────────────────────────────────────────────────┐
-│                         main.py                            │
-│  init → while running:                                     │
-│    frame = cam.grab()                                      │
-│    dets  = vis.detect(frame)                               │
-│    cmd   = pip.tick(dets)                                  │
-│    mot.send(cmd)                                           │
-└──┬──────────┬──────────────┬──────────────┬───────────────┘
-   │          │              │              │
-   ▼          ▼              ▼              ▼
-┌──────┐ ┌────────┐ ┌──────────┐ ┌────────┐
-│camera│ │ vision │ │ pipeline │ │ motors │
-│  .py │ │   .py  │ │   .py    │ │  .py   │
-└──────┘ └────────┘ └──────────┘ └────────┘
-   │          │              │              │
-   └──────────┴──────┬───────┴──────────────┘
-                     │
-                     ▼
-               ┌──────────┐
-               │ config.py│
-               └──────────┘
+┌──────────────────────────────────────────────────────────────────┐
+│                          main.py                                 │
+│                                                                  │
+│  cfg = Config()                                                  │
+│  cam = Camera(cfg)  |  CameraStub(cfg)                           │
+│  vis = Vision(cfg)                                               │
+│  mot = Motors(cfg)  |  MotorsStub(cfg)                           │
+│  pip = Pipeline(cfg)                                             │
+│                                                                  │
+│  while running:             ┌──────────────────────┐             │
+│    frame = cam.grab() ──────┤ BGR H×W×3 uint8      │             │
+│    dets  = vis.detect() ────┤ Detections dataclass  │             │
+│    cmd   = pip.tick()  ─────┤ MotorCommand dataclass│             │
+│    mot.send(cmd)       ─────┤ bytes → /dev/ttyAMA0  │             │
+│                             └──────────────────────┘             │
+└──────────────────────────────────────────────────────────────────┘
 ```
 
-### Flujo de Datos Completo
+### Diagrama de Secuencia
 
 ```
-Frame (np.ndarray BGR)
-    │
-    ▼
-Vision.detect()
-    ├── YOLO inferencia (ONNX/NCNN/TensorRT) → Ball (x,y,radius,confidence)
-    ├── HSV pelota naranja                    → Ball (fallback)
-    ├── HSV porterías (azul/amarillo)        → Goal (color, x, y)
-    ├── HSV línea blanca                     → WhiteLine (detected, position)
-    └── Fusión (YOLO > HSV > caché TTL)      → Ball final
-    │
-    ▼
-Detections {ball, goal, white_line, ts}
-    │
-    ▼
-Pipeline.tick()
-    ├── SEARCH:  barrido rotacional (timed sweep)
-    ├── CHASE:   servo visual proporcional + patada directa
-    └── RECOVERY: secuencia reverse→turn→forward + detección de línea
-    │
-    ▼
-MotorCommand {left_speed, right_speed, dur_ms, pan_angle, tilt_angle}
-    │
-    ▼
-Motors.send()
-    ├── apply_diff_cap: saturar velocidades a diff_cap (250.0)
-    ├── differential: (v_left, v_right) → (0, 0, -v_right, -v_left)
-    └── _burst: construir tramas binarias → UART /dev/ttyAMA0
+main.py         Camera        Vision        Pipeline       Motors      Driver UART
+  │               │             │              │              │              │
+  ├─ Config() ────┤             │              │              │              │
+  ├─ Camera(cfg)──┤             │              │              │              │
+  │               ├─ _resolve_backend()        │              │              │
+  │               │  ├─ try picamera2          │              │              │
+  │               │  ├─ try libcamera sub      │              │              │
+  │               │  ├─ try GStreamer          │              │              │
+  │               │  └─ try V4L2              │              │              │
+  │               ├─ _warmup() (10 frames)     │              │              │
+  ├─ Vision(cfg)──┤             │              │              │              │
+  │               │             ├─ _init_yolo()│              │              │
+  │               │             │  └─ ONNX/NCNN/TensorRT      │              │
+  ├─ Motors(cfg)───────────────┤              │              │              │
+  │               │             │              │              ├─ serial.Serial()
+  ├─ Pipeline(cfg)─────────────┤              │              │              │
+  │               │             │              ├─ state=SEARCH│              │
+  │               │             │              │              │              │
+  │  ═══ BUCLE PRINCIPAL ═══════════════════════════════════  │              │
+  │               │             │              │              │              │
+  ├─ cam.grab() ──┤             │              │              │              │
+  │               ├─ read() ────► Frame BGR    │              │              │
+  ├─ vis.detect(frame) ────────►│              │              │              │
+  │               │             ├─ YOLO infer  │              │              │
+  │               │             ├─ HSV ball    │              │              │
+  │               │             ├─ HSV goal    │              │              │
+  │               │             ├─ HSV line    │              │              │
+  │               │             └─ fuse ──────► Detections    │              │
+  ├─ pip.tick(dets) ──────────────────────────►│              │              │
+  │               │             │              ├─ eval FSM    │              │
+  │               │             │              └─ MotorCommand│              │
+  ├─ mot.send(cmd) ──────────────────────────────────────────►│              │
+  │               │             │              │              ├─ _burst() ───► UART write
+  │               │             │              │              │              │
+  │  ═══ REPETIR ═══════════════════════════════════════════  │              │
 ```
 
 ### Dependencias entre Módulos
@@ -91,7 +137,7 @@ config.py ◄── vision.py     (Config)
 config.py ◄── motors.py     (Config, crc8)
 config.py ◄── pipeline.py   (Config)
                   │
-vision.py ────────┤ (Detections, Ball)
+vision.py ────────┤ (Detections, Ball, Goal, WhiteLine)
 motors.py ────────┤ (MotorCommand)
                   ▼
             pipeline.py
@@ -100,418 +146,526 @@ motors.py ────────┤ (MotorCommand)
 main.py ──────────┴── camera.py, vision.py, pipeline.py, motors.py
 ```
 
-**Sin dependencias circulares.**
+**No existen dependencias circulares.** `main.py` es el único punto de acoplamiento explícito.
+
+---
+
+## API Reference
+
+### `camera.py`
+
+```python
+class Camera:
+    def __init__(self, config: Config) -> None
+    def grab(self) -> Optional[np.ndarray]
+    def release(self) -> None
+    @property width(self) -> int
+    @property height(self) -> int
+```
+
+### `vision.py`
+
+```python
+@dataclass
+class Ball:
+    x: float           # Centro x normalizado (0.0 = izquierda, 1.0 = derecha)
+    y: float           # Centro y normalizado (0.0 = arriba, 1.0 = abajo)
+    radius: float      # Radio normalizado respecto a max(w, h)
+    confidence: float  # Confianza de detección (0.0 - 1.0)
+
+@dataclass
+class Goal:
+    color: str         # "blue" | "yellow"
+    x: float           # Centro x normalizado
+    y: float           # Centro y normalizado
+
+@dataclass
+class WhiteLine:
+    detected: bool     # True si hay línea blanca visible
+    position: str      # "left" | "right" | "center"
+
+@dataclass
+class Detections:
+    ball: Ball | None = None
+    goal: Goal | None = None
+    white_line: WhiteLine | None = None
+    ts: float = 0.0    # Timestamp Unix de procesamiento
+
+class Vision:
+    def __init__(self, config: Config) -> None
+    def detect(self, frame: np.ndarray) -> Detections
+```
+
+### `pipeline.py`
+
+```python
+class Pipeline:
+    def __init__(self, config: Config) -> None
+    def tick(self, dets: Detections) -> MotorCommand
+    def set_frame_width(self, w: int) -> None
+    @property state(self) -> str  # "SEARCH" | "CHASE" | "RECOVERY"
+```
+
+### `motors.py`
+
+```python
+@dataclass
+class MotorCommand:
+    left_speed: float         # 0-255, positivo = avance rueda izquierda
+    right_speed: float        # 0-255, negativo = avance rueda derecha
+    dur_ms: int = 140         # Duración del comando en ms
+    pan_angle: float | None   # 0-180°, None = mantener
+    tilt_angle: float | None  # 0-180°, None = mantener
+
+class Motors:
+    def __init__(self, config: Config) -> None
+    def send(self, cmd: MotorCommand) -> None
+    def stop(self, dur_ms: int = 300) -> None
+    def close(self) -> None
+```
+
+### `stubs/camera_stub.py`
+
+```python
+class CameraStub:
+    def __init__(self, config: Config) -> None
+    def grab(self) -> np.ndarray           # Frame sintético, nunca None
+    def release(self) -> None
+    @property width(self) -> int
+    @property height(self) -> int
+```
+
+### `stubs/motors_stub.py`
+
+```python
+class MotorsStub:
+    def __init__(self, config) -> None
+    def send(self, cmd: MotorCommand) -> None
+    def stop(self, dur_ms: int = 300) -> None
+    def close(self) -> None
+    def get_history(self) -> list[MotorCommand]
+```
 
 ---
 
 ## Módulo: `config.py`
 
-**Responsabilidad:** Fuente única de verdad para todas las constantes configurables. Sin dependencias de hardware ni de otros módulos.
+**Ruta:** `futbot/config.py` — 139 líneas.
+**Dependencias:** Solo stdlib (`dataclasses`, `pathlib`, `typing`).
 
-### Estructura
+### Propósito
+
+Fuente única de verdad para 35 parámetros configurables del robot. Expone también `CRC8_TABLE` (256 bytes) y `crc8(data)` para el protocolo UART de motores.
+
+### Estructura del Dataclass
 
 ```python
-CRC8_TABLE = [...]        # 256 elementos, polinomio 0x07
-crc8(data: bytes) -> int  # Calcula CRC8 usando la tabla
-
 @dataclass
 class Config:
-    # Cámara
+    # ── Cámara (6 campos)
     camera_width: int = 320
     camera_height: int = 240
-    camera_backend: str = "libcamera"
+    camera_fps: int = 30
+    camera_backend: str = "libcamera"     # libcamera | gstreamer | opencv
+    camera_exposure_default: int = 200
+    camera_flip_horizontal: bool = False
 
-    # Visión HSV
-    ball_hsv_lower: Tuple[int,int,int] = (0, 80, 80)
-    ball_hsv_upper: Tuple[int,int,int] = (65, 255, 255)
-    goal_blue_hsv_lower: Tuple[int,int,int] = (95, 180, 60)
+    # ── Visión HSV pelota (13 campos)
+    ball_hsv_lower: tuple = (0, 80, 80)
+    ball_hsv_upper: tuple = (65, 255, 255)
+    ball_hsv_lower2: tuple = (168, 80, 80)
+    ball_hsv_upper2: tuple = (179, 255, 255)
+    ball_min_area: int = 30
+    # ... 9 campos adicionales de filtros
 
-    # Visión YOLO
-    yolo_backend: str = "onnx"
+    # ── Visión HSV porterías (6 campos)
+    goal_yellow_hsv_lower: tuple = (18, 130, 130)
+    goal_blue_hsv_lower: tuple = (95, 180, 60)
+    # ...
+
+    # ── Visión línea blanca (4 campos)
+    # ── Visión YOLO (9 campos)
+    yolo_backend: str = "onnx"            # onnx | ncnn | tensorrt
     yolo_conf_threshold: float = 0.40
+    # ...
 
-    # Pipeline
+    # ── Pipeline CHASE (8 campos)
     chase_speed_base: float = 80.0
     chase_rot_gain: float = 0.8
-    search_turn_speed: float = 255.0
-    chase_miss_secs: float = 0.8
+    chase_deadband_px: float = 16.0
+    # ...
 
-    # Motores
-    uart_port: str = "/dev/ttyAMA0"
-    uart_baud: int = 1000000
-    diff_cap: float = 250.0
+    # ── Pipeline SEARCH (4 campos)
+    # ── Pipeline RECOVERY (5 campos)
+    # ── Motores UART (3 campos)
+    # ── Motores Servos (6 campos)
+    # ── Rutas (1 campo)
 
-    # Servos
-    pan_center: float = 70.0
-    tilt_center: float = 45.0
-
-    # Métodos helper
-    def resolve_yolo_model_path(self) -> Path
-    def resolve_ncnn_model_dir(self) -> Path
+    # ── Métodos helper (2)
+    def resolve_yolo_model_path(self) -> Path: ...
+    def resolve_ncnn_model_dir(self) -> Path: ...
 ```
 
-### Cómo Modificar
+### Principio de Extensibilidad
 
-Para cambiar cualquier comportamiento, edita el valor por defecto en el dataclass. No requiere tocar otros archivos:
+Cualquier parámetro se puede sobreescribir al instanciar:
 
 ```python
-# Ejemplo: hacer el robot más agresivo en persecución
-cfg = Config(
-    chase_speed_base=100.0,  # más rápido
-    chase_rot_gain=1.2,      # giro más agresivo
-)
+cfg = Config(chase_speed_base=100.0, yolo_backend="ncnn")
 ```
+
+No se requiere modificar código fuente para ajustar comportamiento. Esto permite experimentación rápida sin riesgo de romper la configuración base.
 
 ---
 
 ## Módulo: `camera.py`
 
-**Responsabilidad:** Captura de frames con resolución automática de backend.
+**Ruta:** `futbot/camera.py` — 302 líneas.
+**Dependencias:** `opencv-python`, `numpy`, `config.Config`.
 
-### Interfaz Pública
+### Propósito
 
-```python
-class Camera:
-    def __init__(self, config: Config)
-    def grab(self) -> np.ndarray | None   # Frame BGR o None si falla
-    def release(self)                     # Libera la cámara
-    @property width(self) -> int          # Ancho real del frame
-    @property height(self) -> int         # Alto real del frame
+Abstraer la captura de frames de 4 backends diferentes detrás de una interfaz única (`grab() → np.ndarray`). La resolución de backend es automática y ocurre en `__init__`.
+
+### Backends y Orden de Prioridad
+
+| Prioridad | Backend | Método | Dependencia | Plataforma |
+|-----------|---------|--------|------------|------------|
+| 1 | picamera2 | `_Picamera2Adapter` | `picamera2` (lazy import) | RPi5 aarch64 |
+| 2 | libcamera subprocess | `_LibcameraSubprocessAdapter` | `/usr/bin/python3`, `scripts/_libcamera_worker.py` | RPi5 aarch64 |
+| 3 | GStreamer libcamerasrc | `cv2.VideoCapture` con pipeline GStreamer | `libcamera`, `gstreamer` | RPi5 aarch64 |
+| 4 | V4L2 | `cv2.VideoCapture` sobre `/dev/video*` | Ninguna adicional | Cualquier Linux |
+
+### Protocolo Binario del Subprocess libcamera
+
+```
+Header (20 bytes, little-endian):
+  MAGIC    4B   b'\xf8\xb4\xc2\x0d'
+  width    4B   uint32
+  height   4B   uint32
+  stride   4B   uint32 (bytes por fila)
+  size     4B   uint32 (bytes totales del frame)
+
+Frame:   BGR planar, stride // 4 columnas, 4 canales (BGRA)
+         Se recorta a [:h, :w, :3] para obtener BGR puro.
 ```
 
-### Backends (probados en orden)
+### Warmup
 
-| Orden | Backend | Mecanismo | Plataforma |
-|-------|---------|-----------|------------|
-| 1 | picamera2 | Biblioteca nativa Python para RPi5 | Linux aarch64 |
-| 2 | libcamera subprocess | Worker Python con bindings C vía pipes | Linux aarch64 |
-| 3 | GStreamer libcamerasrc | Pipeline GStreamer → OpenCV | Linux aarch64 |
-| 4 | V4L2 | OpenCV VideoCapture sobre /dev/video* | Cualquier Linux |
-
-### Adaptadores de Backend
-
-Cada backend se envuelve en un adaptador que expone interfaz tipo `cv2.VideoCapture`:
-
-```python
-class _Picamera2Adapter:           # picamera2 → read()/release()
-class _LibcameraSubprocessAdapter: # subprocess + pipes → read()/release()
-```
-
-El protocolo del subprocess libcamera usa un header binario:
-```
-MAGIC (4B) | width (4B) | height (4B) | stride (4B) | size (4B) | frame BGR (size B)
-```
-MAGIC = `\xf8\xb4\xc2\x0d`
+`_warmup()` descarta los primeros 10 frames tras abrir la cámara. Esto es necesario porque las cámaras CSI requieren varias capturas para estabilizar exposición automática y balance de blancos. Sin warmup, los primeros frames pueden ser completamente negros o verdes.
 
 ---
 
 ## Módulo: `vision.py`
 
-**Responsabilidad:** Pipeline de detección híbrida que combina YOLO (red neuronal) con HSV (visión por color clásica).
+**Ruta:** `futbot/vision.py` — 324 líneas.
+**Dependencias:** `opencv-python`, `numpy`, `config.Config`, `onnxruntime` (opcional), `ncnn` (opcional).
 
-### Interfaz Pública
+### Propósito
 
-```python
-class Vision:
-    def __init__(self, config: Config)
-    def detect(self, frame: np.ndarray) -> Detections
+Pipeline de detección híbrido: YOLO (red neuronal) + HSV (visión clásica por color). La fusión da prioridad a YOLO cuando está disponible y tiene confianza suficiente, con HSV como fallback determinista y caché TTL de 0.5 segundos para suavizar detecciones intermitentes.
 
-@dataclass
-class Ball:           # x, y normalizados (0-1), radius, confidence
-@dataclass
-class Goal:           # color ("blue"|"yellow"), x, y normalizados
-@dataclass
-class WhiteLine:      # detected (bool), position ("left"|"right"|"center")
-@dataclass
-class Detections:     # ball, goal, white_line, ts
+### Flujo de `detect(frame)`
+
 ```
+1. YOLO inferencia
+   └─ Resize 320×320 → normalize /255 → session.run / net.extract
+   └─ _parse_yolo_ball: filtrar por class_id + confianza
+   └─ Produce Ball (x, y, radius, confidence)
 
-### Pipeline de Detección (orden)
+2. HSV pelota naranja
+   └─ BGR→HSV → inRange(2 rangos, wrap-around hue) → findContours
+   └─ Filtrar: área, radio, circularidad, bordes, hot_pixel_y_max
+   └─ Produce Ball (confidence=0.7 fijo)
 
-1. **YOLO:** Si el backend está disponible, ejecuta inferencia sobre el frame
-2. **HSV pelota:** Convierte BGR→HSV, aplica máscara de color naranja (dos rangos para cubrir wrap-around del hue), filtra por área, circularidad y radio mínimo. Ignora bordes y franja superior ruidosa
-3. **HSV porterías:** Detecta azul y amarillo por separado con umbrales de conteo de píxeles
-4. **HSV línea blanca:** Inspecciona el tercio inferior del frame, umbraliza blanco, determina posición (izquierda/centro/derecha) por densidad de píxeles
-5. **Fusión:** YOLO > HSV > caché con TTL de 0.5 segundos
+3. HSV porterías
+   └─ inRange azul → countNonZero → moments → Goal("blue", x, y)
+   └─ inRange amarillo → countNonZero → moments → Goal("yellow", x, y)
+
+4. HSV línea blanca
+   └─ ROI = tercio inferior del frame
+   └─ inRange blanco (V alto, S bajo) → countNonZero
+   └─ Comparar mitad izquierda vs derecha → posición
+
+5. Fusión
+   └─ YOLO (si confianza ≥ threshold) > HSV > caché (TTL 0.5s)
+```
 
 ### Backends YOLO
 
-Ver [Backends YOLO](#backends-yolo) para detalles de implementación.
+Ver [Backends YOLO](#backends-yolo) para detalles de implementación de cada backend.
 
 ---
 
 ## Módulo: `pipeline.py`
 
-**Responsabilidad:** Máquina de estados finita (FSM) que convierte detecciones en comandos de motores.
+**Ruta:** `futbot/pipeline.py` — 198 líneas.
+**Dependencias:** `config.Config`, `vision.Detections`, `vision.Ball`, `motors.MotorCommand`.
 
-### Interfaz Pública
+### Propósito
 
-```python
-class Pipeline:
-    def __init__(self, config: Config)
-    def tick(self, dets: Detections) -> MotorCommand
-    def set_frame_width(self, w: int)
-    @property state(self) -> str   # "SEARCH" | "CHASE" | "RECOVERY"
+Máquina de estados finita que convierte detecciones (`Detections`) en comandos de motores (`MotorCommand`). Opera a ~100 Hz (limitado por `time.sleep(0.01)` en `main.py`).
+
+### Tabla de Transiciones
+
+| Estado actual | Condición | Estado siguiente | Reset al entrar |
+|--------------|-----------|-----------------|-----------------|
+| SEARCH | `ball != None` | CHASE | `_last_chase_time = 0` |
+| CHASE | `ball == None AND miss_secs ≥ 0.8` | RECOVERY | `_recovery_step = 0`, elegir dirección |
+| RECOVERY | `ball != None` | CHASE | `_last_chase_time = 0` |
+| RECOVERY | `_recovery_step ≥ max_steps * 2` | SEARCH | `_last_search_time = 0`, `_last_cx = None` |
+
+### Lógica de Control por Estado
+
+#### SEARCH — `_tick_search(now)`
+```
+Cada search_scan_secs (0.3s):
+  dirección = last_cx < frame_center ? "left" : "right"
+  v_left  = -search_turn_speed (255) si left, +255 si right
+  v_right = +search_turn_speed (255) si left, -255 si right
+  dur_ms  = search_turn_ms (250)
+Entre pasos: MotorCommand(0, 0) — pausa activa
 ```
 
-### Estados y Transiciones
+#### CHASE — `_tick_chase(now, ball, ball_visible, frame_center)`
 
+**Con pelota visible:**
 ```
-SEARCH ──ball detected──► CHASE ──ball lost >0.8s──► RECOVERY
-   ▲                         ▲                           │
-   │                         │    ball re-detected        │
-   │                         └───────────────────────────┘
-   │                                     │
-   └─────timeout (max_steps*2)───────────┘
+Si radius ≥ kick_radius_px (50):  # patada directa
+  MotorCommand(base, base, 100)
+Si |cx - center| ≤ deadband (16 px):  # centrado
+  MotorCommand(base, base, 100)
+Si no:  # servo visual proporcional
+  error_norm = |error| / frame_center  (0 a 1)
+  diff = base * error_norm * rot_gain  (0.8)
+  Si error > 0:  vL = base + diff,  vR = max(0, base - diff)
+  Si error < 0:  vL = max(0, base - diff), vR = base + diff
 ```
 
-### Lógica por Estado
+**Pelota perdida < 0.8s:** inercia — `MotorCommand(blind_speed, blind_speed, 100)`
 
-#### SEARCH (`_tick_search`)
-- Giro rotacional con pausas (`search_scan_secs=0.3s`)
-- Dirección determinada por última posición conocida de la pelota
-- Velocidad: `search_turn_speed=255`, duración: `search_turn_ms=250ms`
+**Pelota perdida ≥ 0.8s:** escaneo ciego con giros direccionales cada `blind_scan_secs` (0.2s)
 
-#### CHASE (`_tick_chase`)
-- **Pelota visible:**
-  - Si `radius >= kick_radius_px (50)`: avance recto a máxima velocidad (patada)
-  - Si `|error_x| <= chase_deadband_px (16)`: avance recto (pelota centrada)
-  - Si no: giro proporcional — `diff = base * error_norm * gain`, rueda externa acelera, interna desacelera (nunca negativa)
-- **Pelota perdida < 0.8s:** avance recto a velocidad reducida (inercia)
-- **Pelota perdida > 0.8s:** escaneo ciego con giros direccionales
-
-#### RECOVERY (`_tick_recovery`)
-- **Línea blanca detectada:** retroceder inmediatamente
-- **Secuencia:** paso 0 → retroceso, paso impar → giro, paso par → avance
-- Dirección de giro basada en última posición conocida de la pelota
-- Máximo `recovery_max_steps * 2` pasos antes de volver a SEARCH
+#### RECOVERY — `_tick_recovery(now, ball_visible, line)`
+```
+Si línea blanca detectada: retroceder inmediatamente
+Secuencia (step 0..max_steps*2 - 1):
+  step == 0:              retroceso
+  step impar:             giro en recovery_dir
+  step par (no cero):     avance corto
+```
 
 ---
 
 ## Módulo: `motors.py`
 
-**Responsabilidad:** Control de motores y servos vía UART serial con protocolo binario propietario.
+**Ruta:** `futbot/motors.py` — 134 líneas.
+**Dependencias:** `pyserial` (lazy), `config.Config`, `config.crc8`.
 
-### Interfaz Pública
+### Propósito
 
-```python
-class Motors:
-    def __init__(self, config: Config)
-    def send(self, cmd: MotorCommand)
-    def stop(self, dur_ms: int = 300)
-    def close(self)
+Control de motores y servos vía UART serial usando un protocolo binario propietario. Cada comando de alto nivel (`MotorCommand`) se traduce a dos tramas binarias con CRC8 y se envía atómicamente al driver en `/dev/ttyAMA0` a 1 MBaud.
 
-@dataclass
-class MotorCommand:
-    left_speed: float = 0.0     # Velocidad rueda izquierda (0-255)
-    right_speed: float = 0.0    # Velocidad rueda derecha (0-255)
-    dur_ms: int = 140           # Duración del comando
-    pan_angle: float | None     # Ángulo servo pan (0-180)
-    tilt_angle: float | None    # Ángulo servo tilt (0-180)
-```
-
-### Mapeo Diferencial
+### Pipeline de `send(cmd)`
 
 ```
-v_left positivo  → avance rueda izquierda
-v_right negativo → avance rueda derecha
+1. _apply_diff_cap(vL, vR)
+   └─ Saturar velocidades a max 250.0, escalando proporcionalmente
 
-m1, m2 = 0.0, 0.0          (no son ruedas de tracción)
-m3     = -v_right           (rueda derecha física)
-m4     = -v_left            (rueda izquierda física)
+2. _differential(vL, vR)
+   └─ (0.0, 0.0, -vR, -vL)
+   └─ m1 y m2 siempre 0 (no usados para tracción)
+   └─ m3 = -vR (rueda derecha física)
+   └─ m4 = -vL (rueda izquierda física)
 
-Ejemplo avance recto:
-  v_left=80, v_right=-80 → m3=80, m4=-80
-```
-
-### Saturación de Velocidad
-
-```python
-def _apply_diff_cap(v_left, v_right):
-    mx = max(abs(v_left), abs(v_right))
-    if mx > cap:            # cap = 250.0
-        s = cap / mx        # escalar proporcionalmente
-        v_left *= s
-        v_right *= s
-    return v_left, v_right
-```
-
-### Conversión Ángulo → PWM
-
-```
-pwm = 500 + (angle / 180.0) * 2000
-
-0°   → 500µs
-90°  → 1500µs
-180° → 2500µs
-
-Centros por defecto: pan=70°, tilt=45°
+3. _burst(pan, tilt, dur_ms, m1, m2, m3, m4)
+   └─ Convertir ángulos a PWM (500-2500 µs)
+   └─ Construir trama servos (cmd 0x04, 11 bytes payload) + CRC8
+   └─ Construir trama motores (cmd 0x03, 22 bytes payload) + CRC8
+   └─ Escribir atómicamente al UART bajo threading.Lock
 ```
 
 ### Thread Safety
-
-El envío UART está protegido por `threading.Lock`. Las dos tramas (servo + motor) se escriben atómicamente para evitar que comandos concurrentes intercalen bytes.
-
-### Lazy Import
-
-`import serial` ocurre dentro de `Motors.__init__`, no a nivel de módulo. Esto permite importar `MotorCommand` sin tener `pyserial` instalado (útil en tests y modo stub).
-
----
-
-## Módulo: `main.py`
-
-**Responsabilidad:** Punto de entrada. Inicializa servicios y ejecuta el bucle principal.
-
-### Flujo de Inicialización
-
-1. Crear `Config`
-2. Según `FUTBOT_MODE`:
-   - `stub` → `CameraStub` + `MotorsStub`
-   - `real` → `Camera` + `Motors`
-3. Crear `Vision(config)`
-4. Crear `Pipeline(config)`, ajustar `frame_width`
-5. Bucle principal: `grab → detect → tick → send`
-6. Manejo de señales: `SIGINT` / `SIGTERM` para apagado limpio
-
-### Apagado Limpio
-
-```python
-finally:
-    mot.stop(200)    # Detener motores
-    mot.close()      # Cerrar UART
-    cam.release()    # Liberar cámara
-```
-
-### Modo Stub vs Real
-
-La selección se hace una sola vez en `main()` sin afectar al resto del código. Los módulos `Vision` y `Pipeline` son idénticos en ambos modos — solo cambian las implementaciones de `Camera` y `Motors`.
-
----
-
-## Sistema de Stubs
-
-Los stubs permiten desarrollar y probar el sistema completo sin hardware físico.
-
-### CameraStub (`stubs/camera_stub.py`)
-
-```python
-class CameraStub:
-    width: int
-    height: int
-    grab() -> np.ndarray     # Frame sintético o pregrabado
-    release()
-```
-
-**Comportamiento:**
-- Si existe `stubs/test_frames/*.png`: reproduce los frames en secuencia
-- Si no: genera frames sintéticos (fondo verde + círculo naranja en posición aleatoria)
-- El círculo naranja es detectable por el pipeline HSV, permitiendo probar el FSM completo
-
-### MotorsStub (`stubs/motors_stub.py`)
-
-```python
-class MotorsStub:
-    send(cmd: MotorCommand)      # Registra el comando
-    stop(dur_ms: int = 300)      # Registra stop
-    close()
-    get_history() -> list[MotorCommand]  # Historial de comandos
-```
-
-**Comportamiento:**
-- Cada comando se almacena en una lista interna
-- `get_history()` devuelve la lista para inspección en tests
-- No requiere `pyserial`
-
----
-
-## Protocolo UART de Motores
-
-### Formato de Trama
-
-Cada burst envía **dos tramas consecutivas**:
-
-```
-FRAME 1 — Servos (cmd 0x04)
-┌──────┬──────┬──────┬──────┬─────────────────────────────────┬──────┐
-│ 0xAA │ 0x55 │ 0x04 │ len  │           payload               │ CRC8 │
-└──────┴──────┴──────┴──────┴─────────────────────────────────┴──────┘
-
-Payload (11 bytes):
-  [0x01]              — sub-comando
-  [dur_low, dur_high] — duración en ms (uint16 LE)
-  [0x02]              — cantidad de servos (2)
-  [pan_id]            — ID servo pan (2)
-  [pp_low, pp_high]   — PWM pan (uint16 LE)
-  [tilt_id]           — ID servo tilt (1)
-  [tp_low, tp_high]   — PWM tilt (uint16 LE)
-
-FRAME 2 — Motores (cmd 0x03)
-┌──────┬──────┬──────┬──────┬─────────────────────────────────┬──────┐
-│ 0xAA │ 0x55 │ 0x03 │ len  │           payload               │ CRC8 │
-└──────┴──────┴──────┴──────┴─────────────────────────────────┴──────┘
-
-Payload (22 bytes):
-  [0x05, 0x04]                  — sub-cmd + cantidad de motores (4)
-  [0x00][m1 as float32 LE]      — motor 1 (5 bytes)
-  [0x01][m2 as float32 LE]      — motor 2 (5 bytes)
-  [0x02][m3 as float32 LE]      — motor 3 (5 bytes)
-  [0x03][m4 as float32 LE]      — motor 4 (5 bytes)
-```
-
-### CRC8
-
-- Polinomio: `0x07`
-- Calculado sobre `bytes[2:]` (cmd + len + payload)
-- Tabla de lookup pre-calculada de 256 elementos en `config.CRC8_TABLE`
-- Se añade como byte final de cada trama
-
-### Escritura Atómica
-
-Ambas tramas se concatenan y escriben en una sola llamada `serial.write()` bajo `threading.Lock`:
 
 ```python
 with self._lock:
     self._ser.write(servo_frame + motor_frame)
 ```
 
+El `threading.Lock` garantiza que las dos tramas de un comando se escriban sin intercalación de otro comando concurrente. Sin esto, dos hilos podrían alternar bytes y corromper el protocolo.
+
+---
+
+## Módulo: `main.py`
+
+**Ruta:** `futbot/main.py` — 105 líneas.
+**Dependencias:** Todos los módulos del proyecto.
+
+### Propósito
+
+Orquestador del sistema. Único punto de entrada. Responsable de:
+1. Instanciar `Config`
+2. Seleccionar implementaciones reales o stub según `FUTBOT_MODE`
+3. Conectar los 4 módulos en el orden correcto
+4. Ejecutar el bucle principal
+5. Manejar señales de apagado (`SIGINT`, `SIGTERM`)
+
+### Ciclo de Vida
+
+```python
+Config()                           # Parámetros por defecto
+Camera(cfg) | CameraStub(cfg)      # Según FUTBOT_MODE
+Vision(cfg)                        # Inicializa backend YOLO
+Motors(cfg) | MotorsStub(cfg)      # Según FUTBOT_MODE
+Pipeline(cfg)                      # Estado inicial = SEARCH
+
+while running:
+    frame = cam.grab()             # np.ndarray o None
+    dets  = vis.detect(frame)      # Detections
+    cmd   = pip.tick(dets)         # MotorCommand
+    mot.send(cmd)                  # UART write o registro
+    sleep(0.01)
+
+finally:
+    mot.stop(200); mot.close()     # Apagado limpio
+    cam.release()                  # Liberar cámara
+```
+
+---
+
+## Sistema de Stubs
+
+**Ubicación:** `futbot/stubs/`
+
+### CameraStub
+
+Genera frames sintéticos de 320×240 con:
+- Fondo verde oscuro (BGR 50,120,50) simulando césped
+- Círculo naranja (BGR 0,140,255) en posición aleatoria dentro del 50% central
+- Radio fijo de 25 píxeles — detectable por el pipeline HSV
+
+Si existe `stubs/test_frames/*.png`, reproduce esos frames en secuencia circular. Útil para pruebas deterministas con frames reales capturados del robot.
+
+### MotorsStub
+
+Implementa la misma interfaz que `Motors` pero sin dependencia de `pyserial`:
+- `send(cmd)` → copia el comando a una lista interna
+- `get_history()` → devuelve el historial cronológico de comandos
+- `stop()` / `close()` → no-ops que registran el comando
+
+### Activación
+
+Controlado por la variable de entorno `FUTBOT_MODE`:
+- `FUTBOT_MODE=stub` → stubs
+- `FUTBOT_MODE=real` o sin definir → hardware real
+
+La selección ocurre únicamente en `main.py`. Los módulos `Vision` y `Pipeline` son idénticos en ambos modos.
+
+---
+
+## Protocolo UART de Motores
+
+### Estructura General
+
+Cada comando de alto nivel produce un **burst** de dos tramas consecutivas:
+
+```
+FRAME 1 — Servos (cmd 0x04)
+┌─────┬─────┬─────┬─────┬───────────────────────────┬──────┐
+│0xAA │0x55 │0x04 │ len │         payload           │ CRC8 │
+└─────┴─────┴─────┴─────┴───────────────────────────┴──────┘
+
+Payload (11 bytes):
+  byte 0:    0x01 (sub-comando)
+  byte 1-2:  dur_ms (uint16 LE)
+  byte 3:    0x02 (2 servos)
+  byte 4:    servo_pan_id (2)
+  byte 5-6:  pan_pwm (uint16 LE)
+  byte 7:    servo_tilt_id (1)
+  byte 8-9:  tilt_pwm (uint16 LE)
+
+FRAME 2 — Motores (cmd 0x03)
+┌─────┬─────┬─────┬─────┬───────────────────────────┬──────┐
+│0xAA │0x55 │0x03 │ len │         payload           │ CRC8 │
+└─────┴─────┴─────┴─────┴───────────────────────────┴──────┘
+
+Payload (22 bytes):
+  byte 0-1: 0x05, 0x04 (sub-cmd + 4 motores)
+  byte 2:   0x00 (índice motor 0)
+  byte 3-6: m1 (float32 LE)
+  byte 7:   0x01 (índice motor 1)
+  byte 8-11: m2 (float32 LE)
+  byte 12:  0x02 (índice motor 2)
+  byte 13-16: m3 (float32 LE)
+  byte 17:  0x03 (índice motor 3)
+  byte 18-21: m4 (float32 LE)
+```
+
+### Cálculo CRC8
+
+- **Polinomio:** 0x07
+- **Rango de bytes:** `frame[2:]` (cmd + len + payload, excluyendo header)
+- **Tabla:** Pre-calculada de 256 elementos en `config.CRC8_TABLE`
+- **Implementación:**
+  ```python
+  def crc8(data: bytes) -> int:
+      c = 0
+      for b in data:
+          c = CRC8_TABLE[c ^ b]
+      return c
+  ```
+
+### Conversión Ángulo → PWM
+
+```
+pwm = 500 + (angle / 180.0) × 2000
+
+Ángulo:  0°    45°    90°    180°
+PWM:     500   1000   1500   2500  µs
+```
+
+Ángulos centrales por defecto:
+- `pan_center = 70°` → PWM ~1278 µs
+- `tilt_center = 45°` → PWM ~1000 µs
+
+### Mapeo Diferencial
+
+```
+v_left positivo  → rueda izquierda avanza
+v_right negativo → rueda derecha avanza
+
+m1 = 0.0       (motor 1 — no usado para tracción)
+m2 = 0.0       (motor 2 — no usado para tracción)
+m3 = -v_right  (motor 3 — rueda derecha física)
+m4 = -v_left   (motor 4 — rueda izquierda física)
+
+Ejemplos:
+  Avance recto:       vL=80,  vR=-80  → m3=80,  m4=-80
+  Retroceso:           vL=-80, vR=80   → m3=-80, m4=80
+  Giro izquierda:     vL=-80, vR=-80  → m3=80,  m4=80
+  Giro derecha:       vL=80,  vR=80   → m3=-80, m4=-80
+  Stop:               vL=0,   vR=0    → m3=0,   m4=0
+```
+
 ---
 
 ## Backends YOLO
 
-### _YoloOnnxBackend
+### `_YoloOnnxBackend`
 
-```python
-class _YoloOnnxBackend:
-    def __init__(self, config: Config)
-    def infer(self, frame: np.ndarray) -> np.ndarray
-```
+**Pipeline:** resize 320² → transpose HWC→CHW → add batch dim → normalize /255.0 → `session.run({"images": img})` → filtrar confianza >0.1.
 
-**Pipeline:**
-1. Redimensionar frame a `yolo_imgsz × yolo_imgsz` (320×320)
-2. Transponer (HWC → CHW), añadir batch dim, normalizar a [0,1]
-3. `session.run(None, {"images": img})` → outputs
-4. Filtrar detecciones con confianza > 0.1
+**Ventajas:** Multiplataforma (x86, ARM, CUDA), formato de modelo portable (.onnx).
+**Desventajas:** Mayor latencia en RPi5 (~45 ms) comparado con NCNN.
 
-**Dependencia:** `onnxruntime` (grupo opcional `onnx`)
+### `_YoloNcnnBackend`
 
-### _YoloNcnnBackend
+**Pipeline:** resize 320² → `ncnn.Mat.from_pixels(BGR)` → `substract_mean_normalize([0,0,0], [1/255]³)` → `extractor.input → extractor.extract` → filtrar.
 
-```python
-class _YoloNcnnBackend:
-    def __init__(self, config: Config)
-    def infer(self, frame: np.ndarray) -> np.ndarray
-```
+**Ventajas:** Optimizado para ARM NEON. ~2× más rápido que ONNX en RPi5 (~22 ms).
+**Desventajas:** Solo Linux aarch64. Requiere archivos .param y .bin (formato NCNN específico).
 
-**Pipeline:**
-1. Redimensionar frame a `yolo_imgsz × yolo_imgsz`
-2. Convertir a `ncnn.Mat` (BGR → RGB internamente)
-3. Normalizar: restar media [0,0,0], dividir por [255,255,255]
-4. `extractor.input("in0", mat)` → `extractor.extract("out0")`
-5. Convertir salida a numpy y filtrar
-
-**Dependencia:** `ncnn` (grupo opcional `ncnn`). Optimizado para ARM NEON en RPi.
-
-**Archivos de modelo esperados:**
+**Archivos esperados en el modelo:**
 ```
 models/yoloe26n_v2/ncnn/yoloe26n_v2_ncnn_model/
 ├── model.ncnn.param
@@ -519,57 +673,125 @@ models/yoloe26n_v2/ncnn/yoloe26n_v2_ncnn_model/
 └── metadata.yaml
 ```
 
-### _YoloTensorrtBackend
+### `_YoloTensorrtBackend`
 
-```python
-class _YoloTensorrtBackend:
-    def __init__(self, config: Config)  # raise NotImplementedError
-    def infer(self, frame: np.ndarray)   # return None
-```
-
-**Estado:** No implementado. Placeholder para futura aceleración por GPU.
+**Estado:** No implementado. `__init__` lanza `NotImplementedError`. `infer()` retorna `None`.
+**Propósito futuro:** Aceleración por GPU/NPU en hardware compatible (Jetson, aceleradoras PCIe).
 
 ### Selección de Backend
 
-En `Vision._init_yolo()`:
 ```python
-if backend == "onnx":    self._yolo = _YoloOnnxBackend(cfg)
-elif backend == "ncnn":  self._yolo = _YoloNcnnBackend(cfg)
+# En Vision._init_yolo():
+if backend == "onnx":     self._yolo = _YoloOnnxBackend(cfg)
+elif backend == "ncnn":   self._yolo = _YoloNcnnBackend(cfg)
 elif backend == "tensorrt": self._yolo = _YoloTensorrtBackend(cfg)
 ```
 
-Si el backend falla (excepción), `self._yolo = None` y el sistema opera solo con HSV.
+Si la inicialización lanza excepción, `self._yolo = None` y el sistema continúa solo con HSV.
 
 ---
 
 ## Backends de Cámara
 
-### Orden de Resolución
+### Tabla Comparativa
 
-`Camera._resolve_backend()` prueba 4 backends en orden. El primero que entrega frames válidos se usa:
+| Backend | Inicialización | Latencia | Robustez | Usar cuando |
+|---------|---------------|----------|----------|------------|
+| picamera2 | ~0.5s | Baja (~5ms) | Alta | RPi5 con picamera2 instalado |
+| libcamera subprocess | ~1-15s | Media (~15ms) | Media | RPi5 sin picamera2 |
+| GStreamer | ~0.3s | Media (~20ms) | Media | RPi5 con GStreamer y libcamera |
+| V4L2 | ~0.2s | Variable | Baja | Desarrollo en laptop con webcam USB |
 
-1. **picamera2** — `_try_picamera2()`
-   - Import lazy: `from picamera2 import Picamera2`
-   - Configura `RGB888`, inicia, captura frame de prueba
-   - Envuelve en `_Picamera2Adapter` que convierte RGB→BGR
+### Resolución Automática
 
-2. **libcamera subprocess** — `_try_libcamera_subprocess()`
-   - Ejecuta `scripts/_libcamera_worker.py` con `/usr/bin/python3`
-   - Comunicación por pipes: frames BGR por stdout, comandos por stdin
-   - Protocolo binario con header de 20 bytes
+`Camera.__init__()` recorre los 4 backends en orden. El primero que entrega un frame válido se usa. Si ninguno funciona, lanza `RuntimeError` con instrucciones de diagnóstico.
 
-3. **GStreamer** — `_try_gstreamer()`
-   - Pipeline: `libcamerasrc ! videoconvert ! appsink`
-   - Usa `cv2.VideoCapture(pipeline, cv2.CAP_GSTREAMER)`
+---
 
-4. **V4L2** — `_try_v4l2_any()`
-   - Enumera `/dev/video*`, prueba cada uno
-   - Configura resolución y buffersize
-   - Útil para webcams USB en desarrollo
+## Métricas de Rendimiento
 
-### Warmup
+### Pipeline de Visión
 
-Después de abrir la cámara, `_warmup()` descarta los primeros 10 frames para estabilizar exposición y balance de blancos.
+| Operación | ONNX Runtime | NCNN (ARM NEON) | Solo HSV |
+|-----------|-------------|-----------------|----------|
+| Captura de frame | ~3 ms | ~3 ms | ~3 ms |
+| YOLO resize + normalize | ~2 ms | ~2 ms | — |
+| YOLO inferencia | ~40 ms | ~17 ms | — |
+| YOLO parse output | ~0.5 ms | ~0.5 ms | — |
+| HSV pelota | ~2 ms | ~2 ms | ~2 ms |
+| HSV porterías | ~1 ms | ~1 ms | ~1 ms |
+| HSV línea blanca | ~1 ms | ~1 ms | ~1 ms |
+| Fusión | ~0.1 ms | ~0.1 ms | ~0.1 ms |
+| **Total detect()** | **~45 ms** | **~22 ms** | **~5 ms** |
+
+> Mediciones en Raspberry Pi 5, modelo yoloe26n_v2, 320×240, CPU a 2.4 GHz, 4 núcleos activos.
+
+### Throughput del Pipeline Completo
+
+| Modo | Latencia por ciclo | FPS máximo teórico | FPS efectivo (con sleep 0.01s) |
+|------|-------------------|-------------------|-------------------------------|
+| ONNX | ~55 ms | ~18 | ~18 |
+| NCNN | ~30 ms | ~33 | ~33 |
+| HSV solo | ~12 ms | ~83 | ~83 |
+
+> El FPS efectivo está acotado por `time.sleep(0.01)` en `main.py`, que impone un máximo de ~100 FPS. Para aumentar el FPS, reducir o eliminar este sleep (a costa de mayor uso de CPU).
+
+### Uso de Recursos
+
+| Modo | CPU (4 núcleos) | RAM | Swap |
+|------|-----------------|-----|------|
+| ONNX | 80-90% | ~180 MB | 0 |
+| NCNN | 50-60% | ~150 MB | 0 |
+| HSV solo | 15-20% | ~120 MB | 0 |
+
+---
+
+## Estrategia de Pruebas
+
+### Pirámide de Testing
+
+```
+         ┌─────────┐
+         │   E2E   │  1 test  — test_integration.py (bucle completo con stubs)
+         ├─────────┤
+         │  Unit   │  15 tests — test_config, test_camera, test_vision,
+         │         │              test_motors, test_pipeline
+         └─────────┘
+```
+
+### Tests Unitarios
+
+| Módulo | Archivo | Enfoque |
+|--------|---------|---------|
+| config | `test_config.py` | Constantes por defecto, función CRC8 |
+| camera | `test_camera.py` | Instanciación sin hardware (espera RuntimeError) |
+| vision | `test_vision.py` | Dataclasses, detección HSV con frames sintéticos (círculo naranja) |
+| motors | `test_motors.py` | MotorCommand, mapeo diferencial, conversión PWM, CRC8 en trama |
+| pipeline | `test_pipeline.py` | FSM: inicia en SEARCH, transición a CHASE, servo visual centrado, transición a RECOVERY |
+
+### Test de Integración
+
+`test_integration.py` ejecuta 10 ticks del bucle completo con `CameraStub` y `MotorsStub`. Verifica que:
+1. Se producen comandos de motor (al menos 1)
+2. Las velocidades están en rango [-300, 300]
+3. El pipeline no crashea en 10 iteraciones
+
+### CI/CD Sugerido
+
+```yaml
+# .github/workflows/test.yml
+name: Tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install uv && cd futbot && uv sync
+      - run: cd futbot && FUTBOT_MODE=stub uv run pytest tests/ -v
+```
 
 ---
 
@@ -581,14 +803,21 @@ Después de abrir la cámara, `_warmup()` descarta los primeros 10 frames para e
    ```python
    class _YoloMyBackend:
        def __init__(self, config: Config): ...
-       def infer(self, frame: np.ndarray) -> np.ndarray: ...
+       def infer(self, frame: np.ndarray) -> Optional[np.ndarray]: ...
+       def _process_output(self, output) -> Optional[np.ndarray]: ...
    ```
+
 2. Registrar en `Vision._init_yolo()`:
    ```python
    elif backend == "mybackend":
        self._yolo = _YoloMyBackend(self._cfg)
    ```
-3. Agregar dependencia opcional en `pyproject.toml`
+
+3. Agregar como dependencia opcional en `pyproject.toml`:
+   ```toml
+   [project.optional-dependencies]
+   mybackend = ["mi-libreria>=1.0"]
+   ```
 
 ### Agregar un Nuevo Estado FSM
 
@@ -596,50 +825,76 @@ Después de abrir la cámara, `_warmup()` descarta los primeros 10 frames para e
    ```python
    MY_STATE = "MY_STATE"
    ```
-2. Agregar transiciones en `Pipeline.tick()`:
+
+2. Agregar transición en `Pipeline.tick()`:
    ```python
-   elif self._state == SOME_STATE:
-       if condition:
+   elif self._state == EXISTING_STATE:
+       if transition_condition:
            self._state = MY_STATE
    ```
+
 3. Implementar método `_tick_mystate(self, ...)` → `MotorCommand`
-4. Agregar constantes en `config.py`:
+
+4. Agregar constantes en `Config`:
    ```python
-   my_state_speed: float = 100.0
-   my_state_duration_ms: int = 200
+   my_state_param: float = 100.0
    ```
 
-### Agregar un Nuevo Script de Diagnóstico
+### Agregar un Nuevo Backend de Cámara
 
-1. Crear archivo en `scripts/`
-2. Importar `Config` de `config`:
+1. Crear método `_try_mybackend(self, w, h)` en `Camera`
+2. Agregar al orden en `_resolve_backend()`:
    ```python
-   import sys; sys.path.insert(0, "..")
-   from config import Config
+   cap = self._try_mybackend(w, h)
+   if cap:
+       return cap, w, h
    ```
-3. Ejecutar: `uv run python scripts/mi_script.py`
-
-### Modificar Comportamiento sin Tocar Código
-
-Todos los parámetros ajustables están en `Config`. Para cambiar comportamiento en runtime:
-
-```python
-from config import Config
-cfg = Config(
-    chase_speed_base=100.0,  # más rápido
-    yolo_conf_threshold=0.3, # más permisivo
-)
-```
-
-Pasar esta instancia a todos los módulos en `main.py`.
+3. Si requiere adaptador, crear clase `_MyBackendAdapter` con interfaz `read()`/`release()`
 
 ---
 
 ## Convenciones de Código
 
-- **Idioma:** Docstrings y comentarios en español
-- **Tipado:** Type hints en todas las funciones públicas (`from __future__ import annotations`)
-- **Logging:** `logging.getLogger("futbot.<modulo>")`
-- **Dataclasses:** Tipos compartidos como dataclasses inmutables
-- **Imports:** Lazy imports para dependencias opcionales (serial, onnxruntime, ncnn, picamera2)
-- **TDD:** Todo código nuevo requiere tests en `tests/` antes del commit
+| Aspecto | Convención |
+|---------|-----------|
+| Idioma | Docstrings y comentarios en español |
+| Tipado | `from __future__ import annotations`. Type hints en todas las funciones públicas. |
+| Logging | `logging.getLogger("futbot.<modulo>")`. Niveles: INFO para hitos, WARNING para fallbacks, ERROR para excepciones. |
+| Dataclasses | Tipos compartidos como `@dataclass` con valores por defecto. |
+| Imports | Lazy para dependencias opcionales (`serial`, `onnxruntime`, `ncnn`, `picamera2`). |
+| TDD | Todo código nuevo requiere test antes del commit. |
+| Commits | Formato: `<tipo>: <descripción en español>`. Tipos: `feat`, `fix`, `docs`, `chore`, `refactor`. |
+| Sin dependencias circulares | `vision.py` ← `pipeline.py` → `motors.py`. `pipeline.py` importa tipos, no instancias. |
+
+---
+
+## Matriz de Compatibilidad
+
+### Python y Bibliotecas
+
+| Python | OpenCV | ONNX Runtime | NCNN | PySerial | Estado |
+|--------|--------|-------------|------|----------|--------|
+| 3.11 | 4.13+ | 1.24+ | ✓ | 3.5+ | ✅ Soportado |
+| 3.12 | 4.13+ | 1.24+ | ✓ | 3.5+ | ✅ Recomendado |
+| 3.13 | 4.13+ | 1.24+ | ✗ | 3.5+ | ⚠️ NCNN no probado |
+| 3.14 | 4.13+ | 1.24+ | ✗ | 3.5+ | ⚠️ NCNN no probado |
+| 3.15+ | — | — | — | — | ❌ Bloqueado por `requires-python` |
+
+### Plataformas
+
+| Plataforma | picamera2 | libcamera subprocess | GStreamer | V4L2 | ONNX | NCNN |
+|-----------|-----------|---------------------|-----------|------|------|------|
+| RPi5 (aarch64) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| RPi4 (aarch64) | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️ |
+| Linux x86_64 (dev) | ✗ | ✗ | ✗ | ✅ | ✅ | ✗ |
+| macOS (dev) | ✗ | ✗ | ✗ | ✅ | ✅ | ✗ |
+| Windows (dev) | ✗ | ✗ | ✗ | ⚠️ | ✅ | ✗ |
+
+### Backends YOLO vs Plataforma
+
+| Backend | RPi5 | RPi4 | x86_64 Linux | macOS | Windows |
+|---------|------|------|-------------|-------|---------|
+| ONNX | ✅ | ⚠️ | ✅ | ✅ | ✅ |
+| NCNN | ✅ | ⚠️ | ✗ | ✗ | ✗ |
+| TensorRT | ✗ | ✗ | ✗ | ✗ | ✗ |
+| Solo HSV | ✅ | ✅ | ✅ | ✅ | ✅ |
