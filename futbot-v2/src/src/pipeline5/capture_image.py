@@ -1,3 +1,15 @@
+"""Script de diagnóstico: captura un frame de la cámara y lo guarda como JPG.
+
+Útil para verificar que la cámara IMX219 funciona y ver qué está viendo el robot
+sin overlays ni procesamiento de visión.
+
+Uso:
+    python capture_image.py
+
+Salida:
+    captura_camara.jpg (en el mismo directorio)
+"""
+
 import sys
 import os
 import time

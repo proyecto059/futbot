@@ -6,12 +6,20 @@ FSM de 2 estados:
 
 Transiciones:
     SEARCH  → ADVANCE (pelota visible)
-    ADVANCE → SEARCH  (pelota perdida)
+    ADVANCE → SEARCH  (pelota perdida por >0.2s)
 
 Usa motors.drive(v_left, v_right, dur_ms) con la misma convención que
 el pipeline de v3:
     - Ambos positivos = avanzar
     - Signos opuestos = girar sobre eje
+
+Cada tick del loop ejecuta:
+    1. Obtener snapshot de visión (frame + detección de pelota)
+    2. Aplicar filtros de color/saturación/forma para evitar falsos positivos
+    3. Evaluar transiciones del FSM
+    4. Calcular velocidades según el operador del estado actual
+    5. Aplicar capa de seguridad AvoidWall (si se detecta pared negra, escapa)
+    6. Enviar comandos a motores (invirtiendo rueda izquierda por polaridad)
 """
 
 import logging
@@ -44,44 +52,52 @@ class Pipeline5Service:
         self._avoid_wall_op = AvoidWallOperator()
 
     def tick(self) -> PipelineOutputDto:
+        """Ejecuta un ciclo completo del FSM: visión → filtros → transición → motores.
+
+        Retorna un PipelineOutputDto con el snapshot del estado tras este tick.
+        """
         now = time.time()
 
-        # Obtener snapshot de visión (mismo que v3)
+        # ── Paso 1: Obtener snapshot de visión ──
         snap = self._vision.tick()
         ball = snap.get("ball")
         ball_visible = ball is not None
 
-        # --- FILTROS INSTANTÁNEOS (Sin retrasos) ---
+        # ── Paso 2: FILTROS INSTANTÁNEOS anti falsos positivos ──
+        # Se ejecutan sobre el frame crudo ANTES de usar la detección para decidir.
         if ball_visible:
             frame = self._vision.last_frame()
             if frame is not None:
                 import cv2
                 import numpy as np
                 cx, cy = int(ball["cx"]), int(ball["cy"])
-                
-                # 1. Filtro de Color y Saturación (Rechaza amarillo y brillos blancos)
+
+                # --- Filtro 1: Color (HSV Hue) + Saturación ---
+                # Se analiza un parche 7x7 píxeles alrededor del centro detectado.
                 patch_r = 3
                 y0, y1 = max(0, cy - patch_r), min(frame.shape[0], cy + patch_r + 1)
                 x0, x1 = max(0, cx - patch_r), min(frame.shape[1], cx + patch_r + 1)
-                
+
                 if x1 > x0 and y1 > y0:
                     patch_bgr = frame[y0:y1, x0:x1]
                     patch_hsv = cv2.cvtColor(patch_bgr, cv2.COLOR_BGR2HSV)
                     median_h = int(np.median(patch_hsv[:, :, 0]))
                     median_s = int(np.median(patch_hsv[:, :, 1]))
-                    
-                    # La pelota es naranja (Hue entre 0 y 12). 
-                    # Rechazamos CUALQUIER OTRO COLOR (amarillo, verde, azul, morado, rosa)
+
+                    # La pelota es naranja (Hue entre 0 y 12 en OpenCV).
+                    # Rechaza: amarillo, verde, azul, morado, rosa.
                     if 13 <= median_h <= 170:
                         log.info(f"event=ball_rejected reason=wrong_color hue={median_h} source={ball.get('source')}")
                         ball = None
                         ball_visible = False
-                    elif median_s < 140:  # Exigir que sea un "naranja chillón" (saturación alta). Rechaza madera, piel, cartón.
+                    elif median_s < 140:
+                        # Exige saturación alta ("naranja chillón"). Rechaza madera, piel, cartón.
                         log.info(f"event=ball_rejected reason=not_neon_enough sat={median_s} source={ball.get('source')}")
                         ball = None
                         ball_visible = False
-                        
-            # 2. Filtro de Forma (Rechaza pilares altos, solo si YOLO ya los vio)
+
+            # --- Filtro 2: Forma (solo si YOLO detectó la pelota) ---
+            # Rechaza objetos cuya altura sea >1.4x su anchura (pilares, conos).
             if ball_visible and hasattr(self._vision, "_yolo"):
                 yolo_raw = self._vision._yolo.get_latest_output()
                 ball_bbox = yolo_raw.get("ball_bbox")
@@ -89,15 +105,14 @@ class Pipeline5Service:
                     x1, y1, x2, y2, conf, cls_id = ball_bbox
                     w = max(1.0, float(x2 - x1))
                     h = max(1.0, float(y2 - y1))
-                    
-                    # Si es un pilar, lo rechazamos al instante.
+
                     if (h / w) > 1.4:
                         log.info(f"event=ball_rejected reason=tall_pillar_shape source={ball.get('source')}")
                         ball = None
                         ball_visible = False
-        # -------------------------------------------
+        # ── Fin de filtros ──
 
-        # Log de detección de pelota y actualización de última posición
+        # ── Paso 3: Loggeo y actualización de última posición conocida ──
         if ball_visible:
             self._last_ball_cx = ball["cx"]
             self._last_ball_cy = ball["cy"]
@@ -112,22 +127,23 @@ class Pipeline5Service:
             log.info("event=ball_NOT_detected state=%s", self._state)
             self._last_no_ball_log = now
 
-        # Transición de estados
+        # ── Paso 4: Transición de estados del FSM ──
         if self._state == SEARCH:
             if ball_visible:
                 self._state = ADVANCE
                 log.info("event=state_change from=SEARCH to=ADVANCE")
         elif self._state == ADVANCE:
             if not ball_visible and (now - self._last_seen_ts > 0.2):
-                # Esperamos 0.2s antes de darla por perdida para evitar "parpadeos"
-                # Se perdió la pelota -> pasamos a BUSQUEDA (SEARCH)
+                # Esperar 0.2s antes de darla por perdida evita "parpadeos"
+                # (falsas pérdidas de detección por 1-2 frames).
                 self._state = SEARCH
                 centro_x = self._vision.frame_width / 2.0
+                # Girar hacia donde se vio la pelota por última vez
                 direccion = -1 if self._last_ball_cx < centro_x else 1
                 self._search_op.reset(direction=direccion)
                 log.info(f"event=state_change from=ADVANCE to=SEARCH direction={'left' if direccion == -1 else 'right'}")
 
-        # Ejecución del estado actual
+        # ── Paso 5: Ejecutar operador del estado actual ──
         v_left, v_right, dur_ms = 0.0, 0.0, 100
 
         if self._state == ADVANCE:
@@ -136,14 +152,15 @@ class Pipeline5Service:
         elif self._state == SEARCH:
             v_left, v_right, dur_ms = self._search_op.compute()
 
-        # Capa de seguridad: Evaluación de pared negra antes de mandar a motores
+        # ── Paso 6: Capa de seguridad — AvoidWall tiene prioridad máxima ──
         frame = self._vision.last_frame()
         evasion = self._avoid_wall_op.check_and_avoid(frame)
         if evasion is not None:
             v_left, v_right, dur_ms = evasion
             log.info("event=avoid_wall_activated action=reversing")
 
-        # Invertir v_left porque la rueda izquierda tiene polaridad invertida
+        # ── Paso 7: Enviar comandos a motores ──
+        # La rueda izquierda tiene polaridad invertida en el hardware de este robot.
         if v_left != 0 or v_right != 0:
             self._motors.drive(-v_left, v_right, dur_ms)
         else:

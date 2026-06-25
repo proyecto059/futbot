@@ -1,17 +1,27 @@
-"""Cálculo dinámico frame-by-frame para ir hacia la pelota.
+"""Operador de persecución — CÓDIGO MUERTO (NO SE USA).
 
-Ambas ruedas siempre hacia adelante. La rueda externa va más rápido
-y la interna más lento proporcionalmente al error.
+Este archivo NO es importado por pipeline_service.py ni por ningún otro módulo
+de pipeline5. Es un remanente de futbot-v4.
 
-    error_norm = |error| / (frame_width / 2)   → 0..1
-    diff = base * error_norm * 0.8
+ADVERTENCIA: Si se intentara importar, fallaría con ImportError porque referencia
+constantes que NO existen en pipeline_constants.py:
+    - CHASE_SPEED_BASE
+    - CHASE_DEADBAND_PX
+    - KICK_RADIUS_PX
 
-    rueda externa = base + diff  (rápida)
-    rueda interna = base - diff  (lenta pero siempre >= 0)
+El operador activo equivalente es AdvanceOperator (advance_operator.py).
 
-Esto garantiza avance continuo con giro suave y progresivo.
+Algoritmo original (para referencia histórica):
+    Ambas ruedas siempre hacia adelante. La rueda externa va más rápido
+    y la interna más lento proporcionalmente al error.
 
-Replicado de futbot-v4.
+        error_norm = |error| / (frame_width / 2)   → 0..1
+        diff = base * error_norm * 0.8
+
+        rueda externa = base + diff  (rápida)
+        rueda interna = base - diff  (lenta pero siempre >= 0)
+
+    Esto garantiza avance continuo con giro suave y progresivo.
 """
 
 from __future__ import annotations

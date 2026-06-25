@@ -1,8 +1,19 @@
+"""DTO (Data Transfer Object) para la salida de cada tick del pipeline."""
+
 from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class PipelineOutputDto:
-    """Snapshot del estado FSM y comandos de motor en un tick."""
+    """Snapshot inmutable del estado FSM y comandos de motor en un tick.
+
+    Atributos:
+        state: Estado actual de la FSM ("SEARCH" o "ADVANCE").
+        ball_visible: True si se detectó pelota en este tick (post-filtros).
+        v_left: Velocidad PWM enviada a la rueda izquierda (-255 a 255).
+        v_right: Velocidad PWM enviada a la rueda derecha (-255 a 255).
+        dur_ms: Duración del pulso de motor en milisegundos.
+        ts: Timestamp Unix del momento en que se generó este tick.
+    """
     state: str
     ball_visible: bool
     v_left: float
@@ -11,7 +22,7 @@ class PipelineOutputDto:
     ts: float
 
     def to_dict(self) -> dict:
-        """Serializa el DTO a un dict JSON-serializable."""
+        """Serializa el DTO a un diccionario JSON-serializable."""
         return {
             "state": self.state,
             "ball_visible": self.ball_visible,

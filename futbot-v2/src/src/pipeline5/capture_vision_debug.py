@@ -1,3 +1,22 @@
+"""Script de diagnóstico: captura un frame con overlays de detección de pelota.
+
+Dibuja sobre la imagen:
+  - Cruz central de referencia (gris)
+  - Círculo verde del radio detectado
+  - Punto rojo en el centro exacto de la pelota
+  - Rectángulo azul del parche 7×7 usado por el filtro de color
+  - Etiqueta con la fuente de detección (HSV o YOLO)
+
+Útil para calibrar la detección de pelota y verificar que los filtros de color
+están funcionando correctamente.
+
+Uso:
+    python capture_vision_debug.py
+
+Salida:
+    captura_vision_debug.jpg (en el mismo directorio)
+"""
+
 import sys
 import os
 import time
