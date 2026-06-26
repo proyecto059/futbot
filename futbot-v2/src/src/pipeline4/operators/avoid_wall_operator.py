@@ -10,7 +10,7 @@ Nota: los parámetros reales usados están hardcodeados en check_and_avoid()
 import cv2
 import numpy as np
 import time
-from pipeline02.utils.pipeline_constants import STOP_DUR_MS
+from src.pipeline4.utils.pipeline_constants import STOP_DUR_MS
 
 class AvoidWallOperator:
     def __init__(self, black_threshold=30, coverage_ratio=0.35, reverse_duration=0.5, turn_duration=1.0):
