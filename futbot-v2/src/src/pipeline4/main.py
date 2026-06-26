@@ -1,3 +1,16 @@
+"""Pipeline 4 — Punto de entrada principal.
+
+Wiring de los 3 servicios que componen el robot:
+  1. HybridVisionService  → captura de cámara + detección de pelota/porterías (HSV + YOLO)
+  2. MotorService         → control de motores vía Serial
+  3. Pipeline4Service     → FSM que orquesta búsqueda, avance, alineación y disparo
+
+Ejecutar con:
+    python main.py
+
+Para detener: Ctrl+C (manejado vía KeyboardInterrupt, hace cleanup ordenado).
+"""
+
 import sys
 import os
 import logging
@@ -15,7 +28,9 @@ logging.basicConfig(
 )
 log = logging.getLogger("turbopi")
 
+
 def main():
+    """Instancia los servicios y ejecuta el loop principal del pipeline4."""
     vision = None
     motors = None
     pipeline = None
@@ -23,16 +38,15 @@ def main():
     try:
         from vision import HybridVisionService
         from motors import MotorService
-        
-        # Importar el nuevo Pipeline5 refactorizado
-        from src.pipeline5.pipeline_service import Pipeline5Service
 
-        log.info("event=controller_started mode=pipeline5")
+        from src.pipeline4.pipeline_service import Pipeline4Service
+
+        log.info("event=controller_started mode=pipeline4")
 
         vision = HybridVisionService()
         motors = MotorService()
 
-        pipeline = Pipeline5Service(vision, motors)
+        pipeline = Pipeline4Service(vision, motors)
         pipeline.run()
 
     except KeyboardInterrupt:
@@ -47,6 +61,7 @@ def main():
             motors.close()
         if vision is not None:
             vision.close()
+
 
 if __name__ == "__main__":
     main()

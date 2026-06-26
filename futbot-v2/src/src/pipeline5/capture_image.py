@@ -15,7 +15,7 @@ import os
 import time
 import cv2
 
-# Añadir el directorio 'src' principal al PYTHONPATH para importar 'vision'
+# Añadir el directorio 'src' principal al PYTHONPATH para importar 'vision' autoloader
 current_dir = os.path.dirname(os.path.abspath(__file__))
 src_dir = os.path.abspath(os.path.join(current_dir, "..", ".."))
 if src_dir not in sys.path:
