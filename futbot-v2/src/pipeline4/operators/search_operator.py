@@ -7,11 +7,7 @@ Convención de giro (igual que v3 pipeline_service.py):
 """
 
 import time
-<<<<<<< HEAD:futbot-v2/src/pipeline5/operators/search_operator.py
-from pipeline5.utils.pipeline_constants import (
-=======
-from src.pipeline4.utils.pipeline_constants import (
->>>>>>> 5f36520a1fd37a0d5cef277410929cc404fd1920:futbot-v2/src/src/pipeline4/operators/search_operator.py
+from pipeline4.utils.pipeline_constants import (
     SEARCH_SPEED,
     SEARCH_TURN_DUR_MS,
     SEARCH_PAUSE_DUR_MS,

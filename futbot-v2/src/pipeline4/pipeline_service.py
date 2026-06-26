@@ -27,16 +27,16 @@ Cada tick ejecuta:
 import logging
 import time
 
-from src.pipeline4.utils.pipeline_constants import (
+from pipeline4.utils.pipeline_constants import (
     SEARCH, ADVANCE, ALIGN, PUSH,
     STOP_DUR_MS, BALL_CLOSE_RADIUS,
 )
-from src.pipeline4.dto.pipeline_output_dto import PipelineOutputDto
-from src.pipeline4.operators.search_operator import SearchOperator
-from src.pipeline4.operators.advance_operator import AdvanceOperator
-from src.pipeline4.operators.align_to_goal_operator import AlignToGoalOperator
-from src.pipeline4.operators.push_operator import PushOperator
-from src.pipeline4.operators.avoid_wall_operator import AvoidWallOperator
+from pipeline4.dto.pipeline_output_dto import PipelineOutputDto
+from pipeline4.operators.search_operator import SearchOperator
+from pipeline4.operators.advance_operator import AdvanceOperator
+from pipeline4.operators.align_to_goal_operator import AlignToGoalOperator
+from pipeline4.operators.push_operator import PushOperator
+from pipeline4.operators.avoid_wall_operator import AvoidWallOperator
 
 log = logging.getLogger("turbopi.pipeline4")
 

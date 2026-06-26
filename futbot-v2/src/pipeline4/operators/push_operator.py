@@ -5,7 +5,7 @@ Una vez iniciado, mantiene velocidad máxima por PUSH_DUR_MS y luego se desactiv
 
 import time
 
-from src.pipeline4.utils.pipeline_constants import PUSH_SPEED, PUSH_DUR_MS, STOP_DUR_MS
+from pipeline4.utils.pipeline_constants import PUSH_SPEED, PUSH_DUR_MS, STOP_DUR_MS
 
 
 class PushOperator:

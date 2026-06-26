@@ -7,7 +7,7 @@ Estrategia:
   4. Marca alineado cuando ambos están dentro de la tolerancia.
 """
 
-from src.pipeline4.utils.pipeline_constants import (
+from pipeline4.utils.pipeline_constants import (
     ALIGN_SPEED,
     ALIGN_TURN_DUR_MS,
     ALIGN_CENTER_TOLERANCE,
