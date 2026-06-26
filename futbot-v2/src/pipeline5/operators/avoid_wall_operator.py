@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import time
-from src.pipeline5.utils.pipeline_constants import STOP_DUR_MS
+from pipeline5.utils.pipeline_constants import STOP_DUR_MS
 
 class AvoidWallOperator:
     def __init__(self, black_threshold=30, coverage_ratio=0.35, reverse_duration=0.5, turn_duration=1.0):

@@ -7,7 +7,7 @@ Convención de giro (igual que v3 pipeline_service.py):
 """
 
 import time
-from src.pipeline6.utils.pipeline_constants import (
+from pipeline02.utils.pipeline_constants import (
     SEARCH_SPEED,
     SEARCH_TURN_DUR_MS,
     SEARCH_PAUSE_DUR_MS,
@@ -21,10 +21,15 @@ class SearchOperator:
         self._search_start_ts = time.time()
         self._search_direction = 1  # 1 = derecha, -1 = izquierda
 
-    def reset(self):
-        """Reinicia el estado de búsqueda al entrar al estado SEARCH."""
+    def reset(self, direction=1):
+        """Reinicia el estado de búsqueda al entrar al estado SEARCH.
+        
+        Args:
+            direction (int): 1 para girar a la derecha, -1 para izquierda.
+        """
         self._search_phase = "turn"
         self._search_start_ts = time.time()
+        self._search_direction = direction
 
     def compute(self):
         """Ejecuta la rutina de búsqueda paso a paso.
@@ -44,7 +49,7 @@ class SearchOperator:
             speed = SEARCH_SPEED
             v_left = speed * self._search_direction
             v_right = -speed * self._search_direction
-            dur_ms = SEARCH_TURN_DUR_MS
+            dur_ms = STOP_DUR_MS # Enviamos pulso corto al motor para que pueda ser interrumpido
             if time_in_phase > (SEARCH_TURN_DUR_MS / 1000.0):
                 self._search_phase = "pause"
                 self._search_start_ts = now

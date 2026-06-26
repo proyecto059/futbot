@@ -5,9 +5,10 @@ Convención de giro (igual que v3 pipeline_service.py):
   - Girar derecha:   v_left = speed,  v_right = -speed
   - Se envía directo a motors.drive(v_left, v_right, dur_ms)
 """
+#Implementación para poder comprender como se mueve el robot 
 
 import time
-from src.pipeline5.utils.pipeline_constants import (
+from pipeline02.utils.pipeline_constants import (
     SEARCH_SPEED,
     SEARCH_TURN_DUR_MS,
     SEARCH_PAUSE_DUR_MS,
@@ -15,7 +16,7 @@ from src.pipeline5.utils.pipeline_constants import (
 )
 
 
-class SearchOperator:
+class ForwardMovement:
     def __init__(self):
         self._search_phase = "turn"
         self._search_start_ts = time.time()

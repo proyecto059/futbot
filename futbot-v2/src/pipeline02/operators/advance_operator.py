@@ -5,7 +5,7 @@ Misma convención que ChaseOperator de v3:
   - Ajusta la velocidad de las ruedas dependiendo del error (distancia de la pelota al centro).
 """
 
-from src.pipeline5.utils.pipeline_constants import ADVANCE_SPEED
+from pipeline02.utils.pipeline_constants import ADVANCE_SPEED
 
 class AdvanceOperator:
     def __init__(self):

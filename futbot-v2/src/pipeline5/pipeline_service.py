@@ -17,19 +17,13 @@ el pipeline de v3:
 import logging
 import time
 
-from src.pipeline5.utils.pipeline_constants import SEARCH, ADVANCE, STOP_DUR_MS
-from src.pipeline5.dto.pipeline_output_dto import PipelineOutputDto
-from src.pipeline5.operators.search_operator import SearchOperator
-from src.pipeline5.operators.advance_operator import AdvanceOperator
-from src.pipeline5.operators.avoid_wall_operator import AvoidWallOperator
+from pipeline5.utils.pipeline_constants import SEARCH, ADVANCE, STOP_DUR_MS
+from pipeline5.dto.pipeline_output_dto import PipelineOutputDto
+from pipeline5.operators.search_operator import SearchOperator
+from pipeline5.operators.advance_operator import AdvanceOperator
+from pipeline5.operators.avoid_wall_operator import AvoidWallOperator
 
 log = logging.getLogger("turbopi.pipeline5")
-
-
-# Cuántos frames consecutivos con pelota se necesitan para confirmar SEARCH→ADVANCE
-_CONFIRM_FRAMES = 3
-# Tiempo (segundos) sin pelota para confirmar ADVANCE→SEARCH
-_LOST_TIMEOUT_S = 0.5
 
 
 class Pipeline5Service:
@@ -43,10 +37,7 @@ class Pipeline5Service:
         self._last_no_ball_log = 0.0
         self._last_ball_cx = 0.0  # Para saber dónde se vio por última vez
         self._last_ball_cy = 0.0  # Para saber qué tan cerca estaba antes de perderla
-        self._last_seen_ts = 0.0  # Última vez que se vio la pelota
-
-        # Contador de histéresis: evita que un solo frame cause cambio de estado
-        self._confirm_count = 0
+        self._last_seen_ts = 0.0  # Para evitar parpadeos falsos
 
         self._search_op = SearchOperator()
         self._advance_op = AdvanceOperator()
@@ -121,27 +112,15 @@ class Pipeline5Service:
             log.info("event=ball_NOT_detected state=%s", self._state)
             self._last_no_ball_log = now
 
-        # Transición de estados con histéresis para evitar "dudas"
+        # Transición de estados
         if self._state == SEARCH:
             if ball_visible:
-                self._confirm_count += 1
-                if self._confirm_count >= _CONFIRM_FRAMES:
-                    self._state = ADVANCE
-                    self._confirm_count = 0
-                    log.info("event=state_change from=SEARCH to=ADVANCE (confirmed %d frames)", _CONFIRM_FRAMES)
-            else:
-                # Reinicia el contador si se pierde la pelota antes de confirmar
-                self._confirm_count = 0
-
+                self._state = ADVANCE
+                log.info("event=state_change from=SEARCH to=ADVANCE")
         elif self._state == ADVANCE:
-            if ball_visible:
-                # Mientras la vea, mantiene el contador al máximo para no soltar fácil
-                self._confirm_count = _CONFIRM_FRAMES
-            else:
-                self._confirm_count = 0
-
-            if not ball_visible and (now - self._last_seen_ts > _LOST_TIMEOUT_S):
-                # Solo pasa a SEARCH si lleva _LOST_TIMEOUT_S sin ver la pelota
+            if not ball_visible and (now - self._last_seen_ts > 0.2):
+                # Esperamos 0.2s antes de darla por perdida para evitar "parpadeos"
+                # Se perdió la pelota -> pasamos a BUSQUEDA (SEARCH)
                 self._state = SEARCH
                 centro_x = self._vision.frame_width / 2.0
                 direccion = -1 if self._last_ball_cx < centro_x else 1

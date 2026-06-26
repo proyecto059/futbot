@@ -7,7 +7,7 @@ Convención de giro (igual que v3 pipeline_service.py):
 """
 
 import time
-from src.pipeline5.utils.pipeline_constants import (
+from pipeline5.utils.pipeline_constants import (
     SEARCH_SPEED,
     SEARCH_TURN_DUR_MS,
     SEARCH_PAUSE_DUR_MS,

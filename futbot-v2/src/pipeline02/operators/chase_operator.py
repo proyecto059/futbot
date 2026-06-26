@@ -16,7 +16,7 @@ Replicado de futbot-v4.
 
 from __future__ import annotations
 
-from src.pipeline5.utils.pipeline_constants import (
+from pipeline02.utils.pipeline_constants import (
     CHASE_SPEED_BASE,
     CHASE_DEADBAND_PX,
     KICK_RADIUS_PX,

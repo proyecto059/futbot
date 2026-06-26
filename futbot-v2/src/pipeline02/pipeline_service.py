@@ -14,16 +14,17 @@ el pipeline de v3:
     - Signos opuestos = girar sobre eje
 """
 
-import logging
-import time
+import logging #Se importa la consola para establecer mensajes 
+import time    #Se importa tiempo para implementar los movimientos
 
-from src.pipeline5.utils.pipeline_constants import SEARCH, ADVANCE, STOP_DUR_MS
-from src.pipeline5.dto.pipeline_output_dto import PipelineOutputDto
-from src.pipeline5.operators.search_operator import SearchOperator
-from src.pipeline5.operators.advance_operator import AdvanceOperator
-from src.pipeline5.operators.avoid_wall_operator import AvoidWallOperator
+from pipeline02.utils.pipeline_constants import SEARCH, ADVANCE, STOP_DUR_MS  #Se importan las constantes necesarias
+from pipeline02.dto.pipeline_output_dto import PipelineOutputDto  #Función que empaqueta datos de salida 
+from pipeline02.operators.search_operator import SearchOperator   #Se establece la funcion SearchOperator
+from pipeline02.operators.advance_operator import AdvanceOperator  #Se establece la funcion AdvanceOperator
+from pipeline02.operators.avoid_wall_operator import AvoidWallOperator  #Se establece la funcion AvoidWallOperator
+from pipeline02.operators.hector_routine import ForwardMovement #ForwardMovement
 
-log = logging.getLogger("turbopi.pipeline5")
+log = logging.getLogger("turbopi.pipeline02")   #Se establece el titulo de la consola 
 
 
 class Pipeline5Service:
@@ -42,6 +43,7 @@ class Pipeline5Service:
         self._search_op = SearchOperator()
         self._advance_op = AdvanceOperator()
         self._avoid_wall_op = AvoidWallOperator()
+        self._hector_routine = ForwardMovement()
 
     def tick(self) -> PipelineOutputDto:
         now = time.time()
