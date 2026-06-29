@@ -1,0 +1,2802 @@
+{
+  "nodes": [
+    {
+      "id": "src_pipeline4_capture_vision_debug_py",
+      "label": "capture_vision_debug.py",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\capture_vision_debug.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "pipeline4_capture_vision_debug_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\capture_vision_debug.py",
+      "source_location": "L33"
+    },
+    {
+      "id": "pipeline4_capture_vision_debug_rationale_1",
+      "label": "Script de diagn\u00f3stico: captura un frame con overlays de detecci\u00f3n de pelota.",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline4\\capture_vision_debug.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_pipeline4_main_py",
+      "label": "main.py",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\main.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "pipeline4_main_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\main.py",
+      "source_location": "L31"
+    },
+    {
+      "id": "pipeline4_main_rationale_1",
+      "label": "Pipeline 4 \u2014 Punto de entrada principal.  Wiring de los 3 servicios que compon",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline4\\main.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "pipeline4_main_rationale_32",
+      "label": "Instancia los servicios y ejecuta el loop principal del pipeline4.",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline4\\main.py",
+      "source_location": "L32"
+    },
+    {
+      "id": "src_pipeline4_pipeline_service_py",
+      "label": "pipeline_service.py",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "pipeline4_pipeline_service_pipeline4service",
+      "label": "Pipeline4Service",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L44"
+    },
+    {
+      "id": "pipeline4_pipeline_service_pipeline4service_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L45"
+    },
+    {
+      "id": "pipeline4_pipeline_service_pipeline4service_tick",
+      "label": ".tick()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L63"
+    },
+    {
+      "id": "pipeline4_pipeline_service_pipeline4service_run",
+      "label": ".run()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L222"
+    },
+    {
+      "id": "pipeline4_pipeline_service_pipeline4service_stop",
+      "label": ".stop()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L229"
+    },
+    {
+      "id": "pipeline4_pipeline_service_pipeline4service_close",
+      "label": ".close()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L232"
+    },
+    {
+      "id": "pipeline4_pipeline_service_rationale_1",
+      "label": "Pipeline 4 \u2014 rutina de disparo a porter\u00eda.  FSM de 4 estados:     SEARCH  \u2192 g",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "pipeline4_pipeline_service_rationale_64",
+      "label": "Ejecuta un ciclo completo del FSM: visi\u00f3n \u2192 filtros \u2192 transici\u00f3n \u2192 motores.",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L64"
+    },
+    {
+      "id": "src_pipeline4_dto_pipeline_output_dto_py",
+      "label": "pipeline_output_dto.py",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\dto\\pipeline_output_dto.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "dto_pipeline_output_dto_pipelineoutputdto",
+      "label": "PipelineOutputDto",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\dto\\pipeline_output_dto.py",
+      "source_location": "L8"
+    },
+    {
+      "id": "dto_pipeline_output_dto_pipelineoutputdto_to_dict",
+      "label": ".to_dict()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\dto\\pipeline_output_dto.py",
+      "source_location": "L30"
+    },
+    {
+      "id": "dto_pipeline_output_dto_rationale_1",
+      "label": "DTO (Data Transfer Object) para la salida de cada tick del pipeline.",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline4\\dto\\pipeline_output_dto.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "dto_pipeline_output_dto_rationale_9",
+      "label": "Snapshot inmutable del estado FSM y comandos de motor en un tick.      Atribut",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline4\\dto\\pipeline_output_dto.py",
+      "source_location": "L9"
+    },
+    {
+      "id": "dto_pipeline_output_dto_rationale_31",
+      "label": "Serializa el DTO a un diccionario JSON-serializable.",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline4\\dto\\pipeline_output_dto.py",
+      "source_location": "L31"
+    },
+    {
+      "id": "src_pipeline4_operators_advance_operator_py",
+      "label": "advance_operator.py",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\advance_operator.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "operators_advance_operator_advanceoperator",
+      "label": "AdvanceOperator",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\advance_operator.py",
+      "source_location": "L10"
+    },
+    {
+      "id": "operators_advance_operator_advanceoperator_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\advance_operator.py",
+      "source_location": "L11"
+    },
+    {
+      "id": "operators_advance_operator_advanceoperator_compute",
+      "label": ".compute()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\advance_operator.py",
+      "source_location": "L14"
+    },
+    {
+      "id": "operators_advance_operator_rationale_1",
+      "label": "Operador de avance \u2014 avanza recto hacia la pelota, ajustando curvas en tiempo re",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline4\\operators\\advance_operator.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "operators_advance_operator_rationale_15",
+      "label": "Retorna (v_left, v_right, dur_ms) para avanzar ajustando la direcci\u00f3n.",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline4\\operators\\advance_operator.py",
+      "source_location": "L15"
+    },
+    {
+      "id": "src_pipeline4_operators_align_to_goal_operator_py",
+      "label": "align_to_goal_operator.py",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\align_to_goal_operator.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "operators_align_to_goal_operator_aligntogoaloperator",
+      "label": "AlignToGoalOperator",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\align_to_goal_operator.py",
+      "source_location": "L18"
+    },
+    {
+      "id": "operators_align_to_goal_operator_aligntogoaloperator_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\align_to_goal_operator.py",
+      "source_location": "L19"
+    },
+    {
+      "id": "operators_align_to_goal_operator_aligntogoaloperator_compute",
+      "label": ".compute()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\align_to_goal_operator.py",
+      "source_location": "L22"
+    },
+    {
+      "id": "operators_align_to_goal_operator_aligntogoaloperator_is_aligned",
+      "label": ".is_aligned()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\align_to_goal_operator.py",
+      "source_location": "L61"
+    },
+    {
+      "id": "operators_align_to_goal_operator_aligntogoaloperator_reset",
+      "label": ".reset()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\align_to_goal_operator.py",
+      "source_location": "L64"
+    },
+    {
+      "id": "operators_align_to_goal_operator_rationale_1",
+      "label": "Operador de alineaci\u00f3n a porter\u00eda \u2014 rota lentamente hasta centrar pelota y porte",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline4\\operators\\align_to_goal_operator.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "operators_align_to_goal_operator_rationale_23",
+      "label": "Retorna (v_left, v_right, dur_ms) para rotar hacia la alineaci\u00f3n.          Arg",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline4\\operators\\align_to_goal_operator.py",
+      "source_location": "L23"
+    },
+    {
+      "id": "src_pipeline4_operators_avoid_wall_operator_py",
+      "label": "avoid_wall_operator.py",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\avoid_wall_operator.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "operators_avoid_wall_operator_avoidwalloperator",
+      "label": "AvoidWallOperator",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\avoid_wall_operator.py",
+      "source_location": "L15"
+    },
+    {
+      "id": "operators_avoid_wall_operator_avoidwalloperator_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\avoid_wall_operator.py",
+      "source_location": "L16"
+    },
+    {
+      "id": "operators_avoid_wall_operator_avoidwalloperator_check_and_avoid",
+      "label": ".check_and_avoid()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\avoid_wall_operator.py",
+      "source_location": "L33"
+    },
+    {
+      "id": "operators_avoid_wall_operator_rationale_1",
+      "label": "Operador de evasi\u00f3n de pared \u2014 capa de seguridad con m\u00e1xima prioridad.  Detect",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline4\\operators\\avoid_wall_operator.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "operators_avoid_wall_operator_rationale_17",
+      "label": "Args:             black_threshold: valor m\u00e1ximo en escala de grises (0-255) par",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline4\\operators\\avoid_wall_operator.py",
+      "source_location": "L17"
+    },
+    {
+      "id": "operators_avoid_wall_operator_rationale_34",
+      "label": "Analiza el frame y decide si evadir una pared negra.          Retorna (v_left,",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline4\\operators\\avoid_wall_operator.py",
+      "source_location": "L34"
+    },
+    {
+      "id": "src_pipeline4_operators_chase_operator_py",
+      "label": "chase_operator.py",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\chase_operator.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "operators_chase_operator_chaseoperator",
+      "label": "ChaseOperator",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\chase_operator.py",
+      "source_location": "L36"
+    },
+    {
+      "id": "operators_chase_operator_chaseoperator_compute",
+      "label": ".compute()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\chase_operator.py",
+      "source_location": "L37"
+    },
+    {
+      "id": "operators_chase_operator_rationale_1",
+      "label": "Operador de persecuci\u00f3n \u2014 C\u00d3DIGO MUERTO (NO SE USA).  Este archivo NO es impor",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline4\\operators\\chase_operator.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_pipeline4_operators_push_operator_py",
+      "label": "push_operator.py",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\push_operator.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "operators_push_operator_pushoperator",
+      "label": "PushOperator",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\push_operator.py",
+      "source_location": "L11"
+    },
+    {
+      "id": "operators_push_operator_pushoperator_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\push_operator.py",
+      "source_location": "L12"
+    },
+    {
+      "id": "operators_push_operator_pushoperator_start",
+      "label": ".start()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\push_operator.py",
+      "source_location": "L16"
+    },
+    {
+      "id": "operators_push_operator_pushoperator_compute",
+      "label": ".compute()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\push_operator.py",
+      "source_location": "L20"
+    },
+    {
+      "id": "operators_push_operator_pushoperator_is_done",
+      "label": ".is_done()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\push_operator.py",
+      "source_location": "L30"
+    },
+    {
+      "id": "operators_push_operator_pushoperator_reset",
+      "label": ".reset()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\push_operator.py",
+      "source_location": "L33"
+    },
+    {
+      "id": "operators_push_operator_rationale_1",
+      "label": "Operador de empuje \u2014 avanza recto a m\u00e1xima velocidad para empujar la pelota.",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline4\\operators\\push_operator.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_pipeline4_operators_search_operator_py",
+      "label": "search_operator.py",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\search_operator.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "operators_search_operator_searchoperator",
+      "label": "SearchOperator",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\search_operator.py",
+      "source_location": "L18"
+    },
+    {
+      "id": "operators_search_operator_searchoperator_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\search_operator.py",
+      "source_location": "L19"
+    },
+    {
+      "id": "operators_search_operator_searchoperator_reset",
+      "label": ".reset()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\search_operator.py",
+      "source_location": "L24"
+    },
+    {
+      "id": "operators_search_operator_searchoperator_compute",
+      "label": ".compute()",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\operators\\search_operator.py",
+      "source_location": "L34"
+    },
+    {
+      "id": "operators_search_operator_rationale_1",
+      "label": "Operador de b\u00fasqueda \u2014 gira sobre su eje y pausa c\u00edclicamente.  Convenci\u00f3n de",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline4\\operators\\search_operator.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "operators_search_operator_rationale_25",
+      "label": "Reinicia el estado de b\u00fasqueda al entrar al estado SEARCH.                  Ar",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline4\\operators\\search_operator.py",
+      "source_location": "L25"
+    },
+    {
+      "id": "operators_search_operator_rationale_35",
+      "label": "Ejecuta la rutina de b\u00fasqueda paso a paso.          Retorna (v_left, v_right,",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline4\\operators\\search_operator.py",
+      "source_location": "L35"
+    },
+    {
+      "id": "src_pipeline4_utils_pipeline_constants_py",
+      "label": "pipeline_constants.py",
+      "file_type": "code",
+      "source_file": "src\\pipeline4\\utils\\pipeline_constants.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "utils_pipeline_constants_rationale_1",
+      "label": "Constantes de configuraci\u00f3n para Pipeline 4 \u2014 rutina de disparo a porter\u00eda.  V",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline4\\utils\\pipeline_constants.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_pipeline5_pipeline_service_py",
+      "label": "pipeline_service.py",
+      "file_type": "code",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "pipeline5_pipeline_service_pipeline5service",
+      "label": "Pipeline5Service",
+      "file_type": "code",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L29"
+    },
+    {
+      "id": "pipeline5_pipeline_service_pipeline5service_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L30"
+    },
+    {
+      "id": "pipeline5_pipeline_service_pipeline5service_tick",
+      "label": ".tick()",
+      "file_type": "code",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L46"
+    },
+    {
+      "id": "pipeline5_pipeline_service_pipeline5service_run",
+      "label": ".run()",
+      "file_type": "code",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L161"
+    },
+    {
+      "id": "pipeline5_pipeline_service_pipeline5service_stop",
+      "label": ".stop()",
+      "file_type": "code",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L168"
+    },
+    {
+      "id": "pipeline5_pipeline_service_pipeline5service_close",
+      "label": ".close()",
+      "file_type": "code",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L171"
+    },
+    {
+      "id": "pipeline5_pipeline_service_rationale_1",
+      "label": "Pipeline 5 \u2014 sigue la pelota con visi\u00f3n y busca al perderla.  FSM de 2 estados",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_pipeline5_operators_advance_operator_py",
+      "label": "advance_operator.py",
+      "file_type": "code",
+      "source_file": "src\\pipeline5\\operators\\advance_operator.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "operators_advance_operator_advanceoperator",
+      "label": "AdvanceOperator",
+      "file_type": "code",
+      "source_file": "src\\pipeline5\\operators\\advance_operator.py",
+      "source_location": "L10"
+    },
+    {
+      "id": "operators_advance_operator_advanceoperator_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src\\pipeline5\\operators\\advance_operator.py",
+      "source_location": "L11"
+    },
+    {
+      "id": "operators_advance_operator_advanceoperator_compute",
+      "label": ".compute()",
+      "file_type": "code",
+      "source_file": "src\\pipeline5\\operators\\advance_operator.py",
+      "source_location": "L14"
+    },
+    {
+      "id": "operators_advance_operator_rationale_1",
+      "label": "Operador de avance \u2014 avanza recto hacia la pelota, ajustando curvas en tiempo re",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline5\\operators\\advance_operator.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "operators_advance_operator_rationale_15",
+      "label": "Retorna (v_left, v_right, dur_ms) para avanzar ajustando la direcci\u00f3n proporcion",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline5\\operators\\advance_operator.py",
+      "source_location": "L15"
+    },
+    {
+      "id": "src_pipeline5_operators_avoid_wall_operator_py",
+      "label": "avoid_wall_operator.py",
+      "file_type": "code",
+      "source_file": "src\\pipeline5\\operators\\avoid_wall_operator.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "operators_avoid_wall_operator_avoidwalloperator",
+      "label": "AvoidWallOperator",
+      "file_type": "code",
+      "source_file": "src\\pipeline5\\operators\\avoid_wall_operator.py",
+      "source_location": "L6"
+    },
+    {
+      "id": "operators_avoid_wall_operator_avoidwalloperator_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src\\pipeline5\\operators\\avoid_wall_operator.py",
+      "source_location": "L7"
+    },
+    {
+      "id": "operators_avoid_wall_operator_avoidwalloperator_check_and_avoid",
+      "label": ".check_and_avoid()",
+      "file_type": "code",
+      "source_file": "src\\pipeline5\\operators\\avoid_wall_operator.py",
+      "source_location": "L21"
+    },
+    {
+      "id": "operators_avoid_wall_operator_rationale_8",
+      "label": "black_threshold: valor m\u00e1ximo en escala de grises para considerar un p\u00edxel como",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline5\\operators\\avoid_wall_operator.py",
+      "source_location": "L8"
+    },
+    {
+      "id": "operators_avoid_wall_operator_rationale_22",
+      "label": "Analiza el frame y retorna (v_left, v_right, dur_ms) si debe evadir la pared,",
+      "file_type": "rationale",
+      "source_file": "src\\pipeline5\\operators\\avoid_wall_operator.py",
+      "source_location": "L22"
+    },
+    {
+      "id": "src_ultrasonic_ultrasonic_service_py",
+      "label": "ultrasonic_service.py",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "ultrasonic_ultrasonic_service_ultrasonicservice",
+      "label": "UltrasonicService",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L45"
+    },
+    {
+      "id": "ultrasonic_ultrasonic_service_ultrasonicservice_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L46"
+    },
+    {
+      "id": "ultrasonic_ultrasonic_service_ultrasonicservice_tick",
+      "label": ".tick()",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L53"
+    },
+    {
+      "id": "ultrasonic_ultrasonic_service_ultrasonicservice_set_led",
+      "label": ".set_led()",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L57"
+    },
+    {
+      "id": "ultrasonic_ultrasonic_service_ultrasonicservice_close",
+      "label": ".close()",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L66"
+    },
+    {
+      "id": "ultrasonic_ultrasonic_service_rationale_1",
+      "label": "Fachada del sensor ultras\u00f3nico (punto de entrada \u00fanico).  Este m\u00f3dulo NO conti",
+      "file_type": "rationale",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "ultrasonic_ultrasonic_service_rationale_54",
+      "label": "Realiza una lectura de distancia y devuelve un DTO inmutable.",
+      "file_type": "rationale",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L54"
+    },
+    {
+      "id": "ultrasonic_ultrasonic_service_rationale_58",
+      "label": "Cambia el color del LED RGB integrado en el sensor.          Args:",
+      "file_type": "rationale",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L58"
+    },
+    {
+      "id": "ultrasonic_ultrasonic_service_rationale_67",
+      "label": "Libera el bus SMBus. Debe llamarse al terminar el programa.",
+      "file_type": "rationale",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L67"
+    },
+    {
+      "id": "src_ultrasonic_init_py",
+      "label": "__init__.py",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\__init__.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "ultrasonic_init_rationale_1",
+      "label": "Paquete `ultrasonic` \u2014 sensor ultras\u00f3nico I2C (0x77) para detecci\u00f3n de obst\u00e1culo",
+      "file_type": "rationale",
+      "source_file": "src\\ultrasonic\\__init__.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_ultrasonic_dto_ultrasonic_dto_py",
+      "label": "ultrasonic_dto.py",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\dto\\ultrasonic_dto.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "dto_ultrasonic_dto_ultrasonicdto",
+      "label": "UltrasonicDto",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\dto\\ultrasonic_dto.py",
+      "source_location": "L11"
+    },
+    {
+      "id": "dto_ultrasonic_dto_ultrasonicdto_to_dict",
+      "label": ".to_dict()",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\dto\\ultrasonic_dto.py",
+      "source_location": "L17"
+    },
+    {
+      "id": "dto_ultrasonic_dto_empty",
+      "label": "empty()",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\dto\\ultrasonic_dto.py",
+      "source_location": "L25"
+    },
+    {
+      "id": "dto_ultrasonic_dto_rationale_1",
+      "label": "DTO de una lectura del sensor ultras\u00f3nico.",
+      "file_type": "rationale",
+      "source_file": "src\\ultrasonic\\dto\\ultrasonic_dto.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "dto_ultrasonic_dto_rationale_12",
+      "label": "Distancia medida en mil\u00edmetros con timestamp de la lectura.",
+      "file_type": "rationale",
+      "source_file": "src\\ultrasonic\\dto\\ultrasonic_dto.py",
+      "source_location": "L12"
+    },
+    {
+      "id": "dto_ultrasonic_dto_rationale_18",
+      "label": "Serializa el DTO a un ``dict`` JSON-serializable.",
+      "file_type": "rationale",
+      "source_file": "src\\ultrasonic\\dto\\ultrasonic_dto.py",
+      "source_location": "L18"
+    },
+    {
+      "id": "dto_ultrasonic_dto_rationale_26",
+      "label": "Crea un DTO sin lectura v\u00e1lida (``distance_mm=None``).          Se usa como fa",
+      "file_type": "rationale",
+      "source_file": "src\\ultrasonic\\dto\\ultrasonic_dto.py",
+      "source_location": "L26"
+    },
+    {
+      "id": "src_ultrasonic_dto_init_py",
+      "label": "__init__.py",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\dto\\__init__.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "dto_init_rationale_1",
+      "label": "Data Transfer Objects del sensor ultras\u00f3nico.",
+      "file_type": "rationale",
+      "source_file": "src\\ultrasonic\\dto\\__init__.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_ultrasonic_exceptions_ultrasonic_exception_py",
+      "label": "ultrasonic_exception.py",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\exceptions\\ultrasonic_exception.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "exceptions_ultrasonic_exception_ultrasonicexception",
+      "label": "UltrasonicException",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\exceptions\\ultrasonic_exception.py",
+      "source_location": "L8"
+    },
+    {
+      "id": "exception",
+      "label": "Exception",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "exceptions_ultrasonic_exception_rationale_1",
+      "label": "Excepci\u00f3n base del paquete `ultrasonic`.  Heredar de esta clase hace f\u00e1cil que",
+      "file_type": "rationale",
+      "source_file": "src\\ultrasonic\\exceptions\\ultrasonic_exception.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "exceptions_ultrasonic_exception_rationale_9",
+      "label": "Ra\u00edz de las excepciones del sensor ultras\u00f3nico.",
+      "file_type": "rationale",
+      "source_file": "src\\ultrasonic\\exceptions\\ultrasonic_exception.py",
+      "source_location": "L9"
+    },
+    {
+      "id": "src_ultrasonic_exceptions_init_py",
+      "label": "__init__.py",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\exceptions\\__init__.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "exceptions_init_rationale_1",
+      "label": "Excepciones del paquete `ultrasonic`.",
+      "file_type": "rationale",
+      "source_file": "src\\ultrasonic\\exceptions\\__init__.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_ultrasonic_operators_ultrasonic_led_operator_py",
+      "label": "ultrasonic_led_operator.py",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_led_operator.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "operators_ultrasonic_led_operator_ultrasonicledoperator",
+      "label": "UltrasonicLedOperator",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_led_operator.py",
+      "source_location": "L26"
+    },
+    {
+      "id": "operators_ultrasonic_led_operator_ultrasonicledoperator_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_led_operator.py",
+      "source_location": "L27"
+    },
+    {
+      "id": "operators_ultrasonic_led_operator_ultrasonicledoperator_set_led",
+      "label": ".set_led()",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_led_operator.py",
+      "source_location": "L31"
+    },
+    {
+      "id": "operators_ultrasonic_led_operator_rationale_1",
+      "label": "Control del LED RGB integrado en el sensor ultras\u00f3nico.  Escribe 7 bytes al re",
+      "file_type": "rationale",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_led_operator.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "operators_ultrasonic_led_operator_rationale_32",
+      "label": "Env\u00eda el color y modo al LED del sensor.          Args:             r, g, b:",
+      "file_type": "rationale",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_led_operator.py",
+      "source_location": "L32"
+    },
+    {
+      "id": "src_ultrasonic_operators_ultrasonic_read_operator_py",
+      "label": "ultrasonic_read_operator.py",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_read_operator.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "operators_ultrasonic_read_operator_ultrasonicreadoperator",
+      "label": "UltrasonicReadOperator",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_read_operator.py",
+      "source_location": "L30"
+    },
+    {
+      "id": "operators_ultrasonic_read_operator_ultrasonicreadoperator_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_read_operator.py",
+      "source_location": "L31"
+    },
+    {
+      "id": "operators_ultrasonic_read_operator_ultrasonicreadoperator_read",
+      "label": ".read()",
+      "file_type": "code",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_read_operator.py",
+      "source_location": "L35"
+    },
+    {
+      "id": "operators_ultrasonic_read_operator_rationale_1",
+      "label": "Lectura sincr\u00f3nica de distancia v\u00eda I2C (sensor ultras\u00f3nico 0x77).  Flujo de b",
+      "file_type": "rationale",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_read_operator.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "operators_ultrasonic_read_operator_rationale_36",
+      "label": "Realiza una lectura I2C y devuelve la distancia en mm.",
+      "file_type": "rationale",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_read_operator.py",
+      "source_location": "L36"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_pipeline4_capture_vision_debug_py",
+      "target": "sys",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\capture_vision_debug.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_capture_vision_debug_py",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\capture_vision_debug.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_capture_vision_debug_py",
+      "target": "time",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\capture_vision_debug.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_capture_vision_debug_py",
+      "target": "cv2",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\capture_vision_debug.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_capture_vision_debug_py",
+      "target": "vision",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\capture_vision_debug.py",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_capture_vision_debug_py",
+      "target": "pipeline4_capture_vision_debug_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\capture_vision_debug.py",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline4_capture_vision_debug_rationale_1",
+      "target": "src_pipeline4_capture_vision_debug_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\capture_vision_debug.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_main_py",
+      "target": "sys",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\main.py",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_main_py",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\main.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_main_py",
+      "target": "logging",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\main.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_main_py",
+      "target": "pipeline4_main_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\main.py",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline4_main_rationale_1",
+      "target": "src_pipeline4_main_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\main.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline4_main_rationale_32",
+      "target": "pipeline4_main_main",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\main.py",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_pipeline_service_py",
+      "target": "logging",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_pipeline_service_py",
+      "target": "time",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_pipeline_service_py",
+      "target": "pipeline4_utils_pipeline_constants",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_pipeline_service_py",
+      "target": "pipeline4_dto_pipeline_output_dto",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_pipeline_service_py",
+      "target": "pipeline4_operators_search_operator",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_pipeline_service_py",
+      "target": "pipeline4_operators_advance_operator",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_pipeline_service_py",
+      "target": "pipeline4_operators_align_to_goal_operator",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_pipeline_service_py",
+      "target": "pipeline4_operators_push_operator",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_pipeline_service_py",
+      "target": "pipeline4_operators_avoid_wall_operator",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L39",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_pipeline_service_py",
+      "target": "pipeline4_pipeline_service_pipeline4service",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline4_pipeline_service_pipeline4service",
+      "target": "pipeline4_pipeline_service_pipeline4service_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline4_pipeline_service_pipeline4service",
+      "target": "pipeline4_pipeline_service_pipeline4service_tick",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L63",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline4_pipeline_service_pipeline4service",
+      "target": "pipeline4_pipeline_service_pipeline4service_run",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L222",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline4_pipeline_service_pipeline4service",
+      "target": "pipeline4_pipeline_service_pipeline4service_stop",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L229",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline4_pipeline_service_pipeline4service",
+      "target": "pipeline4_pipeline_service_pipeline4service_close",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L232",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline4_pipeline_service_pipeline4service_tick",
+      "target": "pipeline4_pipeline_service_pipeline4service_stop",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L209",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline4_pipeline_service_pipeline4service_run",
+      "target": "pipeline4_pipeline_service_pipeline4service_tick",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L226",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline4_pipeline_service_pipeline4service_close",
+      "target": "pipeline4_pipeline_service_pipeline4service_stop",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L234",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline4_pipeline_service_rationale_1",
+      "target": "src_pipeline4_pipeline_service_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline4_pipeline_service_rationale_64",
+      "target": "pipeline4_pipeline_service_pipeline4service_tick",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_dto_pipeline_output_dto_py",
+      "target": "dataclasses",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\dto\\pipeline_output_dto.py",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_dto_pipeline_output_dto_py",
+      "target": "typing",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\dto\\pipeline_output_dto.py",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_dto_pipeline_output_dto_py",
+      "target": "dto_pipeline_output_dto_pipelineoutputdto",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\dto\\pipeline_output_dto.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "dto_pipeline_output_dto_pipelineoutputdto",
+      "target": "dto_pipeline_output_dto_pipelineoutputdto_to_dict",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\dto\\pipeline_output_dto.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "dto_pipeline_output_dto_rationale_1",
+      "target": "src_pipeline4_dto_pipeline_output_dto_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\dto\\pipeline_output_dto.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "dto_pipeline_output_dto_rationale_9",
+      "target": "dto_pipeline_output_dto_pipelineoutputdto",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\dto\\pipeline_output_dto.py",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "dto_pipeline_output_dto_rationale_31",
+      "target": "dto_pipeline_output_dto_pipelineoutputdto_to_dict",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\dto\\pipeline_output_dto.py",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_operators_advance_operator_py",
+      "target": "pipeline4_utils_pipeline_constants",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\advance_operator.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_operators_advance_operator_py",
+      "target": "operators_advance_operator_advanceoperator",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\advance_operator.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_advance_operator_advanceoperator",
+      "target": "operators_advance_operator_advanceoperator_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\advance_operator.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_advance_operator_advanceoperator",
+      "target": "operators_advance_operator_advanceoperator_compute",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\advance_operator.py",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_advance_operator_rationale_1",
+      "target": "src_pipeline4_operators_advance_operator_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\advance_operator.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_advance_operator_rationale_15",
+      "target": "operators_advance_operator_advanceoperator_compute",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\advance_operator.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_operators_align_to_goal_operator_py",
+      "target": "pipeline4_utils_pipeline_constants",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\align_to_goal_operator.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_operators_align_to_goal_operator_py",
+      "target": "operators_align_to_goal_operator_aligntogoaloperator",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\align_to_goal_operator.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_align_to_goal_operator_aligntogoaloperator",
+      "target": "operators_align_to_goal_operator_aligntogoaloperator_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\align_to_goal_operator.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_align_to_goal_operator_aligntogoaloperator",
+      "target": "operators_align_to_goal_operator_aligntogoaloperator_compute",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\align_to_goal_operator.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_align_to_goal_operator_aligntogoaloperator",
+      "target": "operators_align_to_goal_operator_aligntogoaloperator_is_aligned",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\align_to_goal_operator.py",
+      "source_location": "L61",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_align_to_goal_operator_aligntogoaloperator",
+      "target": "operators_align_to_goal_operator_aligntogoaloperator_reset",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\align_to_goal_operator.py",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_align_to_goal_operator_rationale_1",
+      "target": "src_pipeline4_operators_align_to_goal_operator_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\align_to_goal_operator.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_align_to_goal_operator_rationale_23",
+      "target": "operators_align_to_goal_operator_aligntogoaloperator_compute",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\align_to_goal_operator.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_operators_avoid_wall_operator_py",
+      "target": "cv2",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\avoid_wall_operator.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_operators_avoid_wall_operator_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\avoid_wall_operator.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_operators_avoid_wall_operator_py",
+      "target": "time",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\avoid_wall_operator.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_operators_avoid_wall_operator_py",
+      "target": "pipeline4_utils_pipeline_constants",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\avoid_wall_operator.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_operators_avoid_wall_operator_py",
+      "target": "operators_avoid_wall_operator_avoidwalloperator",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\avoid_wall_operator.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_avoid_wall_operator_avoidwalloperator",
+      "target": "operators_avoid_wall_operator_avoidwalloperator_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\avoid_wall_operator.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_avoid_wall_operator_avoidwalloperator",
+      "target": "operators_avoid_wall_operator_avoidwalloperator_check_and_avoid",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\avoid_wall_operator.py",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_avoid_wall_operator_rationale_1",
+      "target": "src_pipeline4_operators_avoid_wall_operator_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\avoid_wall_operator.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_avoid_wall_operator_rationale_17",
+      "target": "operators_avoid_wall_operator_avoidwalloperator_init",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\avoid_wall_operator.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_avoid_wall_operator_rationale_34",
+      "target": "operators_avoid_wall_operator_avoidwalloperator_check_and_avoid",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\avoid_wall_operator.py",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_operators_chase_operator_py",
+      "target": "pipeline5_utils_pipeline_constants",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\chase_operator.py",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_operators_chase_operator_py",
+      "target": "operators_chase_operator_chaseoperator",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\chase_operator.py",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_chase_operator_chaseoperator",
+      "target": "operators_chase_operator_chaseoperator_compute",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\chase_operator.py",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_chase_operator_rationale_1",
+      "target": "src_pipeline4_operators_chase_operator_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\chase_operator.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_operators_push_operator_py",
+      "target": "time",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\push_operator.py",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_operators_push_operator_py",
+      "target": "pipeline4_utils_pipeline_constants",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\push_operator.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_operators_push_operator_py",
+      "target": "operators_push_operator_pushoperator",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\push_operator.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_push_operator_pushoperator",
+      "target": "operators_push_operator_pushoperator_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\push_operator.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_push_operator_pushoperator",
+      "target": "operators_push_operator_pushoperator_start",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\push_operator.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_push_operator_pushoperator",
+      "target": "operators_push_operator_pushoperator_compute",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\push_operator.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_push_operator_pushoperator",
+      "target": "operators_push_operator_pushoperator_is_done",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\push_operator.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_push_operator_pushoperator",
+      "target": "operators_push_operator_pushoperator_reset",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\push_operator.py",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_push_operator_pushoperator_compute",
+      "target": "operators_push_operator_pushoperator_is_done",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\push_operator.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_push_operator_rationale_1",
+      "target": "src_pipeline4_operators_push_operator_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\push_operator.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_operators_search_operator_py",
+      "target": "time",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\search_operator.py",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_operators_search_operator_py",
+      "target": "pipeline4_utils_pipeline_constants",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\search_operator.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline4_operators_search_operator_py",
+      "target": "operators_search_operator_searchoperator",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\search_operator.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_search_operator_searchoperator",
+      "target": "operators_search_operator_searchoperator_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\search_operator.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_search_operator_searchoperator",
+      "target": "operators_search_operator_searchoperator_reset",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\search_operator.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_search_operator_searchoperator",
+      "target": "operators_search_operator_searchoperator_compute",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\search_operator.py",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_search_operator_rationale_1",
+      "target": "src_pipeline4_operators_search_operator_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\search_operator.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_search_operator_rationale_25",
+      "target": "operators_search_operator_searchoperator_reset",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\search_operator.py",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_search_operator_rationale_35",
+      "target": "operators_search_operator_searchoperator_compute",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\operators\\search_operator.py",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "utils_pipeline_constants_rationale_1",
+      "target": "src_pipeline4_utils_pipeline_constants_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline4\\utils\\pipeline_constants.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline5_pipeline_service_py",
+      "target": "logging",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline5_pipeline_service_py",
+      "target": "time",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline5_pipeline_service_py",
+      "target": "pipeline5_utils_pipeline_constants",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline5_pipeline_service_py",
+      "target": "pipeline5_dto_pipeline_output_dto",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline5_pipeline_service_py",
+      "target": "pipeline5_operators_search_operator",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline5_pipeline_service_py",
+      "target": "pipeline5_operators_advance_operator",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline5_pipeline_service_py",
+      "target": "pipeline5_operators_avoid_wall_operator",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline5_pipeline_service_py",
+      "target": "pipeline5_pipeline_service_pipeline5service",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline5_pipeline_service_pipeline5service",
+      "target": "pipeline5_pipeline_service_pipeline5service_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline5_pipeline_service_pipeline5service",
+      "target": "pipeline5_pipeline_service_pipeline5service_tick",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline5_pipeline_service_pipeline5service",
+      "target": "pipeline5_pipeline_service_pipeline5service_run",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L161",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline5_pipeline_service_pipeline5service",
+      "target": "pipeline5_pipeline_service_pipeline5service_stop",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L168",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline5_pipeline_service_pipeline5service",
+      "target": "pipeline5_pipeline_service_pipeline5service_close",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L171",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline5_pipeline_service_pipeline5service_tick",
+      "target": "pipeline5_pipeline_service_pipeline5service_stop",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L150",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline5_pipeline_service_pipeline5service_run",
+      "target": "pipeline5_pipeline_service_pipeline5service_tick",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L165",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline5_pipeline_service_pipeline5service_close",
+      "target": "pipeline5_pipeline_service_pipeline5service_stop",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L173",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline5_pipeline_service_rationale_1",
+      "target": "src_pipeline5_pipeline_service_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline5_operators_advance_operator_py",
+      "target": "pipeline5_utils_pipeline_constants",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\operators\\advance_operator.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline5_operators_advance_operator_py",
+      "target": "operators_advance_operator_advanceoperator",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\operators\\advance_operator.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_advance_operator_advanceoperator",
+      "target": "operators_advance_operator_advanceoperator_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\operators\\advance_operator.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_advance_operator_advanceoperator",
+      "target": "operators_advance_operator_advanceoperator_compute",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\operators\\advance_operator.py",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_advance_operator_rationale_1",
+      "target": "src_pipeline5_operators_advance_operator_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\operators\\advance_operator.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_advance_operator_rationale_15",
+      "target": "operators_advance_operator_advanceoperator_compute",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\operators\\advance_operator.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline5_operators_avoid_wall_operator_py",
+      "target": "cv2",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\operators\\avoid_wall_operator.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline5_operators_avoid_wall_operator_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\operators\\avoid_wall_operator.py",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline5_operators_avoid_wall_operator_py",
+      "target": "time",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\operators\\avoid_wall_operator.py",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline5_operators_avoid_wall_operator_py",
+      "target": "pipeline5_utils_pipeline_constants",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\operators\\avoid_wall_operator.py",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pipeline5_operators_avoid_wall_operator_py",
+      "target": "operators_avoid_wall_operator_avoidwalloperator",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\operators\\avoid_wall_operator.py",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_avoid_wall_operator_avoidwalloperator",
+      "target": "operators_avoid_wall_operator_avoidwalloperator_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\operators\\avoid_wall_operator.py",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_avoid_wall_operator_avoidwalloperator",
+      "target": "operators_avoid_wall_operator_avoidwalloperator_check_and_avoid",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\operators\\avoid_wall_operator.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_avoid_wall_operator_rationale_8",
+      "target": "operators_avoid_wall_operator_avoidwalloperator_init",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\operators\\avoid_wall_operator.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_avoid_wall_operator_rationale_22",
+      "target": "operators_avoid_wall_operator_avoidwalloperator_check_and_avoid",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\pipeline5\\operators\\avoid_wall_operator.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_ultrasonic_service_py",
+      "target": "logging",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_ultrasonic_service_py",
+      "target": "threading",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_ultrasonic_service_py",
+      "target": "smbus2",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_ultrasonic_service_py",
+      "target": "ultrasonic_dto_ultrasonic_dto",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_ultrasonic_service_py",
+      "target": "ultrasonic_operators_ultrasonic_led_operator",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_ultrasonic_service_py",
+      "target": "ultrasonic_operators_ultrasonic_read_operator",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_ultrasonic_service_py",
+      "target": "ultrasonic_utils_ultrasonic_constants",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_ultrasonic_service_py",
+      "target": "ultrasonic_ultrasonic_service_ultrasonicservice",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "ultrasonic_ultrasonic_service_ultrasonicservice",
+      "target": "ultrasonic_ultrasonic_service_ultrasonicservice_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "ultrasonic_ultrasonic_service_ultrasonicservice",
+      "target": "ultrasonic_ultrasonic_service_ultrasonicservice_tick",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "ultrasonic_ultrasonic_service_ultrasonicservice",
+      "target": "ultrasonic_ultrasonic_service_ultrasonicservice_set_led",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L57",
+      "weight": 1.0
+    },
+    {
+      "source": "ultrasonic_ultrasonic_service_ultrasonicservice",
+      "target": "ultrasonic_ultrasonic_service_ultrasonicservice_close",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L66",
+      "weight": 1.0
+    },
+    {
+      "source": "ultrasonic_ultrasonic_service_ultrasonicservice_init",
+      "target": "ultrasonic_ultrasonic_service_ultrasonicservice_set_led",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L51",
+      "weight": 1.0
+    },
+    {
+      "source": "ultrasonic_ultrasonic_service_rationale_1",
+      "target": "src_ultrasonic_ultrasonic_service_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "ultrasonic_ultrasonic_service_rationale_54",
+      "target": "ultrasonic_ultrasonic_service_ultrasonicservice_tick",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L54",
+      "weight": 1.0
+    },
+    {
+      "source": "ultrasonic_ultrasonic_service_rationale_58",
+      "target": "ultrasonic_ultrasonic_service_ultrasonicservice_set_led",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L58",
+      "weight": 1.0
+    },
+    {
+      "source": "ultrasonic_ultrasonic_service_rationale_67",
+      "target": "ultrasonic_ultrasonic_service_ultrasonicservice_close",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L67",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_init_py",
+      "target": "ultrasonic_ultrasonic_service",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\__init__.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "ultrasonic_init_rationale_1",
+      "target": "src_ultrasonic_init_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\__init__.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_dto_ultrasonic_dto_py",
+      "target": "time",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\dto\\ultrasonic_dto.py",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_dto_ultrasonic_dto_py",
+      "target": "dataclasses",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\dto\\ultrasonic_dto.py",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_dto_ultrasonic_dto_py",
+      "target": "typing",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\dto\\ultrasonic_dto.py",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_dto_ultrasonic_dto_py",
+      "target": "dto_ultrasonic_dto_ultrasonicdto",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\dto\\ultrasonic_dto.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "dto_ultrasonic_dto_ultrasonicdto",
+      "target": "dto_ultrasonic_dto_ultrasonicdto_to_dict",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\dto\\ultrasonic_dto.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_dto_ultrasonic_dto_py",
+      "target": "dto_ultrasonic_dto_empty",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\dto\\ultrasonic_dto.py",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "dto_ultrasonic_dto_rationale_1",
+      "target": "src_ultrasonic_dto_ultrasonic_dto_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\dto\\ultrasonic_dto.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "dto_ultrasonic_dto_rationale_12",
+      "target": "dto_ultrasonic_dto_ultrasonicdto",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\dto\\ultrasonic_dto.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "dto_ultrasonic_dto_rationale_18",
+      "target": "dto_ultrasonic_dto_ultrasonicdto_to_dict",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\dto\\ultrasonic_dto.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "dto_ultrasonic_dto_rationale_26",
+      "target": "dto_ultrasonic_dto_ultrasonicdto_empty",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\dto\\ultrasonic_dto.py",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_dto_init_py",
+      "target": "ultrasonic_dto_ultrasonic_dto",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\dto\\__init__.py",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "dto_init_rationale_1",
+      "target": "src_ultrasonic_dto_init_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\dto\\__init__.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_exceptions_ultrasonic_exception_py",
+      "target": "exceptions_ultrasonic_exception_ultrasonicexception",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\exceptions\\ultrasonic_exception.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "exceptions_ultrasonic_exception_ultrasonicexception",
+      "target": "exception",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\exceptions\\ultrasonic_exception.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "exceptions_ultrasonic_exception_rationale_1",
+      "target": "src_ultrasonic_exceptions_ultrasonic_exception_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\exceptions\\ultrasonic_exception.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "exceptions_ultrasonic_exception_rationale_9",
+      "target": "exceptions_ultrasonic_exception_ultrasonicexception",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\exceptions\\ultrasonic_exception.py",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_exceptions_init_py",
+      "target": "ultrasonic_exceptions_ultrasonic_exception",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\exceptions\\__init__.py",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "exceptions_init_rationale_1",
+      "target": "src_ultrasonic_exceptions_init_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\exceptions\\__init__.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_operators_ultrasonic_led_operator_py",
+      "target": "logging",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_led_operator.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_operators_ultrasonic_led_operator_py",
+      "target": "threading",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_led_operator.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_operators_ultrasonic_led_operator_py",
+      "target": "smbus2",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_led_operator.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_operators_ultrasonic_led_operator_py",
+      "target": "ultrasonic_utils_ultrasonic_constants",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_led_operator.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_operators_ultrasonic_led_operator_py",
+      "target": "operators_ultrasonic_led_operator_ultrasonicledoperator",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_led_operator.py",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_ultrasonic_led_operator_ultrasonicledoperator",
+      "target": "operators_ultrasonic_led_operator_ultrasonicledoperator_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_led_operator.py",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_ultrasonic_led_operator_ultrasonicledoperator",
+      "target": "operators_ultrasonic_led_operator_ultrasonicledoperator_set_led",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_led_operator.py",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_ultrasonic_led_operator_rationale_1",
+      "target": "src_ultrasonic_operators_ultrasonic_led_operator_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_led_operator.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_ultrasonic_led_operator_rationale_32",
+      "target": "operators_ultrasonic_led_operator_ultrasonicledoperator_set_led",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_led_operator.py",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_operators_ultrasonic_read_operator_py",
+      "target": "logging",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_read_operator.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_operators_ultrasonic_read_operator_py",
+      "target": "time",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_read_operator.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_operators_ultrasonic_read_operator_py",
+      "target": "threading",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_read_operator.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_operators_ultrasonic_read_operator_py",
+      "target": "typing",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_read_operator.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_operators_ultrasonic_read_operator_py",
+      "target": "smbus2",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_read_operator.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_operators_ultrasonic_read_operator_py",
+      "target": "ultrasonic_dto_ultrasonic_dto",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_read_operator.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_operators_ultrasonic_read_operator_py",
+      "target": "ultrasonic_utils_ultrasonic_constants",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_read_operator.py",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "src_ultrasonic_operators_ultrasonic_read_operator_py",
+      "target": "operators_ultrasonic_read_operator_ultrasonicreadoperator",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_read_operator.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_ultrasonic_read_operator_ultrasonicreadoperator",
+      "target": "operators_ultrasonic_read_operator_ultrasonicreadoperator_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_read_operator.py",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_ultrasonic_read_operator_ultrasonicreadoperator",
+      "target": "operators_ultrasonic_read_operator_ultrasonicreadoperator_read",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_read_operator.py",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_ultrasonic_read_operator_rationale_1",
+      "target": "src_ultrasonic_operators_ultrasonic_read_operator_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_read_operator.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_ultrasonic_read_operator_rationale_36",
+      "target": "operators_ultrasonic_read_operator_ultrasonicreadoperator_read",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_read_operator.py",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline4_pipeline_service_pipeline4service",
+      "target": "dto_pipeline_output_dto_pipelineoutputdto",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L34",
+      "weight": 0.8
+    },
+    {
+      "source": "pipeline4_pipeline_service_pipeline4service",
+      "target": "operators_search_operator_searchoperator",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L35",
+      "weight": 0.8
+    },
+    {
+      "source": "pipeline4_pipeline_service_pipeline4service",
+      "target": "operators_advance_operator_advanceoperator",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L36",
+      "weight": 0.8
+    },
+    {
+      "source": "pipeline4_pipeline_service_pipeline4service",
+      "target": "operators_align_to_goal_operator_aligntogoaloperator",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L37",
+      "weight": 0.8
+    },
+    {
+      "source": "pipeline4_pipeline_service_pipeline4service",
+      "target": "operators_push_operator_pushoperator",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L38",
+      "weight": 0.8
+    },
+    {
+      "source": "pipeline4_pipeline_service_pipeline4service",
+      "target": "operators_avoid_wall_operator_avoidwalloperator",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L39",
+      "weight": 0.8
+    },
+    {
+      "source": "pipeline5_pipeline_service_pipeline5service",
+      "target": "dto_pipeline_output_dto_pipelineoutputdto",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L21",
+      "weight": 0.8
+    },
+    {
+      "source": "pipeline5_pipeline_service_pipeline5service",
+      "target": "operators_search_operator_searchoperator",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L22",
+      "weight": 0.8
+    },
+    {
+      "source": "pipeline5_pipeline_service_pipeline5service",
+      "target": "operators_advance_operator_advanceoperator",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L23",
+      "weight": 0.8
+    },
+    {
+      "source": "pipeline5_pipeline_service_pipeline5service",
+      "target": "operators_avoid_wall_operator_avoidwalloperator",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L24",
+      "weight": 0.8
+    },
+    {
+      "source": "ultrasonic_ultrasonic_service_ultrasonicservice",
+      "target": "dto_ultrasonic_dto_ultrasonicdto",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L32",
+      "weight": 0.8
+    },
+    {
+      "source": "ultrasonic_ultrasonic_service_ultrasonicservice",
+      "target": "operators_ultrasonic_led_operator_ultrasonicledoperator",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L33",
+      "weight": 0.8
+    },
+    {
+      "source": "ultrasonic_ultrasonic_service_ultrasonicservice",
+      "target": "operators_ultrasonic_read_operator_ultrasonicreadoperator",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L34",
+      "weight": 0.8
+    },
+    {
+      "source": "operators_ultrasonic_read_operator_ultrasonicreadoperator",
+      "target": "dto_ultrasonic_dto_ultrasonicdto",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_read_operator.py",
+      "source_location": "L24",
+      "weight": 0.8
+    },
+    {
+      "source": "pipeline4_main_main",
+      "target": "pipeline4_pipeline_service_pipeline4service",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src\\pipeline4\\main.py",
+      "source_location": "L48",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline4_pipeline_service_pipeline4service_init",
+      "target": "operators_search_operator_searchoperator",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L57",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline4_pipeline_service_pipeline4service_init",
+      "target": "operators_align_to_goal_operator_aligntogoaloperator",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L59",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline4_pipeline_service_pipeline4service_init",
+      "target": "operators_push_operator_pushoperator",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L60",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline4_pipeline_service_pipeline4service_tick",
+      "target": "dto_pipeline_output_dto_pipelineoutputdto",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src\\pipeline4\\pipeline_service.py",
+      "source_location": "L211",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline5_pipeline_service_pipeline5service_init",
+      "target": "operators_search_operator_searchoperator",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline5_pipeline_service_pipeline5service_tick",
+      "target": "dto_pipeline_output_dto_pipelineoutputdto",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src\\pipeline5\\pipeline_service.py",
+      "source_location": "L152",
+      "weight": 1.0
+    },
+    {
+      "source": "ultrasonic_ultrasonic_service_ultrasonicservice_init",
+      "target": "operators_ultrasonic_read_operator_ultrasonicreadoperator",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L49",
+      "weight": 1.0
+    },
+    {
+      "source": "ultrasonic_ultrasonic_service_ultrasonicservice_init",
+      "target": "operators_ultrasonic_led_operator_ultrasonicledoperator",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src\\ultrasonic\\ultrasonic_service.py",
+      "source_location": "L50",
+      "weight": 1.0
+    },
+    {
+      "source": "operators_ultrasonic_read_operator_ultrasonicreadoperator_read",
+      "target": "dto_ultrasonic_dto_ultrasonicdto",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src\\ultrasonic\\operators\\ultrasonic_read_operator.py",
+      "source_location": "L45",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

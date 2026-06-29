@@ -1,0 +1,686 @@
+{
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\build_graph.py": {
+    "mtime": 1782606078.8262439,
+    "hash": "d5d8fb0a18ebff42b06dba0ca7c6a92f"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\cam.py": {
+    "mtime": 1782602245.4686244,
+    "hash": "3e3183e59b9dbe270193def35534ec82"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\capture_frame.py": {
+    "mtime": 1782602245.4686244,
+    "hash": "ccf1235818d1462f6762cb49e4eb020c"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\check_cache.py": {
+    "mtime": 1782603192.623112,
+    "hash": "b125b90f28ec8fbb813f64229ecd87d4"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\debug_vision.py": {
+    "mtime": 1782602245.4696102,
+    "hash": "294b9b5754b43ef5d16f61f1acb9e301"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\huskytest.py": {
+    "mtime": 1782602245.473616,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\main.py": {
+    "mtime": 1782602245.473616,
+    "hash": "3e87d03c3fb39efb91fef4bb4aabae34"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\merge_ast_sem.py": {
+    "mtime": 1782606032.432902,
+    "hash": "e5488072c6882814e206e418b1d386be"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\merge_chunks.py": {
+    "mtime": 1782606012.4298325,
+    "hash": "f38d5e9479d976fa2ec8b2568e8f421b"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\run_ast.py": {
+    "mtime": 1782603117.7409506,
+    "hash": "c7bd8996e492e224130aa3904ce4fa5e"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\split_chunks.py": {
+    "mtime": 1782603256.2212813,
+    "hash": "75db40aed90bb935d6ee80ec7ead4d48"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\scripts\\cal_motors.py": {
+    "mtime": 1782602245.485659,
+    "hash": "4ec0c62730d6e8c2c8537e340b17cabd"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\scripts\\test_chase_dynamic.py": {
+    "mtime": 1782602245.4866679,
+    "hash": "7ad600d7f754bc9a1da330b3b0d9241b"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\scripts\\test_motors_raw.py": {
+    "mtime": 1782602245.4866679,
+    "hash": "c3ec5057fb0834f88579954a8c8a6430"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\chase\\visual_servo_controller.py": {
+    "mtime": 1782602245.4876645,
+    "hash": "d93abbc5fb3b2f79f6dc3cdaf3c01e38"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\motors\\motor_service.py": {
+    "mtime": 1782602245.65166,
+    "hash": "24b410e1285cbdf007a80f256130b1a8"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\motors\\__init__.py": {
+    "mtime": 1782602245.6491573,
+    "hash": "55bc0a036d71d4effb48c5c153b049d7"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\motors\\dto\\wheel_dto.py": {
+    "mtime": 1782602245.650156,
+    "hash": "f3364db2db81c9ccec3c86289b616523"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\motors\\dto\\__init__.py": {
+    "mtime": 1782602245.6491573,
+    "hash": "a54030e3594cf17472ff63c7cdff69f0"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\motors\\exceptions\\motor_exception.py": {
+    "mtime": 1782602245.65166,
+    "hash": "341662d2b2663b8455f7818144e5c515"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\motors\\exceptions\\__init__.py": {
+    "mtime": 1782602245.650156,
+    "hash": "977b72afbd2c8cdf7a223772c928edeb"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\motors\\operators\\burst_operator.py": {
+    "mtime": 1782602245.6527956,
+    "hash": "5267492d240509c80d25b21bb8da9ebf"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\motors\\operators\\differential_operator.py": {
+    "mtime": 1782602245.6541634,
+    "hash": "9727d2949d0c81767ecff12c956a0130"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\motors\\operators\\movement_operator.py": {
+    "mtime": 1782602245.6541634,
+    "hash": "50e3f4f3f6d02a06d87ba2f0a63a609d"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\motors\\operators\\__init__.py": {
+    "mtime": 1782602245.6527956,
+    "hash": "50a3913a6c11fd210a1b3ce6aa96faec"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\motors\\utils\\motor_constants.py": {
+    "mtime": 1782602245.655171,
+    "hash": "76ab753ba71503d02f92584f444fb9a1"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\motors\\utils\\__init__.py": {
+    "mtime": 1782602245.655171,
+    "hash": "d0e7b516d2151f40340c23ff6f489884"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline\\pipeline_service.py": {
+    "mtime": 1782602245.6653743,
+    "hash": "b4f57e33c5d06fae88508d8d01b92245"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline\\__init__.py": {
+    "mtime": 1782602245.6601768,
+    "hash": "9f9c4530559b250e132ec2b33cddfd3e"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline\\dto\\pipeline_output_dto.py": {
+    "mtime": 1782602245.6626854,
+    "hash": "3270a2c62250135f5381674bce813e64"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline\\dto\\__init__.py": {
+    "mtime": 1782602245.66168,
+    "hash": "9be4076e2a198704f1452ad4484a26ac"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline\\operators\\avoid_operator.py": {
+    "mtime": 1782602245.6636848,
+    "hash": "136d9f188a8c90d759d23b6efdcafbdc"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline\\operators\\chase_operator.py": {
+    "mtime": 1782602245.6636848,
+    "hash": "80a66d05d7280d8c851600bf968ff918"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline\\operators\\search_operator.py": {
+    "mtime": 1782602245.6648698,
+    "hash": "b6f5e2259e444944e7192a98ad8a0555"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline\\operators\\__init__.py": {
+    "mtime": 1782602245.6626854,
+    "hash": "22c55bd9a9883fd39222dfb2f2fa268e"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline\\utils\\pipeline_constants.py": {
+    "mtime": 1782602245.6663804,
+    "hash": "26360702ab6f6fde172f11a715ec48c6"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline\\utils\\__init__.py": {
+    "mtime": 1782602245.6663804,
+    "hash": "9de2f9bae1ce9e98dd990b0a8acf6906"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline02\\capture_image.py": {
+    "mtime": 1782602245.6703799,
+    "hash": "2b06b4927055be5b1018cf2548cbfb96"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline02\\capture_vision_debug.py": {
+    "mtime": 1782602245.6703799,
+    "hash": "3c0adc3737266d7b8cc49f03e010f544"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline02\\main.py": {
+    "mtime": 1782602245.6718857,
+    "hash": "ce98a5f5604701b1cee3b606ba0dc28d"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline02\\pipeline_service.py": {
+    "mtime": 1782602245.6738927,
+    "hash": "e14e899abf5783ef8cf954d09f7186ce"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline02\\dto\\pipeline_output_dto.py": {
+    "mtime": 1782602245.6703799,
+    "hash": "b4b48b5cc1519cb02818541f5a757453"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline02\\operators\\advance_operator.py": {
+    "mtime": 1782602245.6728914,
+    "hash": "72086e51436f9995f7ea52ca343b92d1"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline02\\operators\\avoid_wall_operator.py": {
+    "mtime": 1782602245.6728914,
+    "hash": "2ecfbd41a0b6b699142f5d8dead3c930"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline02\\operators\\chase_operator.py": {
+    "mtime": 1782602245.6738927,
+    "hash": "b1a5de565ac33156919f5f00b569a567"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline02\\operators\\hector_routine.py": {
+    "mtime": 1782602245.6738927,
+    "hash": "c0b0da67a66a68bd97a762d55fcaf547"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline02\\operators\\search_operator.py": {
+    "mtime": 1782602245.6738927,
+    "hash": "e2399cbfff919a3202e1ddc8bfefcae3"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline02\\utils\\pipeline_constants.py": {
+    "mtime": 1782602245.6753988,
+    "hash": "83f61c9704d5f37a031cd908dac6e784"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline4\\capture_image.py": {
+    "mtime": 1782602245.6784046,
+    "hash": "2b06b4927055be5b1018cf2548cbfb96"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline4\\capture_vision_debug.py": {
+    "mtime": 1782602245.6784046,
+    "hash": "3c0adc3737266d7b8cc49f03e010f544"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline4\\main.py": {
+    "mtime": 1782602245.6794052,
+    "hash": "6f0b90d1548ee04aab778a1d1fd57041"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline4\\pipeline_service.py": {
+    "mtime": 1782602245.6832619,
+    "hash": "0a9a214dd27947cd63fc79f8674c33a9"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline4\\dto\\pipeline_output_dto.py": {
+    "mtime": 1782602245.6794052,
+    "hash": "199105d7699237a87f7de8da7fca57e5"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline4\\operators\\advance_operator.py": {
+    "mtime": 1782602245.6804059,
+    "hash": "e28238452d01145eaef1958bd9023328"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline4\\operators\\align_to_goal_operator.py": {
+    "mtime": 1782602245.6814048,
+    "hash": "5dcce1713c0d8ee2e33c7872987d9d43"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline4\\operators\\avoid_wall_operator.py": {
+    "mtime": 1782602245.6817539,
+    "hash": "7e371d06f891c2830e947cd30601af9f"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline4\\operators\\chase_operator.py": {
+    "mtime": 1782602245.6817539,
+    "hash": "9742b715c17ba90746f2317a7ec513a5"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline4\\operators\\push_operator.py": {
+    "mtime": 1782602245.6817539,
+    "hash": "b42a70920bcff246c03d19179c0e623c"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline4\\operators\\search_operator.py": {
+    "mtime": 1782602245.6827576,
+    "hash": "401b10203ef110a984484fb4bfe206ad"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline4\\utils\\pipeline_constants.py": {
+    "mtime": 1782602245.6832619,
+    "hash": "e726bc2c1d21edccfdcb9f75a126b93b"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline5\\pipeline_service.py": {
+    "mtime": 1782602245.6852672,
+    "hash": "a022b3e8c11b3eb020bad5afee2133d2"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline5\\operators\\advance_operator.py": {
+    "mtime": 1782602245.684267,
+    "hash": "4c6895d95260f9743a93586c831a562f"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline5\\operators\\avoid_wall_operator.py": {
+    "mtime": 1782602245.6852672,
+    "hash": "858b0d7e38e54b6dc0ef44938d68a3ad"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\ultrasonic\\ultrasonic_service.py": {
+    "mtime": 1782602245.6927135,
+    "hash": "32d31412105ff73b38d4e4df26df6365"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\ultrasonic\\__init__.py": {
+    "mtime": 1782602245.6865165,
+    "hash": "aab37d21a23825ca459acc4c7b36f535"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\ultrasonic\\dto\\ultrasonic_dto.py": {
+    "mtime": 1782602245.6875186,
+    "hash": "239cf1cd626f41c469bcfb1beb5225db"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\ultrasonic\\dto\\__init__.py": {
+    "mtime": 1782602245.6865165,
+    "hash": "cbe83310d39ca8753cdb81950236e9bc"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\ultrasonic\\exceptions\\ultrasonic_exception.py": {
+    "mtime": 1782602245.6885169,
+    "hash": "2493d8eb6972bf139a3289e9f24a7178"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\ultrasonic\\exceptions\\__init__.py": {
+    "mtime": 1782602245.6885169,
+    "hash": "bc432d7676517eefbb54acd8dbe3ccd0"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\ultrasonic\\operators\\ultrasonic_led_operator.py": {
+    "mtime": 1782602245.690713,
+    "hash": "d8f8c4a4aacf14476aac5b680a399b86"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\ultrasonic\\operators\\ultrasonic_read_operator.py": {
+    "mtime": 1782602245.6917148,
+    "hash": "0c455ddb7ccb23f65395c883c245e885"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\ultrasonic\\operators\\__init__.py": {
+    "mtime": 1782602245.689708,
+    "hash": "b518e556abd9857a568869080159626d"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\ultrasonic\\utils\\ultrasonic_constants.py": {
+    "mtime": 1782602245.693714,
+    "hash": "d46dfd79f265b29702ca9420a636eb0e"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\ultrasonic\\utils\\__init__.py": {
+    "mtime": 1782602245.6927135,
+    "hash": "3549065ca28e60a7398caa71dc6d1d6b"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\hybrid_vision_service.py": {
+    "mtime": 1782602245.703112,
+    "hash": "41bd268fbdcb84d78544a322ab669871"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\__init__.py": {
+    "mtime": 1782602245.693714,
+    "hash": "e31ce53f16db1eb2d83be139a0ff55fd"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\commands\\detect_vision_command.py": {
+    "mtime": 1782602245.6962256,
+    "hash": "d5b7eb30cf8e776f0a9e36f88b32086d"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\commands\\vision_config_command.py": {
+    "mtime": 1782602245.6962256,
+    "hash": "d517f01b70733c7d21415527c69eff4b"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\commands\\__init__.py": {
+    "mtime": 1782602245.695219,
+    "hash": "c766fc22ba840cc39308dcc41db9668d"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\dto\\ball_dto.py": {
+    "mtime": 1782602245.6972256,
+    "hash": "25d7d29b1734438f57b4d53065e7a78e"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\dto\\frame_dto.py": {
+    "mtime": 1782602245.698226,
+    "hash": "9e5604b7b5aa3a4a2eb9862d414c387a"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\dto\\goals_dto.py": {
+    "mtime": 1782602245.699226,
+    "hash": "eed8e95bcfef0219a9bf5e953043a4ae"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\dto\\line_dto.py": {
+    "mtime": 1782602245.6997921,
+    "hash": "152dfae2c727a41ba793eb872d4bca09"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\dto\\robot_dto.py": {
+    "mtime": 1782602245.6997921,
+    "hash": "a00c2f245a99f3e5143eef5f1edc9c87"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\dto\\vision_output_dto.py": {
+    "mtime": 1782602245.6997921,
+    "hash": "62e7d4fca891bbd3c065116ced0426ea"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\dto\\__init__.py": {
+    "mtime": 1782602245.6972256,
+    "hash": "9c323122fd58dcdcfb248d8448ca422c"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\exceptions\\camera_not_found_exception.py": {
+    "mtime": 1782602245.7007961,
+    "hash": "25c5b5ae330c8fbf473d74b13b753b33"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\exceptions\\frame_capture_exception.py": {
+    "mtime": 1782602245.7021074,
+    "hash": "e20e6439268fe90fb752e28b93c2f930"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\exceptions\\vision_exception.py": {
+    "mtime": 1782602245.7021074,
+    "hash": "8293dd93b5210f6a3aa2f8ee782002dd"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\exceptions\\yolo_inference_exception.py": {
+    "mtime": 1782602245.7021074,
+    "hash": "2777a273e8df90ce8172a3955bf3babe"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\exceptions\\yolo_model_not_found_exception.py": {
+    "mtime": 1782602245.703112,
+    "hash": "50c8204bc784faf018af3ca403fd3f31"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\exceptions\\__init__.py": {
+    "mtime": 1782602245.7007961,
+    "hash": "998da061feddb3183fb5144c6370cb87"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\operators\\ball_fusion_operator.py": {
+    "mtime": 1782602245.7041152,
+    "hash": "49197c8344ceb2fea41644756369e67e"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\operators\\frame_capture_operator.py": {
+    "mtime": 1782602245.705114,
+    "hash": "4c991d5cc5f00667ae88848bce66ccf1"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\operators\\goal_color_detection_operator.py": {
+    "mtime": 1782602245.705114,
+    "hash": "18f2b519e13a090da7bf0080114beb7e"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\operators\\hsv_ball_detection_operator.py": {
+    "mtime": 1782602245.7061384,
+    "hash": "28dfefa3309b2e81392083a73336a7fc"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\operators\\json_export_operator.py": {
+    "mtime": 1782602245.7061384,
+    "hash": "18fa4319296face51b22a3af31a1a631"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\operators\\white_line_detection_operator.py": {
+    "mtime": 1782602245.7071357,
+    "hash": "5b90041aa3ea2f38a3565a491b85fc16"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\operators\\yolo_inference_operator.py": {
+    "mtime": 1782602245.7071357,
+    "hash": "66708aa3f617f41141bf41319ddd4d07"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\operators\\yolo_parser_operator.py": {
+    "mtime": 1782602245.708136,
+    "hash": "63782b79fcf562b927ef8233c0ffc1aa"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\operators\\__init__.py": {
+    "mtime": 1782602245.7041152,
+    "hash": "553595d57a9c96df91d4c0e4854a7154"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\utils\\camera_backend_resolver.py": {
+    "mtime": 1782602245.709136,
+    "hash": "da83efa9a93a8d79dd5076385c36d249"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\utils\\onnx_session_factory.py": {
+    "mtime": 1782602245.7101371,
+    "hash": "58d086ad7f03fc00d538caa2ff17507d"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\utils\\vision_constants.py": {
+    "mtime": 1782602245.7101371,
+    "hash": "6f8bd60e83aefadf0c7c0eef0aa8471d"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\utils\\_libcamera_worker.py": {
+    "mtime": 1782602245.709136,
+    "hash": "60ca0f3ba2d1567a0a47cc616c39b108"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\vision\\utils\\__init__.py": {
+    "mtime": 1782602245.708136,
+    "hash": "16698524e6dc61fe0eca408a2d27b89f"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\deploy": {
+    "mtime": 1782602246.1538346,
+    "hash": "d71a3cf4ad313fd8ea924cc3e8497e4c"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\diag_all_detections.py": {
+    "mtime": 1782602246.1538346,
+    "hash": "79c662a4f82f0280c34a4b255b15a86f"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\diag_center_kick.py": {
+    "mtime": 1782602246.1553392,
+    "hash": "805dab5fc1f2daebab8c8207770ebc45"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\diag_line.py": {
+    "mtime": 1782602246.1553392,
+    "hash": "5987bcbce2aad60f7719091afa0bcf22"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\diag_line2.py": {
+    "mtime": 1782602246.1563442,
+    "hash": "f3e161e02b4ba856c87b632de715c84c"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\diag_raw_track.py": {
+    "mtime": 1782602246.1563442,
+    "hash": "d1ce75b12c5d1fb530a7b65bb56f3db9"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\diag_servo_direction.py": {
+    "mtime": 1782602246.1573462,
+    "hash": "c3973240c03534117049fafe06a64474"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\diag_servo_map.py": {
+    "mtime": 1782602246.1573462,
+    "hash": "b0e91519378254fc6da00e58763a1dda"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\diag_stationary.py": {
+    "mtime": 1782602246.158346,
+    "hash": "a4e87d39930ef0ddfdf934d4d7e6c388"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\diag_vision.py": {
+    "mtime": 1782602246.158346,
+    "hash": "4e182efa14e0ffde26a5fc6510d94d08"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\diag_yolo_hsv.py": {
+    "mtime": 1782602246.1593435,
+    "hash": "66fd9ecf97bb8bbf8c96d9833131371a"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\hardware.py": {
+    "mtime": 1782602246.1753786,
+    "hash": "7b94826ebe2171391aeb71679733ade8"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\main.py": {
+    "mtime": 1782602246.193551,
+    "hash": "b24f4725e8270c0a9e4244ddf0f2143c"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\play_futbot.py": {
+    "mtime": 1782602246.342413,
+    "hash": "bbf1fd0b593e7ecec731e5811bb032ce"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\test_gol.py": {
+    "mtime": 1782602246.343419,
+    "hash": "964b2012330ed807d27585871e9efcf3"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\test_line.py": {
+    "mtime": 1782602246.344417,
+    "hash": "51e81a12dcc6852f5ed3a95d60dcce1d"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\test_motors.py": {
+    "mtime": 1782602246.344417,
+    "hash": "07c9325959da9285fe8c267a625b2c7b"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\test_omni.py": {
+    "mtime": 1782602246.344417,
+    "hash": "31b7e658fc54af212a80945f77114a11"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\test_servos.py": {
+    "mtime": 1782602246.3459232,
+    "hash": "975977b543ce0e53fe8241cae5ef02d9"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\test_servo_motors.py": {
+    "mtime": 1782602246.3454175,
+    "hash": "e8528bf4926da7547b2118088c6579fe"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\test_sonic.py": {
+    "mtime": 1782602246.3459232,
+    "hash": "39bcd43374099278c0a0b7e3500722de"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\tests\\test_adaptive_ball_detection.py": {
+    "mtime": 1782602246.3469288,
+    "hash": "037cc164d58a8d0cc6568dae90f0a06f"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\tests\\test_diag_servos.py": {
+    "mtime": 1782602246.3479342,
+    "hash": "32c5628c02f055111fd72616dd61b391"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\tests\\test_main_approach_logic.py": {
+    "mtime": 1782602246.3514407,
+    "hash": "a146a5a45115cd6794779a6aa58cb82b"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\tests\\test_play_futbot.py": {
+    "mtime": 1782602246.352448,
+    "hash": "b9cb6b5048a040a9e2f5d6e7898f13b1"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\tests\\test_servo_mapping.py": {
+    "mtime": 1782602246.3534472,
+    "hash": "c436a342d09b0f7a93095c64c19e4a84"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\tests\\test_main_hybrid_logic.py": {
+    "mtime": 1782602246.360583,
+    "hash": "4a17396bd6ddd3d60d6f0176824e32bc"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\tests\\test_visual_servo_controller.py": {
+    "mtime": 1782602246.360583,
+    "hash": "f2a72f0efb1b048ddfb3484574072d64"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\README.md": {
+    "mtime": 1782602245.4676054,
+    "hash": "009c3b2c725645270a0b5b55d03e8049"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\docs\\pipeline5.md": {
+    "mtime": 1782602245.4696102,
+    "hash": "accc8602192d352be5cce0971a7b8ad0"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\docs\\plans\\2026-04-15-husky-to-cam-hybrid-design.md": {
+    "mtime": 1782602245.4716098,
+    "hash": "c10cf30ccd3ea38289a5160afb5f76e2"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\docs\\plans\\2026-04-15-husky-to-cam-hybrid-implementation-plan.md": {
+    "mtime": 1782602245.472616,
+    "hash": "0a6213184688080915566a186789ad28"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\README.md": {
+    "mtime": 1782602246.1538346,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\docs\\plans\\2026-04-09-differential-wheels.md": {
+    "mtime": 1782602246.1603441,
+    "hash": "a80a59f981215f7a2afc4300f020b1d5"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\docs\\plans\\2026-04-10-servo-tracking-direction-bug-design.md": {
+    "mtime": 1782602246.1603441,
+    "hash": "26591be54ee258a1877a0937de809c45"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\docs\\plans\\2026-04-10-servo-tracking-direction-bugfix-implementation.md": {
+    "mtime": 1782602246.1673653,
+    "hash": "9b13cdaddd729df1b1d02907622cea1b"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\docs\\plans\\2026-04-11-yolo-hsv-calibration.md": {
+    "mtime": 1782602246.1673653,
+    "hash": "58ac78eb97564d2516e6f2bb058f30bd"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\docs\\plans\\2026-04-12-play-futbot.md": {
+    "mtime": 1782602246.1683617,
+    "hash": "fcbfaa9407afd1c798d605d867c19449"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\docs\\serial-map.pdf": {
+    "mtime": 1782602246.173874,
+    "hash": "f8b638015028f0593ec16f949d973dfd"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\output\\capture.jpg": {
+    "mtime": 1782602245.6561756,
+    "hash": "8a9b35872486a036eba67e0d146c4de8"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\output\\capture_bbox.jpg": {
+    "mtime": 1782602245.6561756,
+    "hash": "4729e6036eba2886929005747d36cb61"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\output\\capture_bigball.jpg": {
+    "mtime": 1782602245.657177,
+    "hash": "784310886aaeb132ac40b582df41144b"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\output\\capture_bright.jpg": {
+    "mtime": 1782602245.6581762,
+    "hash": "ab0cac8fbd6a5938f2fc69cde45ed1b4"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\output\\capture_smallball.jpg": {
+    "mtime": 1782602245.6581762,
+    "hash": "359996a7d16a5e55163f6305e01040a5"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\output\\capture_v3.jpg": {
+    "mtime": 1782602245.6591775,
+    "hash": "e4fea0c29dd5ef1edea20fe88e45b3ab"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\output\\direct_capture.jpg": {
+    "mtime": 1782602245.6601768,
+    "hash": "6242464597dc90b1d88114f39a7f630a"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\output\\raw_v4l2.jpg": {
+    "mtime": 1782602245.6601768,
+    "hash": "6e862a54ca8b5304c528dfd7c29d2b49"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline02\\captura_camara.jpg": {
+    "mtime": 1782602245.6683795,
+    "hash": "9bd8e8a628239b46bd484e2884fbdfa6"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline02\\captura_vision_debug.jpg": {
+    "mtime": 1782602245.6693792,
+    "hash": "53de368e6212b95abf829af57f066d28"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline4\\captura_camara.jpg": {
+    "mtime": 1782602245.6764069,
+    "hash": "9bd8e8a628239b46bd484e2884fbdfa6"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\src\\pipeline4\\captura_vision_debug.jpg": {
+    "mtime": 1782602245.6774046,
+    "hash": "53de368e6212b95abf829af57f066d28"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\docs\\serial-map-page1.png": {
+    "mtime": 1782602246.1693614,
+    "hash": "37354291173176d300c59d1cb727936b"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\images\\detected.jpg": {
+    "mtime": 1782602246.1763854,
+    "hash": "3766cb5ddaa5ead3fdb52f2836ec2399"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\images\\gamma.jpg": {
+    "mtime": 1782602246.1773863,
+    "hash": "3181ebda196930c55981d0c7063cbf74"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\images\\raw.jpg": {
+    "mtime": 1782602246.1773863,
+    "hash": "786c3661ffcaabe6944d1838372ede9e"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\images\\v2_exp1000.jpg": {
+    "mtime": 1782602246.1823845,
+    "hash": "3eff337c497f7939cce65d7fea8b2f75"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\images\\v2_exp1000_det.jpg": {
+    "mtime": 1782602246.1833842,
+    "hash": "4a822c80c843aeb626c8ee03b93f1d87"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\images\\v2_exp600.jpg": {
+    "mtime": 1782602246.1844265,
+    "hash": "f5aac7ec8ac2be1a27e498cabcb73f30"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\images\\v2_exp600_det.jpg": {
+    "mtime": 1782602246.1854274,
+    "hash": "778bbb2c3db281651d8d55f137282939"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\images\\v2_exp800.jpg": {
+    "mtime": 1782602246.1865532,
+    "hash": "3bcdf623d5b69a84362fcb49de8f297d"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\images\\v2_exp800_det.jpg": {
+    "mtime": 1782602246.1875508,
+    "hash": "dcca1eed6e2ee5d4e06e90ecb44548e2"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\images\\v3_g3.jpg": {
+    "mtime": 1782602246.1885507,
+    "hash": "49633f2a8b4b9c4ba64c9db82f87d6b3"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\images\\v3_g5.jpg": {
+    "mtime": 1782602246.1895504,
+    "hash": "98146963fa694ed95e6fb2c3dd8e8bbd"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\images\\v3_g8.jpg": {
+    "mtime": 1782602246.1915505,
+    "hash": "bcde4b6e3bd30aea96932946ac94135a"
+  },
+  "C:\\Users\\gamer\\Documents\\Github\\futbot\\futbot-v2\\test-robot\\images\\v4_exp2000.jpg": {
+    "mtime": 1782602246.1925511,
+    "hash": "e1e4d6e8b1896aef32fac13c37975fb8"
+  }
+}
