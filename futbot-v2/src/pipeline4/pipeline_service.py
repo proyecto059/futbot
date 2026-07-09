@@ -37,6 +37,7 @@ from pipeline4.operators.advance_operator import AdvanceOperator
 from pipeline4.operators.align_to_goal_operator import AlignToGoalOperator
 from pipeline4.operators.push_operator import PushOperator
 from pipeline4.operators.avoid_wall_operator import AvoidWallOperator
+from pipeline4.operators.operator_base import OperatorBase
 
 log = logging.getLogger("turbopi.pipeline4")
 
@@ -59,8 +60,9 @@ class Pipeline4Service:
         self._align_op = AlignToGoalOperator()
         self._push_op = PushOperator()
         self._avoid_wall_op = AvoidWallOperator()
+        self._operator_basic_op = OperatorBase()
 
-    def tick(self) -> PipelineOutputDto:
+    '''def tick(self) -> PipelineOutputDto:
         """Ejecuta un ciclo completo del FSM: visión → filtros → transición → motores."""
         now = time.time()
 
@@ -206,7 +208,12 @@ class Pipeline4Service:
         if v_left != 0 or v_right != 0:
             self._motors.drive(-v_left, v_right, dur_ms)
         else:
-            self._motors.stop(dur_ms)
+            self._motors.stop(dur_ms)'''
+
+        v_left, v_right, dur_ms = self._operator_basic_op.compute()
+        ball_visible=FALSE
+        now = time.time()
+
 
         return PipelineOutputDto(
             state=self._state,

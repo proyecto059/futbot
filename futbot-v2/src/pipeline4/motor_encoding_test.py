@@ -2,10 +2,14 @@
 
 Uso:
     # Simulado (no requiere hardware):
-    uv run python -m pipeline4.motor_encoding_test
+    uv run python src/pipeline4/motor_encoding_test.py
 
     # En el robot real (conexion UART a /dev/ttyAMA0):
-    uv run python -m pipeline4.motor_encoding_test --real
+    uv run python src/pipeline4/motor_encoding_test.py --real
+
+    # O con -m (requiere src/ en PYTHONPATH):
+    PYTHONPATH=src uv run python -m pipeline4.motor_encoding_test
+    PYTHONPATH=src uv run python -m pipeline4.motor_encoding_test --real
 
 Propósito:
     Demostrar qué convención de signos necesita un pipeline para mover
