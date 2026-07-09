@@ -7,9 +7,6 @@ Uso:
     # En el robot real (conexion UART a /dev/ttyAMA0):
     uv run python -m pipeline4.motor_encoding_test --real
 
-    # O desde la raiz del proyecto con ruta absoluta:
-    uv run python src/pipeline4/motor_encoding_test.py
-
 Propósito:
     Demostrar qué convención de signos necesita un pipeline para mover
     los motores correctamente a través de MotorService / MovementOperator.
@@ -54,8 +51,15 @@ from __future__ import annotations
 
 import io
 import logging
+import os
 import sys
 import time
+
+# ── Añadir src/ al PYTHONPATH para poder importar pipeline4 y motors ──
+current_dir = os.path.dirname(os.path.abspath(__file__))
+src_dir = os.path.abspath(os.path.join(current_dir, ".."))
+if src_dir not in sys.path:
+    sys.path.insert(0, src_dir)
 
 # ── Forzar UTF-8 en Windows ──────────────────────────────────────────────
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
