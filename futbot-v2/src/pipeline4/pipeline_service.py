@@ -54,6 +54,9 @@ class Pipeline4Service:
         self._last_ball_cx = 0.0
         self._last_ball_cy = 0.0
         self._last_seen_ts = 0.0
+        self._sequence
+        self._seq_idx = 0
+        self._seq_start_ts = time.time()
 
         self._search_op = SearchOperator()
         self._advance_op = AdvanceOperator()
@@ -65,12 +68,12 @@ class Pipeline4Service:
     '''def tick(self) -> PipelineOutputDto:
         """Ejecuta un ciclo completo del FSM: visión → filtros → transición → motores."""
         now = time.time()
-
+    
         # ── Paso 1: Obtener snapshot de visión ──
         snap = self._vision.tick()
         ball = snap.get("ball")
         ball_visible = ball is not None
-
+    
         goals = snap.get("goals", {})
         goal_visible = goals.get("yellow", False) or goals.get("blue", False)
         goal_cx = None
@@ -78,7 +81,7 @@ class Pipeline4Service:
             goal_cx = goals.get("yellow_cx")
         elif goals.get("blue"):
             goal_cx = goals.get("blue_cx")
-
+    
         # ── Paso 2: FILTROS INSTANTÁNEOS anti falsos positivos ──
         if ball_visible:
             frame = self._vision.last_frame()
@@ -86,17 +89,17 @@ class Pipeline4Service:
                 import cv2
                 import numpy as np
                 cx, cy = int(ball["cx"]), int(ball["cy"])
-
+    
                 patch_r = 3
                 y0, y1 = max(0, cy - patch_r), min(frame.shape[0], cy + patch_r + 1)
                 x0, x1 = max(0, cx - patch_r), min(frame.shape[1], cx + patch_r + 1)
-
+    
                 if x1 > x0 and y1 > y0:
                     patch_bgr = frame[y0:y1, x0:x1]
                     patch_hsv = cv2.cvtColor(patch_bgr, cv2.COLOR_BGR2HSV)
                     median_h = int(np.median(patch_hsv[:, :, 0]))
                     median_s = int(np.median(patch_hsv[:, :, 1]))
-
+    
                     if 13 <= median_h <= 170:
                         log.info("event=ball_rejected reason=wrong_color hue=%s source=%s", median_h, ball.get("source"))
                         ball = None
@@ -105,7 +108,7 @@ class Pipeline4Service:
                         log.info("event=ball_rejected reason=not_neon_enough sat=%s source=%s", median_s, ball.get("source"))
                         ball = None
                         ball_visible = False
-
+    
             if ball_visible and hasattr(self._vision, "_yolo"):
                 yolo_raw = self._vision._yolo.get_latest_output()
                 ball_bbox = yolo_raw.get("ball_bbox")
@@ -113,12 +116,12 @@ class Pipeline4Service:
                     x1, y1, x2, y2, conf, cls_id = ball_bbox
                     w = max(1.0, float(x2 - x1))
                     h = max(1.0, float(y2 - y1))
-
+    
                     if (h / w) > 1.4:
                         log.info("event=ball_rejected reason=tall_pillar_shape source=%s", ball.get("source"))
                         ball = None
                         ball_visible = False
-
+    
         # ── Paso 3: Loggeo y actualización de última posición conocida ──
         if ball_visible:
             self._last_ball_cx = ball["cx"]
@@ -133,19 +136,19 @@ class Pipeline4Service:
         elif not ball_visible and now - self._last_no_ball_log >= 1.0:
             log.info("event=ball_NOT_detected state=%s", self._state)
             self._last_no_ball_log = now
-
+    
         if goal_visible and now - self._last_ball_log >= 0.5:
             log.info(
                 "event=goal_detected yellow=%s blue=%s state=%s",
                 goals.get("yellow"), goals.get("blue"), self._state,
             )
-
+     
         # ── Paso 4: Transiciones del FSM ──
         if self._state == SEARCH:
             if ball_visible:
                 self._state = ADVANCE
                 log.info("event=state_change from=SEARCH to=ADVANCE")
-
+     
         elif self._state == ADVANCE:
             if not ball_visible and (now - self._last_seen_ts > 0.2):
                 self._state = SEARCH
@@ -157,7 +160,7 @@ class Pipeline4Service:
                 self._state = ALIGN
                 self._align_op.reset()
                 log.info("event=state_change from=ADVANCE to=ALIGN ball_r=%s", ball["r"])
-
+     
         elif self._state == ALIGN:
             if not ball_visible and (now - self._last_seen_ts > 0.5):
                 self._state = SEARCH
@@ -172,7 +175,7 @@ class Pipeline4Service:
                 self._state = PUSH
                 self._push_op.start()
                 log.info("event=state_change from=ALIGN to=PUSH reason=aligned")
-
+     
         elif self._state == PUSH:
             if self._push_op.is_done():
                 self._state = SEARCH
@@ -181,39 +184,54 @@ class Pipeline4Service:
                 self._search_op.reset(direction=direccion)
                 self._push_op.reset()
                 log.info("event=state_change from=PUSH to=SEARCH reason=push_complete")
-
+    
         # ── Paso 5: Ejecutar operador del estado actual ──
         v_left, v_right, dur_ms = 0.0, 0.0, STOP_DUR_MS
-
+     
         if self._state == SEARCH:
             v_left, v_right, dur_ms = self._search_op.compute()
-
+     
         elif self._state == ADVANCE:
             v_left, v_right, dur_ms = self._advance_op.compute(self._vision.frame_width, ball)
-
+    
         elif self._state == ALIGN:
             v_left, v_right, dur_ms = self._align_op.compute(self._vision.frame_width, ball, goals)
-
+     
         elif self._state == PUSH:
             v_left, v_right, dur_ms = self._push_op.compute()
-
+    
         # ── Paso 6: Capa de seguridad — AvoidWall tiene prioridad máxima ──
         frame = self._vision.last_frame()
         evasion = self._avoid_wall_op.check_and_avoid(frame)
         if evasion is not None:
             v_left, v_right, dur_ms = evasion
             log.info("event=avoid_wall_activated action=reversing")
-
+     
         # ── Paso 7: Enviar comandos a motores ──
         if v_left != 0 or v_right != 0:
             self._motors.drive(-v_left, v_right, dur_ms)
         else:
             self._motors.stop(dur_ms)'''
 
-        v_left, v_right, dur_ms = self._operator_basic_op.compute()
-        ball_visible=FALSE
+    def tick(self) -> PipelineOutputDto:
+        ball_visible = False
+        goal_visible = False
+        goal_cx = None
         now = time.time()
+        step, dur_ms = self._sequence[self._seq_idx]
+        elapsed_ms = (now - self._seq_start_ts) * 1000
 
+        if elapsed_ms >= dur_ms:
+            self._seq_idx = (self._seq_idx + 1) % len(self._sequence)
+            self._seq_start_ts = now
+            step, dur_ms = self._sequence[self._seq_idx]
+
+        v_left, v_right, _ = self._operator_basic_op.move(step)
+
+        if v_left != 0 or v_right != 0:
+            self._motors.drive(-v_left, v_right, dur_ms)
+        else:
+            self._motors.stop(dur_ms)
 
         return PipelineOutputDto(
             state=self._state,
@@ -225,7 +243,7 @@ class Pipeline4Service:
             dur_ms=dur_ms,
             ts=now,
         )
-
+        
     def run(self):
         self._running = True
         log.info("event=pipeline4_started mode=shoot_to_goal")

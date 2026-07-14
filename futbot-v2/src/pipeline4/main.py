@@ -1,16 +1,3 @@
-"""Pipeline 4 — Punto de entrada principal.
-
-Wiring de los 3 servicios que componen el robot:
-  1. HybridVisionService  → captura de cámara + detección de pelota/porterías (HSV + YOLO)
-  2. MotorService         → control de motores vía Serial
-  3. Pipeline4Service     → FSM que orquesta búsqueda, avance, alineación y disparo
-
-Ejecutar con:
-    python main.py
-
-Para detener: Ctrl+C (manejado vía KeyboardInterrupt, hace cleanup ordenado).
-"""
-
 import sys
 import os
 import logging

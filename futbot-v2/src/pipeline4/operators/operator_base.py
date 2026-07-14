@@ -1,4 +1,4 @@
-"""Operador de búsqueda — gira sobre su eje y pausa cíclicamente.
+"""Operador base con movimientos modulares seleccionables por índice.
 
 Convención de giro (igual que v3 pipeline_service.py):
   - Girar izquierda: v_left = -speed, v_right = speed
@@ -7,49 +7,48 @@ Convención de giro (igual que v3 pipeline_service.py):
 """
 
 import time
-from pipeline4.utils.pipeline_constants import (
-    SEARCH_SPEED,
-    SEARCH_TURN_DUR_MS,
-    SEARCH_PAUSE_DUR_MS,
-    STOP_DUR_MS,
-)
 
 
 class OperatorBase:
     def __init__(self):
-        self._search_phase = "turn"
-        self._search_start_ts = time.time()
-        self._search_direction = 1  # 1 = derecha, -1 = izquierda
+        self._step = 0
+        self._step_start_ts = time.time()
+        self._dur_ms = 1000
+        self._sequence = [
+            (0, 3000),   # avanzar 3s
+            (2, 500),    # Aderecha 0.5s
+            (0, 1500),   # avanzar 1.5s
+            (2, 500),    # Aderecha 0.5s
+            (0, 3000),   # avanzar 3s
+            (2, 500),    # Aderecha 0.5s
+            (0, 1500),   # avanzar 1.5s
+            (2, 500),    # Aderecha 0.5s
+        ]
 
-    def reset(self, direction=1):
-        self._search_phase = "turn"
-        self._search_start_ts = time.time()
-        self._search_direction = direction
+    def move(self, step: int):
+        moves = [
+            (150.0,  150.0),   # 0: Avanzar
+            (0,      150.0),   # 1: Adelante derecha
+            (150.0,  0),       # 2: Adelante izquierda
+            (-150.0, -150.0),  # 3: Retroceder
+            (-150.0, 0),       # 4: Retroceder derecha
+            (0,     -150.0),   # 5: Retroceder izquierda
+        ]
+        v_left, v_right = moves[step]
+        return v_left, v_right, self._dur_ms
 
     def compute(self):
         now = time.time()
-        time_in_phase = now - self._search_start_ts
-        v_left, v_right = 180.0, 180.0
-        dur_ms = 1000
+        elapsed_ms = (now - self._step_start_ts) * 1000
 
-        """if self._search_phase == "turn":
-            # Giro sobre su eje:
-            #   direction=1 (derecha):   v_left=+speed, v_right=-speed
-            #   direction=-1 (izquierda): v_left=-speed, v_right=+speed
-            speed = SEARCH_SPEED
-            v_left = speed * self._search_direction
-            v_right = -speed * self._search_direction
-            dur_ms = STOP_DUR_MS  # Pulso corto para respuesta rápida a detección
-            if time_in_phase > (SEARCH_TURN_DUR_MS / 1000.0):
-                self._search_phase = "pause"
-                self._search_start_ts = now
+        if elapsed_ms >= self._dur_ms:
+            self._step = (self._step + 1) % 6
+            self._step_start_ts = now
 
-        elif self._search_phase == "pause":
-            # Detenido: damos tiempo a que el sistema de visión procese
-            v_left, v_right = 0.0, 0.0
-            dur_ms = STOP_DUR_MS
-            if time_in_phase > (SEARCH_PAUSE_DUR_MS / 1000.0):
-                self._search_phase = "turn"
-                self._search_start_ts = now"""
+        return self.move(self._step)
 
-        return v_left, v_right, dur_ms
+        time.sleep(1)
+
+    def reset(self):
+        self._step = 0
+        self._step_start_ts = time.time()
