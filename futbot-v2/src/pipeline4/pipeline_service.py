@@ -56,6 +56,7 @@ class Pipeline4Service:
         self._last_seen_ts = 0.0
         self._seq_idx = 0
         self._seq_start_ts = time.time()
+        self._max_steps = 8
 
         self._search_op = SearchOperator()
         self._advance_op = AdvanceOperator()
@@ -63,7 +64,6 @@ class Pipeline4Service:
         self._push_op = PushOperator()
         self._avoid_wall_op = AvoidWallOperator()
         self._operator_basic_op = OperatorBase()
-        self._sequence = self._operator_basic_op._sequence
 
     '''def tick(self) -> PipelineOutputDto:
         """Ejecuta un ciclo completo del FSM: visión → filtros → transición → motores."""
@@ -218,15 +218,20 @@ class Pipeline4Service:
         goal_visible = False
         goal_cx = None
         now = time.time()
-        step, dur_ms = self._sequence[self._seq_idx]
         elapsed_ms = (now - self._seq_start_ts) * 1000
+        v_left, v_right, dur_ms = self._operator_basic_op.get_current()
 
         if elapsed_ms >= dur_ms:
-            self._seq_idx = (self._seq_idx + 1) % len(self._sequence)
+            self._operator_basic_op.advance()
+            self._seq_idx += 1
             self._seq_start_ts = now
-            step, dur_ms = self._sequence[self._seq_idx]
 
-        v_left, v_right, _ = self._operator_basic_op.move(step)
+            if self._seq_idx >= self._max_steps:
+                self._operator_basic_op.reset()
+                self._seq_idx = 0
+                self._seq_start_ts = now
+
+            v_left, v_right, dur_ms = self._operator_basic_op.get_current()
 
         if v_left != 0 or v_right != 0:
             self._motors.drive(-v_left, v_right, dur_ms)
