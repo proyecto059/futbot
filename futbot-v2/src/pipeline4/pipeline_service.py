@@ -54,7 +54,6 @@ class Pipeline4Service:
         self._last_ball_cx = 0.0
         self._last_ball_cy = 0.0
         self._last_seen_ts = 0.0
-        self._sequence
         self._seq_idx = 0
         self._seq_start_ts = time.time()
 
@@ -64,6 +63,7 @@ class Pipeline4Service:
         self._push_op = PushOperator()
         self._avoid_wall_op = AvoidWallOperator()
         self._operator_basic_op = OperatorBase()
+        self._sequence = self._operator_basic_op._sequence
 
     '''def tick(self) -> PipelineOutputDto:
         """Ejecuta un ciclo completo del FSM: visión → filtros → transición → motores."""
